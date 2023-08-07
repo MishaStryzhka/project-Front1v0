@@ -2,7 +2,7 @@ import { UserMenu } from '../UserMenu/UserMenu';
 import { AuthNav } from '../AuthNav/AuthNav';
 import { useAuth } from 'hooks';
 import {
-  NavContainer,
+  // NavContainer,
   StyleBtn,
   StyledAppBar,
   StyledContainer,
@@ -11,7 +11,7 @@ import {
 import Btn from 'components/Btn/Btn';
 import { useDispatch } from 'react-redux';
 import { logOut } from 'redux/auth/operations';
-import { Container } from 'components/Container/Container';
+// import { Container } from 'components/Container/Container';
 
 export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
   const dispatch = useDispatch();
