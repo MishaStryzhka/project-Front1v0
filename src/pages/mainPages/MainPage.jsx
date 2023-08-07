@@ -1,5 +1,15 @@
+import { Helmet } from 'react-helmet';
+
 const MainPage = () => {
-  return <p>Main Page</p>;
+  return (
+    <>
+      <Helmet>
+        <title>Dantist Portal</title>
+      </Helmet>
+
+      <p>Main Page</p>
+    </>
+  );
 };
 
 export default MainPage;
