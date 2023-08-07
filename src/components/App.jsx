@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 import { refreshUser } from 'redux/auth/operations';
 import { useAuth } from 'hooks';
 import { ThemeProvider } from 'styled-components';
-import theme from './theme';
+import theme from 'theme';
 
 import { RestrictedRoute } from 'rotes/RestrictedRoute';
 import { PrivateRoute } from 'rotes/PrivateRoute';

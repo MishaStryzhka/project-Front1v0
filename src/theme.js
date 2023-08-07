@@ -1,26 +1,40 @@
-const darktheme = {
-  bodyColor: '#FEF9F9',
-  primary: '#FFC107', //yellow
-  secondary: '#111111', //black
-  btnDark: '#54ADFF', //blue-dark
-  btnLight: '#CCE4FB', //blue-light
-  error: '#F43F5E', //red
-  background: '#FDF7F2', //white
-  indicator: '#00C3AD', //green
-  btnLogOut: '#888', //grey
+const lightTheme = {
+  qweColor: '#D9D9D9',
+
+  bodyColor: '',
+  primary: '', //
+
+  secondary: '', //
+
+  btnDark: '', //
+  btnLight: '', //
+  btnLogOut: '', //
+
+  error: '', //
+
+  background: '', //
+  cardBG: '', //
+
+  indicator: '', //
   gradient: 'linear-gradient(to left, #419ef1 0%, #9bd0ff 100%)', //gradient
 };
 
-const lightTheme = {
-  bodyColor: '#FEF9F9',
-  primary: '#FFC107', //yellow
-  secondary: '#111111', //black
-  btnDark: '#54ADFF', //blue-dark
-  btnLight: '#CCE4FB', //blue-light
-  error: '#F43F5E', //red
-  background: '#FDF7F2', //white
-  indicator: '#00C3AD', //green
-  btnLogOut: '#888', //grey
+const darktheme = {
+  bodyColor: '',
+  primary: '', //
+
+  secondary: '', //
+
+  btnDark: '', //
+  btnLight: '', //
+  btnLogOut: '', //
+
+  error: '', //
+
+  background: '', //
+  cardBG: '', //
+
+  indicator: '', //
   gradient: 'linear-gradient(to left, #419ef1 0%, #9bd0ff 100%)', //gradient
 };
 

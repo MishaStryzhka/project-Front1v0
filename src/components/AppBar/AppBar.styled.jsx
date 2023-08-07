@@ -3,21 +3,21 @@ import { Container } from 'components/Container/Container';
 import styled from 'styled-components';
 
 export const StyledAppBar = styled.header`
-  box-sizing: border-box;
-  margin-top: 20px;
-  height: 28px;
-
-  display: flex;
-  align-items: center;
+  background-color: ${({ theme }) => {
+    console.log('theme', theme);
+    return theme.color.qweColor;
+  }};
+  padding: 20px 0;
+  // height: 280px;
 
   @media screen and (min-width: 768px) {
-    height: 44px;
-    margin-top: 24px;
+    // height: 44px;
+    padding: 24px 0;
   }
 
-  @media screen and (min-width: 1280px) {
-    height: 48px;
-    margin-top: 20px;
+  @media screen and (min-width: 1440px) {
+    height: 150px;
+    padding: 20px 0;
   }
 `;
 
@@ -147,7 +147,7 @@ export const StyleBtn = styled(Btn)`
         : `
     display: none;
     `};
-}
+  }
 
   @media screen and (min-width: 1280px) {
     display: flex;
