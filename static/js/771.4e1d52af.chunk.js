@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkreact=self.webpackChunkreact||[]).push([[771],{771:function(e,n,t){t.r(n);var r=t(270),a=t(329);n.default=function(){return(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(r.q,{children:(0,a.jsx)("title",{children:"Dantist Portal"})}),(0,a.jsx)("p",{children:"Main Page"})]})}}}]);
+//# sourceMappingURL=771.4e1d52af.chunk.js.map
