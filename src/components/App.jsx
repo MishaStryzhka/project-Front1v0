@@ -9,6 +9,8 @@ import theme from 'theme';
 import { RestrictedRoute } from 'rotes/RestrictedRoute';
 import { PrivateRoute } from 'rotes/PrivateRoute';
 import SharedLayout from 'components/SharedLayout/SharedLayout';
+import ProblemsPage from 'pages/mainPages/ProblemsPage';
+import DoctorsPage from 'pages/mainPages/DoctorsPage';
 
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
 const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
@@ -37,6 +39,9 @@ export const App = () => {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<MainPage />} />
           <Route path="/main" element={<MainPage />} />
+          <Route path="/main" element={<MainPage />} />
+          <Route path="/doctors" element={<DoctorsPage />} />
+          <Route path="/problems" element={<ProblemsPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
           <Route

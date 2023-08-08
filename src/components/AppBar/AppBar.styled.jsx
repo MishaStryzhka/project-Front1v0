@@ -3,89 +3,46 @@ import { Container } from 'components/Container/Container';
 import styled from 'styled-components';
 
 export const StyledAppBar = styled.header`
-  background-color: ${({ theme }) => {
-    console.log('theme', theme);
-    return theme.color.qweColor;
-  }};
-  padding: 20px 0;
+  background-color: ${({ theme }) => theme.color.qweColor};
+  // padding: 20px 0;
   // height: 280px;
 
   @media screen and (min-width: 768px) {
     // height: 44px;
-    padding: 24px 0;
+    // padding: 24px 0;
   }
 
   @media screen and (min-width: 1440px) {
-    height: 150px;
-    padding: 20px 0;
+    height: 120px;
+    // padding: 20px 0;
   }
 `;
 
 export const StyledContainer = styled(Container)`
-  box-sizing: border-box;
-  // background-color: red;
-  // margin: 20px 20px;
-  padding: 0 20px;
-  // background-color: ${({ theme }) => theme.color.background};
-  // height: 24px;
+  // box-sizing: border-box;
+  // padding: 0 20px;
+
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: relative;
-  z-index: 9;
+  // position: relative;
+  // z-index: 9;
 
-  // background: ${({ theme }) => theme.color.gradient};
-  // box-shadow: ${({ theme }) => theme.boxShadowHover};
+  // @media screen and (min-width: 768px) {
+  //   padding: 0 32px;
+  // }
 
-  @media screen and (min-width: 768px) {
-    padding: 0 32px;
-  }
-
-  @media screen and (min-width: 1280px) {
-    padding: 0 16px;
-  }
+  // @media screen and (min-width: 1440px) {
+  //   padding: 0 16px;
+  // }
 `;
 
 export const NavContainer = styled.div`
-  ${({ isOpenMenu }) =>
-    isOpenMenu
-      ? `
-  display:flex;
-  flex-direction: column-reverse;
-  justify-content: flex-end;
+  display: flex;
+  justify-content: space-between;
   align-items: center;
-  z-index: -1;
-  position: absolute;
-  top: -20px;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  `
-      : `
-      display:flex;
-      width: 100%;
-  flex-direction: row-reverse;
-      `};
 
-  background-color: ${({ theme }) => theme.color.bodyColor};
-  // height: 1px;
-  // background-color: red;
-
-  @media screen and (min-width: 768px) {
-    top: -32px;
-    display: flex;
-  }
-
-  @media screen and (min-width: 1280px) {
-    // height: 28px;
-    flex-direction: row;
-    align-items: center;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    // align-content: space-between;
-    // width: 100vw;
-  }
+  column-gap: 40px;
 `;
 
 export const UserBox = styled.div`

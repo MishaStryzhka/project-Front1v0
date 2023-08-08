@@ -1,8 +1,8 @@
-import { StyleBtn } from './Btn.style';
-import { useAuth } from 'hooks';
-import ListIcons from 'images/icons/ListIcons';
-import { useState } from 'react';
-import theme from 'theme';
+import { StyledBtn, StyledNavLink } from './Btn.style';
+// import { useAuth } from 'hooks';
+// import ListIcons from 'images/icons/ListIcons';
+// import { useState } from 'react';
+// import theme from 'theme';
 
 // ================INFO=======================
 //                 size
@@ -17,39 +17,52 @@ import theme from 'theme';
 // =============================================
 
 const Btn = ({
-  size = 'middle',
   transparent = false,
-  icon,
   text,
   className,
   onClick,
   type = 'button',
+  to,
+  children,
 }) => {
-  const [isHover, setIsHover] = useState(false);
-  const { currentTheme } = useAuth();
+  // const [isHover, setIsHover] = useState(false);
+  // const { currentTheme } = useAuth();
 
-  let fill = 'null';
+  // let fill = 'null';
 
-  if (isHover) {
-    fill = theme[currentTheme].color.background;
-  } else
-    fill = !transparent
-      ? theme[currentTheme].color.background
-      : theme[currentTheme].color.btnDark;
+  // if (isHover) {
+  //   fill = theme[currentTheme].color.background;
+  // } else
+  //   fill = !transparent
+  //     ? theme[currentTheme].color.background
+  //     : theme[currentTheme].color.btnDark;
 
-  return (
-    <StyleBtn
-      onMouseEnter={e => setIsHover(true)}
-      onMouseLeave={e => setIsHover(false)}
-      size={size}
+  return type === 'link' ? (
+    <StyledNavLink
+      // onMouseEnter={e => setIsHover(true)}
+      // onMouseLeave={e => setIsHover(false)}
+      transparent={transparent}
+      className={className}
+      type={type}
+      to={to}
+      children={children}
+    >
+      {text}
+      {children}
+    </StyledNavLink>
+  ) : (
+    <StyledBtn
+      // onMouseEnter={e => setIsHover(true)}
+      // onMouseLeave={e => setIsHover(false)}
       transparent={transparent}
       className={className}
       onClick={() => onClick()}
-      // type={type}
+      type={type}
+      children={children}
     >
       {text}
-      {icon && ListIcons(fill, icon)}
-    </StyleBtn>
+      {children}
+    </StyledBtn>
   );
 };
 
