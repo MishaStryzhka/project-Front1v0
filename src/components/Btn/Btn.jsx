@@ -17,7 +17,7 @@ import { StyledBtn, StyledNavLink } from './Btn.style';
 // =============================================
 
 const Btn = ({
-  transparent = false,
+  transparent = 'false',
   text,
   className,
   onClick,
