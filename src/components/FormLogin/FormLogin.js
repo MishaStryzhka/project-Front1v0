@@ -9,13 +9,13 @@ import {
   LabelCheckboxStyled,
   ImputWrap,
 } from './FormLogin.styled';
-import { useState } from 'react';
-import { useAuth } from 'hooks';
-import theme from 'theme';
+// import { useState } from 'react';
+// import { useAuth } from 'hooks';
+// import theme from 'theme';
 
 const FormLogin = ({ onSubmit }) => {
-  const [openPassword, setOpenPassword] = useState(false);
-  const { currentTheme } = useAuth();
+  // const [openPassword, setOpenPassword] = useState(false);
+  // const { currentTheme } = useAuth();
   return (
     <Formik
       initialValues={{
@@ -34,7 +34,7 @@ const FormLogin = ({ onSubmit }) => {
         handleBlur,
         handleSubmit,
       }) => {
-        const isPasswordValid = values.password && values.password.length >= 6;
+        // const isPasswordValid = values.password && values.password.length >= 6;
 
         return (
           <FormStyled onSubmit={handleSubmit}>
