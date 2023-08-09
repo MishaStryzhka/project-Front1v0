@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact=self.webpackChunkreact||[]).push([[188],{188:function(e,n,r){r.r(n);var c=r(270),t=r(329);n.default=function(){return(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(c.q,{children:(0,t.jsx)("title",{children:"Login"})}),(0,t.jsx)("p",{children:"Login page"})]})}}}]);
-//# sourceMappingURL=188.a57d3ece.chunk.js.map
