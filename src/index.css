@@ -13,3 +13,45 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+  padding: 0;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Знімає стилізацію з ul */
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Знімає стилізацію з <a> */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Знімає стилізацію з <button> */
+button {
+  margin: 0;
+  padding: 0;
+  background: none;
+  position: relative;
+  border: 0;
+}
+
+/* Заборона зміну розміру в textarea */
+textarea {
+  resize: none;
+}
