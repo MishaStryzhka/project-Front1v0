@@ -3,7 +3,7 @@ import { Container } from 'components/Container/Container';
 import styled from 'styled-components';
 
 export const StyledAppBar = styled.header`
-  background-color: ${({ theme }) => theme.color.qweColor};
+  background-color: ${({ theme }) => theme.color.main};
   // padding: 20px 0;
   // height: 280px;
 

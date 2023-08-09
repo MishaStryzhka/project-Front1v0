@@ -1,17 +1,18 @@
 const lightTheme = {
-  qweColor: '#04827A',
-
   bodyColor: '',
-  primary: '#FFFFFF', //
-  secondary: '', //
 
-  btnDark: '', //
-  btnLight: '', //
+  main: '#04827A',
+
+  primary: '#FFFFFF', //
+  // secondary: , //
+
+  btnDark: '#C3E2E7', //
+  btnLight: '#E5E8EF', //
   btnLogOut: '', //
 
-  error: '', //
+  error: 'red', //
 
-  background: '', //
+  background: '#EEF1F7', //
   cardBG: '', //
 
   indicator: '', //

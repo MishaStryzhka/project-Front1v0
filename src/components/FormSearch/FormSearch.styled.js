@@ -9,10 +9,10 @@ export const StuledInput = styled.input`
   font-weight: 400;
   line-height: normal;
 
-  //   justify-content: center;
-  //   align-items: center;
+  outline: none;
 
   box-sizing: border-box;
+  width: 200px;
   height: 40px;
   padding: 10px 20px;
 
@@ -23,11 +23,9 @@ export const StuledInput = styled.input`
 
   box-shadow: ${({ theme }) => theme.boxShadow};
 
-  :focus-visible {
+  &:focus-visible {
     box-shadow: ${({ theme }) => theme.boxShadowHover};
-    border: 2px solid ${({ theme }) => theme.color.primary};
-    outline: none;
-    outline-color: red;
+    border: 3px solid ${({ theme }) => theme.color.primary} !important;
   }
 `;
 

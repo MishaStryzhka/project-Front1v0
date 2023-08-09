@@ -8,7 +8,7 @@ import { Container } from 'components/Container/Container';
 import { Outlet } from 'react-router-dom';
 
 const SharedLayout = () => {
-  const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isOpenMenu, setIsOpenMenu] = useState(null);
   const { currentTheme } = useAuth();
 
   const closeMenu = e => {
@@ -23,7 +23,7 @@ const SharedLayout = () => {
 
   return (
     <>
-      <ContainerLayout isOpenMenu={isOpenMenu} onClick={closeMenu}>
+      <ContainerLayout onClick={closeMenu}>
         <Helmet>
           <style>{`body { background-color: ${theme[currentTheme].color.bodyColor}; }`}</style>
         </Helmet>

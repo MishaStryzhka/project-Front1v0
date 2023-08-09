@@ -1,5 +1,15 @@
+import { Helmet } from 'react-helmet';
+
 const DoctorsPage = () => {
-  return <p>DoctorsPage</p>;
+  return (
+    <>
+      <Helmet>
+        <title>Спеціалісти</title>
+      </Helmet>
+
+      <p>Doctors page</p>
+    </>
+  );
 };
 
 export default DoctorsPage;

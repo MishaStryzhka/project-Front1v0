@@ -4,7 +4,7 @@ const MainPage = () => {
   return (
     <>
       <Helmet>
-        <title>Dantist Portal</title>
+        <title>Дантист портал</title>
       </Helmet>
 
       <p>Main Page</p>
