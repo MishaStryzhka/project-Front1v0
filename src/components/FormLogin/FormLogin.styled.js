@@ -3,34 +3,30 @@ import { NavLink } from 'react-router-dom';
 import { Form, Field } from 'formik';
 
 export const FormStyled = styled(Form)`
-  padding-top: 180px;
+  padding-top: 75px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  //   justify-content: center;
-  //   padding: 40px 12px;
-  //   border-radius: 20px;
-  //   margin-top: 40px;
-  //   background-color: #fff;
-  //   box-shadow: ${({ theme }) => theme.boxShadow};s
+`;
 
-  //   @media screen and (min-width: 768px) {
-  //     width: 608px;
-  //     padding: 60px 0;
-  //     margin-top: 80px;
-  //     border-radius: 40px;
-  //   }
+export const Title = styled.h2`
+  color: ${({ theme }) => theme.color.secondary};
+
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  padding-top: 75px;
+  margin: auto;
+  width: 800px;
 `;
 
 export const ImputWrap = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 50px;
-
-  //   @media screen and (min-width: 768px) {
-  //     gap: 32px;
-  //     margin-bottom: 60px;
-  //   }
+  gap: 40px;
 `;
 
 export const FieldStyled = styled(Field)`
@@ -60,12 +56,16 @@ export const FieldStyled = styled(Field)`
 export const LabelCheckboxStyled = styled.label`
   display: flex;
   column-gap: 20px;
-  // padding-top: 20px;
+  padding-top: 22px;
+
+  // background-color: red;
 `;
 
 export const FieldCheckboxStyled = styled(Field)`
-  height: 20px;
-  width: 20px;
+  // height: 20px;
+  // width: 20px;
+  // background: url('unchecked.png') no-repeat left center;
+  display: none;
 `;
 
 export const Label = styled.label`
@@ -93,6 +93,23 @@ export const Button = styled.button`
 
   border: 3px solid ${({ theme }) => theme.color.secondaryMain};
   border-radius: 10px;
+`;
+
+export const StyledRefreshPassword = styled(NavLink)`
+  width: 800px;
+  padding-top: 20px;
+
+  color: ${({ theme }) => theme.color.main};
+
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  &:hover {
+    text-decoration-line: underline;
+  }
 `;
 
 export const StyledNavLink = styled(NavLink)`
@@ -126,7 +143,7 @@ export const Text = styled.p`
   color: #888;
 `;
 
-export const TextError = styled.div`
+export const TextError = styled.p`
   font-size: 12px;
   line-height: 1.3;
   font-weight: 400;

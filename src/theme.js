@@ -43,7 +43,7 @@ const defaultTheme = {
   boxShadow: '3px 8px 14px 0px #88C6FD30',
   boxShadowHover: '7px 13px 14px 0px #74B1E83D',
 
-  fontFamily: 'K2D',
+  fontFamily: 'Rubik',
 };
 
 const theme = {

@@ -23,9 +23,9 @@ const SharedLayout = () => {
   return (
     <>
       <ContainerLayout onClick={closeMenu}>
-        <Helmet>
+        {/* <Helmet>
           <style>{`body { background-color: ${theme[currentTheme].color.bodyColor}; }`}</style>
-        </Helmet>
+        </Helmet> */}
         <AppBar isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} />
         <StuledContainer>
           <Suspense fallback={null}>
