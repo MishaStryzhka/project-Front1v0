@@ -74,42 +74,45 @@ export const Label = styled.label`
 
 export const Button = styled.button`
   cursor: pointer;
-  display: flex;
-  width: 256px;
-  height: 48px;
-  padding: 10px 28px;
-  justify-content: center;
-  align-items: center;
-  border-radius: 40px;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  letter-spacing: 0.8px;
-  border: transparent;
-  margin-bottom: 8px;
 
-  color: ${({ theme }) => theme.color.background};
-  background-color: ${({ theme }) => theme.color.btnDark} !important;
-
-  :hover {
-    background: ${({ theme }) => theme.color.gradient} !important;
-  }
-  @media screen and (min-width: 768px) {
-    width: 478px;
-    margin-bottom: 20px;
-  }
-`;
-
-export const StyledNavLink = styled(NavLink)`
-  font-size: 12px;
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 16px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  letter-spacing: 0.48px;
-  text-decoration-line: underline;
 
-  color: ${({ theme }) => theme.color.btnDark};
+  display: flex;
+  align-items: center;
+
+  padding: 18px 36px;
+  height: 57px;
+  box-sizing: border-box;
+
+  color: ${({ theme }) => theme.color.secondary};
+  background-color: ${({ theme }) => theme.color.secondaryMain};
+
+  border: 3px solid ${({ theme }) => theme.color.secondaryMain};
+  border-radius: 10px;
+`;
+
+export const StyledNavLink = styled(NavLink)`
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  display: flex;
+  align-items: center;
+
+  padding: 18px 36px;
+  height: 57px;
+  box-sizing: border-box;
+
+  color: ${({ theme }) => theme.color.secondary};
+
+  border: 3px solid ${({ theme }) => theme.color.secondaryMain};
+  border-radius: 10px;
 `;
 
 export const Text = styled.p`
