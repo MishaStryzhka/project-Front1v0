@@ -1,4 +1,6 @@
+import Container from 'components/Container/Container';
 import FormLogin from 'components/FormLogin/FormLogin';
+import OrBoxAotorization from 'components/OrBoxAotorization/OrBoxAotorization';
 // import { Formik } from 'formik';
 import { Helmet } from 'react-helmet';
 // import { useDispatch } from 'react-redux';
@@ -10,13 +12,14 @@ const LoginPage = () => {
   };
 
   return (
-    <>
+    <Container>
       <Helmet>
         <title>Login</title>
       </Helmet>
 
       <FormLogin onSubmit={handleLogInSubmit} />
-    </>
+      <OrBoxAotorization />
+    </Container>
   );
 };
 

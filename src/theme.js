@@ -2,9 +2,10 @@ const lightTheme = {
   bodyColor: '',
 
   main: '#04827A',
+  secondaryMain: '#F5BC20',
 
   primary: '#FFFFFF', //
-  // secondary: , //
+  secondary: '#000', //
 
   btnDark: '#C3E2E7', //
   btnLight: '#E5E8EF', //

@@ -11,6 +11,7 @@ import { PrivateRoute } from 'rotes/PrivateRoute';
 import SharedLayout from 'components/SharedLayout/SharedLayout';
 import ProblemsPage from 'pages/mainPages/ProblemsPage';
 import DoctorsPage from 'pages/mainPages/DoctorsPage';
+import RefreshPassword from 'pages/secondaryPages/UserPage/RefreshPassword';
 
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
 const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
@@ -48,6 +49,15 @@ export const App = () => {
             path="/login"
             element={
               <RestrictedRoute redirectTo="/user" component={<LoginPage />} />
+            }
+          />
+          <Route
+            path="/refreshPassword"
+            element={
+              <RestrictedRoute
+                redirectTo="/user"
+                component={<RefreshPassword />}
+              />
             }
           />
           <Route

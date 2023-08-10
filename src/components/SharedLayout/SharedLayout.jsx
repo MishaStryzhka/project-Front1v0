@@ -4,7 +4,6 @@ import { ContainerLayout, StuledContainer } from './SharedLayout.style';
 import { Helmet } from 'react-helmet';
 import theme from 'theme';
 import { AppBar } from 'components/AppBar/AppBar';
-import { Container } from 'components/Container/Container';
 import { Outlet } from 'react-router-dom';
 
 const SharedLayout = () => {
@@ -29,11 +28,9 @@ const SharedLayout = () => {
         </Helmet>
         <AppBar isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} />
         <StuledContainer>
-          <Container>
-            <Suspense fallback={null}>
-              <Outlet />
-            </Suspense>
-          </Container>
+          <Suspense fallback={null}>
+            <Outlet />
+          </Suspense>
         </StuledContainer>
       </ContainerLayout>
     </>

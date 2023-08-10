@@ -8,7 +8,9 @@ import {
   Label,
   LabelCheckboxStyled,
   ImputWrap,
+  StyledNavLink,
 } from './FormLogin.styled';
+import { NavLink } from 'react-router-dom';
 // import { useState } from 'react';
 // import { useAuth } from 'hooks';
 // import theme from 'theme';
@@ -21,7 +23,7 @@ const FormLogin = ({ onSubmit }) => {
       initialValues={{
         email: '',
         password: '',
-        checkbox: false,
+        rememberMe: false,
       }}
       validationSchema={validationLoginSchema}
       onSubmit={onSubmit}
@@ -80,7 +82,7 @@ const FormLogin = ({ onSubmit }) => {
                 <FieldCheckboxStyled
                   //   error={errors.check && touched.check && errors.check}
                   type={'checkbox'}
-                  name="checkbox"
+                  name="rememberMe"
                   //   value={values.checkbox}
                   onChange={handleChange}
                   onBlur={handleBlur}
@@ -88,10 +90,23 @@ const FormLogin = ({ onSubmit }) => {
                 <span>запам’ятати мене</span>
               </LabelCheckboxStyled>
 
-              <span>Забули пароль?</span>
+              <NavLink to="/refreshPassword">Забули пароль?</NavLink>
             </div>
 
-            <Button type="submit">Вхід</Button>
+            <div
+              style={{
+                display: 'flex',
+                // justifyContent: 'center',
+                boxSizing: 'border-box',
+                paddingLeft: 78,
+                columnGap: 279,
+                width: 800,
+                paddingTop: 52,
+              }}
+            >
+              <StyledNavLink to="/register">Новий користувач</StyledNavLink>
+              <Button type="submit">Вхід</Button>
+            </div>
           </FormStyled>
         );
       }}
