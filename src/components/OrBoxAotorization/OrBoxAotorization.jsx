@@ -34,10 +34,10 @@ const OrBoxAotorization = () => {
           alignItems: 'center',
         }}
       >
-        <a href="https://project-back1v0.onrender.com/auth/google/">
+        <a href="https://project-back1v0.onrender.com/api/users/google/">
           <IconGoogle />
         </a>
-        <a href="https://project-back1v0.onrender.com/auth/facebook/">
+        <a href="https://project-back1v0.onrender.com/api/users/facebook/">
           <IconFacebook />
         </a>
       </div>
