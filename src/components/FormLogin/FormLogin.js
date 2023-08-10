@@ -9,108 +9,109 @@ import {
   LabelCheckboxStyled,
   ImputWrap,
   StyledNavLink,
+  TextError,
+  Title,
+  StyledRefreshPassword,
 } from './FormLogin.styled';
-import { NavLink } from 'react-router-dom';
-// import { useState } from 'react';
-// import { useAuth } from 'hooks';
-// import theme from 'theme';
+import Checkbox from 'components/Checkbox/Checkbox';
 
 const FormLogin = ({ onSubmit }) => {
-  // const [openPassword, setOpenPassword] = useState(false);
-  // const { currentTheme } = useAuth();
   return (
-    <Formik
-      initialValues={{
-        email: '',
-        password: '',
-        rememberMe: false,
-      }}
-      validationSchema={validationLoginSchema}
-      onSubmit={onSubmit}
-    >
-      {({
-        values,
-        errors,
-        touched,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-      }) => {
-        // const isPasswordValid = values.password && values.password.length >= 6;
+    <>
+      <Title>Вхід</Title>
+      <Formik
+        initialValues={{
+          email: '',
+          password: '',
+          rememberMe: false,
+        }}
+        validationSchema={validationLoginSchema}
+        onSubmit={onSubmit}
+      >
+        {({
+          values,
+          errors,
+          touched,
+          handleChange,
+          handleBlur,
+          handleSubmit,
+        }) => {
+          return (
+            <FormStyled onSubmit={handleSubmit}>
+              <ImputWrap>
+                <Label>
+                  <FieldStyled
+                    error={errors.email && touched.email && errors.email}
+                    valid={values.email}
+                    type="email"
+                    name="email"
+                    // value={values.email}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="e-mail"
+                    required
+                  />
+                  {errors.email && touched.email && (
+                    <TextError>{errors.email}</TextError>
+                  )}
+                </Label>
 
-        return (
-          <FormStyled onSubmit={handleSubmit}>
-            <ImputWrap>
-              <Label>
-                <FieldStyled
-                  error={errors.email && touched.email && errors.email}
-                  valid={values.email}
-                  type="email"
-                  name="email"
-                  value={values.email}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="e-mail"
-                  required
-                />
-              </Label>
+                <Label>
+                  <FieldStyled
+                    error={
+                      errors.password && touched.password && errors.password
+                    }
+                    type={'password'}
+                    name="password"
+                    // value={values.password}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="Пароль"
+                    required
+                  />
+                  {errors.password && touched.password && (
+                    <TextError>{errors.password}</TextError>
+                  )}
+                </Label>
+              </ImputWrap>
 
-              <Label>
-                <FieldStyled
-                  error={errors.password && touched.password && errors.password}
-                  type={'password'}
-                  name="password"
-                  value={values.password}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  placeholder="Пароль"
-                  required
-                />
-              </Label>
-            </ImputWrap>
+              <StyledRefreshPassword to="/refreshPassword">
+                Забули пароль?
+              </StyledRefreshPassword>
 
-            <div
-              style={{
-                width: 800,
-                display: 'flex',
-                justifyContent: 'space-between',
-                paddingTop: 20,
-                alignItems: 'baseline',
-              }}
-            >
-              <LabelCheckboxStyled>
-                <FieldCheckboxStyled
-                  //   error={errors.check && touched.check && errors.check}
-                  type={'checkbox'}
-                  name="rememberMe"
-                  //   value={values.checkbox}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <span>запам’ятати мене</span>
-              </LabelCheckboxStyled>
-
-              <NavLink to="/refreshPassword">Забули пароль?</NavLink>
-            </div>
-
-            <div
-              style={{
-                display: 'flex',
-                // justifyContent: 'center',
-                boxSizing: 'border-box',
-                paddingLeft: 78,
-                columnGap: 279,
-                width: 800,
-                paddingTop: 52,
-              }}
-            >
-              <StyledNavLink to="/register">Новий користувач</StyledNavLink>
-              <Button type="submit">Вхід</Button>
-            </div>
-          </FormStyled>
-        );
-      }}
-    </Formik>
+              <div
+                style={{
+                  display: 'flex',
+                  // justifyContent: 'center',
+                  boxSizing: 'border-box',
+                  paddingLeft: 60,
+                  columnGap: 279,
+                  width: 800,
+                  paddingTop: 52,
+                }}
+              >
+                <div>
+                  <Button type="submit">Вхід</Button>
+                  <LabelCheckboxStyled>
+                    <FieldCheckboxStyled
+                      type={'checkbox'}
+                      name="rememberMe"
+                      onChange={handleChange}
+                      onBlur={handleBlur}
+                      component={Checkbox}
+                    />
+                    <span>запам’ятати мене</span>
+                  </LabelCheckboxStyled>
+                </div>
+                <StyledNavLink to="/register">
+                  Створити користувача
+                </StyledNavLink>
+              </div>
+            </FormStyled>
+          );
+        }}
+      </Formik>
+    </>
   );
 };
 

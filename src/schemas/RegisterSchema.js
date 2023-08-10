@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const validationLoginSchema = Yup.object().shape({
+export const validationRegisterSchema = Yup.object().shape({
   email: Yup.string()
     .required('Поле обов`язкове')
     .email('Введіть дійсну адресу електронної пошти'),
@@ -12,4 +12,7 @@ export const validationLoginSchema = Yup.object().shape({
       /^(?=.*[A-Z])(?=.*\d).{8,16}$/,
       'Пароль повинен містити мінімум 8 латинських символів, одну велику літеру, одну цифру'
     ),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref('password'), null], 'Паролі повинні збігатися')
+    .required('Поле обов`язкове'),
 });

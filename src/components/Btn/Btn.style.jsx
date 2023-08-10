@@ -48,7 +48,7 @@ export const StyledNavLink = styled(NavLink)`
   padding: ${({ children }) => (children[1] ? '10px' : '10px 20px')};
 
   border-radius: 10px;
-  border: 2px solid ${({ theme }) => theme.color.btnDark};
+  border: 2px solid ${({ theme }) => theme.color.primary};
 
   &:hover {
     // background: ${({ theme }) => theme.color.gradient};
