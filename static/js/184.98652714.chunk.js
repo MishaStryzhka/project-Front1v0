@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact=self.webpackChunkreact||[]).push([[184],{9195:function(e,r,t){t.r(r);var n=t(4270),s=t(3329);r.default=function(){return(0,s.jsxs)(s.Fragment,{children:[(0,s.jsx)(n.q,{children:(0,s.jsx)("title",{children:"Registration"})}),(0,s.jsx)("p",{children:"registerPage"})]})}}}]);
-//# sourceMappingURL=184.98652714.chunk.js.map
