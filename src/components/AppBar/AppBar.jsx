@@ -13,7 +13,7 @@ import {
 // import Btn from 'components/Btn/Btn';
 // import { useDispatch } from 'react-redux';
 // import { logOut } from 'redux/auth/operations';
-import BtnBack from 'components/BtnBack/BtnBack';
+// import BtnBack from 'components/BtnBack/BtnBack';
 import Logo from 'components/Logo/Logo';
 import FormSearch from 'components/FormSearch/FormSearch';
 import IconUser from 'images/icons/IconUser';
@@ -21,7 +21,7 @@ import IconUser from 'images/icons/IconUser';
 
 export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
   // const dispatch = useDispatch();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, userType } = useAuth();
 
   // const hendlelogout = () => {
   //   dispatch(logOut());
@@ -30,7 +30,7 @@ export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
   return (
     <StyledAppBar>
       <StyledContainer>
-        <BtnBack />
+        {/* <BtnBack /> */}
 
         <NavContainer>
           <Logo />
@@ -38,7 +38,7 @@ export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
           <Btn to="/doctors" type="link" text="Спеціалісти" />
           <Btn to="/problems" type="link" text="Проблеми" />
           <FormSearch />
-          <Btn to={isLoggedIn ? '/user' : '/login'} type="link">
+          <Btn to={isLoggedIn ? `/user/${userType}` : '/login'} type="link">
             <IconUser />
           </Btn>
         </NavContainer>

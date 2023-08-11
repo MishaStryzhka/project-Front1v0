@@ -10,6 +10,7 @@ import {
 const initialState = {
   user: null,
   token: null,
+  userType: null,
   isLoggedIn: false,
   isRefreshing: false,
   error: null,
@@ -24,7 +25,8 @@ const authSlice = createSlice({
     builder
       .addCase(register.fulfilled, (state, action) => {
         state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.token = action.payload.user.token;
+        state.userType = action.payload.user.userType;
         state.isLoggedIn = true;
         state.isFirstLogin = true;
       })
@@ -32,10 +34,14 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(logIn.fulfilled, (state, action) => {
-        state.user = action.payload.user;
+        state.user = action.payload;
         state.token = action.payload.token;
+        state.userType = action.payload.userType;
         state.isLoggedIn = true;
         state.isFirstLogin = false;
+      })
+      .addCase(logIn.rejected, (state, action) => {
+        state.error = action.payload;
       })
       .addCase(logOut.fulfilled, state => {
         state.user = { name: null, email: null };
@@ -47,7 +53,8 @@ const authSlice = createSlice({
         state.isRefreshing = true;
       })
       .addCase(refreshUser.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.user;
+        state.userType = action.payload.user.userType;
         state.isLoggedIn = true;
         state.isRefreshing = false;
         state.isFirstLogin = false;
@@ -61,8 +68,8 @@ const authSlice = createSlice({
         state.user = action.payload;
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
-			state.error = action.payload;
-			console.log(action.payload);
+        state.error = action.payload;
+        console.log(action.payload);
       });
   },
 });

@@ -9,6 +9,6 @@ export const ValidateBox = styled.ul`
 
 export const ValidateBoxItem = styled.li`
   display: flex;
-  column-gap: 20px;
+  column-gap: 5px;
   align-items: center;
 `;

@@ -11,18 +11,18 @@ import { PrivateRoute } from 'rotes/PrivateRoute';
 import SharedLayout from 'components/SharedLayout/SharedLayout';
 import ProblemsPage from 'pages/mainPages/ProblemsPage';
 import DoctorsPage from 'pages/mainPages/DoctorsPage';
-import RefreshPassword from 'pages/secondaryPages/UserPage/RefreshPassword';
+import RefreshPassword from 'pages/secondaryPages/RefreshPassword';
 
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
 const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
 const MainPage = lazy(() => import('pages/mainPages/MainPage'));
-const UserPage = lazy(() => import('pages/secondaryPages/UserPage/UserPage'));
+const UserPage = lazy(() => import('pages/secondaryPages/UserPage'));
 const NotFoundPage = lazy(() => import('pages/mainPages/NotFoundPage'));
 
 export const App = () => {
   const [currentTheme, setCurrentTheme] = useState('light');
   const dispatch = useDispatch();
-  const { isRefreshing } = useAuth();
+  const { isRefreshing, userType } = useAuth();
 
   useEffect(() => {
     setCurrentTheme('light');
@@ -40,7 +40,6 @@ export const App = () => {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<MainPage />} />
           <Route path="/main" element={<MainPage />} />
-          <Route path="/main" element={<MainPage />} />
           <Route path="/doctors" element={<DoctorsPage />} />
           <Route path="/problems" element={<ProblemsPage />} />
 
@@ -48,14 +47,17 @@ export const App = () => {
           <Route
             path="/login"
             element={
-              <RestrictedRoute redirectTo="/user" component={<LoginPage />} />
+              <RestrictedRoute
+                redirectTo={`/user/${userType}`}
+                component={<LoginPage />}
+              />
             }
           />
           <Route
             path="/refreshPassword"
             element={
               <RestrictedRoute
-                redirectTo="/user"
+                redirectTo={`/user/${userType}`}
                 component={<RefreshPassword />}
               />
             }
@@ -64,7 +66,7 @@ export const App = () => {
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo="/user"
+                redirectTo={`/user/${userType}`}
                 component={<RegisterPage />}
               />
             }
@@ -73,7 +75,7 @@ export const App = () => {
             path="/register/typeUser"
             element={
               <RestrictedRoute
-                redirectTo="/user"
+                redirectTo={`/user/${userType}`}
                 component={<RegisterPage />}
               />
             }
@@ -81,7 +83,13 @@ export const App = () => {
           <Route
             path="/user"
             element={
-              <PrivateRoute redirectTo="/news" component={<UserPage />} />
+              <PrivateRoute redirectTo="/main" component={<UserPage />} />
+            }
+          />
+          <Route
+            path="/user/:userType"
+            element={
+              <PrivateRoute redirectTo="/main" component={<UserPage />} />
             }
           />
         </Route>

@@ -3,10 +3,14 @@ import FormLogin from 'components/FormLogin/FormLogin';
 import OrBoxAotorization from 'components/OrBoxAotorization/OrBoxAotorization';
 
 import { Helmet } from 'react-helmet';
+import { useDispatch } from 'react-redux';
+import { logIn } from 'redux/auth/operations';
 
 const LoginPage = () => {
+  const dispatch = useDispatch();
+
   const handleLogInSubmit = async values => {
-    console.log('values', values);
+    dispatch(logIn(values));
   };
 
   return (
