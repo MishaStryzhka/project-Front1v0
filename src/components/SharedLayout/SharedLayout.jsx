@@ -11,11 +11,7 @@ const SharedLayout = () => {
   // const { currentTheme } = useAuth();
 
   const closeMenu = e => {
-    if (
-      e.target.id !== 'btnNavMenu' &&
-      e.target.id !== 'navMenu' &&
-      e.target.id !== 'navContainer'
-    ) {
+    if (e.target.id !== 'btnOpenBurgerMenu') {
       setIsOpenMenu(false);
     }
   };
@@ -23,9 +19,6 @@ const SharedLayout = () => {
   return (
     <>
       <ContainerLayout onClick={closeMenu}>
-        {/* <Helmet>
-          <style>{`body { background-color: ${theme[currentTheme].color.bodyColor}; }`}</style>
-        </Helmet> */}
         <AppBar isOpenMenu={isOpenMenu} setIsOpenMenu={setIsOpenMenu} />
         <StuledContainer>
           <Suspense fallback={null}>

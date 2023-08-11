@@ -23,8 +23,7 @@ export const register = createAsyncThunk(
     try {
       const res = await axios.post('api/users/register', credentials);
       // After successful registration, add the token to the HTTP header
-      setAuthHeader(res.data.token);
-      console.log('res', res);
+      setAuthHeader(res.data.user.token);
 
       return res.data;
     } catch (error) {
@@ -46,7 +45,7 @@ export const logIn = createAsyncThunk(
     try {
       const res = await axios.post('/api/users/login', { email, password });
       // After successful login, add the token to the HTTP header
-      setAuthHeader(res.data.token);
+      setAuthHeader(res.data.user.token);
 
       return {
         ...res.data.user,

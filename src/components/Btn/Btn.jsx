@@ -24,6 +24,7 @@ const Btn = ({
   type = 'button',
   to,
   children,
+  id,
 }) => {
   // const [isHover, setIsHover] = useState(false);
   // const { currentTheme } = useAuth();
@@ -46,6 +47,7 @@ const Btn = ({
       type={type}
       to={to}
       children={children}
+      id={id}
     >
       {text}
       {children}
@@ -54,11 +56,12 @@ const Btn = ({
     <StyledBtn
       // onMouseEnter={e => setIsHover(true)}
       // onMouseLeave={e => setIsHover(false)}
-      transparent={transparent}
+      // transparent={transparent}
       className={className}
       onClick={() => onClick()}
       type={type}
       children={children}
+      id={id}
     >
       {text}
       {children}

@@ -12,3 +12,13 @@ export const ValidateBoxItem = styled.li`
   column-gap: 5px;
   align-items: center;
 `;
+
+export const ValidateBoxText = styled.p`
+  color: ${({ theme }) => theme.color.secondary};
+
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
+`;
