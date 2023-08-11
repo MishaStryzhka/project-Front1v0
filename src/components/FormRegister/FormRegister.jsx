@@ -15,10 +15,14 @@ import {
   FieldCheckboxStyled,
   LabelCheckboxStyled,
   LabelCheckboxText,
-} from './FormRedister.styled';
+} from './FormRegister.styled';
 import CheckboxToggle from 'components/CheckboxToggle/CheckboxToggle';
+import { useAuth } from 'hooks';
 
 const FormRegister = ({ onSubmit }) => {
+  let { error } = useAuth();
+  console.log('error', error);
+
   return (
     <>
       <Title>Реєстрація нового користувача</Title>
@@ -27,14 +31,14 @@ const FormRegister = ({ onSubmit }) => {
           email: '',
           password: '',
           confirmPassword: '',
-          typeUser: true,
+          userType: true,
         }}
         validationSchema={validationRegisterSchema}
-        onSubmit={({ email, password, typeUser }) =>
+        onSubmit={({ email, password, userType }) =>
           onSubmit({
             email,
             password,
-            typeUser: typeUser ? 'patient' : 'doctor',
+            userType: userType ? 'patient' : 'doctor',
           })
         }
       >
@@ -56,13 +60,24 @@ const FormRegister = ({ onSubmit }) => {
                     type="email"
                     name="email"
                     value={values.email}
-                    onChange={handleChange}
+                    onChange={e => {
+                      error = null;
+                      handleChange(e);
+                    }}
                     onBlur={handleBlur}
                     placeholder="e-mail"
                     required
                   />
                   {errors.email && touched.email && (
                     <TextError>{errors.email}</TextError>
+                  )}
+                  {error && (
+                    <TextError>
+                      {error.status === 409 &&
+                        'Користувач з таким адресом електроної пошти вже існує'}
+                      {error.status === 400 &&
+                        'Невірний формат електроної пошти'}
+                    </TextError>
                   )}
                 </Label>
 
@@ -107,17 +122,17 @@ const FormRegister = ({ onSubmit }) => {
                 </Label>
 
                 <LabelCheckboxStyled>
-                  <LabelCheckboxText value={values.typeUser}>
+                  <LabelCheckboxText value={values.userType}>
                     Пацієнт
                   </LabelCheckboxText>
                   <FieldCheckboxStyled
                     type={'checkbox'}
-                    name="typeUser"
+                    name="userType"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     component={CheckboxToggle}
                   />
-                  <LabelCheckboxText value={!values.typeUser}>
+                  <LabelCheckboxText value={!values.userType}>
                     Лікар
                   </LabelCheckboxText>
                 </LabelCheckboxStyled>

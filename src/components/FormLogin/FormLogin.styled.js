@@ -144,12 +144,15 @@ export const Text = styled.p`
 `;
 
 export const TextError = styled.p`
-  font-size: 12px;
-  line-height: 1.3;
-  font-weight: 400;
   color: ${({ theme }) => theme.color.error};
   margin-top: 4px;
   margin-left: 16px;
+
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
 `;
 
 export const SuccessText = styled.div`

@@ -1,8 +1,9 @@
 import { string } from 'yup';
-import IconCheckboxSmall from 'images/icons/IconCheckboxSmall';
+// import IconCheckboxSmall from 'images/icons/IconCheckboxSmall';
 import { useEffect, useState } from 'react';
-import IconCheckboxSmallChack from 'images/icons/IconCheckboxSmallChack';
+// import IconCheckboxSmallChack from 'images/icons/IconCheckboxSmallChack';
 import { ValidateBox, ValidateBoxItem } from './PassValidateBox.styled';
+import IconDone from 'images/icons/IconDone';
 
 const passwordMin8Valid = string().min(8, '');
 const passwordLatinLettersValid = string().matches(
@@ -35,27 +36,23 @@ const PassValidateBox = ({ value }) => {
   return (
     <ValidateBox>
       <ValidateBoxItem>
-        {passwordMin8 ? <IconCheckboxSmallChack /> : <IconCheckboxSmall />}
+        {passwordMin8 ? <IconDone /> : <div style={{ width: 16 }} />}
         <p>мінімум 8 символів</p>
       </ValidateBoxItem>
       <ValidateBoxItem>
-        {passwordLatinLetters ? (
-          <IconCheckboxSmallChack />
-        ) : (
-          <IconCheckboxSmall />
-        )}
+        {passwordLatinLetters ? <IconDone /> : <div style={{ width: 16 }} />}
         <p>латинські літери</p>
       </ValidateBoxItem>
       <ValidateBoxItem>
         {passwordLettersUpperCase ? (
-          <IconCheckboxSmallChack />
+          <IconDone />
         ) : (
-          <IconCheckboxSmall />
+          <div style={{ width: 16 }} />
         )}
         <p>1 велика літера</p>
       </ValidateBoxItem>
       <ValidateBoxItem>
-        {passwordOneNumber ? <IconCheckboxSmallChack /> : <IconCheckboxSmall />}
+        {passwordOneNumber ? <IconDone /> : <div style={{ width: 16 }} />}
         <p>1 цифра</p>
       </ValidateBoxItem>
     </ValidateBox>

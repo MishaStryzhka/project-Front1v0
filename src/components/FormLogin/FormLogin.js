@@ -15,8 +15,11 @@ import {
   NavWrap,
 } from './FormLogin.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
+import { useAuth } from 'hooks';
 
 const FormLogin = ({ onSubmit }) => {
+  let { error } = useAuth();
+
   return (
     <>
       <Title>Вхід</Title>
@@ -46,7 +49,10 @@ const FormLogin = ({ onSubmit }) => {
                     valid={values.email}
                     type="email"
                     name="email"
-                    onChange={handleChange}
+                    onChange={e => {
+                      error = null;
+                      handleChange(e);
+                    }}
                     onBlur={handleBlur}
                     placeholder="e-mail"
                     required
@@ -63,13 +69,21 @@ const FormLogin = ({ onSubmit }) => {
                     }
                     type={'password'}
                     name="password"
-                    onChange={handleChange}
+                    onChange={e => {
+                      error = null;
+                      handleChange(e);
+                    }}
                     onBlur={handleBlur}
                     placeholder="Пароль"
                     required
                   />
                   {errors.password && touched.password && (
                     <TextError>{errors.password}</TextError>
+                  )}
+                  {error?.status === 401 && (
+                    <TextError>
+                      Електронна пошта або пароль неправильні
+                    </TextError>
                   )}
                 </Label>
               </ImputWrap>

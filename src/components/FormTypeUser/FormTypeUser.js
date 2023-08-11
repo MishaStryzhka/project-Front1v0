@@ -7,19 +7,20 @@ import {
   LabelCheckboxStyled,
   NavWrap,
 } from 'components/FormLogin/FormLogin.styled';
-import { LabelCheckboxText } from 'components/FormRegister/FormRedister.styled';
+import { LabelCheckboxText } from 'components/FormRegister/FormRegister.styled';
 import { Formik } from 'formik';
+import { Title } from './FormTypeUser.styled';
 
 const FormTypeUser = ({ onSubmit }) => {
   return (
     <>
       <Formik
         initialValues={{
-          typeUser: true,
+          userType: true,
         }}
-        onSubmit={({ typeUser }) =>
+        onSubmit={({ userType }) =>
           onSubmit({
-            typeUser: typeUser ? 'patient' : 'doctor',
+            userType: userType ? 'patient' : 'doctor',
           })
         }
       >
@@ -33,19 +34,20 @@ const FormTypeUser = ({ onSubmit }) => {
         }) => {
           return (
             <FormStyled onSubmit={handleSubmit}>
-              <ImputWrap>
+              <Title>Виберіть тип користувача</Title>
+              <ImputWrap style={{ paddingTop: 28 }}>
                 <LabelCheckboxStyled>
-                  <LabelCheckboxText value={values.typeUser}>
+                  <LabelCheckboxText value={values.userType}>
                     Пацієнт
                   </LabelCheckboxText>
                   <FieldCheckboxStyled
                     type={'checkbox'}
-                    name="typeUser"
+                    name="userType"
                     onChange={handleChange}
                     onBlur={handleBlur}
                     component={CheckboxToggle}
                   />
-                  <LabelCheckboxText value={!values.typeUser}>
+                  <LabelCheckboxText value={!values.userType}>
                     Лікар
                   </LabelCheckboxText>
                 </LabelCheckboxStyled>
