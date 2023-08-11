@@ -12,6 +12,7 @@ import {
   TextError,
   Title,
   StyledRefreshPassword,
+  NavWrap,
 } from './FormLogin.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
 
@@ -45,7 +46,6 @@ const FormLogin = ({ onSubmit }) => {
                     valid={values.email}
                     type="email"
                     name="email"
-                    // value={values.email}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="e-mail"
@@ -63,7 +63,6 @@ const FormLogin = ({ onSubmit }) => {
                     }
                     type={'password'}
                     name="password"
-                    // value={values.password}
                     onChange={handleChange}
                     onBlur={handleBlur}
                     placeholder="Пароль"
@@ -79,17 +78,10 @@ const FormLogin = ({ onSubmit }) => {
                 Забули пароль?
               </StyledRefreshPassword>
 
-              <div
-                style={{
-                  display: 'flex',
-                  // justifyContent: 'center',
-                  boxSizing: 'border-box',
-                  paddingLeft: 60,
-                  columnGap: 279,
-                  width: 800,
-                  paddingTop: 52,
-                }}
-              >
+              <NavWrap>
+                <StyledNavLink to="/register">
+                  Створити користувача
+                </StyledNavLink>
                 <div>
                   <Button type="submit">Вхід</Button>
                   <LabelCheckboxStyled>
@@ -103,10 +95,7 @@ const FormLogin = ({ onSubmit }) => {
                     <span>запам’ятати мене</span>
                   </LabelCheckboxStyled>
                 </div>
-                <StyledNavLink to="/register">
-                  Створити користувача
-                </StyledNavLink>
-              </div>
+              </NavWrap>
             </FormStyled>
           );
         }}

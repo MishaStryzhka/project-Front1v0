@@ -3,8 +3,8 @@ const IconCheckboxSmallChack = props => (
   <svg
     {...props}
     xmlns="http://www.w3.org/2000/svg"
-    width={20}
-    height={20}
+    width={16}
+    height={16}
     fill="none"
   >
     <path
