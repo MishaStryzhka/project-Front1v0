@@ -1,4 +1,3 @@
-import Btn from 'components/Btn/Btn';
 import styled from 'styled-components';
 
 export const Backdrop = styled.div`
