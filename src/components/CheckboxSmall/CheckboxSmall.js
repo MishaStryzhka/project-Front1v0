@@ -1,5 +1,5 @@
 import IconCheckboxSmall from 'images/icons/IconCheckboxSmall';
-import { StyledField, StyledLabel } from './Checkbox.stuled';
+import { StyledField, StyledLabel } from '../Checkbox/Checkbox.stuled';
 import IconCheckboxSmallChack from 'images/icons/IconCheckboxSmallChack';
 
 const CheckboxSmall = e => {

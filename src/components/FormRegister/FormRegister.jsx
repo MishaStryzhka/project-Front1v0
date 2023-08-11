@@ -4,13 +4,19 @@ import {
   FormStyled,
   ImputWrap,
   Label,
+  NavWrap,
   TextError,
   Title,
 } from 'components/FormLogin/FormLogin.styled';
+import PassValidateBox from 'components/PassValidateBox/PassValidateBox';
 import { Formik } from 'formik';
-// import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
 import { validationRegisterSchema } from 'schemas';
+import {
+  FieldCheckboxStyled,
+  LabelCheckboxStyled,
+  LabelCheckboxText,
+} from './FormRedister.styled';
+import CheckboxToggle from 'components/CheckboxToggle/CheckboxToggle';
 
 const FormRegister = ({ onSubmit }) => {
   return (
@@ -21,9 +27,16 @@ const FormRegister = ({ onSubmit }) => {
           email: '',
           password: '',
           confirmPassword: '',
+          typeUser: true,
         }}
         validationSchema={validationRegisterSchema}
-        onSubmit={onSubmit}
+        onSubmit={({ email, password, typeUser }) =>
+          onSubmit({
+            email,
+            password,
+            typeUser: typeUser ? 'patient' : 'doctor',
+          })
+        }
       >
         {({
           values,
@@ -69,7 +82,10 @@ const FormRegister = ({ onSubmit }) => {
                   {errors.password && touched.password && (
                     <TextError>{errors.password}</TextError>
                   )}
+
+                  <PassValidateBox value={values.password} />
                 </Label>
+
                 <Label>
                   <FieldStyled
                     error={
@@ -82,53 +98,33 @@ const FormRegister = ({ onSubmit }) => {
                     value={values.confirmPassword}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Повторіть пароль"
+                    placeholder="Повторити пароль"
                     required
                   />
                   {errors.confirmPassword && touched.confirmPassword && (
                     <TextError>{errors.confirmPassword}</TextError>
                   )}
                 </Label>
+
+                <LabelCheckboxStyled>
+                  <LabelCheckboxText value={values.typeUser}>
+                    Пацієнт
+                  </LabelCheckboxText>
+                  <FieldCheckboxStyled
+                    type={'checkbox'}
+                    name="typeUser"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    component={CheckboxToggle}
+                  />
+                  <LabelCheckboxText value={!values.typeUser}>
+                    Лікар
+                  </LabelCheckboxText>
+                </LabelCheckboxStyled>
               </ImputWrap>
-
-              <div
-                style={{
-                  width: 800,
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  paddingTop: 20,
-                  alignItems: 'baseline',
-                }}
-              >
-                {/* <LabelCheckboxStyled>
-                <FieldCheckboxStyled
-                  //   error={errors.check && touched.check && errors.check}
-                  type={'checkbox'}
-                  name="rememberMe"
-                  //   value={values.checkbox}
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                />
-                <span>запам’ятати мене</span>
-              </LabelCheckboxStyled> */}
-
-                <NavLink to="/refreshPassword">Забули пароль?</NavLink>
-              </div>
-
-              {/* <div
-              style={{
-                display: 'flex',
-                // justifyContent: 'center',
-                boxSizing: 'border-box',
-                paddingLeft: 78,
-                columnGap: 279,
-                width: 800,
-                paddingTop: 52,
-              }}
-            > */}
-              {/* <StyledNavLink to="/register">Новий користувач</StyledNavLink> */}
-              <Button type="submit">Вхід</Button>
-              {/* </div> */}
+              <NavWrap>
+                <Button type="submit">Зберегти та продовжити </Button>
+              </NavWrap>
             </FormStyled>
           );
         }}

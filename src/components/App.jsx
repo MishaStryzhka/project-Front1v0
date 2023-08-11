@@ -70,6 +70,15 @@ export const App = () => {
             }
           />
           <Route
+            path="/register/typeUser"
+            element={
+              <RestrictedRoute
+                redirectTo="/user"
+                component={<RegisterPage />}
+              />
+            }
+          />
+          <Route
             path="/user"
             element={
               <PrivateRoute redirectTo="/news" component={<UserPage />} />

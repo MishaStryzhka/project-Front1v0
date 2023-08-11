@@ -7,9 +7,9 @@ const lightTheme = {
   primary: '#FFFFFF', //
   secondary: '#000', //
 
+  btn: '#9D9D9D', //
   btnDark: '#C3E2E7', //
   btnLight: '#E5E8EF', //
-  btnLogOut: '', //
 
   error: 'red', //
 
