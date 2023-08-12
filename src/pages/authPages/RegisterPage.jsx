@@ -23,6 +23,7 @@ const RegisterPage = () => {
   const handleRegisterTypeUser = async values => {
     console.log('register - values', values);
     setIsOpenModal(false);
+    document.body.style.overflow = 'auto';
   };
 
   return (
@@ -35,7 +36,7 @@ const RegisterPage = () => {
       <OrBoxAotorization />
 
       {isOpenModal && (
-        <Modal onClick={() => console.log(false)}>
+        <Modal>
           <FormTypeUser onSubmit={handleRegisterTypeUser} />
         </Modal>
       )}

@@ -33,14 +33,16 @@ const Modal = ({ children, onClick }) => {
     <Backdrop onClick={handleBackdropClick}>
       <ModalContainer>
         <CloseWrap>
-          <BtnStyled
-            onClick={() => {
-              document.body.style.overflow = 'auto';
-              onClick();
-            }}
-          >
-            <IconCross />
-          </BtnStyled>
+          {onClick && (
+            <BtnStyled
+              onClick={() => {
+                document.body.style.overflow = 'auto';
+                onClick();
+              }}
+            >
+              <IconCross />
+            </BtnStyled>
+          )}
         </CloseWrap>
         {children}
       </ModalContainer>
