@@ -13,6 +13,7 @@ import {
   Title,
   StyledRefreshPassword,
   NavWrap,
+  TextCheckbox,
 } from './FormLogin.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
 import { useAuth } from 'hooks';
@@ -106,7 +107,7 @@ const FormLogin = ({ onSubmit }) => {
                       onBlur={handleBlur}
                       component={Checkbox}
                     />
-                    <span>запам’ятати мене</span>
+                    <TextCheckbox>запам’ятати мене</TextCheckbox>
                   </LabelCheckboxStyled>
                 </div>
               </NavWrap>

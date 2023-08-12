@@ -183,3 +183,13 @@ export const NavWrap = styled.div`
   // width: 800px;
   padding-top: 52px;
 `;
+
+export const TextCheckbox = styled.span`
+  color: ${({ theme }) => theme.color.main};
+
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
+`;

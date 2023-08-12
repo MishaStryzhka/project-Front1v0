@@ -1,6 +1,6 @@
 // import { UserMenu } from '../UserMenu/UserMenu';
 // import { AuthNav } from '../AuthNav/AuthNav';
-import { useAuth } from 'hooks';
+// import { useAuth } from 'hooks';
 import Btn from 'components/Btn/Btn';
 import {
   NavContainer,
@@ -17,11 +17,12 @@ import {
 import Logo from 'components/Logo/Logo';
 import FormSearch from 'components/FormSearch/FormSearch';
 import IconUser from 'images/icons/IconUser';
+import BurgerMenu from 'components/BurgerMenu/BurgerMenu';
 // import { Container } from 'components/Container/Container';
 
 export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
   // const dispatch = useDispatch();
-  const { isLoggedIn, userType } = useAuth();
+  // const { isLoggedIn, userType } = useAuth();
 
   // const hendlelogout = () => {
   //   dispatch(logOut());
@@ -30,18 +31,17 @@ export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
   return (
     <StyledAppBar>
       <StyledContainer>
-        {/* <BtnBack /> */}
-
         <NavContainer>
           <Logo />
           <Btn to="/news" type="link" text="Залишити заявку" />
           <Btn to="/doctors" type="link" text="Спеціалісти" />
           <Btn to="/problems" type="link" text="Проблеми" />
           <FormSearch />
-          <Btn to={isLoggedIn ? `/user/${userType}` : '/login'} type="link">
+          <Btn id="btnOpenBurgerMenu" onClick={() => setIsOpenMenu(true)}>
             <IconUser />
           </Btn>
         </NavContainer>
+        {isOpenMenu && <BurgerMenu setIsOpenMenu={setIsOpenMenu} />}
       </StyledContainer>
     </StyledAppBar>
   );

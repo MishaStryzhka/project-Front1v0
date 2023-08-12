@@ -22,9 +22,16 @@ export const StyledBtn = styled.button`
   border-radius: 10px;
   border: 2px solid ${({ theme }) => theme.color.primary};
 
+  min-width: 40px;
+  min-height: 40px;
+
   &:hover {
     // background: ${({ theme }) => theme.color.gradient};
     // color: ${({ theme }) => theme.color.background};
+  }
+
+  > svg {
+    pointer-events: none;
   }
 `;
 
