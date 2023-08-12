@@ -16,7 +16,7 @@ import RefreshPassword from 'pages/secondaryPages/RefreshPassword';
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
 const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
 const MainPage = lazy(() => import('pages/mainPages/MainPage'));
-const UserPage = lazy(() => import('pages/secondaryPages/UserPage'));
+const UserPage = lazy(() => import('pages/secondaryPages/UserPage/UserPage'));
 const NotFoundPage = lazy(() => import('pages/mainPages/NotFoundPage'));
 
 export const App = () => {

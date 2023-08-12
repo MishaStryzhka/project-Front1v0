@@ -15,6 +15,7 @@ const lightTheme = {
 
   background: '#EEF1F7', //
   card: '#DDD', //
+  placeholder: '#adadad',
 
   indicator: '#C3E2E7CC', //
   gradient: 'linear-gradient(to left, #419ef1 0%, #9bd0ff 100%)', //gradient
