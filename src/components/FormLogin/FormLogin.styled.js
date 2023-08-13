@@ -24,12 +24,15 @@ export const Title = styled.h2`
 `;
 
 export const ImputWrap = styled.div`
+  padding-top: 26px;
+
   display: flex;
   flex-direction: column;
   gap: 40px;
 `;
 
 export const FieldStyled = styled(Field)`
+  ${({ disabled }) => disabled && 'pointer-events: none;'}
   display: block;
 
   position: relative;
