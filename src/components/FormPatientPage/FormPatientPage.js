@@ -1,4 +1,5 @@
 import {
+  Button,
   FieldStyled,
   FormStyled,
   ImputWrap,
@@ -6,15 +7,27 @@ import {
   TextError,
 } from 'components/FormLogin/FormLogin.styled';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
-import { Formik } from 'formik';
+import { Field, Formik } from 'formik';
 import { useAuth } from 'hooks';
 import { validationPatientPageScheme } from 'schemas';
 import {
   ButtonRefresh,
+  ButtonWrapper,
+  ContactMethodLabel,
   FormDescription,
   FormStyledPatient,
   Placeholder,
+  RadioInputWrap,
+  RadioLabel,
+  StyledButton,
+  StyledField,
+  StyledLegend,
+  WrapInputRadio,
 } from './FormPatientPage.styled';
+import Checkbox from 'components/Checkbox/Checkbox';
+import IconCheckbox from 'images/icons/IconCheckbox';
+import IconCheckboxChack from 'images/icons/IconCheckboxChack';
+import IconRemove from 'images/icons/IconRemove';
 
 const FormPatientPage = () => {
   let { user, error } = useAuth();
@@ -35,6 +48,10 @@ const FormPatientPage = () => {
     console.log('add phone number');
   };
 
+  const handleRemoveAccount = () => {
+    return 'Remove account';
+  };
+
   return (
     <Formik
       initialValues={{
@@ -43,8 +60,7 @@ const FormPatientPage = () => {
         lastName: '',
         firstName: '',
         patronymic: '',
-        control: '',
-        phone1: '',
+        phone: [],
         contactMethod: '',
       }}
       validationSchema={validationPatientPageScheme}
@@ -203,7 +219,41 @@ const FormPatientPage = () => {
                   + Додати номер телефону
                 </ButtonRefresh>
               </Label>
+
+              <ContactMethodLabel>
+                <StyledLegend>Спосіб зв’язку *</StyledLegend>
+                <RadioInputWrap>
+                  <WrapInputRadio>
+                    <StyledField
+                      type="radio"
+                      id="chat"
+                      name="contactMethod"
+                      value="chat"
+                      component={Checkbox}
+                    ></StyledField>
+
+                    <RadioLabel htmlFor="chat">чат</RadioLabel>
+                  </WrapInputRadio>
+                  <WrapInputRadio>
+                    <StyledField
+                      type="radio"
+                      id="telegramBot"
+                      name="contactMethod"
+                      value="telegramBot"
+                      component={Checkbox}
+                    />
+                    <RadioLabel htmlFor="telegramBot">телеграм-бот</RadioLabel>
+                  </WrapInputRadio>
+                </RadioInputWrap>
+              </ContactMethodLabel>
             </ImputWrap>
+
+            <ButtonWrapper>
+              <StyledButton type="button" onClick={handleRemoveAccount}>
+                <IconRemove /> Видалити акаунт
+              </StyledButton>
+              <Button type="submit">Зберегти</Button>
+            </ButtonWrapper>
           </FormStyledPatient>
         );
       }}
