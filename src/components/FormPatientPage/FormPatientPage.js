@@ -7,7 +7,7 @@ import {
   TextError,
 } from 'components/FormLogin/FormLogin.styled';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
-import { Field, Formik } from 'formik';
+import { Formik } from 'formik';
 import { useAuth } from 'hooks';
 import { validationPatientPageScheme } from 'schemas';
 import {
@@ -25,8 +25,6 @@ import {
   WrapInputRadio,
 } from './FormPatientPage.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
-import IconCheckbox from 'images/icons/IconCheckbox';
-import IconCheckboxChack from 'images/icons/IconCheckboxChack';
 import IconRemove from 'images/icons/IconRemove';
 
 const FormPatientPage = () => {
