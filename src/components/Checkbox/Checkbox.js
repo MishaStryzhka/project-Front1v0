@@ -5,7 +5,12 @@ import IconCheckboxChack from 'images/icons/IconCheckboxChack';
 const Checkbox = e => {
   return (
     <StyledLabel
-      onChange={() => e.form.setFieldValue(e.field.name, e.field.value)}
+      onChange={() =>
+        e.form.setFieldValue(
+          e.field.name,
+          e.type === 'radio' ? e.field.value : !e.field.value
+        )
+      }
     >
       <StyledField type={e.type} name={e.field.name} />
       {e.type === 'radio'

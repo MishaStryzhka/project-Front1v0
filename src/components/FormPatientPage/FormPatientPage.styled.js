@@ -2,7 +2,7 @@ import { Field } from 'formik';
 import { styled } from 'styled-components';
 
 export const FormStyledPatient = styled.form`
-  padding-top: 40px;
+  padding: 40px 0;
 `;
 
 export const FormDescription = styled.p`
@@ -31,6 +31,7 @@ export const Placeholder = styled.p`
   line-height: normal;
 
   pointer-events: none;
+  white-space: nowrap;
 
   position: absolute;
   top: 15px;
@@ -44,7 +45,8 @@ export const Placeholder = styled.p`
 export const ButtonRefresh = styled.button`
   padding-top: 10px;
 
-  color: ${({ theme }) => theme.color.secondary};
+  color: ${({ theme, disabled }) =>
+    disabled ? theme.color.placeholder : theme.color.secondary};
 
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 16px;
@@ -53,8 +55,15 @@ export const ButtonRefresh = styled.button`
   line-height: normal;
 
   &:hover {
-    text-decoration-line: underline;
+    ${({ disabled }) => !disabled && 'text-decoration-line: underline'};
   }
+`;
+
+export const WrapPhone = styled.div``;
+export const WrapPhoneInput = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
 `;
 
 export const ContactMethodLabel = styled.div`
@@ -108,4 +117,16 @@ export const StyledButton = styled.button`
   display: flex;
   column-gap: 40px;
   align-items: center;
+
+  color: ${({ theme }) => theme.color.secondary};
+
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
