@@ -28,6 +28,7 @@ export const StyledBtn = styled.button`
   &:hover {
     // background: ${({ theme }) => theme.color.gradient};
     // color: ${({ theme }) => theme.color.background};
+    cursor: pointer;
   }
 
   > svg {

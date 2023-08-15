@@ -23,6 +23,8 @@ import {
   StyledField,
   StyledLegend,
   WrapInputRadio,
+  WrapPhone,
+  WrapPhoneInput,
 } from './FormPatientPage.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
 import IconRemove from 'images/icons/IconRemove';
@@ -42,23 +44,23 @@ const FormPatientPage = () => {
     console.log('refresh password');
   };
 
-  const handleAddPhoneNumber = () => {
-    console.log('add phone number');
-  };
+  // const handleAddPhoneNumber = () => {
+  //   console.log('add phone number');
+  // };
 
   const handleRemoveAccount = () => {
-    return 'Remove account';
+    console.log('Remove account');
   };
 
   return (
     <Formik
       initialValues={{
         email: user.email,
-        password: '',
+        password: 'Qwerty123',
         lastName: '',
         firstName: '',
         patronymic: '',
-        phone: [],
+        phones: [],
         contactMethod: '',
       }}
       validationSchema={validationPatientPageScheme}
@@ -202,21 +204,70 @@ const FormPatientPage = () => {
                 )}
               </Label>
 
-              <Label>
-                <FieldStyled
-                  as={PhoneInputField}
-                  field={{ name: 'phone1', value: values.phone1 }}
-                  form={{ setFieldValue }}
-                />
-                {!values.phone1 && (
-                  <Placeholder type="tel">
-                    +380 __ ___ ____ <span>*</span>
-                  </Placeholder>
-                )}
-                <ButtonRefresh type="button" onClick={handleAddPhoneNumber}>
+              <WrapPhone>
+                <WrapPhoneInput>
+                  {(values.phones.length === 0
+                    ? ['']
+                    : [...(values.phones || '')]
+                  ).map(phone => {
+                    const index = values.phones.indexOf(phone);
+                    return (
+                      <Label key={values.phones.length === 0 ? 0 : index}>
+                        <FieldStyled
+                          as={PhoneInputField}
+                          field={{ name: 'phones', value: phone }}
+                          setFieldValue={value => {
+                            const newPhones = [...values.phones];
+                            if (
+                              values.phones.indexOf('') &&
+                              values.phones.indexOf('') !== index &&
+                              value === ''
+                            ) {
+                              console.log('видаляти номер?');
+
+                              newPhones.splice(index, 1);
+                            } else {
+                              if (
+                                value !== '' &&
+                                values.phones.indexOf(value) !== -1
+                              ) {
+                                console.log('Даний номер вже вказаний.');
+                                return;
+                              }
+                              newPhones.splice(index, 1, value);
+                            }
+
+                            setFieldValue(
+                              'phones',
+                              index === -1 ? [value] : newPhones
+                            );
+                          }}
+                        />
+
+                        {phone === '' && (
+                          <Placeholder type="tel">
+                            +380 __ ___ ____ <span>*</span>
+                          </Placeholder>
+                        )}
+                      </Label>
+                    );
+                  })}
+                </WrapPhoneInput>
+                <ButtonRefresh
+                  disabled={
+                    values.phones.indexOf('') !== -1 ||
+                    values.phones.length === 0
+                  }
+                  type="button"
+                  onClick={() => {
+                    const newPhones = [...values.phones];
+                    newPhones.push('');
+                    setFieldValue('phones', newPhones);
+                  }}
+                >
                   + Додати номер телефону
                 </ButtonRefresh>
-              </Label>
+              </WrapPhone>
 
               <ContactMethodLabel>
                 <StyledLegend>Спосіб зв’язку *</StyledLegend>
@@ -247,7 +298,7 @@ const FormPatientPage = () => {
             </ImputWrap>
 
             <ButtonWrapper>
-              <StyledButton type="button" onClick={handleRemoveAccount}>
+              <StyledButton type="button" onClick={() => handleRemoveAccount()}>
                 <IconRemove /> Видалити акаунт
               </StyledButton>
               <Button type="submit">Зберегти</Button>

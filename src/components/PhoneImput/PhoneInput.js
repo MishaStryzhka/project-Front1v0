@@ -6,26 +6,23 @@ import ua from 'react-phone-number-input/locale/ua';
 const PhoneInputField = props => {
   const {
     field: { name, value },
-    form: { setFieldValue },
+    setFieldValue,
     country = 'UA',
-    onChange,
   } = props;
 
-  const onValueChange = phoneNumber => {
-    setFieldValue(name, phoneNumber);
+  // console.log('name, value', name, value);
 
-    if (onChange !== null) {
-      onChange(phoneNumber);
-    }
+  const onValueChange = phoneNumber => {
+    console.log('phoneNumber', phoneNumber);
+    setFieldValue(phoneNumber);
   };
 
   return (
     <StyledPhoneInput
       labels={ua}
-      // placeholder="+380 __ ___ ____ *"
       name={name}
       value={value}
-      onChange={onValueChange}
+      onChange={e => onValueChange(e || '')}
       country={country}
     />
   );

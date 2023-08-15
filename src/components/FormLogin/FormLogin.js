@@ -103,7 +103,7 @@ const FormLogin = ({ onSubmit }) => {
                     <FieldCheckboxStyled
                       type={'checkbox'}
                       name="rememberMe"
-                      onChange={handleChange}
+                      // onChange={handleChange}
                       onBlur={handleBlur}
                       component={Checkbox}
                     />
