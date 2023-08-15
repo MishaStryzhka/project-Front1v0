@@ -29,7 +29,7 @@ import {
 import Checkbox from 'components/Checkbox/Checkbox';
 import IconRemove from 'images/icons/IconRemove';
 
-const FormPatientPage = () => {
+const FormPatientPage = ({ setOnChange }) => {
   let { user, error } = useAuth();
 
   const onSubmit = value => {
@@ -37,11 +37,11 @@ const FormPatientPage = () => {
   };
 
   const handleRefreshEmail = () => {
-    console.log('refresh email');
+    setOnChange('email');
   };
 
   const handleRefreshPassword = () => {
-    console.log('refresh password');
+    setOnChange('password');
   };
 
   // const handleAddPhoneNumber = () => {
