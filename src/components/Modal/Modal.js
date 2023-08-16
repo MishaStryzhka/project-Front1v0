@@ -1,11 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import {
-  Backdrop,
-  ModalContainer,
-  BtnClose,
-  CloseWrap,
-  ModalContentContainer,
-} from './Modal.styled';
+import { Backdrop, ModalContainer, BtnClose } from './Modal.styled';
 import IconCross from 'images/icons/IconCross';
 
 const Modal = ({ children, onClick }) => {

@@ -19,6 +19,8 @@ const RegisterPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const accessToken = searchParams.get('accessToken');
 
+  false && setSearchParams(); // eslint
+
   const handleRegisterSubmit = async values => {
     console.log('register - values', values);
     dispatch(register(values));

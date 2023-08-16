@@ -23,7 +23,7 @@ const ModalRefreshEmail = ({ setIsOpenModal }) => {
   console.log('error', error);
 
   const handleRefreshEmail = value => {
-    const { email, newEmail } = value;
+    const { email } = value;
     if (email === user.email) {
       console.log('value', value);
     } else {
