@@ -11,12 +11,12 @@ import {
 import PassValidateBox from 'components/PassValidateBox/PassValidateBox';
 import { Formik } from 'formik';
 import { validationRegisterSchema } from 'schemas';
-import {
-  FieldCheckboxStyled,
-  LabelCheckboxStyled,
-  LabelCheckboxText,
-} from './FormRegister.styled';
-import CheckboxToggle from 'components/CheckboxToggle/CheckboxToggle';
+// import {
+//   FieldCheckboxStyled,
+//   LabelCheckboxStyled,
+//   LabelCheckboxText,
+// } from './FormRegister.styled';
+// import CheckboxToggle from 'components/CheckboxToggle/CheckboxToggle';
 import { useAuth } from 'hooks';
 
 const FormRegister = ({ onSubmit }) => {
@@ -31,14 +31,14 @@ const FormRegister = ({ onSubmit }) => {
           email: '',
           password: '',
           confirmPassword: '',
-          userType: true,
+          // userType: true,
         }}
         validationSchema={validationRegisterSchema}
         onSubmit={({ email, password, userType }) =>
           onSubmit({
             email,
             password,
-            userType: userType ? 'patient' : 'doctor',
+            // userType: userType ? 'patient' : 'doctor',
           })
         }
       >
@@ -121,7 +121,7 @@ const FormRegister = ({ onSubmit }) => {
                   )}
                 </Label>
 
-                <LabelCheckboxStyled>
+                {/* <LabelCheckboxStyled>
                   <LabelCheckboxText value={values.userType}>
                     Пацієнт
                   </LabelCheckboxText>
@@ -135,7 +135,7 @@ const FormRegister = ({ onSubmit }) => {
                   <LabelCheckboxText value={!values.userType}>
                     Лікар
                   </LabelCheckboxText>
-                </LabelCheckboxStyled>
+                </LabelCheckboxStyled> */}
               </ImputWrap>
               <NavWrap>
                 <Button type="submit">Зберегти та продовжити </Button>

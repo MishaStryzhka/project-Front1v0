@@ -9,7 +9,7 @@ import {
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import { Formik } from 'formik';
 import { useAuth } from 'hooks';
-import { validationPatientPageScheme } from 'schemas';
+import { validationPatientPageSchema } from 'schemas';
 import {
   ButtonRefresh,
   ButtonWrapper,
@@ -33,7 +33,16 @@ const FormPatientPage = ({ setOnChange }) => {
   let { user, error } = useAuth();
 
   const onSubmit = value => {
-    console.log('value', value);
+    const { lastName, firstName, patronymic, phones, contactMethod } = value;
+
+    console.log(
+      'value',
+      lastName,
+      firstName,
+      patronymic,
+      phones,
+      contactMethod
+    );
   };
 
   const handleRefreshEmail = () => {
@@ -44,10 +53,6 @@ const FormPatientPage = ({ setOnChange }) => {
     setOnChange('password');
   };
 
-  // const handleAddPhoneNumber = () => {
-  //   console.log('add phone number');
-  // };
-
   const handleRemoveAccount = () => {
     console.log('Remove account');
   };
@@ -56,14 +61,14 @@ const FormPatientPage = ({ setOnChange }) => {
     <Formik
       initialValues={{
         email: user.email,
-        password: 'Qwerty123',
+        password: '********',
         lastName: '',
         firstName: '',
         patronymic: '',
         phones: [],
         contactMethod: '',
       }}
-      validationSchema={validationPatientPageScheme}
+      validationSchema={validationPatientPageSchema}
       onSubmit={onSubmit}
     >
       {({

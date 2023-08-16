@@ -7,7 +7,7 @@ export const PrivateRoute = ({
   redirectBack,
 }) => {
   const [searchParams] = useSearchParams();
-  const { isLoggedIn, isRefreshing } = useAuth();
+  const { isLoggedIn, isRefreshing, userType } = useAuth();
   const shouldRedirect = !isLoggedIn && !isRefreshing;
 
   return shouldRedirect ? (
@@ -15,7 +15,9 @@ export const PrivateRoute = ({
       to={redirectTo}
       state={{ filter: searchParams.get('filter'), redirectBack }}
     />
-  ) : (
+  ) : userType ? (
     Component
+  ) : (
+    <Navigate to="/register/typeUser" />
   );
 };

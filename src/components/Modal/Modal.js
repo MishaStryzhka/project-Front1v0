@@ -1,5 +1,5 @@
 import { useCallback, useEffect } from 'react';
-import { Backdrop, ModalContainer, BtnStyled, CloseWrap } from './Modal.styled';
+import { Backdrop, ModalContainer, BtnClose } from './Modal.styled';
 import IconCross from 'images/icons/IconCross';
 
 const Modal = ({ children, onClick }) => {
@@ -32,18 +32,14 @@ const Modal = ({ children, onClick }) => {
   return (
     <Backdrop onClick={handleBackdropClick}>
       <ModalContainer>
-        <CloseWrap>
-          {onClick && (
-            <BtnStyled
-              onClick={() => {
-                document.body.style.overflow = 'auto';
-                onClick();
-              }}
-            >
-              <IconCross />
-            </BtnStyled>
-          )}
-        </CloseWrap>
+        <BtnClose
+          onClick={() => {
+            document.body.style.overflow = 'auto';
+            onClick();
+          }}
+        >
+          <IconCross />
+        </BtnClose>
         {children}
       </ModalContainer>
     </Backdrop>

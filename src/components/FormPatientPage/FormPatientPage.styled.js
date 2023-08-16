@@ -1,7 +1,7 @@
-import { Field } from 'formik';
+import { Field, Form } from 'formik';
 import { styled } from 'styled-components';
 
-export const FormStyledPatient = styled.form`
+export const FormStyledPatient = styled(Form)`
   padding: 40px 0;
 `;
 
@@ -106,6 +106,7 @@ export const StyledField = styled(Field)`
 
 export const ButtonWrapper = styled.div`
   padding-top: 80px;
+  // cursor: pointer;
 
   width: 800px;
 
