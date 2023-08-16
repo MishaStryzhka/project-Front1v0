@@ -1,4 +1,4 @@
-const { validationPatientPageScheme } = require('./PatientPageScheme');
+const { validationPatientPageScheme } = require('./PatientPageSchema');
 const { validationRegisterSchema } = require('./RegisterSchema');
 const { validationLoginSchema } = require('./loginSchema');
 

@@ -1,15 +1,15 @@
 const lightTheme = {
   bodyColor: '',
 
-  main: '#04827A',
-  secondaryMain: '#F5BC20',
+  main: '#04827A', // dark green
+  secondaryMain: '#F5BC20', // yellow
 
-  primary: '#FFFFFF', //
-  secondary: '#000', //
+  primary: '#FFFFFF', // White
+  secondary: '#000', // Black
 
-  btn: '#9D9D9D', //
-  btnDark: '#C3E2E7', //
-  btnLight: '#E5E8EF', //
+  btn: '#9D9D9D', // Dark gray
+  btnDark: '#C3E2E7', // Light blue
+  btnLight: '#E5E8EF', // Light grayish blue
 
   error: 'red', //
 

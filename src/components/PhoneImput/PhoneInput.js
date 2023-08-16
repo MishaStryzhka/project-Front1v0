@@ -10,10 +10,7 @@ const PhoneInputField = props => {
     country = 'UA',
   } = props;
 
-  // console.log('name, value', name, value);
-
   const onValueChange = phoneNumber => {
-    console.log('phoneNumber', phoneNumber);
     setFieldValue(phoneNumber);
   };
 

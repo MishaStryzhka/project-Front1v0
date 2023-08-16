@@ -34,7 +34,7 @@ export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
         <NavContainer>
           <Logo />
           <Btn to="/news" type="link" text="Залишити заявку" />
-          <Btn to="/doctors" type="link" text="Спеціалісти" />
+          <Btn to="/specialistDoctors" type="link" text="Спеціалісти" />
           <Btn to="/problems" type="link" text="Проблеми" />
           <FormSearch />
           <Btn id="btnOpenBurgerMenu" onClick={() => setIsOpenMenu(true)}>

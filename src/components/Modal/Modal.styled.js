@@ -9,7 +9,7 @@ export const Backdrop = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgba(97, 97, 97, 0.6);
+  background: ${({ theme }) => theme.color.primary}80;
   backdrop-filter: blur(4px);
   z-index: 1200;
 `;
@@ -20,19 +20,27 @@ export const CloseWrap = styled.div`
   justify-content: flex-end;
 `;
 export const ModalContainer = styled.div`
-  background-color: ${p => p.theme.color.primary};
+  background-color: ${p => p.theme.color.background};
   min-width: 500px;
-  /* height: 300px; */
+
   padding: 14px;
   margin: 0 auto;
   border-radius: 20px;
-  z-index: 2000;
-  //   @media screen and (min-width: 768px) {
-  //     width: 580px;
-  //     /* height: 326px; */
-  //   }
+
+  position: relative;
+  width: 800px;
+  padding: 80px 100px;
 `;
-export const BtnStyled = styled.button`
-  //   width: 100%;
+
+export const ModalContentContainer = styled.div`
+  width: 800px;
+  padding: 80px 100px;
+`;
+
+export const BtnClose = styled.button`
+  position: absolute;
+  right: 15px;
+  top: 15px;
+
   cursor: pointer;
 `;

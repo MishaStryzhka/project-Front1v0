@@ -2,18 +2,14 @@ import * as React from 'react';
 const IconCross = props => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width={20}
-    height={20}
+    width="17"
+    height="17"
+    viewBox="0 0 17 17"
     fill="none"
     {...props}
   >
-    <path
-      stroke={props.fill || '#04827A'}
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      strokeWidth={1.5}
-      d="m16 8-8 8m0-8 8 8"
-    />
+    <path d="M1 16L15.8492 1.15076" stroke="#04827A" />
+    <path d="M1 1L15.8492 15.8492" stroke="#04827A" />
   </svg>
 );
 export default IconCross;
