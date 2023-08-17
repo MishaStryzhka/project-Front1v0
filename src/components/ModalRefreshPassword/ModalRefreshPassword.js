@@ -82,7 +82,7 @@ const ModalRefreshPassword = ({ setIsOpenModal }) => {
                     value={values.newPassword}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Пароль"
+                    placeholder="Новий пароль"
                     required
                   />
                   {errors.newPassword && touched.newPassword && (
@@ -104,7 +104,7 @@ const ModalRefreshPassword = ({ setIsOpenModal }) => {
                     value={values.confirmNewPassword}
                     onChange={handleChange}
                     onBlur={handleBlur}
-                    placeholder="Повторити пароль"
+                    placeholder="Повторити новий пароль"
                     required
                   />
                   {errors.confirmNewPassword && touched.confirmNewPassword && (
