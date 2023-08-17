@@ -183,7 +183,7 @@ export const NavWrap = styled.div`
   justify-content: center;
   box-sizing: border-box;
   column-gap: 80px;
-  // width: 800px;
+
   padding-top: 52px;
 `;
 

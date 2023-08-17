@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch } from 'react-redux';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { register, updateUserType } from 'redux/auth/operations';
+import { register, setAuthHeader, updateUserType } from 'redux/auth/operations';
 import { saveToken } from 'redux/auth/slice';
 
 const RegisterPage = () => {
@@ -22,6 +22,7 @@ const RegisterPage = () => {
   useEffect(() => {
     if (accessToken) {
       dispatch(saveToken(accessToken));
+      setAuthHeader(accessToken);
     }
   }, [dispatch, accessToken]);
 
@@ -57,7 +58,7 @@ const RegisterPage = () => {
       <OrBoxAotorization />
 
       {isOpenModal && (
-        <Modal onClick={() => setIsOpenModal(false)}>
+        <Modal>
           <FormTypeUser onSubmit={handleRegisterTypeUser} />
         </Modal>
       )}
