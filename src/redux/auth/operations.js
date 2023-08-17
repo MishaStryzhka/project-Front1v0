@@ -38,6 +38,8 @@ export const register = createAsyncThunk(
 );
 
 export const saveToken = createAsyncThunk('auth/saveToken', async token => {
+  console.log('token', token);
+
   return token;
 });
 

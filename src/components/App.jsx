@@ -10,18 +10,21 @@ import { RestrictedRoute } from 'rotes/RestrictedRoute';
 import { PrivateRoute } from 'rotes/PrivateRoute';
 
 import SharedLayout from 'components/SharedLayout/SharedLayout';
-import ProblemsPage from 'pages/mainPages/ProblemsPage';
-import SpecialistDoctorsPage from 'pages/mainPages/SpecialistDoctorsPage';
-import AccountData from './AccountData/AccountData';
-import PersonalData from './PersonalData/PersonalData';
-import DirectionWork from './DirectionWork/DirectionWork';
-import Communication from './Communication/Communication';
 
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
 const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
 const MainPage = lazy(() => import('pages/mainPages/MainPage'));
 const UserPage = lazy(() => import('pages/secondaryPages/UserPage/UserPage'));
 const NotFoundPage = lazy(() => import('pages/mainPages/NotFoundPage'));
+
+const ProblemsPage = lazy(() => import('pages/mainPages/ProblemsPage'));
+const SpecialistDoctorsPage = lazy(() =>
+  import('pages/mainPages/SpecialistDoctorsPage')
+);
+const AccountData = lazy(() => import('./AccountData/AccountData'));
+const PersonalData = lazy(() => import('./PersonalData/PersonalData'));
+const DirectionWork = lazy(() => import('./DirectionWork/DirectionWork'));
+const Communication = lazy(() => import('./Communication/Communication'));
 
 export const App = () => {
   const [currentTheme, setCurrentTheme] = useState('light');
