@@ -42,6 +42,8 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(updateUserType.fulfilled, (state, action) => {
+        console.log('action', action.payload);
+
         state.userType = action.payload;
       })
       .addCase(logIn.fulfilled, (state, action) => {
