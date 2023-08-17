@@ -7,7 +7,8 @@ import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch } from 'react-redux';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { register, saveToken, updateUserType } from 'redux/auth/operations';
+import { register, updateUserType } from 'redux/auth/operations';
+import { saveToken } from 'redux/auth/slice';
 
 const RegisterPage = () => {
   const location = useLocation();
@@ -19,11 +20,13 @@ const RegisterPage = () => {
   false && setSearchParams(); // eslint
 
   useEffect(() => {
-    accessToken && dispatch(saveToken(accessToken));
+    if (accessToken) {
+      dispatch(saveToken(accessToken));
+    }
   }, [dispatch, accessToken]);
 
   useEffect(() => {
-    location.pathname === '/register/typeUser' && setSearchParams(true);
+    location.pathname === '/register/typeUser' && setIsOpenModal(true);
     if (!isOpenModal) {
       isLoggedIn && !userType && setIsOpenModal(true);
     }

@@ -1,11 +1,15 @@
 import { useAuth } from 'hooks';
+// import { useEffect } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
 
 export const RestrictedRoute = ({ component: Component, redirectTo = '/' }) => {
   const { isLoggedIn, userType } = useAuth();
   const location = useLocation();
 
-  console.log('userType', userType);
+  // useEffect(() => {
+  //   console.log('userType', userType);
+  //   console.log('isLoggedIn', isLoggedIn);
+  // }, [userType, isLoggedIn]);
 
   return isLoggedIn && userType ? (
     <Navigate

@@ -6,7 +6,7 @@ import {
   refreshUser,
   updateUserInfo,
   updateUserType,
-  saveToken,
+  // saveToken,
 } from './operations';
 
 const initialState = {
@@ -23,6 +23,12 @@ const initialState = {
 const authSlice = createSlice({
   name: 'auth',
   initialState,
+  reducers: {
+    saveToken: (state, { payload }) => {
+      console.log('payload', payload);
+      state.token = payload;
+    },
+  },
   extraReducers: builder => {
     builder
       .addCase(register.fulfilled, (state, action) => {
@@ -37,9 +43,6 @@ const authSlice = createSlice({
       })
       .addCase(updateUserType.fulfilled, (state, action) => {
         state.userType = action.payload;
-      })
-      .addCase(saveToken.rejected, (state, action) => {
-        console.log('action', action);
       })
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload;
@@ -87,3 +90,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
+export const { saveToken } = authSlice.actions;
