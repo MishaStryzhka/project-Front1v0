@@ -4,7 +4,7 @@ import { createAsyncThunk } from '@reduxjs/toolkit';
 axios.defaults.baseURL = 'https://project-back1v0.onrender.com';
 
 // Utility to add JWT
-const setAuthHeader = token => {
+export const setAuthHeader = token => {
   axios.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
@@ -36,18 +36,6 @@ export const register = createAsyncThunk(
     }
   }
 );
-
-// export const saveToken = createAsyncThunk('auth/saveToken', async token => {
-//   console.log('token', token);
-
-//   const promise = new Promise((res, rej) => {
-//     res(token);
-//   });
-
-//   promise.then(value => {
-//     return value;
-//   });
-// });
 
 export const updateUserType = createAsyncThunk(
   'auth/updateUserType',

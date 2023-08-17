@@ -11,12 +11,6 @@ import {
 import PassValidateBox from 'components/PassValidateBox/PassValidateBox';
 import { Formik } from 'formik';
 import { validationRegisterSchema } from 'schemas';
-// import {
-//   FieldCheckboxStyled,
-//   LabelCheckboxStyled,
-//   LabelCheckboxText,
-// } from './FormRegister.styled';
-// import CheckboxToggle from 'components/CheckboxToggle/CheckboxToggle';
 import { useAuth } from 'hooks';
 
 const FormRegister = ({ onSubmit }) => {

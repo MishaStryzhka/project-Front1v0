@@ -7,7 +7,7 @@ const Modal = ({ children, onClick }) => {
     evt => {
       document.body.style.overflow = 'auto';
       if (evt.code === 'Escape') {
-        onClick();
+        onClick && onClick();
       }
     },
     [onClick]
@@ -17,7 +17,7 @@ const Modal = ({ children, onClick }) => {
 
   const handleBackdropClick = evt => {
     if (evt.currentTarget === evt.target) {
-      onClick();
+      onClick && onClick();
     }
   };
 
@@ -32,14 +32,16 @@ const Modal = ({ children, onClick }) => {
   return (
     <Backdrop onClick={handleBackdropClick}>
       <ModalContainer>
-        <BtnClose
-          onClick={() => {
-            document.body.style.overflow = 'auto';
-            onClick();
-          }}
-        >
-          <IconCross />
-        </BtnClose>
+        {onClick && (
+          <BtnClose
+            onClick={() => {
+              document.body.style.overflow = 'auto';
+              onClick();
+            }}
+          >
+            <IconCross />
+          </BtnClose>
+        )}
         {children}
       </ModalContainer>
     </Backdrop>

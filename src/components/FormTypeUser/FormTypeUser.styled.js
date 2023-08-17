@@ -1,4 +1,11 @@
+import { Form } from 'formik';
 import { styled } from 'styled-components';
+
+export const FormStyled = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
 
 export const Title = styled.h2`
   color: ${({ theme }) => theme.color.secondary};
