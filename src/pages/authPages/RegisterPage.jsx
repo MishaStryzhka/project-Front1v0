@@ -3,36 +3,41 @@ import FormTypeUser from 'components/FormTypeUser/FormTypeUser';
 import Modal from 'components/Modal/Modal';
 import OrBoxAotorization from 'components/OrBoxAotorization/OrBoxAotorization';
 import { useAuth } from 'hooks';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet';
 import { useDispatch } from 'react-redux';
 import { useLocation, useSearchParams } from 'react-router-dom';
-import { register } from 'redux/auth/operations';
+import { register, saveToken, updateUserType } from 'redux/auth/operations';
 
 const RegisterPage = () => {
   const location = useLocation();
-  const [isOpenModal, setIsOpenModal] = useState(
-    location.pathname === '/register/typeUser'
-  );
-  const dispatch = useDispatch();
-  const { isLoggedIn } = useAuth();
+  const { isLoggedIn, userType } = useAuth();
+  const [isOpenModal, setIsOpenModal] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   const accessToken = searchParams.get('accessToken');
-
+  const dispatch = useDispatch();
   false && setSearchParams(); // eslint
 
+  useEffect(() => {
+    accessToken && dispatch(saveToken(accessToken));
+  }, [dispatch, accessToken]);
+
+  useEffect(() => {
+    location.pathname === '/register/typeUser' && setSearchParams(true);
+    if (!isOpenModal) {
+      isLoggedIn && !userType && setIsOpenModal(true);
+    }
+  }, [location, isLoggedIn, userType, setSearchParams, isOpenModal]);
+
   const handleRegisterSubmit = async values => {
-    console.log('register - values', values);
     dispatch(register(values));
-    isLoggedIn && setIsOpenModal(true);
   };
 
   const handleRegisterTypeUser = async values => {
-    console.log('typeUser', values);
-    console.log('accessToken', accessToken);
-
-    // dispatch(register(values));
-    setIsOpenModal(false);
+    if (accessToken) {
+      values.accessToken = accessToken;
+    }
+    dispatch(updateUserType(values));
     document.body.style.overflow = 'auto';
   };
 
