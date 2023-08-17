@@ -21,7 +21,6 @@ import { useAuth } from 'hooks';
 
 const FormRegister = ({ onSubmit }) => {
   let { error } = useAuth();
-  console.log('error', error);
 
   return (
     <>
@@ -31,14 +30,12 @@ const FormRegister = ({ onSubmit }) => {
           email: '',
           password: '',
           confirmPassword: '',
-          // userType: true,
         }}
         validationSchema={validationRegisterSchema}
         onSubmit={({ email, password, userType }) =>
           onSubmit({
             email,
             password,
-            // userType: userType ? 'patient' : 'doctor',
           })
         }
       >
@@ -120,22 +117,6 @@ const FormRegister = ({ onSubmit }) => {
                     <TextError>{errors.confirmPassword}</TextError>
                   )}
                 </Label>
-
-                {/* <LabelCheckboxStyled>
-                  <LabelCheckboxText value={values.userType}>
-                    Пацієнт
-                  </LabelCheckboxText>
-                  <FieldCheckboxStyled
-                    type={'checkbox'}
-                    name="userType"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    component={CheckboxToggle}
-                  />
-                  <LabelCheckboxText value={!values.userType}>
-                    Лікар
-                  </LabelCheckboxText>
-                </LabelCheckboxStyled> */}
               </ImputWrap>
               <NavWrap>
                 <Button type="submit">Зберегти та продовжити </Button>

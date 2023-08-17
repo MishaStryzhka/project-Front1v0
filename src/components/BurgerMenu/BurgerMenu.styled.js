@@ -4,10 +4,11 @@ import { styled } from 'styled-components';
 export const BurgerMenuContainer = styled.div`
   position: absolute;
   bottom: -40px;
-  //   background-color: red;
+
   display: flex;
   align-items: center;
   flex-direction: column;
+  z-index: 1;
 `;
 
 export const StyledNavLink = styled(NavLink)`

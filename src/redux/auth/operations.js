@@ -25,8 +25,6 @@ export const register = createAsyncThunk(
       // After successful registration, add the token to the HTTP header
       setAuthHeader(res.data.user.token);
 
-      console.log('res', res);
-
       return res.data;
     } catch (error) {
       console.log('error', error);
@@ -39,18 +37,27 @@ export const register = createAsyncThunk(
   }
 );
 
+export const saveToken = createAsyncThunk('auth/saveToken', async token => {
+  return token;
+});
+
 export const updateUserType = createAsyncThunk(
   'auth/updateUserType',
   async (credentials, thunkAPI) => {
-    console.log('credentials', credentials);
+    const { userType, accessToken } = credentials;
 
+    accessToken && setAuthHeader(accessToken);
     try {
-      const res = await axios.post('/api/users/current/userType', credentials);
-      // After successful registration, add the token to the HTTP header
-      setAuthHeader(res.data.user.token);
+      const res = await axios.patch('/api/users/current/userType', {
+        userType,
+      });
 
-      return res.data;
+      console.log('res', res);
+
+      return res.data.user.userType;
     } catch (error) {
+      console.log('error', error);
+
       return thunkAPI.rejectWithValue({
         status: error.response.status,
         message: error.response.data.message,
@@ -130,14 +137,11 @@ export const updateUserInfo = createAsyncThunk(
   async ({ avatar, name, email, phone, city, birthday }, thunkAPI) => {
     try {
       const formData = new FormData();
-      // formData.append('avatar', avatar);
       formData.append('name', name);
       formData.append('email', email);
       formData.append('phone', phone || '');
       formData.append('city', city || '');
       formData.append('birthday', birthday || '');
-      //  console.log(formData);
-      //  const user = { name, email};
 
       const response = await axios.patch(
         `/api/users/current/update`,
