@@ -57,7 +57,7 @@ const RegisterPage = () => {
       <OrBoxAotorization />
 
       {isOpenModal && (
-        <Modal>
+        <Modal onClick={() => setIsOpenModal(false)}>
           <FormTypeUser onSubmit={handleRegisterTypeUser} />
         </Modal>
       )}
