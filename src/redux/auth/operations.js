@@ -40,9 +40,7 @@ export const register = createAsyncThunk(
 export const updateUserType = createAsyncThunk(
   'auth/updateUserType',
   async (credentials, thunkAPI) => {
-    const { userType, accessToken } = credentials;
-
-    accessToken && setAuthHeader(accessToken);
+    const { userType } = credentials;
     try {
       const res = await axios.patch('/api/users/current/userType', {
         userType,
