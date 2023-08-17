@@ -8,9 +8,14 @@ import theme from 'theme';
 
 import { RestrictedRoute } from 'rotes/RestrictedRoute';
 import { PrivateRoute } from 'rotes/PrivateRoute';
+
 import SharedLayout from 'components/SharedLayout/SharedLayout';
 import ProblemsPage from 'pages/mainPages/ProblemsPage';
 import SpecialistDoctorsPage from 'pages/mainPages/SpecialistDoctorsPage';
+import AccountData from './AccountData/AccountData';
+import PersonalData from './PersonalData/PersonalData';
+import DirectionWork from './DirectionWork/DirectionWork';
+import Communication from './Communication/Communication';
 
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
 const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
@@ -92,7 +97,13 @@ export const App = () => {
                 component={<UserPage />}
               />
             }
-          />
+          >
+            <Route index element={<AccountData />} />
+            <Route path="accountData/" element={<AccountData />} />
+            <Route path="personalData/" element={<PersonalData />} />
+            <Route path="directionWork/" element={<DirectionWork />} />
+            <Route path="communication/" element={<Communication />} />
+          </Route>
         </Route>
       </Routes>
     </ThemeProvider>
