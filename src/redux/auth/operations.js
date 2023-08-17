@@ -37,11 +37,17 @@ export const register = createAsyncThunk(
   }
 );
 
-export const saveToken = createAsyncThunk('auth/saveToken', async token => {
-  console.log('token', token);
+// export const saveToken = createAsyncThunk('auth/saveToken', async token => {
+//   console.log('token', token);
 
-  return token;
-});
+//   const promise = new Promise((res, rej) => {
+//     res(token);
+//   });
+
+//   promise.then(value => {
+//     return value;
+//   });
+// });
 
 export const updateUserType = createAsyncThunk(
   'auth/updateUserType',
