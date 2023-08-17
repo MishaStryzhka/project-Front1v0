@@ -106,7 +106,6 @@ export const StyledField = styled(Field)`
 
 export const ButtonWrapper = styled.div`
   padding-top: 80px;
-  // cursor: pointer;
 
   width: 800px;
 
