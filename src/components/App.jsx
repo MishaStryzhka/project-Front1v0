@@ -29,7 +29,7 @@ const Communication = lazy(() => import('./Communication/Communication'));
 export const App = () => {
   const [currentTheme, setCurrentTheme] = useState('light');
   const dispatch = useDispatch();
-  const { isRefreshing, userType } = useAuth();
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
     setCurrentTheme('light');
