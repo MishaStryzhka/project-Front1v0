@@ -58,7 +58,7 @@ export const App = () => {
             path="/login"
             element={
               <RestrictedRoute
-                redirectTo={`/user/${userType}`}
+                redirectTo={`/user/`}
                 component={<LoginPage />}
               />
             }
@@ -67,7 +67,7 @@ export const App = () => {
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo={`/user/${userType}`}
+                redirectTo={`/user/`}
                 component={<RegisterPage />}
               />
             }
@@ -76,7 +76,7 @@ export const App = () => {
             path="/register/typeUser"
             element={
               <RestrictedRoute
-                redirectTo={`/user/${userType}`}
+                redirectTo={`/user/`}
                 component={<RegisterPage />}
               />
             }
