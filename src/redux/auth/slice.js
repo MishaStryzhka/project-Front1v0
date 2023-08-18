@@ -43,6 +43,7 @@ const authSlice = createSlice({
       .addCase(updateUserType.fulfilled, (state, action) => {
         console.log('action', action.payload);
 
+        state.isLoggedIn = true;
         state.userType = action.payload;
       })
       .addCase(logIn.fulfilled, (state, action) => {
