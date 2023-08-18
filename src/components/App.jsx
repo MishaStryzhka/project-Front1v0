@@ -29,7 +29,7 @@ const Communication = lazy(() => import('./Communication/Communication'));
 export const App = () => {
   const [currentTheme, setCurrentTheme] = useState('light');
   const dispatch = useDispatch();
-  const { isRefreshing, userType } = useAuth();
+  const { isRefreshing } = useAuth();
 
   useEffect(() => {
     setCurrentTheme('light');
@@ -58,7 +58,7 @@ export const App = () => {
             path="/login"
             element={
               <RestrictedRoute
-                redirectTo={`/user/${userType}`}
+                redirectTo={`/user/`}
                 component={<LoginPage />}
               />
             }
@@ -67,7 +67,7 @@ export const App = () => {
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo={`/user/${userType}`}
+                redirectTo={`/user/`}
                 component={<RegisterPage />}
               />
             }
@@ -76,7 +76,7 @@ export const App = () => {
             path="/register/typeUser"
             element={
               <RestrictedRoute
-                redirectTo={`/user/${userType}`}
+                redirectTo={`/user/`}
                 component={<RegisterPage />}
               />
             }
