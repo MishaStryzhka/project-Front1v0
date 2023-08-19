@@ -62,8 +62,8 @@ export const App = () => {
             path="/login"
             element={
               <RestrictedRoute
-                redirectTo={`/${userType}${
-                  userType === 'doctor' && '/accountData'
+                redirectTo={`/${
+                  userType === 'doctor' ? 'doctor/accountData' : 'patient'
                 }/`}
                 component={<LoginPage />}
               />
@@ -73,8 +73,8 @@ export const App = () => {
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo={`/${userType}${
-                  userType === 'doctor' && '/accountData'
+                redirectTo={`/${
+                  userType === 'doctor' ? 'doctor/accountData' : 'patient'
                 }/`}
                 component={<RegisterPage />}
               />
@@ -84,8 +84,8 @@ export const App = () => {
             path="/register/typeUser"
             element={
               <RestrictedRoute
-                redirectTo={`/${userType}${
-                  userType === 'doctor' && '/accountData'
+                redirectTo={`/${
+                  userType === 'doctor' ? 'doctor/accountData' : 'patient'
                 }/`}
                 component={<RegisterPage />}
               />
@@ -96,8 +96,8 @@ export const App = () => {
             element={
               <PrivateRoute
                 redirectTo="/login"
-                redirectBack={`/${userType}${
-                  userType === 'doctor' && '/accountData'
+                redirectBack={`/${
+                  userType === 'doctor' ? 'doctor/accountData' : 'patient'
                 }/`}
                 component={<PatientPage />}
               />
@@ -108,8 +108,8 @@ export const App = () => {
             element={
               <PrivateRoute
                 redirectTo="/login"
-                redirectBack={`/${userType}${
-                  userType === 'doctor' && '/accountData'
+                redirectBack={`/${
+                  userType === 'doctor' ? 'doctor/accountData' : 'patient'
                 }/`}
                 component={<DoctorPage />}
               />
