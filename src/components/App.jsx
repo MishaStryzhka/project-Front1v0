@@ -29,7 +29,7 @@ const Communication = lazy(() => import('./Communication/Communication'));
 export const App = () => {
   const [currentTheme, setCurrentTheme] = useState('light');
   const dispatch = useDispatch();
-  const { isRefreshing } = useAuth();
+  const { isRefreshing, token } = useAuth();
 
   useEffect(() => {
     setCurrentTheme('light');
@@ -37,7 +37,7 @@ export const App = () => {
 
   useEffect(() => {
     dispatch(refreshUser());
-  }, [dispatch]);
+  }, [dispatch, token]);
 
   return isRefreshing ? (
     <b>Refreshing user...</b>
