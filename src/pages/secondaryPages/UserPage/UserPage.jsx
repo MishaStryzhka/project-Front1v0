@@ -1,11 +1,11 @@
-import PatientPage from './PatientPage';
-import DoctorPage from './DoctorPage';
-import { useAuth } from 'hooks';
+// import PatientPage from './PatientPage';
+// import DoctorPage from './DoctorPage';
+// import { useAuth } from 'hooks';
 
-const UserPage = () => {
-  const { userType } = useAuth();
+// const UserPage = () => {
+//   const { userType } = useAuth();
 
-  return userType === 'patient' ? <PatientPage /> : <DoctorPage />;
-};
+//   return userType === 'patient' ? <PatientPage /> : <DoctorPage />;
+// };
 
-export default UserPage;
+// export default UserPage;
