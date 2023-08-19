@@ -8,7 +8,6 @@ import { Outlet } from 'react-router-dom';
 
 const SharedLayout = () => {
   const [isOpenMenu, setIsOpenMenu] = useState(null);
-  // const { currentTheme } = useAuth();
 
   const closeMenu = e => {
     if (e.target.id !== 'btnOpenBurgerMenu') {
