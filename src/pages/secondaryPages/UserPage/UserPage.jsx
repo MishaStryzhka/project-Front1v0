@@ -1,9 +1,11 @@
-import { useParams } from 'react-router-dom';
 import PatientPage from './PatientPage';
 import DoctorPage from './DoctorPage';
+import { useAuth } from 'hooks';
 
 const UserPage = () => {
-  const { userType } = useParams();
+  const { userType } = useAuth();
+  console.log('userType', userType);
+
   return userType === 'patient' ? <PatientPage /> : <DoctorPage />;
 };
 
