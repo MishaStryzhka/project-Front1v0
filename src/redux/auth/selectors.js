@@ -11,3 +11,5 @@ export const selectCurrentTheme = state => state.auth.currentTheme;
 export const selectIsFirstLogin = state => state.auth.isFirstLogin;
 
 export const selectuserType = state => state.auth.userType;
+
+export const selectToken = state => state.auth.token;

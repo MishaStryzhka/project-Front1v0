@@ -7,6 +7,7 @@ import {
   selectCurrentTheme,
   selectIsFirstLogin,
   selectuserType,
+  selectToken,
 } from 'redux/auth/selectors';
 
 export const useAuth = () => {
@@ -17,6 +18,7 @@ export const useAuth = () => {
   const currentTheme = useSelector(selectCurrentTheme);
   const isFirstLogin = useSelector(selectIsFirstLogin);
   const userType = useSelector(selectuserType);
+  const token = useSelector(selectToken);
 
   return {
     isLoggedIn,
@@ -26,5 +28,6 @@ export const useAuth = () => {
     currentTheme,
     isFirstLogin,
     userType,
+    token,
   };
 };
