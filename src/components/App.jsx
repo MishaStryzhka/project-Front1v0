@@ -33,8 +33,6 @@ export const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing, token, userType } = useAuth();
 
-  console.log('userType', userType);
-
   useEffect(() => {
     setCurrentTheme('light');
   }, []);

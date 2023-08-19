@@ -18,7 +18,11 @@ const BurgerMenu = () => {
     <BurgerMenuContainer>
       {isLoggedIn ? (
         <>
-          <StyledNavLink to={`/user/${userType}`}>Мій профіль</StyledNavLink>
+          <StyledNavLink
+            to={`/${userType === 'doctor' ? 'doctor/accountData' : 'patient'}/`}
+          >
+            Мій профіль
+          </StyledNavLink>
           <StyledBtnLogOut onClick={() => hendlelogout()}>
             Вийти
           </StyledBtnLogOut>
