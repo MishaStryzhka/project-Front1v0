@@ -27,8 +27,6 @@ export const register = createAsyncThunk(
 
       return res.data;
     } catch (error) {
-      console.log('error', error);
-
       return thunkAPI.rejectWithValue({
         status: error.response.status,
         message: error.response.data.message,
@@ -46,12 +44,8 @@ export const updateUserType = createAsyncThunk(
         userType,
       });
 
-      console.log('res', res);
-
       return res.data.user.userType;
     } catch (error) {
-      console.log('error', error);
-
       return thunkAPI.rejectWithValue({
         status: error.response.status,
         message: error.response.data.message,
@@ -108,7 +102,6 @@ export const refreshUser = createAsyncThunk(
   async (_, thunkAPI) => {
     // Reading the token from the state via getState()
     const state = thunkAPI.getState();
-    console.log('state', state);
 
     const persistedToken = state.auth.token;
 
@@ -121,7 +114,6 @@ export const refreshUser = createAsyncThunk(
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
       const res = await axios.get('/api/users/current');
-      // console.log('res.data', res.data.user);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
