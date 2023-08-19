@@ -6,7 +6,6 @@ import {
   refreshUser,
   updateUserInfo,
   updateUserType,
-  // saveToken,
 } from './operations';
 
 const initialState = {
