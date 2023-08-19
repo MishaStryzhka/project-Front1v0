@@ -1,33 +1,11 @@
-// import { UserMenu } from '../UserMenu/UserMenu';
-// import { AuthNav } from '../AuthNav/AuthNav';
-// import { useAuth } from 'hooks';
 import Btn from 'components/Btn/Btn';
-import {
-  NavContainer,
-  // NavContainer,
-  // StyleBtn,
-  StyledAppBar,
-  StyledContainer,
-  // UserBox,
-} from './AppBar.styled';
-// import Btn from 'components/Btn/Btn';
-// import { useDispatch } from 'react-redux';
-// import { logOut } from 'redux/auth/operations';
-// import BtnBack from 'components/BtnBack/BtnBack';
+import { NavContainer, StyledAppBar, StyledContainer } from './AppBar.styled';
 import Logo from 'components/Logo/Logo';
 import FormSearch from 'components/FormSearch/FormSearch';
 import IconUser from 'images/icons/IconUser';
 import BurgerMenu from 'components/BurgerMenu/BurgerMenu';
-// import { Container } from 'components/Container/Container';
 
 export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
-  // const dispatch = useDispatch();
-  // const { isLoggedIn, userType } = useAuth();
-
-  // const hendlelogout = () => {
-  //   dispatch(logOut());
-  // };
-
   return (
     <StyledAppBar>
       <StyledContainer>

@@ -10,11 +10,13 @@ import { RestrictedRoute } from 'rotes/RestrictedRoute';
 import { PrivateRoute } from 'rotes/PrivateRoute';
 
 import SharedLayout from 'components/SharedLayout/SharedLayout';
+import DoctorPage from 'pages/secondaryPages/UserPage/DoctorPage';
+import PatientPage from 'pages/secondaryPages/UserPage/PatientPage';
 
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
 const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
 const MainPage = lazy(() => import('pages/mainPages/MainPage'));
-const UserPage = lazy(() => import('pages/secondaryPages/UserPage/UserPage'));
+// const UserPage = lazy(() => import('pages/secondaryPages/UserPage/UserPage'));
 const NotFoundPage = lazy(() => import('pages/mainPages/NotFoundPage'));
 
 const ProblemsPage = lazy(() => import('pages/mainPages/ProblemsPage'));
@@ -29,7 +31,9 @@ const Communication = lazy(() => import('./Communication/Communication'));
 export const App = () => {
   const [currentTheme, setCurrentTheme] = useState('light');
   const dispatch = useDispatch();
-  const { isRefreshing, token } = useAuth();
+  const { isRefreshing, token, userType } = useAuth();
+
+  console.log('userType', userType);
 
   useEffect(() => {
     setCurrentTheme('light');
@@ -58,7 +62,9 @@ export const App = () => {
             path="/login"
             element={
               <RestrictedRoute
-                redirectTo={`/user/`}
+                redirectTo={`/${userType}${
+                  userType === 'doctor' && '/accountData'
+                }/`}
                 component={<LoginPage />}
               />
             }
@@ -67,7 +73,9 @@ export const App = () => {
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo={`/user/`}
+                redirectTo={`/${userType}${
+                  userType === 'doctor' && '/accountData'
+                }/`}
                 component={<RegisterPage />}
               />
             }
@@ -76,32 +84,37 @@ export const App = () => {
             path="/register/typeUser"
             element={
               <RestrictedRoute
-                redirectTo={`/user/`}
+                redirectTo={`/${userType}${
+                  userType === 'doctor' && '/accountData'
+                }/`}
                 component={<RegisterPage />}
               />
             }
           />
           <Route
-            path="/user"
+            path="/patient"
             element={
               <PrivateRoute
                 redirectTo="/login"
-                redirectBack={`/user/`}
-                component={<UserPage />}
+                redirectBack={`/${userType}${
+                  userType === 'doctor' && '/accountData'
+                }/`}
+                component={<PatientPage />}
               />
             }
           />
           <Route
-            path="/user/:userType"
+            path="/doctor"
             element={
               <PrivateRoute
                 redirectTo="/login"
-                redirectBack={`/user/`}
-                component={<UserPage />}
+                redirectBack={`/${userType}${
+                  userType === 'doctor' && '/accountData'
+                }/`}
+                component={<DoctorPage />}
               />
             }
           >
-            <Route index element={<AccountData />} />
             <Route path="accountData/" element={<AccountData />} />
             <Route path="personalData/" element={<PersonalData />} />
             <Route path="directionWork/" element={<DirectionWork />} />
