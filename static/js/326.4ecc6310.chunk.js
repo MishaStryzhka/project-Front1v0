@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact=self.webpackChunkreact||[]).push([[326],{6326:function(e,a,n){n.r(a);var r=n(3329);a.default=function(){return(0,r.jsx)("p",{children:"PersonalData"})}}}]);
-//# sourceMappingURL=326.4ecc6310.chunk.js.map
