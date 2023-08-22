@@ -6,10 +6,13 @@ const CropperWrap = ({ yourImage, setCroppedArea }) => {
   const [zoom, setZoom] = useState(1);
   //   console.log('zoom', zoom);
 
-  const onCropComplete = useCallback((croppedArea, croppedAreaPixels) => {
-    console.log(croppedArea, croppedAreaPixels);
-    setCroppedArea({ croppedArea });
-  }, []);
+  const onCropComplete = useCallback(
+    (croppedArea, croppedAreaPixels) => {
+      console.log(croppedArea, croppedAreaPixels);
+      setCroppedArea({ croppedArea });
+    },
+    [setCroppedArea]
+  );
 
   return (
     <Cropper
