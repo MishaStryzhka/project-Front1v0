@@ -1,4 +1,4 @@
-import { Navigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from 'hooks';
 
 export const PrivateRoute = ({
@@ -6,14 +6,16 @@ export const PrivateRoute = ({
   redirectTo = '/',
   redirectBack,
 }) => {
-  const [searchParams] = useSearchParams();
   const { isLoggedIn, isRefreshing, userType } = useAuth();
   const shouldRedirect = !isLoggedIn && !isRefreshing;
+  const location = useLocation();
 
   return shouldRedirect ? (
     <Navigate
       to={redirectTo}
-      state={{ filter: searchParams.get('filter'), redirectBack }}
+      state={{
+        redirectBack: location.pathname,
+      }}
     />
   ) : userType ? (
     Component

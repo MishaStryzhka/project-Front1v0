@@ -12,6 +12,7 @@
     "formik": "^2.4.3",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
+    "react-easy-crop": "^5.0.0",
     "react-helmet": "^6.1.0",
     "react-native-svg": "^13.11.0",
     "react-phone-number-input": "^3.3.2",

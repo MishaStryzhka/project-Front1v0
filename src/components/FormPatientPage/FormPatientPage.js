@@ -28,9 +28,12 @@ import {
 } from './FormPatientPage.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
 import IconRemove from 'images/icons/IconRemove';
+import { deleteAccount } from 'redux/auth/operations';
+import { useDispatch } from 'react-redux';
 
 const FormPatientPage = ({ setOnChange }) => {
   let { user, error } = useAuth();
+  const dispatch = useDispatch();
 
   const onSubmit = value => {
     const { lastName, firstName, patronymic, phones, contactMethod } = value;
@@ -55,6 +58,7 @@ const FormPatientPage = ({ setOnChange }) => {
 
   const handleRemoveAccount = () => {
     console.log('Remove account');
+    dispatch(deleteAccount());
   };
 
   return (
