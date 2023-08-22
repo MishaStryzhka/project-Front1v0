@@ -8,12 +8,7 @@ export const RestrictedRoute = ({ component: Component, redirectTo = '/' }) => {
 
   return isLoggedIn && userType ? (
     <Navigate
-      to={
-        (location?.state?.redirectBack === '/user/' &&
-          location?.state?.redirectBack + `${userType}`) ||
-        location?.state?.redirectBack ||
-        redirectTo
-      }
+      to={location?.state?.redirectBack || redirectTo}
       state={{ filter: location?.state?.filter }}
     />
   ) : (

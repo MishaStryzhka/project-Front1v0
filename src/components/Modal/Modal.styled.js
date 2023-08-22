@@ -21,14 +21,14 @@ export const CloseWrap = styled.div`
 `;
 export const ModalContainer = styled.div`
   background-color: ${p => p.theme.color.background};
-  min-width: 500px;
+  // min-width: 500px;
 
   padding: 14px;
   margin: 0 auto;
   border-radius: 20px;
 
   position: relative;
-  width: 800px;
+  // width: 800px;
   padding: 80px 100px;
 `;
 

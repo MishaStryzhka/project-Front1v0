@@ -18,7 +18,7 @@ export const StyledNavLink = styled(NavLink)`
   text-decoration: none;
   text-align: center;
 
-  font-family: Manrope;
+  font-family: ${({ theme }) => theme.fontFamily};
   font-size: 16px;
   font-style: normal;
   font-weight: 600;

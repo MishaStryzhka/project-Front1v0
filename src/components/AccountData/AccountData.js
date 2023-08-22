@@ -22,13 +22,19 @@ import {
   StyledButtonWrapper,
   StyledImputWrap,
 } from './AccountData.styled';
+import { deleteAccount } from 'redux/auth/operations';
+import { useDispatch } from 'react-redux';
+import PrimaryButton from 'components/PrimaryButton/PrimaryButton';
+import SecondaryButton from 'components/SecondaryButton/SecondaryButton';
 
 const AccountData = () => {
   let { user, error } = useAuth();
   const [onChange, setOnChange] = useState(null);
+  const dispatch = useDispatch();
 
   const handleRemoveAccount = () => {
     console.log('Remove account');
+    dispatch(deleteAccount());
   };
 
   const onSubmit = value => {
@@ -126,11 +132,15 @@ const AccountData = () => {
                   <IconRemove /> Видалити акаунт
                 </StyledButton>
                 <BtnBox>
-                  <Button type="button">
+                  <SecondaryButton disabled type="button">
                     Переглянути картку як користувач
-                  </Button>
-                  <Button type="submit">Зберегти чернетку</Button>
-                  <Button type="submit">Опублікувати</Button>
+                  </SecondaryButton>
+                  <SecondaryButton type="submit">
+                    Зберегти чернетку
+                  </SecondaryButton>
+                  <PrimaryButton disabled type="submit">
+                    Опублікувати
+                  </PrimaryButton>
                 </BtnBox>
               </StyledButtonWrapper>
             </FormStyledPatient>

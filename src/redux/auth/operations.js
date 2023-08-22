@@ -15,7 +15,7 @@ const clearAuthHeader = () => {
 
 /*
  * POST @ /users/register
- * body: { name, email, password }
+ * body: { email, password }
  */
 export const register = createAsyncThunk(
   'auth/register',
@@ -35,6 +35,11 @@ export const register = createAsyncThunk(
   }
 );
 
+/*
+ * PATCH @ /api/users/current/update
+ * headers: Authorization: Bearer token
+ * body: { userType }
+ */
 export const updateUserType = createAsyncThunk(
   'auth/updateUserType',
   async (credentials, thunkAPI) => {
@@ -120,6 +125,11 @@ export const refreshUser = createAsyncThunk(
     }
   }
 );
+
+/*
+ * PATCH @ /api/users/current/update
+ * headers: Authorization: Bearer token
+ */
 export const updateUserInfo = createAsyncThunk(
   'auth/update',
   async ({ avatar, name, email, phone, city, birthday }, thunkAPI) => {
@@ -139,6 +149,22 @@ export const updateUserInfo = createAsyncThunk(
       return response.data;
       // const user = { avatar, name, email, phone, city, birthday };
       // return user;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+/*
+ * DELETE @ api/users/current
+ * headers: Authorization: Bearer token
+ */
+export const deleteAccount = createAsyncThunk(
+  'auth/deleteAccount',
+  async (_, thunkAPI) => {
+    try {
+      await axios.delete('api/users/delete');
+      clearAuthHeader();
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
