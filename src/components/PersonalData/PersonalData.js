@@ -41,7 +41,6 @@ import { useAuth } from 'hooks';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import Input from 'components/Input/Input';
 import { nanoid } from '@reduxjs/toolkit';
-import { BtnBox } from 'components/AccountData/AccountData.styled';
 import SecondaryButton from 'components/SecondaryButton/SecondaryButton';
 import PrimaryButton from 'components/PrimaryButton/PrimaryButton';
 
