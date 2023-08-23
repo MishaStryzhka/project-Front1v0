@@ -26,26 +26,6 @@ export const AvatarLabel = styled.div`
   column-gap: 40px;
 `;
 
-export const PreviewBox = styled.div`
-  position: relative;
-
-  ${({ width, height }) =>
-    width > 300
-      ? `width: ${(400 / height) * width}px; height: 400px;`
-      : `height: ${(300 / width) * height}px; width: 300px;`}
-
-  margin: auto;
-  margin-top: 20px;
-`;
-
-export const PreviewButtonWraper = styled.div`
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-
-  margin-top: 40px;
-`;
-
 export const AvaterInputLabel = styled.label`
   cursor: pointer;
 
@@ -75,7 +55,29 @@ export const AvatarWrap = styled.div`
   align-items: center;
 `;
 
+export const PhotoDescription = styled.p`
+  color: ${({ theme }) => theme.color.secondary};
+
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+`;
+
 export const Avatar = styled.img``;
+
+export const AvatarDescription = styled.p`
+  margin-top: 20px;
+
+  color: ${({ theme }) => theme.color.secondary};
+
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 16px;
+  font-style: italic;
+  font-weight: 400;
+  line-height: normal;
+`;
 
 export const InputWrap = styled.div`
   padding-top: 26px;

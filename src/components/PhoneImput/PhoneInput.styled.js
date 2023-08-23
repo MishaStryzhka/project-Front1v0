@@ -3,7 +3,7 @@ import { styled } from 'styled-components';
 
 export const StyledPhoneInput = styled(PhoneInput)`
   ${({ disabled }) => disabled && 'pointer-events: none;'}
-  display: block;
+  display: flex;
 
   position: relative;
 
