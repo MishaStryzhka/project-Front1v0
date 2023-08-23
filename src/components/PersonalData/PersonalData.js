@@ -19,9 +19,13 @@ import {
   Label,
   PhotoDescription,
   Placeholder,
+  StyledBtnBox,
   TextError,
+  WrapEducation,
+  WrapEducationInputs,
   WrapPhone,
   WrapPhoneInput,
+  YearsWrap,
   // PayMethodLabel,
   // Placeholder,
   // StyledLegend,
@@ -35,6 +39,11 @@ import { TitleModal } from 'components/ModalRefreshEmail/ModalRefreshEmail.style
 import CropperWrap from 'components/CropperWrap/CropperWrap';
 import { useAuth } from 'hooks';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
+import Input from 'components/Input/Input';
+import { nanoid } from '@reduxjs/toolkit';
+import { BtnBox } from 'components/AccountData/AccountData.styled';
+import SecondaryButton from 'components/SecondaryButton/SecondaryButton';
+import PrimaryButton from 'components/PrimaryButton/PrimaryButton';
 
 const PersonalData = () => {
   const [avatar, setAvatar] = useState(null);
@@ -56,7 +65,7 @@ const PersonalData = () => {
         patronymic: '',
         phones: [],
         experienceYears: '',
-        education: '',
+        education: [{ id: nanoid(), name: '', years: ['', ''] }],
         contactMethod: '',
       }}
       // validationSchema={validationPatientPageSchema}
@@ -71,6 +80,8 @@ const PersonalData = () => {
         handleBlur,
         handleSubmit,
       }) => {
+        console.log('values.education', values.education);
+
         return (
           <FormPersonalData onSubmit={handleSubmit}>
             <FormDescription>
@@ -296,25 +307,191 @@ const PersonalData = () => {
                 )}
               </Label>
 
-              <Label>
-                <FieldStyled
+              {/* <Label>
+                <Input
                   error={
-                    errors.education && touched.education && errors.education
+                    (errors.education &&
+                      touched.education &&
+                      errors.education) ||
+                    null
                   }
                   type={'text'}
+                  value={values.education.name}
                   name="education"
                   onChange={e => {
                     error = null;
-                    handleChange(e);
+                    setFieldValue('education', {
+                      name: e.currentTarget.value,
+                      years: [
+                        values.education.years[0],
+                        values.education.years[1],
+                      ],
+                    });
                   }}
                   onBlur={handleBlur}
                   required
+                  placeholder="Освіта"
                 />
-                {!values.education && <Placeholder>Освіта</Placeholder>}
-                {errors.education && touched.education && (
-                  <TextError>{errors.education}</TextError>
-                )}
-              </Label>
+                <YearsWrap>
+                  <p>Роки</p>
+                  <Input
+                    error={
+                      errors.education && touched.education && errors.education
+                    }
+                    type={'text'}
+                    value={values.education.years[0]}
+                    name="education"
+                    onChange={e => {
+                      error = null;
+                      setFieldValue('education', {
+                        name: values.education.name,
+                        years: [
+                          e.currentTarget.value,
+                          values.education.years[1],
+                        ],
+                      });
+                    }}
+                    onBlur={handleBlur}
+                    placeholder="Від"
+                    width="100px"
+                  />
+                  <Input
+                    error={
+                      errors.education && touched.education && errors.education
+                    }
+                    type={'text'}
+                    value={values.education.years[1]}
+                    name="education"
+                    onChange={e => {
+                      error = null;
+                      console.log('e', e.currentTarget.value);
+
+                      setFieldValue('education', {
+                        name: values.education.name,
+                        years: [
+                          values.education.years[0],
+                          e.currentTarget.value,
+                        ],
+                      });
+                    }}
+                    onBlur={handleBlur}
+                    placeholder="До"
+                    width="100px"
+                  />
+                </YearsWrap>
+              </Label> */}
+
+              <WrapEducation>
+                <WrapEducationInputs>
+                  {values.education.map(education => {
+                    const index = values.education.indexOf(education);
+                    return (
+                      <Label key={education.id}>
+                        <Input
+                          error={
+                            (errors.education &&
+                              touched.education &&
+                              errors.education) ||
+                            null
+                          }
+                          type={'text'}
+                          value={education.name}
+                          name="education"
+                          onChange={e => {
+                            const { value } = e.currentTarget;
+                            error = null;
+                            const newEducation = [...values.education];
+
+                            if (values.education.length !== 1 && value === '') {
+                              newEducation.splice(index, 1);
+                            } else {
+                              newEducation.splice(index, 1, {
+                                ...education,
+                                name: value,
+                              });
+                            }
+
+                            setFieldValue('education', newEducation);
+                          }}
+                          onBlur={handleBlur}
+                          // required
+                          placeholder="Освіта"
+                        />
+                        <YearsWrap>
+                          <p>Роки</p>
+                          <Input
+                            error={
+                              errors.education &&
+                              touched.education &&
+                              errors.education
+                            }
+                            type={'text'}
+                            value={education.years[0]}
+                            name="education"
+                            onChange={e => {
+                              const { value } = e.currentTarget;
+                              error = null;
+                              const newEducation = [...values.education];
+
+                              newEducation.splice(index, 1, {
+                                ...education,
+                                years: [value, education.years[1]],
+                              });
+
+                              setFieldValue('education', newEducation);
+                            }}
+                            onBlur={handleBlur}
+                            placeholder="Від"
+                            width="100px"
+                          />
+                          <Input
+                            error={
+                              errors.education &&
+                              touched.education &&
+                              errors.education
+                            }
+                            type={'text'}
+                            value={education.years[1]}
+                            name="education"
+                            onChange={e => {
+                              const { value } = e.currentTarget;
+                              error = null;
+                              const newEducation = [...values.education];
+
+                              newEducation.splice(index, 1, {
+                                ...education,
+                                years: [education.years[0], value],
+                              });
+
+                              setFieldValue('education', newEducation);
+                            }}
+                            onBlur={handleBlur}
+                            placeholder="До"
+                            width="100px"
+                          />
+                        </YearsWrap>
+                      </Label>
+                    );
+                  })}
+                </WrapEducationInputs>
+                <ButtonRefresh
+                  disabled={values.education.find(
+                    education => education.name === ''
+                  )}
+                  type="button"
+                  onClick={() => {
+                    const newEducation = [...values.education];
+                    newEducation.push({
+                      id: nanoid(),
+                      name: '',
+                      years: ['', ''],
+                    });
+                    setFieldValue('education', newEducation);
+                  }}
+                >
+                  + Додати освіту
+                </ButtonRefresh>
+              </WrapEducation>
 
               {/* <PayMethodLabel>
                 <StyledLegend>Спосіб зв’язку *</StyledLegend>
@@ -345,15 +522,15 @@ const PersonalData = () => {
               </PayMethodLabel> */}
             </InputWrap>
 
-            {/* <ButtonWrapper>
-                <StyledButton
-                  type="button"
-                  onClick={() => handleRemoveAccount()}
-                >
-                  <IconRemove /> Видалити акаунт
-                </StyledButton>
-                <Button type="submit">Зберегти</Button>
-              </ButtonWrapper> */}
+            <StyledBtnBox>
+              <SecondaryButton disabled type="button">
+                Переглянути картку як користувач
+              </SecondaryButton>
+              <SecondaryButton type="submit">Зберегти чернетку</SecondaryButton>
+              <PrimaryButton disabled type="submit">
+                Далі
+              </PrimaryButton>
+            </StyledBtnBox>
           </FormPersonalData>
         );
       }}

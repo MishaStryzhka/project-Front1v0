@@ -1,3 +1,4 @@
+import { BtnBox } from 'components/AccountData/AccountData.styled';
 import { Field, Form } from 'formik';
 import { styled } from 'styled-components';
 
@@ -212,4 +213,23 @@ export const CheckboxLabel = styled.label`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+`;
+
+export const YearsWrap = styled.div`
+  margin-top: 20px;
+  display: flex;
+  column-gap: 40px;
+  align-items: center;
+`;
+
+export const WrapEducation = styled.div``;
+
+export const WrapEducationInputs = styled.div`
+  display: flex;
+  row-gap: 40px;
+  flex-direction: column;
+`;
+
+export const StyledBtnBox = styled(BtnBox)`
+  margin-top: 80px;
 `;
