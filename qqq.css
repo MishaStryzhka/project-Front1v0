@@ -1,3 +1,47 @@
 .qwe {
-  background-color: ;
+  box-sizing: border-box;
+
+  background-color: transparent !important;
+  width: 40px;
+  height: 40px;
+  overflow: hidden;
+
+  outline: none;
+  outline-color: transparent;
+  outline-offset: inherit;
+
+  display: flex;
+  flex-direction: column;
+  column-gap: 12px;
+  row-gap: 12px;
+
+  position: relative;
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+
+  min-height: none;
+
+  pointer-events: none;
+
+  color: red;
+
+  text-align: center;
+  text-decoration-line: line-through;
+
+  pointer-events: none;
+
+  cursor: pointer;
+
+  padding: 0;
+  padding-top: 0;
+
+  margin: 0;
+  margin-top: 0;
+
+  border-top-left-radius: 40px;
+
+  z-index: 1;
 }

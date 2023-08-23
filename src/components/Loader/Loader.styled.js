@@ -26,7 +26,10 @@ export const Spinner = styled.div`
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
   border-radius: 45%;
-  background: conic-gradient(#fff 0%, transparent);
+  background: conic-gradient(
+    ${({ $colorParent }) => $colorParent || '#fff'} 0%,
+    transparent
+  );
   //   -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
   animation: ${rotate} 1s infinite linear;
 `;

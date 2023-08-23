@@ -1,12 +1,12 @@
-// import Loader from 'components/Loader/Loader';
-// import Image from 'images/Loader.png';
-
 import { Field, Formik } from 'formik';
 import {
   Avatar,
+  AvatarDescription,
   AvatarLabel,
   AvatarWrap,
   AvaterInputLabel,
+  ButtonRefresh,
+  FieldStyled,
   // ButtonRefresh,
   // CheckboxField,
   // CheckboxInputWrap,
@@ -17,68 +17,34 @@ import {
   FormPersonalData,
   InputWrap,
   Label,
+  PhotoDescription,
+  Placeholder,
+  TextError,
+  WrapPhone,
+  WrapPhoneInput,
   // PayMethodLabel,
   // Placeholder,
-  PreviewBox,
-  PreviewButtonWraper,
   // StyledLegend,
   // TextError,
   // WrapPhone,
   // WrapPhoneInput,
 } from './PersonalData.styled';
-// import { useAuth } from 'hooks';
-// import PhoneInputField from 'components/PhoneImput/PhoneInput';
-// import Checkbox from 'components/Checkbox/Checkbox';
-import { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Modal from 'components/Modal/Modal';
 import { TitleModal } from 'components/ModalRefreshEmail/ModalRefreshEmail.styled';
 import CropperWrap from 'components/CropperWrap/CropperWrap';
-// import { getWidthImg } from 'helpers/getWidthImg';
-import SecondaryButton from 'components/SecondaryButton/SecondaryButton';
-import PrimaryButton from 'components/PrimaryButton/PrimaryButton';
-import getCroppedImg from 'helpers/cropImage';
+import { useAuth } from 'hooks';
+import PhoneInputField from 'components/PhoneImput/PhoneInput';
 
 const PersonalData = () => {
-  // let { user, error } = useAuth();
   const [avatar, setAvatar] = useState(null);
-  const [avatarWidth, setAvatarWidth] = useState(300);
-  const [avatarHeight, setAvatarHeight] = useState(400);
-  const [croppedArea, setCroppedArea] = useState({});
-
-  useEffect(() => {
-    if (avatar) {
-      const img = document.createElement('img');
-
-      img.src = URL.createObjectURL(avatar);
-
-      img.onload = function () {
-        setAvatarWidth(img.width);
-        setAvatarHeight(img.height);
-      };
-    }
-  }, [avatar]);
-
-  const onSubmit = value => {
-    const { lastName, firstName, patronymic, phones, contactMethod } = value;
-
-    console.log(
-      'value',
-      lastName,
-      firstName,
-      patronymic,
-      phones,
-      contactMethod
-    );
-  };
+  const [isOpenModalAddImage, setIsOpenModalAddImage] = useState(false);
+  let { error } = useAuth();
 
   const isChangeAvatarUrl = e => {
     const { files } = e.currentTarget;
     setAvatar(files[0]);
-  };
-
-  const hendleSave = async () => {
-    const canvas = await getCroppedImg(avatar, croppedArea);
-    console.log('canvas', canvas);
+    setIsOpenModalAddImage(true);
   };
 
   return (
@@ -89,10 +55,12 @@ const PersonalData = () => {
         firstName: '',
         patronymic: '',
         phones: [],
+        experienceYears: '',
+        education: '',
         contactMethod: '',
       }}
       // validationSchema={validationPatientPageSchema}
-      onSubmit={onSubmit}
+      // onSubmit={onSubmit}
     >
       {({
         values,
@@ -103,8 +71,6 @@ const PersonalData = () => {
         handleBlur,
         handleSubmit,
       }) => {
-        console.log('values', values);
-
         return (
           <FormPersonalData onSubmit={handleSubmit}>
             <FormDescription>
@@ -114,9 +80,16 @@ const PersonalData = () => {
               <AvatarLabel as={Label}>
                 <AvatarWrap>
                   {values.avatarUrl ? (
-                    <Avatar src={values.avatarUrl} alt="avatar" />
+                    <Avatar
+                      src={
+                        typeof values.avatarUrl === 'object'
+                          ? URL.createObjectURL(values.avatarUrl)
+                          : values.avatarUrl
+                      }
+                      alt="avatar"
+                    />
                   ) : (
-                    <p>Photo</p>
+                    <PhotoDescription>Photo</PhotoDescription>
                   )}
                 </AvatarWrap>
                 <div>
@@ -126,94 +99,34 @@ const PersonalData = () => {
                     </AvaterInputLabel>
                     <Field
                       style={{ display: 'none' }}
-                      value={values.avatarUrl}
                       type="file"
                       id="avatarUrl"
+                      value=""
                       name="avatarUrl"
                       onChange={e => isChangeAvatarUrl(e)}
                     />
                   </div>
-                  <p>
+                  <AvatarDescription>
                     Файл повинен бути у форматі jpeg або png. Максимальний
                     розмір - 5 Мб
-                  </p>
+                  </AvatarDescription>
                 </div>
-                {avatar && (
+                {isOpenModalAddImage && (
                   <Modal
                     onClick={() => {
-                      setAvatar(null);
+                      setIsOpenModalAddImage(false);
                     }}
                   >
                     <TitleModal>Додати зображення профілю</TitleModal>
-                    <PreviewBox width={avatarWidth} height={avatarHeight}>
-                      <CropperWrap
-                        yourImage={URL.createObjectURL(avatar)}
-                        setCroppedArea={e => setCroppedArea(e)}
-                      />
-                    </PreviewBox>
-                    <PreviewButtonWraper>
-                      <SecondaryButton
-                        onClick={() => {
-                          setAvatar(null);
-                        }}
-                      >
-                        Скасувати
-                      </SecondaryButton>
-                      <PrimaryButton onClick={hendleSave}>
-                        Завантажити
-                      </PrimaryButton>
-                    </PreviewButtonWraper>
+                    <CropperWrap
+                      image={avatar}
+                      name="avatar"
+                      setImage={e => setFieldValue('avatarUrl', e)}
+                      onClose={() => setIsOpenModalAddImage(false)}
+                    />
                   </Modal>
                 )}
               </AvatarLabel>
-
-              {/* <Label>
-                <FieldStyled
-                  disabled={true}
-                  error={errors.email && touched.email && errors.email}
-                  valid={values.email}
-                  type="email"
-                  name="email"
-                  onChange={e => {
-                    error = null;
-                    handleChange(e);
-                  }}
-                  onBlur={handleBlur}
-                  required
-                />
-                 <ButtonRefresh type="button" onClick={handleRefreshEmail}>
-                    Змінити e-mail
-                  </ButtonRefresh>
-                {!values.email && <Placeholder>email</Placeholder>}
-                {errors.email && touched.email && (
-                  <TextError>{errors.email}</TextError>
-                )}
-              </Label>
-
-              <Label>
-                <FieldStyled
-                  disabled={true}
-                  error={errors.password && touched.password && errors.password}
-                  type={'password'}
-                  name="password"
-                  onChange={e => {
-                    error = null;
-                    handleChange(e);
-                  }}
-                  onBlur={handleBlur}
-                  required
-                />
-                 <ButtonRefresh type="button" onClick={handleRefreshPassword}>
-                    Змінити пароль
-                  </ButtonRefresh> 
-                {!values.password && <Placeholder>Пароль</Placeholder>}
-                {errors.password && touched.password && (
-                  <TextError>{errors.password}</TextError>
-                )}
-                {error?.status === 401 && (
-                  <TextError>Електронна пошта або пароль неправильні</TextError>
-                )}
-              </Label>
 
               <Label>
                 <FieldStyled
@@ -355,7 +268,55 @@ const PersonalData = () => {
                 </ButtonRefresh>
               </WrapPhone>
 
-              <PayMethodLabel>
+              <Label>
+                <FieldStyled
+                  error={
+                    errors.experienceYears &&
+                    touched.experienceYears &&
+                    errors.experienceYears
+                  }
+                  type={'number'}
+                  min="1"
+                  max="100"
+                  name="experienceYears"
+                  onChange={e => {
+                    error = null;
+                    handleChange(e);
+                  }}
+                  onBlur={handleBlur}
+                  required
+                />
+                {!values.experienceYears && (
+                  <Placeholder>
+                    Стаж роботи, років <span>*</span>
+                  </Placeholder>
+                )}
+                {errors.experienceYears && touched.experienceYears && (
+                  <TextError>{errors.experienceYears}</TextError>
+                )}
+              </Label>
+
+              <Label>
+                <FieldStyled
+                  error={
+                    errors.education && touched.education && errors.education
+                  }
+                  type={'text'}
+                  name="education"
+                  onChange={e => {
+                    error = null;
+                    handleChange(e);
+                  }}
+                  onBlur={handleBlur}
+                  required
+                />
+                {!values.education && <Placeholder>Освіта</Placeholder>}
+                {errors.education && touched.education && (
+                  <TextError>{errors.education}</TextError>
+                )}
+              </Label>
+
+              {/* <PayMethodLabel>
                 <StyledLegend>Спосіб зв’язку *</StyledLegend>
                 <CheckboxWrap>
                   <CheckboxInputWrap>
