@@ -3,23 +3,16 @@ import { StyledField, StyledLabel } from './Checkbox.stuled';
 import IconCheckboxChack from 'images/icons/IconCheckboxChack';
 
 const Checkbox = e => {
+  const {
+    onChange,
+    value,
+    field: { name },
+  } = e;
   return (
-    <StyledLabel
-      onChange={() =>
-        e.form.setFieldValue(
-          e.field.name,
-          e.type === 'radio' ? e.field.value : !e.field.value
-        )
-      }
-    >
-      <StyledField type={e.type} name={e.field.name} />
-      {e.type === 'radio'
-        ? (e.field.value !== e.form.values[e.field.name] && <IconCheckbox />) ||
-          (e.field.value === e.form.values[e.field.name] && (
-            <IconCheckboxChack />
-          ))
-        : (!e.field.value && <IconCheckbox />) ||
-          (e.field.value && <IconCheckboxChack />)}
+    <StyledLabel onChange={onChange}>
+      <StyledField type={e.type} name={e.field.name} value={value} />
+      {!e.form.values[name].includes(e.value) && <IconCheckbox />}
+      {e.form.values[name].includes(e.value) && <IconCheckboxChack />}
     </StyledLabel>
   );
 };

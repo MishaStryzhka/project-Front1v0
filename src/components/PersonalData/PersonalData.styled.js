@@ -22,6 +22,18 @@ export const FormDescription = styled.p`
   }
 `;
 
+export const InputWrap = styled.div`
+  padding-top: 26px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+`;
+
+export const InputWrapStepOne = styled(InputWrap)``;
+
+export const InputWrapStepTwo = styled(InputWrap)``;
+
 export const AvatarLabel = styled.div`
   display: flex;
   column-gap: 40px;
@@ -78,14 +90,6 @@ export const AvatarDescription = styled.p`
   font-style: italic;
   font-weight: 400;
   line-height: normal;
-`;
-
-export const InputWrap = styled.div`
-  padding-top: 26px;
-
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
 `;
 
 export const Label = styled.div`
@@ -146,6 +150,11 @@ export const Placeholder = styled.p`
   left: ${({ type }) => (type === 'tel' ? '61px' : '17px')};
 
   > span {
+    color: red;
+  }
+
+  &::after {
+    content: '*';
     color: red;
   }
 `;
@@ -228,6 +237,63 @@ export const WrapEducationInputs = styled.div`
   display: flex;
   row-gap: 40px;
   flex-direction: column;
+`;
+
+export const Pagination = styled.ul`
+  display: flex;
+  justify-content: center;
+  margin-top: 40px;
+`;
+
+export const PaginationItem = styled.li`
+  display: flex;
+  margin-right: 100px;
+
+  > button::after {
+    background-color: ${({ theme }) => theme.color.main} !important;
+
+    position: absolute;
+    left: 20px;
+    top: 9px;
+    content: '';
+
+    width: 100px;
+    height: 1px;
+  }
+
+  &:last-child {
+    margin-right: 0;
+    > button::after {
+      display: none;
+    }
+  }
+`;
+
+export const ButtonStep = styled.button`
+  width: 20px;
+  height: 20px;
+
+  border-radius: 4px;
+  border: 1px solid ${({ theme }) => theme.color.main};
+
+  text-align: center;
+  text-align: -webkit-center;
+
+  ${({ islast }) => islast && `margin-left: 100px;`}
+
+  &:before {
+    display: flex;
+    content: '';
+    background-color: ${({ theme }) => theme.color.main};
+    border-radius: 10px;
+
+    width: ${({ $active }) => ($active ? 10 : 4)}px;
+    height: ${({ $active }) => ($active ? 10 : 4)}px;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 export const StyledBtnBox = styled(BtnBox)`

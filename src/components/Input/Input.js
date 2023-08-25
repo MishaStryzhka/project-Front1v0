@@ -1,6 +1,9 @@
 import { Placeholder, StyledField, TextError } from './Input.styled';
 
 const Input = ({
+  as,
+  field,
+  setFieldValue,
   error = null,
   type = 'text',
   value = '',
@@ -10,11 +13,17 @@ const Input = ({
   required = false,
   disabled = false,
   width = '800px',
+  showPlaceholder,
   placeholder = 'placeholder',
 }) => {
+  console.log();
+
   return (
     <div style={{ position: 'relative' }}>
       <StyledField
+        as={as}
+        field={field}
+        setFieldValue={setFieldValue}
         error={error}
         type={type}
         value={value}
@@ -25,12 +34,7 @@ const Input = ({
         disabled={disabled}
         width={width}
       />
-      {!value && (
-        <Placeholder>
-          {placeholder}
-          {required && <span> *</span>}
-        </Placeholder>
-      )}
+      {!value && <Placeholder type={field}>{placeholder}</Placeholder>}
       {error && <TextError>{error}</TextError>}
     </div>
   );

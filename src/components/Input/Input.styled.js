@@ -27,6 +27,10 @@ export const StyledField = styled(Field)`
 `;
 
 export const Placeholder = styled.div`
+  ${e => {
+    console.log('e', e);
+    return e?.type?.name === 'phones' && 'margin-left: 44px;';
+  }}
   color: ${({ theme }) => theme.color.placeholder};
 
   font-family: ${({ theme }) => theme.fontFamily};
@@ -42,7 +46,9 @@ export const Placeholder = styled.div`
   top: 15px;
   left: ${({ type }) => (type === 'tel' ? '61px' : '17px')};
 
-  > span {
+  &::after {
+    ${({ required }) => required && 'display: none;'}
+    content: ' *';
     color: red;
   }
 `;
