@@ -8,11 +8,22 @@ const Checkbox = e => {
     value,
     field: { name },
   } = e;
+
   return (
     <StyledLabel onChange={onChange}>
       <StyledField type={e.type} name={e.field.name} value={value} />
-      {!e.form.values[name].includes(e.value) && <IconCheckbox />}
-      {e.form.values[name].includes(e.value) && <IconCheckboxChack />}
+
+      {typeof e.form.values[name] === 'object' ? (
+        <>
+          {!e.form.values[name].includes(e.value) && <IconCheckbox />}
+          {e.form.values[name].includes(e.value) && <IconCheckboxChack />}
+        </>
+      ) : (
+        <>
+          {!e.form.values[name] && <IconCheckbox />}
+          {e.form.values[name] && <IconCheckboxChack />}
+        </>
+      )}
     </StyledLabel>
   );
 };

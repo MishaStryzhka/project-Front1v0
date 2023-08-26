@@ -24,11 +24,13 @@ export const StyledField = styled(Field)`
   outline: none;
 
   color: ${({ theme }) => theme.color.btnLogOut};
+  ${({ $style }) => $style && $style}
 `;
 
 export const Placeholder = styled.div`
+  display: flex;
   ${e => {
-    console.log('e', e);
+    // console.log('e', e);
     return e?.type?.name === 'phones' && 'margin-left: 44px;';
   }}
   color: ${({ theme }) => theme.color.placeholder};
@@ -47,7 +49,8 @@ export const Placeholder = styled.div`
   left: ${({ type }) => (type === 'tel' ? '61px' : '17px')};
 
   &::after {
-    ${({ required }) => required && 'display: none;'}
+    display: none;
+    ${({ required }) => required && 'display: block;'}
     content: ' *';
     color: red;
   }

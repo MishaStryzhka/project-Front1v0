@@ -299,3 +299,28 @@ export const ButtonStep = styled.button`
 export const StyledBtnBox = styled(BtnBox)`
   margin-top: 80px;
 `;
+
+export const WrapJobs = styled(WrapEducation)``;
+
+export const WrapJobsInputs = styled(WrapEducationInputs)``;
+
+export const LabelJob = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+`;
+
+export const ReceptionHoursWrap = styled.div`
+  margin-top: -20px;
+  display: flex;
+  column-gap: 40px;
+  align-items: center;
+`;
+
+export const WrapSertificate = styled.div``;
+
+export const WrapSertificateInputs = styled.div`
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+`;
