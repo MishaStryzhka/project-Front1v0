@@ -13,11 +13,12 @@ const Input = ({
   required = false,
   disabled = false,
   width = '800px',
-  showPlaceholder,
+  showPlaceholder = false,
   placeholder = 'placeholder',
+  min,
+  max,
+  $style,
 }) => {
-  console.log();
-
   return (
     <div style={{ position: 'relative' }}>
       <StyledField
@@ -26,6 +27,8 @@ const Input = ({
         setFieldValue={setFieldValue}
         error={error}
         type={type}
+        min={min}
+        max={max}
         value={value}
         name={name}
         onChange={onChange}
@@ -33,8 +36,13 @@ const Input = ({
         required={required}
         disabled={disabled}
         width={width}
+        $style={$style}
       />
-      {!value && <Placeholder type={field}>{placeholder}</Placeholder>}
+      {(!value || showPlaceholder) && (
+        <Placeholder type={field} required={required}>
+          {placeholder}
+        </Placeholder>
+      )}
       {error && <TextError>{error}</TextError>}
     </div>
   );

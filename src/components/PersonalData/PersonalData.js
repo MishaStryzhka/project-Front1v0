@@ -16,16 +16,22 @@ import {
   InputWrapStepOne,
   InputWrapStepTwo,
   Label,
+  LabelJob,
   Pagination,
   PaginationItem,
   PayMethodLabel,
   PhotoDescription,
+  ReceptionHoursWrap,
   StyledBtnBox,
   StyledLegend,
   WrapEducation,
   WrapEducationInputs,
+  WrapJobs,
+  WrapJobsInputs,
   WrapPhone,
   WrapPhoneInput,
+  WrapSertificate,
+  WrapSertificateInputs,
   YearsWrap,
 } from './PersonalData.styled';
 import React, { useState } from 'react';
@@ -43,7 +49,10 @@ import Checkbox from 'components/Checkbox/Checkbox';
 const PersonalData = () => {
   let { error } = useAuth();
   const [avatar, setAvatar] = useState(null);
-  const [isOpenModalAddImage, setIsOpenModalAddImage] = useState(false);
+  const [sertificatePreview, setSertificatePreview] = useState(null);
+  const [isOpenModalAddAvatar, setIsOpenModalAddAvatar] = useState(false);
+  const [isOpenModalAddSertificate, setIsOpenModalAddSertificate] =
+    useState(false);
   const [step, setStep] = useState('one');
   const steps = ['one', 'two'];
 
@@ -52,7 +61,13 @@ const PersonalData = () => {
   const isChangeAvatarUrl = e => {
     const { files } = e.currentTarget;
     setAvatar(files[0]);
-    setIsOpenModalAddImage(true);
+    setIsOpenModalAddAvatar(true);
+  };
+
+  const isChangeSertificate = e => {
+    const { files } = e.currentTarget;
+    setSertificatePreview(files[0]);
+    setIsOpenModalAddSertificate(true);
   };
 
   const onSubmit = value => {
@@ -78,8 +93,19 @@ const PersonalData = () => {
         experienceYears: '',
         education: [{ id: nanoid(), name: '', years: ['', ''] }],
         paymentMethod: [],
+        jobs: [
+          {
+            id: nanoid(),
+            name: '',
+            cityArea: '',
+            address: '',
+            workSchedule: '',
+            receptionHours: ['', ''],
+          },
+        ],
+        sertificates: [{ id: nanoid(), file: null }],
       }}
-      // validationSchema={validationPatientPageSchema}
+      // validationSchema={validationDoctorPageSchema}
       onSubmit={onSubmit}
     >
       {({
@@ -91,6 +117,8 @@ const PersonalData = () => {
         handleBlur,
         handleSubmit,
       }) => {
+        console.log('sertificates', values.sertificates);
+
         return (
           <FormPersonalData onSubmit={handleSubmit}>
             <FormDescription>
@@ -133,10 +161,10 @@ const PersonalData = () => {
                       розмір - 5 Мб
                     </AvatarDescription>
                   </div>
-                  {isOpenModalAddImage && (
+                  {isOpenModalAddAvatar && (
                     <Modal
                       onClick={() => {
-                        setIsOpenModalAddImage(false);
+                        setIsOpenModalAddAvatar(false);
                       }}
                     >
                       <TitleModal>Додати зображення профілю</TitleModal>
@@ -144,7 +172,7 @@ const PersonalData = () => {
                         image={avatar}
                         name="avatar"
                         setImage={e => setFieldValue('avatarUrl', e)}
-                        onClose={() => setIsOpenModalAddImage(false)}
+                        onClose={() => setIsOpenModalAddAvatar(false)}
                       />
                     </Modal>
                   )}
@@ -254,7 +282,7 @@ const PersonalData = () => {
                               );
                             }}
                             required
-                            showPlaceholder={phone}
+                            // showPlaceholder={phone}
                             placeholder="+380 __ ___ ____"
                           />
                         </Label>
@@ -474,41 +502,308 @@ const PersonalData = () => {
 
             {step === 'two' && (
               <InputWrapStepTwo>
-                <Label>
-                  <Input
-                    error={
-                      (errors.education &&
-                        touched.education &&
-                        errors.education) ||
-                      null
-                    }
-                    type={'text'}
-                    value={values.education.name}
-                    name="education"
-                    onChange={e => {}}
-                    onBlur={handleBlur}
-                    // required
-                    placeholder="Місце роботи"
-                  />
-                </Label>
+                <WrapJobs>
+                  <WrapJobsInputs>
+                    {values.jobs.map(job => {
+                      const index = values.jobs.findIndex(
+                        option => option.id === job.id
+                      );
 
-                <Label>
-                  <Input
-                    error={
-                      (errors.education &&
-                        touched.education &&
-                        errors.education) ||
-                      null
-                    }
-                    type={'text'}
-                    value={values.education.name}
-                    name="education"
-                    onChange={e => {}}
-                    onBlur={handleBlur}
-                    // required
-                    placeholder="Місце роботи"
-                  />
-                </Label>
+                      return (
+                        <LabelJob key={job.id}>
+                          <Input
+                            error={
+                              (errors.jobs && touched.jobs && errors.jobs) ||
+                              null
+                            }
+                            type={'text'}
+                            value={job.name}
+                            name="jobs"
+                            onChange={e => {
+                              const { value } = e.currentTarget;
+                              error = null;
+                              const newJobs = [...values.jobs];
+                              if (values.jobs.length !== 1 && value === '') {
+                                newJobs.splice(index, 1);
+                              } else {
+                                newJobs.splice(index, 1, {
+                                  ...job,
+                                  name: value,
+                                });
+                              }
+
+                              setFieldValue('jobs', newJobs);
+                            }}
+                            onBlur={handleBlur}
+                            required
+                            placeholder="Місце роботи"
+                          />
+
+                          <Input
+                            error={
+                              (errors.cityArea &&
+                                touched.cityArea &&
+                                errors.cityArea) ||
+                              null
+                            }
+                            type={'text'}
+                            value={job.cityArea}
+                            name="jobs"
+                            onChange={e => {
+                              const { value } = e.currentTarget;
+                              error = null;
+                              const newJobs = [...values.jobs];
+                              if (values.jobs.length !== 1 && value === '') {
+                                newJobs.splice(index, 1);
+                              } else {
+                                newJobs.splice(index, 1, {
+                                  ...job,
+                                  cityArea: value,
+                                });
+                              }
+
+                              setFieldValue('jobs', newJobs);
+                            }}
+                            onBlur={handleBlur}
+                            required
+                            placeholder="Район міста"
+                          />
+
+                          <Input
+                            error={
+                              (errors?.jobs?.address &&
+                                touched?.jobs?.address &&
+                                errors?.jobs?.address) ||
+                              null
+                            }
+                            type={'text'}
+                            value={job.address}
+                            name="jobs"
+                            onChange={e => {
+                              const { value } = e.currentTarget;
+                              error = null;
+                              const newJobs = [...values.jobs];
+                              if (values.jobs.length !== 1 && value === '') {
+                                newJobs.splice(index, 1);
+                              } else {
+                                newJobs.splice(index, 1, {
+                                  ...job,
+                                  address: value,
+                                });
+                              }
+
+                              setFieldValue('jobs', newJobs);
+                            }}
+                            onBlur={handleBlur}
+                            required
+                            placeholder="Адреса"
+                          />
+
+                          <Input
+                            error={
+                              (errors?.jobs?.workSchedule &&
+                                touched?.jobs?.workSchedule &&
+                                errors?.jobs?.workSchedule) ||
+                              null
+                            }
+                            type={'text'}
+                            value={job.workSchedule}
+                            name="jobs"
+                            onChange={e => {
+                              const { value } = e.currentTarget;
+                              error = null;
+                              const newJobs = [...values.jobs];
+                              if (values.jobs.length !== 1 && value === '') {
+                                newJobs.splice(index, 1);
+                              } else {
+                                newJobs.splice(index, 1, {
+                                  ...job,
+                                  workSchedule: value,
+                                });
+                              }
+
+                              setFieldValue('jobs', newJobs);
+                            }}
+                            onBlur={handleBlur}
+                            required
+                            placeholder="Графік роботи"
+                          />
+
+                          <ReceptionHoursWrap>
+                            <p>Години прийому</p>
+                            <Input
+                              error={errors.job && touched.job && errors.job}
+                              type={'time'}
+                              value={job.receptionHours[0]}
+                              name="job"
+                              onChange={e => {
+                                const { value } = e.currentTarget;
+                                error = null;
+                                const newJobs = [...values.jobs];
+
+                                newJobs.splice(index, 1, {
+                                  ...job,
+                                  receptionHours: [
+                                    value,
+                                    job.receptionHours[1],
+                                  ],
+                                });
+
+                                setFieldValue('jobs', newJobs);
+                              }}
+                              onBlur={handleBlur}
+                              showPlaceholder="true"
+                              placeholder="Від"
+                              width="145px"
+                              $style={`padding-left: 45px;`}
+                            />
+                            <Input
+                              error={errors.job && touched.job && errors.job}
+                              type={'time'}
+                              value={job.receptionHours[1]}
+                              name="jobs"
+                              onChange={e => {
+                                const { value } = e.currentTarget;
+                                error = null;
+                                const newjob = [...values.jobs];
+
+                                newjob.splice(index, 1, {
+                                  ...job,
+                                  receptionHours: [
+                                    job.receptionHours[0],
+                                    value,
+                                  ],
+                                });
+
+                                setFieldValue('jobs', newjob);
+                              }}
+                              onBlur={handleBlur}
+                              showPlaceholder="true"
+                              placeholder="До"
+                              width="145px"
+                              $style={`padding-left: 45px;`}
+                            />
+                          </ReceptionHoursWrap>
+                        </LabelJob>
+                      );
+                    })}
+                  </WrapJobsInputs>
+                  <ButtonRefresh
+                    disabled={values.jobs.find(job => job.name === '')}
+                    type="button"
+                    onClick={() => {
+                      const newJobs = [...values.jobs];
+                      newJobs.push({
+                        id: nanoid(),
+                        name: '',
+                        cityArea: '',
+                        address: '',
+                        workSchedule: '',
+                        receptionHours: ['', ''],
+                      });
+                      setFieldValue('jobs', newJobs);
+                    }}
+                  >
+                    + Додати місце роботи
+                  </ButtonRefresh>
+                </WrapJobs>
+                <WrapSertificate>
+                  <WrapSertificateInputs>
+                    {values.sertificates.map(sertificate => {
+                      const index = values.sertificates.findIndex(
+                        option => option.id === sertificate.id
+                      );
+
+                      return (
+                        <AvatarLabel key={sertificate.id} as={Label}>
+                          <AvatarWrap>
+                            {sertificate.file ? (
+                              <Avatar
+                                src={URL.createObjectURL(sertificate.file)}
+                                alt="Sertificate"
+                              />
+                            ) : (
+                              <PhotoDescription>Sertificate</PhotoDescription>
+                            )}
+                          </AvatarWrap>
+                          <div>
+                            <div>
+                              <AvaterInputLabel htmlFor="sertificates">
+                                {sertificate.file
+                                  ? 'Оновити сертифікат'
+                                  : 'Завантажити сертифікат'}
+                              </AvaterInputLabel>
+                              <Field
+                                style={{ display: 'none' }}
+                                type="file"
+                                id="sertificates"
+                                value=""
+                                name={`sertificates-${sertificate.id}`}
+                                onChange={e => {
+                                  document.body.style.overflow = 'auto';
+                                  isChangeSertificate(e);
+                                }}
+                              />
+                            </div>
+                            <AvatarDescription>
+                              Файл повинен бути у форматі jpeg або png.
+                              Максимальний розмір - 5 Мб
+                            </AvatarDescription>
+                          </div>
+                          {isOpenModalAddSertificate && (
+                            <Modal
+                              onClick={() => {
+                                setIsOpenModalAddSertificate(false);
+                              }}
+                            >
+                              <TitleModal>Додати сертифікат</TitleModal>
+                              <CropperWrap
+                                image={sertificatePreview}
+                                name={`sertificate - ${nanoid()}`}
+                                setImage={value => {
+                                  console.log('value', value);
+
+                                  const newSertificates = [
+                                    ...values.sertificates,
+                                  ];
+
+                                  newSertificates.splice(index, 1, {
+                                    ...sertificate,
+                                    file: value,
+                                  });
+
+                                  setFieldValue(
+                                    'sertificates',
+                                    newSertificates
+                                  );
+                                }}
+                                onClose={() => {
+                                  document.body.style.overflow = 'auto';
+                                  setIsOpenModalAddSertificate(false);
+                                }}
+                              />
+                            </Modal>
+                          )}
+                        </AvatarLabel>
+                      );
+                    })}
+                  </WrapSertificateInputs>
+                  <ButtonRefresh
+                    disabled={values.sertificates.find(
+                      sertificate => sertificate.file === null
+                    )}
+                    type="button"
+                    onClick={() => {
+                      const newSertificate = [...values.sertificates];
+
+                      newSertificate.push({ id: nanoid(), file: null });
+
+                      setFieldValue('sertificates', newSertificate);
+                    }}
+                  >
+                    + Додати сертифікат
+                  </ButtonRefresh>
+                </WrapSertificate>
               </InputWrapStepTwo>
             )}
 
