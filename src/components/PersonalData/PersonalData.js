@@ -91,8 +91,8 @@ const PersonalData = () => {
         patronymic: '',
         phones: [],
         experienceYears: '',
-        education: [{ id: nanoid(), name: '', years: ['', ''] }],
-        paymentMethod: [],
+        educations: [{ id: nanoid(), name: '', years: ['', ''] }],
+        paymentMethods: [],
         jobs: [
           {
             id: nanoid(),
@@ -117,8 +117,6 @@ const PersonalData = () => {
         handleBlur,
         handleSubmit,
       }) => {
-        console.log('sertificates', values.sertificates);
-
         return (
           <FormPersonalData onSubmit={handleSubmit}>
             <FormDescription>
@@ -352,8 +350,8 @@ const PersonalData = () => {
 
                 <WrapEducation>
                   <WrapEducationInputs>
-                    {values.education.map(education => {
-                      const index = values.education.indexOf(education);
+                    {values.educations.map(education => {
+                      const index = values.educations.indexOf(education);
                       return (
                         <Label key={education.id}>
                           <Input
@@ -369,10 +367,11 @@ const PersonalData = () => {
                             onChange={e => {
                               const { value } = e.currentTarget;
                               error = null;
-                              const newEducation = [...values.education];
+                              const newEducation = [...values.educations];
+                              console.log('value', value);
 
                               if (
-                                values.education.length !== 1 &&
+                                values.educations.length !== 1 &&
                                 value === ''
                               ) {
                                 newEducation.splice(index, 1);
@@ -383,7 +382,7 @@ const PersonalData = () => {
                                 });
                               }
 
-                              setFieldValue('education', newEducation);
+                              setFieldValue('educations', newEducation);
                             }}
                             onBlur={handleBlur}
                             // required
@@ -403,14 +402,14 @@ const PersonalData = () => {
                               onChange={e => {
                                 const { value } = e.currentTarget;
                                 error = null;
-                                const newEducation = [...values.education];
+                                const newEducation = [...values.educations];
 
                                 newEducation.splice(index, 1, {
                                   ...education,
                                   years: [value, education.years[1]],
                                 });
 
-                                setFieldValue('education', newEducation);
+                                setFieldValue('educations', newEducation);
                               }}
                               onBlur={handleBlur}
                               placeholder="Від"
@@ -428,14 +427,14 @@ const PersonalData = () => {
                               onChange={e => {
                                 const { value } = e.currentTarget;
                                 error = null;
-                                const newEducation = [...values.education];
+                                const newEducation = [...values.educations];
 
                                 newEducation.splice(index, 1, {
                                   ...education,
                                   years: [education.years[0], value],
                                 });
 
-                                setFieldValue('education', newEducation);
+                                setFieldValue('educations', newEducation);
                               }}
                               onBlur={handleBlur}
                               placeholder="До"
@@ -447,18 +446,18 @@ const PersonalData = () => {
                     })}
                   </WrapEducationInputs>
                   <ButtonRefresh
-                    disabled={values.education.find(
+                    disabled={values.educations.find(
                       education => education.name === ''
                     )}
                     type="button"
                     onClick={() => {
-                      const newEducation = [...values.education];
+                      const newEducation = [...values.educations];
                       newEducation.push({
                         id: nanoid(),
                         name: '',
                         years: ['', ''],
                       });
-                      setFieldValue('education', newEducation);
+                      setFieldValue('educations', newEducation);
                     }}
                   >
                     + Додати освіту
@@ -472,7 +471,7 @@ const PersonalData = () => {
                       <CheckboxField
                         type="checkbox"
                         id="cash"
-                        name="paymentMethod"
+                        name="paymentMethods"
                         value="cash"
                         component={Checkbox}
                         onChange={handleChange}
@@ -486,7 +485,7 @@ const PersonalData = () => {
                       <CheckboxField
                         type="checkbox"
                         id="card"
-                        name="paymentMethod"
+                        name="paymentMethods"
                         value="card"
                         component={Checkbox}
                         onChange={handleChange}

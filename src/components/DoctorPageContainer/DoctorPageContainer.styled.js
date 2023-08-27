@@ -6,6 +6,8 @@ export const StyledDoctorPageContainer = styled.div`
 
   display: flex;
   height: 100%;
+
+  background-color: ${({ theme }) => theme.color.background};
 `;
 
 export const SideBarDoctor = styled.div`
@@ -13,11 +15,8 @@ export const SideBarDoctor = styled.div`
   flex-direction: column;
   row-gap: 40px;
 
-  background-color: ${({ theme }) => theme.color.background};
-
   box-sizing: border-box;
-  width: 377px;
-  padding: 81px 117px 81px 40px;
+  padding: 81px 40px;
 `;
 
 export const StyledNavLink = styled(NavLink)`
@@ -45,9 +44,6 @@ export const StyledNavLink = styled(NavLink)`
 `;
 
 export const MainContent = styled.div`
-  position: absolute;
-  right: 0;
-
   box-sizing: border-box;
   width: 1140px;
   height: 100%;
