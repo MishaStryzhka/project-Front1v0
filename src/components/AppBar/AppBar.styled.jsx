@@ -4,38 +4,15 @@ import styled from 'styled-components';
 
 export const StyledAppBar = styled.header`
   background-color: ${({ theme }) => theme.color.main};
-  // padding: 20px 0;
-  // height: 280px;
-
-  @media screen and (min-width: 768px) {
-    // height: 44px;
-    // padding: 24px 0;
-  }
-
-  @media screen and (min-width: 1440px) {
-    height: 120px;
-    // padding: 20px 0;
-  }
+  height: 120px;
 `;
 
 export const StyledContainer = styled(Container)`
-  // box-sizing: border-box;
-  // padding: 0 20px;
-
   display: flex;
   justify-content: flex-end;
   align-items: center;
   position: relative;
-  // position: relative;
-  // z-index: 9;
-
-  // @media screen and (min-width: 768px) {
-  //   padding: 0 32px;
-  // }
-
-  // @media screen and (min-width: 1440px) {
-  //   padding: 0 16px;
-  // }
+  height: 120px;
 `;
 
 export const NavContainer = styled.div`
