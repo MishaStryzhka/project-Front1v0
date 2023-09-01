@@ -11,8 +11,6 @@ import {
   CheckboxInputWrap,
   CheckboxLabel,
   CheckboxWrap,
-  FormDescription,
-  FormPersonalData,
   InputWrapStepOne,
   InputWrapStepTwo,
   Label,
@@ -22,7 +20,6 @@ import {
   PayMethodLabel,
   PhotoDescription,
   ReceptionHoursWrap,
-  StyledBtnBox,
   StyledLegend,
   WrapEducation,
   WrapEducationInputs,
@@ -42,9 +39,8 @@ import { useAuth } from 'hooks';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import Input from 'components/Input/Input';
 import { nanoid } from '@reduxjs/toolkit';
-import SecondaryButton from 'components/SecondaryButton/SecondaryButton';
-import PrimaryButton from 'components/PrimaryButton/PrimaryButton';
 import Checkbox from 'components/Checkbox/Checkbox';
+import Form from 'components/Form/Form';
 
 const PersonalData = () => {
   let { error } = useAuth();
@@ -80,6 +76,10 @@ const PersonalData = () => {
     } else {
       setStep(steps[steps.indexOf(step) + 1]);
     }
+  };
+
+  const handlePublish = () => {
+    console.log('handlePublish');
   };
 
   return (
@@ -118,15 +118,16 @@ const PersonalData = () => {
         handleSubmit,
       }) => {
         return (
-          <FormPersonalData onSubmit={handleSubmit}>
-            <FormDescription>
-              <span>*</span> - обов’язкові поля
-            </FormDescription>
-
+          <Form
+            onSubmit={handleSubmit}
+            isRequiredFields
+            handlePublish={step === 'two' ? handlePublish : null}
+            next={step !== 'two' ? handleNextStep : null}
+          >
             {step === 'one' && (
               <InputWrapStepOne>
                 <AvatarLabel as={Label}>
-                  <AvatarWrap>
+                  <AvatarWrap avatar={values.avatarUrl} htmlFor="avatarUrl">
                     {values.avatarUrl ? (
                       <Avatar
                         src={
@@ -823,17 +824,7 @@ const PersonalData = () => {
                 );
               })}
             </Pagination>
-
-            <StyledBtnBox>
-              <SecondaryButton disabled type="button">
-                Переглянути картку як користувач
-              </SecondaryButton>
-              <SecondaryButton type="submit">Зберегти чернетку</SecondaryButton>
-              <PrimaryButton type="button" onClick={handleNextStep}>
-                Далі
-              </PrimaryButton>
-            </StyledBtnBox>
-          </FormPersonalData>
+          </Form>
         );
       }}
     </Formik>

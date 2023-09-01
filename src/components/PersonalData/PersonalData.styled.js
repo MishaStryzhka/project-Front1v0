@@ -1,4 +1,3 @@
-import { BtnBox } from 'components/AccountData/AccountData.styled';
 import { Field, Form } from 'formik';
 import { styled } from 'styled-components';
 
@@ -51,12 +50,10 @@ export const AvaterInputLabel = styled.label`
   font-weight: 400;
   line-height: normal;
 
-  &:hover {
-    ${({ disabled }) => !disabled && 'text-decoration-line: underline'};
-  }
+  text-decoration-line: underline;
 `;
 
-export const AvatarWrap = styled.div`
+export const AvatarWrap = styled.label`
   width: 150px;
   height: 200px;
 
@@ -66,6 +63,14 @@ export const AvatarWrap = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  cursor: pointer;
+
+  ${({ avatar }) => {
+    console.log('avatar', avatar);
+
+    return avatar && 'cursor: pointer; pointer-events: none;';
+  }};
 `;
 
 export const PhotoDescription = styled.p`
@@ -181,9 +186,7 @@ export const ButtonRefresh = styled.button`
   font-weight: 400;
   line-height: normal;
 
-  &:hover {
-    ${({ disabled }) => !disabled && 'text-decoration-line: underline'};
-  }
+  text-decoration-line: underline;
 `;
 
 export const PayMethodLabel = styled.div`
@@ -294,10 +297,6 @@ export const ButtonStep = styled.button`
   &:hover {
     cursor: pointer;
   }
-`;
-
-export const StyledBtnBox = styled(BtnBox)`
-  margin-top: 80px;
 `;
 
 export const WrapJobs = styled(WrapEducation)``;

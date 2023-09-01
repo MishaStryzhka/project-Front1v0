@@ -1,20 +1,16 @@
-import { StyledBtnBox } from 'components/PersonalData/PersonalData.styled';
-import PrimaryButton from 'components/PrimaryButton/PrimaryButton';
-import SecondaryButton from 'components/SecondaryButton/SecondaryButton';
 import { Formik } from 'formik';
 import {
   CheckboxField,
   CheckboxInputItem,
   CheckboxLabel,
   DirectionOfWorkLabel,
-  FormDescription,
-  FormDirectionWork,
   ListDirection,
   ListProblems,
   ProblemsItSolvesLabel,
   StyledLegend,
 } from './DirectionWork.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
+import Form from 'components/Form/Form';
 
 const DirectionWork = () => {
   const onSubmit = value => {
@@ -46,11 +42,11 @@ const DirectionWork = () => {
         console.log('values.directionsOfWork', values.directionsOfWork);
 
         return (
-          <FormDirectionWork onSubmit={handleSubmit}>
-            <FormDescription>
-              <span>*</span> - обов’язкові поля
-            </FormDescription>
-
+          <Form
+            onSubmit={handleSubmit}
+            isRequiredFields
+            handlePublish={handlePublish}
+          >
             <DirectionOfWorkLabel>
               <StyledLegend>
                 Напрямки роботи <span>*</span>
@@ -402,17 +398,7 @@ const DirectionWork = () => {
                 </CheckboxInputItem>
               </ListProblems>
             </ProblemsItSolvesLabel>
-
-            <StyledBtnBox>
-              <SecondaryButton disabled type="button">
-                Переглянути картку як користувач
-              </SecondaryButton>
-              <SecondaryButton type="submit">Зберегти чернетку</SecondaryButton>
-              <PrimaryButton type="button" onClick={handlePublish}>
-                Опубликувати
-              </PrimaryButton>
-            </StyledBtnBox>
-          </FormDirectionWork>
+          </Form>
         );
       }}
     </Formik>

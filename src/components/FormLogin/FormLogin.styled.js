@@ -19,7 +19,7 @@ export const Title = styled.h2`
   line-height: normal;
 
   padding-top: 75px;
-  margin: auto;
+  // margin: auto;
   width: 800px;
 `;
 
