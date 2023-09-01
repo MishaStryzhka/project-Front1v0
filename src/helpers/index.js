@@ -1,7 +1,5 @@
-import { getHeightImg } from './getHeightImg';
-import { getWidthImg } from './getWidthImg';
+import { cropImage } from './cropImage';
 
 module.exports = {
-  getWidthImg,
-  getHeightImg,
+  cropImage,
 };

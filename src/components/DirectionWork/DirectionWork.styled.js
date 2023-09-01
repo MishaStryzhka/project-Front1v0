@@ -5,22 +5,6 @@ export const FormDirectionWork = styled(Form)`
   padding: 40px 0;
 `;
 
-export const FormDescription = styled.p`
-  width: 800px;
-
-  color: ${({ theme }) => theme.color.placeholder};
-
-  font-family: ${({ theme }) => theme.fontFamily};
-  font-size: 16px;
-  font-style: italic;
-  font-weight: 400;
-  line-height: normal;
-
-  > span {
-    color: red;
-  }
-`;
-
 export const ListProblems = styled.ul`
   margin-top: 20px;
   display: grid;

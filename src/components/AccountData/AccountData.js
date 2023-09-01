@@ -16,15 +16,9 @@ import { Formik } from 'formik';
 import { useAuth } from 'hooks';
 import IconRemove from 'images/icons/IconRemove';
 import { useState } from 'react';
-import {
-  BtnBox,
-  StyledButtonWrapper,
-  StyledImputWrap,
-} from './AccountData.styled';
+import { StyledButtonWrapper, StyledImputWrap } from './AccountData.styled';
 import { deleteAccount } from 'redux/auth/operations';
 import { useDispatch } from 'react-redux';
-import PrimaryButton from 'components/PrimaryButton/PrimaryButton';
-import SecondaryButton from 'components/SecondaryButton/SecondaryButton';
 
 const AccountData = () => {
   let { user, error } = useAuth();
@@ -130,17 +124,6 @@ const AccountData = () => {
                 >
                   <IconRemove /> Видалити акаунт
                 </StyledButton>
-                <BtnBox>
-                  <SecondaryButton disabled type="button">
-                    Переглянути картку як користувач
-                  </SecondaryButton>
-                  <SecondaryButton type="submit">
-                    Зберегти чернетку
-                  </SecondaryButton>
-                  <PrimaryButton disabled type="submit">
-                    Опублікувати
-                  </PrimaryButton>
-                </BtnBox>
               </StyledButtonWrapper>
             </FormStyledPatient>
           );
