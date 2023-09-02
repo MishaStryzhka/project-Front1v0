@@ -36,9 +36,7 @@ export const App = () => {
   const dispatch = useDispatch();
   const { isRefreshing, token, userType } = useAuth();
 
-  useEffect(() => {
-    setCurrentTheme('light');
-  }, []);
+  currentTheme === null && setCurrentTheme('light');
 
   useEffect(() => {
     dispatch(refreshUser());

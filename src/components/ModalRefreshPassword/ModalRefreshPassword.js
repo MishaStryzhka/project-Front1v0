@@ -16,13 +16,17 @@ import {
 import { Placeholder } from 'components/FormPatientPage/FormPatientPage.styled';
 import { validationRefreshPasswordSchema } from 'schemas/RefreshPasswordSchema';
 import PassValidateBox from 'components/PassValidateBox/PassValidateBox';
+import { useDispatch } from 'react-redux';
+import { refreshPassword } from 'redux/auth/operations';
 
 const ModalRefreshPassword = ({ setIsOpenModal }) => {
   let { error } = useAuth();
+  const dispatch = useDispatch();
 
   const handleRefreshPassword = value => {
     const { password, newPassword } = value;
     console.log('value', password, newPassword);
+    dispatch(refreshPassword({ password, newPassword }));
   };
 
   return (

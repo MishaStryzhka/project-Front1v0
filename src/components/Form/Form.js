@@ -28,7 +28,7 @@ const Form = ({
         <SecondaryButton type="submit">Зберегти чернетку</SecondaryButton>
         {(handlePublish || next) && (
           <PrimaryButton type="button" onClick={handlePublish || next}>
-            {(handlePublish && 'Опубликувати') ||
+            {(handlePublish && 'Опублікувати') ||
               (next && 'Далі') ||
               (save && 'Зберегти')}
           </PrimaryButton>

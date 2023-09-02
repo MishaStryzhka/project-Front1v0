@@ -39,8 +39,6 @@ const DirectionWork = () => {
         handleBlur,
         handleSubmit,
       }) => {
-        console.log('values.directionsOfWork', values.directionsOfWork);
-
         return (
           <Form
             onSubmit={handleSubmit}

@@ -16,16 +16,20 @@ import {
   TextError,
 } from 'components/FormLogin/FormLogin.styled';
 import { Placeholder } from 'components/FormPatientPage/FormPatientPage.styled';
+import { useDispatch } from 'react-redux';
+import { refreshEmail } from 'redux/auth/operations';
 
 const ModalRefreshEmail = ({ setIsOpenModal }) => {
   let { user, error } = useAuth();
+  const dispatch = useDispatch();
 
   console.log('error', error);
 
   const handleRefreshEmail = value => {
     const { email } = value;
     if (email === user.email) {
-      console.log('value', value);
+      // console.log('value', value);
+      dispatch(refreshEmail(value));
     } else {
       error = 'Електронна пошта невірна!';
     }

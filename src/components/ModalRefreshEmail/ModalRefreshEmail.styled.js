@@ -12,7 +12,9 @@ export const TitleModal = styled.h2`
   text-align: center;
 `;
 
-export const FormRefreshEmail = styled.form``;
+export const FormRefreshEmail = styled.form`
+  width: 800px;
+`;
 
 export const FormDescription = styled.p`
   color: ${({ theme }) => theme.color.secondary};
