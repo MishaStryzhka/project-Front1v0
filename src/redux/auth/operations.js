@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-axios.defaults.baseURL = 'https://project-back1v0.onrender.com';
+axios.defaults.baseURL = 'https://project-back1v0.onrender.com/api';
 
 // Utility to add JWT
 export const setAuthHeader = token => {
@@ -21,7 +21,7 @@ export const register = createAsyncThunk(
   'auth/register',
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post('api/users/register', credentials);
+      const res = await axios.post('users/register', credentials);
       // After successful registration, add the token to the HTTP header
       setAuthHeader(res.data.user.token);
 
@@ -36,7 +36,7 @@ export const register = createAsyncThunk(
 );
 
 /*
- * PATCH @ /api/users/current/update
+ * PATCH @ /users/current/update
  * headers: Authorization: Bearer token
  * body: { userType }
  */
@@ -45,7 +45,7 @@ export const updateUserType = createAsyncThunk(
   async (credentials, thunkAPI) => {
     const { userType } = credentials;
     try {
-      const res = await axios.patch('/api/users/current/userType', {
+      const res = await axios.patch('/users/current/userType', {
         userType,
       });
 
@@ -67,7 +67,7 @@ export const logIn = createAsyncThunk(
   'auth/login',
   async ({ email, password, rememberMe }, thunkAPI) => {
     try {
-      const res = await axios.post('/api/users/login', { email, password });
+      const res = await axios.post('/users/login', { email, password });
       // After successful login, add the token to the HTTP header
       setAuthHeader(res.data.user.token);
 
@@ -90,7 +90,7 @@ export const logIn = createAsyncThunk(
  */
 export const logOut = createAsyncThunk('auth/logout', async (_, thunkAPI) => {
   try {
-    await axios.post('/api/users/logout');
+    await axios.post('/users/logout');
     // After a successful logout, remove the token from the HTTP header
     clearAuthHeader();
   } catch (error) {
@@ -118,7 +118,7 @@ export const refreshUser = createAsyncThunk(
     try {
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(persistedToken);
-      const res = await axios.get('/api/users/current');
+      const res = await axios.get('/users/current');
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -127,7 +127,7 @@ export const refreshUser = createAsyncThunk(
 );
 
 /*
- * PATCH @ /api/users/current/update
+ * PATCH @ /users/current/update
  * headers: Authorization: Bearer token
  */
 export const updateUserInfo = createAsyncThunk(
@@ -141,11 +141,9 @@ export const updateUserInfo = createAsyncThunk(
       formData.append('city', city || '');
       formData.append('birthday', birthday || '');
 
-      const response = await axios.patch(
-        `/api/users/current/update`,
-        formData,
-        { headers: { 'content-type': 'multipart/form-data' } }
-      );
+      const response = await axios.patch(`/users/current/update`, formData, {
+        headers: { 'content-type': 'multipart/form-data' },
+      });
       return response.data;
       // const user = { avatar, name, email, phone, city, birthday };
       // return user;
@@ -156,17 +154,78 @@ export const updateUserInfo = createAsyncThunk(
 );
 
 /*
- * DELETE @ api/users/current
+ * DELETE @ users/current
  * headers: Authorization: Bearer token
  */
 export const deleteAccount = createAsyncThunk(
   'auth/deleteAccount',
   async (_, thunkAPI) => {
     try {
-      await axios.delete('api/users/delete');
+      await axios.delete('users/delete');
       clearAuthHeader();
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+/*
+ * PUTCH @ users/refreshPassword
+ * headers: Authorization: Bearer token
+ * body: { password, newPassword }
+ */
+export const refreshPassword = createAsyncThunk(
+  'auth/refreshPassword',
+  async (credentials, thunkAPI) => {
+    console.log('credentials', credentials);
+
+    try {
+      const res = await axios.patch(
+        'users/current/refreshPassword',
+        credentials
+      );
+
+      console.log('res', res);
+
+      // setAuthHeader(res.data.user.token);
+
+      return res.data;
+    } catch (error) {
+      console.log('error', error);
+
+      // return thunkAPI.rejectWithValue({
+      //   status: error.response.status,
+      //   message: error.response.data.message,
+      // });
+    }
+  }
+);
+
+/*
+ * PUTCH @ users/refreshEmail
+ * headers: Authorization: Bearer token
+ * body: { password, newPassword }
+ */
+export const refreshEmail = createAsyncThunk(
+  'auth/refreshEmail',
+  async (credentials, thunkAPI) => {
+    console.log('credentials', credentials);
+
+    try {
+      const res = await axios.patch('users/current/refreshEmail', credentials);
+
+      console.log('res', res);
+
+      // setAuthHeader(res.data.user.token);
+
+      return res.data;
+    } catch (error) {
+      console.log('error', error);
+
+      // return thunkAPI.rejectWithValue({
+      //   status: error.response.status,
+      //   message: error.response.data.message,
+      // });
     }
   }
 );

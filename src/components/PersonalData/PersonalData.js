@@ -127,7 +127,7 @@ const PersonalData = () => {
             {step === 'one' && (
               <InputWrapStepOne>
                 <AvatarLabel as={Label}>
-                  <AvatarWrap avatar={values.avatarUrl} htmlFor="avatarUrl">
+                  <AvatarWrap $avatar={values.avatarUrl} htmlFor="avatarUrl">
                     {values.avatarUrl ? (
                       <Avatar
                         src={

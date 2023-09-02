@@ -66,10 +66,8 @@ export const AvatarWrap = styled.label`
 
   cursor: pointer;
 
-  ${({ avatar }) => {
-    console.log('avatar', avatar);
-
-    return avatar && 'cursor: pointer; pointer-events: none;';
+  ${({ $avatar }) => {
+    return $avatar && 'cursor: pointer; pointer-events: none;';
   }};
 `;
 
