@@ -16,7 +16,7 @@ export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
       <StyledContainer>
         <NavContainer>
           <Logo />
-          {user.userType !== 'doctor' && (
+          {user?.userType !== 'doctor' && (
             <Btn to="/news" type="link" text="Залишити заявку" />
           )}
           <Btn to="/specialistDoctors" type="link" text="Спеціалісти" />

@@ -16,6 +16,7 @@ import AccountData from './AccountData/AccountData';
 import PersonalData from './PersonalData/PersonalData';
 import DirectionWork from './DirectionWork/DirectionWork';
 import Communication from './Communication/Communication';
+import DirectionPage from 'pages/mainPages/DirectionPage';
 
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
 const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
@@ -24,7 +25,7 @@ const NotFoundPage = lazy(() => import('pages/mainPages/NotFoundPage'));
 
 const ProblemsPage = lazy(() => import('pages/mainPages/ProblemsPage'));
 const SpecialistDoctorsPage = lazy(() =>
-  import('pages/mainPages/SpecialistDoctorsPage')
+  import('pages/mainPages/SpecialistDoctorsPage/SpecialistDoctorsPage')
 );
 // const AccountData = lazy(() => import('./AccountData/AccountData'));
 // const PersonalData = lazy(() => import('./PersonalData/PersonalData'));
@@ -54,6 +55,7 @@ export const App = () => {
             path="/specialistDoctors"
             element={<SpecialistDoctorsPage />}
           />
+          <Route path="/directions/:direction/" element={<DirectionPage />} />
           <Route path="/problems" element={<ProblemsPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
