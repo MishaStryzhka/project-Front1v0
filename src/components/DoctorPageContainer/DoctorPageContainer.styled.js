@@ -1,24 +1,6 @@
 import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-export const StyledDoctorPageContainer = styled.div`
-  position: relative;
-
-  display: flex;
-  height: 100%;
-
-  background-color: ${({ theme }) => theme.color.background};
-`;
-
-export const SideBarDoctor = styled.div`
-  display: flex;
-  flex-direction: column;
-  row-gap: 40px;
-
-  box-sizing: border-box;
-  padding: 81px 40px;
-`;
-
 export const StyledNavLink = styled(NavLink)`
   color: ${({ theme }) => theme.color.secondary};
   text-align: center;
@@ -41,19 +23,4 @@ export const StyledNavLink = styled(NavLink)`
   &.active {
     background-color: ${({ theme }) => theme.color.btnDark};
   }
-`;
-
-export const MainContent = styled.div`
-  display: flex;
-  flex-direction: column;
-
-  box-sizing: border-box;
-  width: 1140px;
-  height: 100%;
-
-  border-top-left-radius: 40px;
-
-  background: ${({ theme }) => theme.color.primary};
-
-  padding: 0 170px;
 `;
