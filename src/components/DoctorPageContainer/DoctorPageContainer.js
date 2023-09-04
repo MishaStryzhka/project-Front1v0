@@ -1,22 +1,20 @@
 import { Outlet } from 'react-router-dom';
-import {
-  MainContent,
-  SideBarDoctor,
-  StyledDoctorPageContainer,
-  StyledNavLink,
-} from './DoctorPageContainer.styled';
+import { StyledNavLink } from './DoctorPageContainer.styled';
 import { Title } from 'components/FormLogin/FormLogin.styled';
 import NavigationContainer from 'components/NavigationContainer/NavigationContainer';
+import PageContainer from 'componentsReusable/PageContainer/PageContainer';
+import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
+import MainContent from 'componentsReusable/MainContent/MainContent';
 
 const DoctorPageContainer = () => {
   return (
-    <StyledDoctorPageContainer>
-      <SideBarDoctor>
+    <PageContainer>
+      <SideBarPage>
         <StyledNavLink to="accountData">Дані акаунту</StyledNavLink>
         <StyledNavLink to="personalData">Особисті дані</StyledNavLink>
         <StyledNavLink to="directionWork">Напрямок роботи</StyledNavLink>
         <StyledNavLink to="communication">Комунікація</StyledNavLink>
-      </SideBarDoctor>
+      </SideBarPage>
       <MainContent>
         <Title>Особистий кабінет лікаря</Title>
 
@@ -24,7 +22,7 @@ const DoctorPageContainer = () => {
 
         <Outlet />
       </MainContent>
-    </StyledDoctorPageContainer>
+    </PageContainer>
   );
 };
 

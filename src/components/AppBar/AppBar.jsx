@@ -9,8 +9,6 @@ import { useAuth } from 'hooks';
 export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
   const { user } = useAuth();
 
-  console.log('user', user);
-
   return (
     <StyledAppBar>
       <StyledContainer>

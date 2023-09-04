@@ -58,7 +58,6 @@ const DirectionWork = () => {
                     value="therapeuticDentistry"
                     component={Checkbox}
                     onChange={handleChange}
-                    checked
                   />
                   <CheckboxLabel htmlFor="therapeuticDentistry">
                     Терапевтична стоматологія
