@@ -67,13 +67,13 @@ const DirectionWork = () => {
                 <CheckboxInputItem>
                   <CheckboxField
                     type="checkbox"
-                    id="Orthodontics"
+                    id="orthodontics"
                     name="directionsOfWork"
-                    value="Orthodontics"
+                    value="orthodontics"
                     component={Checkbox}
                     onChange={handleChange}
                   />
-                  <CheckboxLabel htmlFor="Orthodontics">
+                  <CheckboxLabel htmlFor="orthodontics">
                     Ортодонтія
                   </CheckboxLabel>
                 </CheckboxInputItem>
@@ -95,13 +95,13 @@ const DirectionWork = () => {
                 <CheckboxInputItem>
                   <CheckboxField
                     type="checkbox"
-                    id="Prosthesis"
+                    id="prosthesis"
                     name="directionsOfWork"
-                    value="Prosthesis"
+                    value="prosthesis"
                     component={Checkbox}
                     onChange={handleChange}
                   />
-                  <CheckboxLabel htmlFor="Prosthesis">
+                  <CheckboxLabel htmlFor="prosthesis">
                     Протезування
                   </CheckboxLabel>
                 </CheckboxInputItem>
@@ -109,13 +109,13 @@ const DirectionWork = () => {
                 <CheckboxInputItem>
                   <CheckboxField
                     type="checkbox"
-                    id="Endodontics"
+                    id="endodontics"
                     name="directionsOfWork"
-                    value="Endodontics"
+                    value="endodontics"
                     component={Checkbox}
                     onChange={handleChange}
                   />
-                  <CheckboxLabel htmlFor="Endodontics">
+                  <CheckboxLabel htmlFor="endodontics">
                     Ендодонтія
                   </CheckboxLabel>
                 </CheckboxInputItem>
@@ -123,13 +123,13 @@ const DirectionWork = () => {
                 <CheckboxInputItem>
                   <CheckboxField
                     type="checkbox"
-                    id="Parandotology"
+                    id="parandotology"
                     name="directionsOfWork"
-                    value="Parandotology"
+                    value="parandotology"
                     component={Checkbox}
                     onChange={handleChange}
                   />
-                  <CheckboxLabel htmlFor="Parandotology">
+                  <CheckboxLabel htmlFor="parandotology">
                     Парандотологія
                   </CheckboxLabel>
                 </CheckboxInputItem>
@@ -137,13 +137,13 @@ const DirectionWork = () => {
                 <CheckboxInputItem>
                   <CheckboxField
                     type="checkbox"
-                    id="children'sDentistry"
+                    id="childrensDentistry"
                     name="directionsOfWork"
-                    value="children'sDentistry"
+                    value="childrensDentistry"
                     component={Checkbox}
                     onChange={handleChange}
                   />
-                  <CheckboxLabel htmlFor="children'sDentistry">
+                  <CheckboxLabel htmlFor="childrensDentistry">
                     Дитяча стоматологія
                   </CheckboxLabel>
                 </CheckboxInputItem>

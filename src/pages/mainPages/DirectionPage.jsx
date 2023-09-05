@@ -4,6 +4,7 @@ import MainContent from 'componentsReusable/MainContent/MainContent';
 import PageContainer from 'componentsReusable/PageContainer/PageContainer';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
 import { Formik } from 'formik';
+import { directionListValue } from 'helpers/directionsList';
 import { useParams } from 'react-router-dom';
 
 const DirectionPage = () => {
@@ -13,6 +14,8 @@ const DirectionPage = () => {
   const hendleSubmit = value => {
     console.log('value', value);
   };
+
+  console.log('directionListValue[direction]', directionListValue[direction]);
 
   return (
     <Container>
@@ -33,7 +36,17 @@ const DirectionPage = () => {
               handleBlur,
               handleSubmit,
             }) => {
-              return <InputRadio width="200" value={values.direction} />;
+              console.log('values.direction', values.direction);
+
+              return (
+                <InputRadio
+                  width="200"
+                  selectedValue={values.direction}
+                  values={directionListValue}
+                  handleChange={handleChange}
+                  name="direction"
+                />
+              );
             }}
           </Formik>
         </SideBarPage>
