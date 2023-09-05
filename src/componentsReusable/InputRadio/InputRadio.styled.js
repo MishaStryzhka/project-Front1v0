@@ -20,6 +20,10 @@ export const ToggleBtn = styled.button`
   cursor: pointer;
   ${({ $isOpenMenu }) => $isOpenMenu && 'transform: rotate(180deg)'};
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  > svg {
+    pointer-events: none;
+  }
 `;
 
 export const ListBox = styled.div`
