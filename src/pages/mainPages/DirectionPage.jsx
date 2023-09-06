@@ -1,4 +1,4 @@
-import { nanoid } from '@reduxjs/toolkit';
+// import { nanoid } from '@reduxjs/toolkit';
 import Container from 'components/Container/Container';
 import { Title } from 'components/FormLogin/FormLogin.styled';
 import InputRadio from 'componentsReusable/InputRadio/InputRadio';
@@ -9,163 +9,162 @@ import { directionListValue } from 'helpers/directionsList';
 import { sortListValue } from 'helpers/sortList';
 import { useSearchParams } from 'react-router-dom';
 
-const users = [
-  {
-    lastName: 'Qwerty',
-    firstName: 'Asd',
-    experienceYears: 3,
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Zxc',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    lastName: 'Qwerty',
-    firstName: 'Asd',
-    experienceYears: 3,
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Zxc',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    lastName: 'Qwerty',
-    firstName: 'Asd',
-    experienceYears: 3,
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Zxc',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    lastName: 'Qwerty',
-    firstName: 'Asd',
-    experienceYears: 3,
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Zxc',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    lastName: 'Qwerty',
-    firstName: 'Asd',
-    experienceYears: 3,
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Zxc',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    lastName: 'Qwerty',
-    firstName: 'Asd',
-    experienceYears: 3,
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Zxc',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    lastName: 'Qwerty',
-    firstName: 'Asd',
-    experienceYears: 3,
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Zxc',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    lastName: 'Qwerty',
-    firstName: 'Asd',
-    experienceYears: 3,
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Zxc',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    lastName: 'Qwerty',
-    firstName: 'Asd',
-    experienceYears: 3,
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Zxc',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    lastName: 'Qwerty',
-    firstName: 'Asd',
-    experienceYears: 3,
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Zxc',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-];
-
-const sort = [];
+// const users = [
+//   {
+//     lastName: 'Qwerty',
+//     firstName: 'Asd',
+//     experienceYears: 3,
+//     jobs: [
+//       {
+//         id: nanoid(),
+//         name: 'Zxc',
+//         cityArea: 'Kyiv',
+//         address: '',
+//         workSchedule: '',
+//         receptionHours: ['', ''],
+//       },
+//     ],
+//   },
+//   {
+//     lastName: 'Qwerty',
+//     firstName: 'Asd',
+//     experienceYears: 3,
+//     jobs: [
+//       {
+//         id: nanoid(),
+//         name: 'Zxc',
+//         cityArea: 'Kyiv',
+//         address: '',
+//         workSchedule: '',
+//         receptionHours: ['', ''],
+//       },
+//     ],
+//   },
+//   {
+//     lastName: 'Qwerty',
+//     firstName: 'Asd',
+//     experienceYears: 3,
+//     jobs: [
+//       {
+//         id: nanoid(),
+//         name: 'Zxc',
+//         cityArea: 'Kyiv',
+//         address: '',
+//         workSchedule: '',
+//         receptionHours: ['', ''],
+//       },
+//     ],
+//   },
+//   {
+//     lastName: 'Qwerty',
+//     firstName: 'Asd',
+//     experienceYears: 3,
+//     jobs: [
+//       {
+//         id: nanoid(),
+//         name: 'Zxc',
+//         cityArea: 'Kyiv',
+//         address: '',
+//         workSchedule: '',
+//         receptionHours: ['', ''],
+//       },
+//     ],
+//   },
+//   {
+//     lastName: 'Qwerty',
+//     firstName: 'Asd',
+//     experienceYears: 3,
+//     jobs: [
+//       {
+//         id: nanoid(),
+//         name: 'Zxc',
+//         cityArea: 'Kyiv',
+//         address: '',
+//         workSchedule: '',
+//         receptionHours: ['', ''],
+//       },
+//     ],
+//   },
+//   {
+//     lastName: 'Qwerty',
+//     firstName: 'Asd',
+//     experienceYears: 3,
+//     jobs: [
+//       {
+//         id: nanoid(),
+//         name: 'Zxc',
+//         cityArea: 'Kyiv',
+//         address: '',
+//         workSchedule: '',
+//         receptionHours: ['', ''],
+//       },
+//     ],
+//   },
+//   {
+//     lastName: 'Qwerty',
+//     firstName: 'Asd',
+//     experienceYears: 3,
+//     jobs: [
+//       {
+//         id: nanoid(),
+//         name: 'Zxc',
+//         cityArea: 'Kyiv',
+//         address: '',
+//         workSchedule: '',
+//         receptionHours: ['', ''],
+//       },
+//     ],
+//   },
+//   {
+//     lastName: 'Qwerty',
+//     firstName: 'Asd',
+//     experienceYears: 3,
+//     jobs: [
+//       {
+//         id: nanoid(),
+//         name: 'Zxc',
+//         cityArea: 'Kyiv',
+//         address: '',
+//         workSchedule: '',
+//         receptionHours: ['', ''],
+//       },
+//     ],
+//   },
+//   {
+//     lastName: 'Qwerty',
+//     firstName: 'Asd',
+//     experienceYears: 3,
+//     jobs: [
+//       {
+//         id: nanoid(),
+//         name: 'Zxc',
+//         cityArea: 'Kyiv',
+//         address: '',
+//         workSchedule: '',
+//         receptionHours: ['', ''],
+//       },
+//     ],
+//   },
+//   {
+//     lastName: 'Qwerty',
+//     firstName: 'Asd',
+//     experienceYears: 3,
+//     jobs: [
+//       {
+//         id: nanoid(),
+//         name: 'Zxc',
+//         cityArea: 'Kyiv',
+//         address: '',
+//         workSchedule: '',
+//         receptionHours: ['', ''],
+//       },
+//     ],
+//   },
+// ];
 
 const DirectionPage = () => {
   let [searchParams, setSearchParams] = useSearchParams();
+  false && setSearchParams({ qwe: '' });
 
   const direction = searchParams.get('direction');
 
