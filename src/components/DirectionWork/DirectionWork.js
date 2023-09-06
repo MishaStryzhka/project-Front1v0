@@ -11,6 +11,7 @@ import {
 } from './DirectionWork.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
 import Form from 'components/Form/Form';
+import { NavLink } from 'react-router-dom';
 
 const DirectionWork = () => {
   const onSubmit = value => {

@@ -1,56 +1,196 @@
+import { nanoid } from '@reduxjs/toolkit';
 import Container from 'components/Container/Container';
+import { Title } from 'components/FormLogin/FormLogin.styled';
 import InputRadio from 'componentsReusable/InputRadio/InputRadio';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import PageContainer from 'componentsReusable/PageContainer/PageContainer';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
-import { Formik } from 'formik';
 import { directionListValue } from 'helpers/directionsList';
-import { useParams } from 'react-router-dom';
+import { sortListValue } from 'helpers/sortList';
+import { useSearchParams } from 'react-router-dom';
+
+const users = [
+  {
+    lastName: 'Qwerty',
+    firstName: 'Asd',
+    experienceYears: 3,
+    jobs: [
+      {
+        id: nanoid(),
+        name: 'Zxc',
+        cityArea: 'Kyiv',
+        address: '',
+        workSchedule: '',
+        receptionHours: ['', ''],
+      },
+    ],
+  },
+  {
+    lastName: 'Qwerty',
+    firstName: 'Asd',
+    experienceYears: 3,
+    jobs: [
+      {
+        id: nanoid(),
+        name: 'Zxc',
+        cityArea: 'Kyiv',
+        address: '',
+        workSchedule: '',
+        receptionHours: ['', ''],
+      },
+    ],
+  },
+  {
+    lastName: 'Qwerty',
+    firstName: 'Asd',
+    experienceYears: 3,
+    jobs: [
+      {
+        id: nanoid(),
+        name: 'Zxc',
+        cityArea: 'Kyiv',
+        address: '',
+        workSchedule: '',
+        receptionHours: ['', ''],
+      },
+    ],
+  },
+  {
+    lastName: 'Qwerty',
+    firstName: 'Asd',
+    experienceYears: 3,
+    jobs: [
+      {
+        id: nanoid(),
+        name: 'Zxc',
+        cityArea: 'Kyiv',
+        address: '',
+        workSchedule: '',
+        receptionHours: ['', ''],
+      },
+    ],
+  },
+  {
+    lastName: 'Qwerty',
+    firstName: 'Asd',
+    experienceYears: 3,
+    jobs: [
+      {
+        id: nanoid(),
+        name: 'Zxc',
+        cityArea: 'Kyiv',
+        address: '',
+        workSchedule: '',
+        receptionHours: ['', ''],
+      },
+    ],
+  },
+  {
+    lastName: 'Qwerty',
+    firstName: 'Asd',
+    experienceYears: 3,
+    jobs: [
+      {
+        id: nanoid(),
+        name: 'Zxc',
+        cityArea: 'Kyiv',
+        address: '',
+        workSchedule: '',
+        receptionHours: ['', ''],
+      },
+    ],
+  },
+  {
+    lastName: 'Qwerty',
+    firstName: 'Asd',
+    experienceYears: 3,
+    jobs: [
+      {
+        id: nanoid(),
+        name: 'Zxc',
+        cityArea: 'Kyiv',
+        address: '',
+        workSchedule: '',
+        receptionHours: ['', ''],
+      },
+    ],
+  },
+  {
+    lastName: 'Qwerty',
+    firstName: 'Asd',
+    experienceYears: 3,
+    jobs: [
+      {
+        id: nanoid(),
+        name: 'Zxc',
+        cityArea: 'Kyiv',
+        address: '',
+        workSchedule: '',
+        receptionHours: ['', ''],
+      },
+    ],
+  },
+  {
+    lastName: 'Qwerty',
+    firstName: 'Asd',
+    experienceYears: 3,
+    jobs: [
+      {
+        id: nanoid(),
+        name: 'Zxc',
+        cityArea: 'Kyiv',
+        address: '',
+        workSchedule: '',
+        receptionHours: ['', ''],
+      },
+    ],
+  },
+  {
+    lastName: 'Qwerty',
+    firstName: 'Asd',
+    experienceYears: 3,
+    jobs: [
+      {
+        id: nanoid(),
+        name: 'Zxc',
+        cityArea: 'Kyiv',
+        address: '',
+        workSchedule: '',
+        receptionHours: ['', ''],
+      },
+    ],
+  },
+];
+
+const sort = [];
 
 const DirectionPage = () => {
-  const { direction } = useParams();
-  console.log('direction', direction);
+  let [searchParams, setSearchParams] = useSearchParams();
 
-  const hendleSubmit = value => {
-    console.log('value', value);
-  };
-
-  console.log('directionListValue[direction]', directionListValue[direction]);
+  const direction = searchParams.get('direction');
 
   return (
     <Container>
       <PageContainer>
         <SideBarPage>
-          <Formik
-            initialValues={{
-              direction: direction,
-            }}
-            //   validationSchema={validationRegisterSchema}
-            onSubmit={hendleSubmit}
-          >
-            {({
-              values,
-              errors,
-              touched,
-              handleChange,
-              handleBlur,
-              handleSubmit,
-            }) => {
-              console.log('values.direction', values.direction);
-
-              return (
-                <InputRadio
-                  width="200"
-                  selectedValue={values.direction}
-                  values={directionListValue}
-                  handleChange={handleChange}
-                  name="direction"
-                />
-              );
-            }}
-          </Formik>
+          <InputRadio
+            width="220"
+            selectedValue={direction}
+            values={directionListValue}
+            name="direction"
+          />
         </SideBarPage>
-        <MainContent></MainContent>
+        <MainContent>
+          <Title>{directionListValue[direction]}</Title>
+          <p>Review</p>
+          <InputRadio
+            width="130"
+            selectedValue={'fromAToZ'}
+            values={sortListValue}
+            name="direction"
+            type="min"
+          />
+        </MainContent>
       </PageContainer>
     </Container>
   );

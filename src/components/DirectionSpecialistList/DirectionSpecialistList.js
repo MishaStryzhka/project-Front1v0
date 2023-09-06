@@ -8,39 +8,49 @@ const DirectionSpecialistList = () => {
   return (
     <DirectionList>
       <DirectionItem>
-        <StyledLink to="/directions/therapeuticDentistry/">
+        <StyledLink to="/direction/?direction=therapeuticDentistry">
           Терапевтична стоматологія
         </StyledLink>
       </DirectionItem>
       <DirectionItem>
-        <StyledLink to="/directions/orthodontics/">Ортодонтія</StyledLink>
+        <StyledLink to="/direction/?direction=orthodontics">
+          Ортодонтія
+        </StyledLink>
       </DirectionItem>
       <DirectionItem>
-        <StyledLink to="/directions/surgicalDentistry/">
+        <StyledLink to="/direction/?direction=surgicalDentistry">
           Хірургічна стоматологія
         </StyledLink>
       </DirectionItem>
       <DirectionItem>
-        <StyledLink to="/directions/prosthesis/">Протезування</StyledLink>
+        <StyledLink to="/direction/?direction=prosthesis">
+          Протезування
+        </StyledLink>
       </DirectionItem>
       <DirectionItem>
-        <StyledLink to="/directions/endodontics/">Ендодонтія</StyledLink>
+        <StyledLink to="/direction/?direction=endodontics">
+          Ендодонтія
+        </StyledLink>
       </DirectionItem>
       <DirectionItem>
-        <StyledLink to="/directions/parandotology/">Парандотологія</StyledLink>
+        <StyledLink to="/direction/?direction=parandotology">
+          Парандотологія
+        </StyledLink>
       </DirectionItem>
       <DirectionItem>
-        <StyledLink to="/directions/children'sDentistry/">
+        <StyledLink to="/direction/?direction=children'sDentistry">
           Дитяча стоматологія
         </StyledLink>
       </DirectionItem>
       <DirectionItem>
-        <StyledLink to="/directions/aestheticDentistry/">
+        <StyledLink to="/direction/?direction=aestheticDentistry">
           Естетична стоматологія
         </StyledLink>
       </DirectionItem>
       <DirectionItem>
-        <StyledLink to="/directions/radiology/">Рентгенологія</StyledLink>
+        <StyledLink to="/direction/?direction=radiology">
+          Рентгенологія
+        </StyledLink>
       </DirectionItem>
     </DirectionList>
   );

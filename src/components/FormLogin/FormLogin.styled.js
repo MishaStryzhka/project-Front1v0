@@ -20,7 +20,8 @@ export const Title = styled.h2`
 
   padding-top: 75px;
   // margin: auto;
-  width: 800px;
+  // width: 800px;
+  text-align: center;
 `;
 
 export const ImputWrap = styled.div`

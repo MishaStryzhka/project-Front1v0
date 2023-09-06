@@ -1,17 +1,24 @@
-import Input from 'components/Input/Input';
 import {
   InputRadioBox,
   Item,
-  ItemField,
-  ItemLabel,
   ListBox,
+  StyledBtn,
+  StyledInputRadio,
   ToggleBtn,
 } from './InputRadio.styled';
 import IconPolygon from 'images/icons/IconPolygon';
 import { useCallback, useEffect, useState } from 'react';
+import { useSearchParams } from 'react-router-dom';
 
-const InputRadio = ({ width, selectedValue, values, handleChange, name }) => {
+const InputRadio = ({
+  width,
+  selectedValue,
+  values,
+  name,
+  type = 'normal',
+}) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
   const handleKeyDown = useCallback(evt => {
     document.body.style.overflow = 'auto';
     if (evt.code === 'Escape') {
@@ -37,33 +44,46 @@ const InputRadio = ({ width, selectedValue, values, handleChange, name }) => {
 
   const keys = Object.keys(values);
 
+  const newSetSearchParams = (key, value) => {
+    setSearchParams(pref => {
+      const Query = {};
+      for (const [key, value] of pref.entries()) {
+        Query[key] = value;
+      }
+
+      return {
+        ...Query,
+        [key]: value,
+      };
+    });
+  };
+
   return (
-    <InputRadioBox>
+    <InputRadioBox width={width}>
       <ListBox $isOpenMenu={isOpenMenu} id="InputRadioListBox">
         {keys.map(value => {
           return (
             <Item key={value}>
-              <ItemField
-                type="radio"
-                id={value}
-                name={name}
-                value={value}
-                onChange={handleChange}
-              />
-              <ItemLabel $active={selectedValue === value} htmlFor={value}>
+              <StyledBtn
+                onClick={() => newSetSearchParams(name, value)}
+                $active={selectedValue === value}
+              >
                 {values[value]}
-              </ItemLabel>
+              </StyledBtn>
             </Item>
           );
         })}
       </ListBox>
-      <Input width={width} value={values[selectedValue]} />
+      <StyledInputRadio type={type} width={width}>
+        {values[selectedValue]}
+      </StyledInputRadio>
       <ToggleBtn
         id="ToggleBtn"
         $isOpenMenu={isOpenMenu}
         onClick={() => {
           setIsOpenMenu(!isOpenMenu);
         }}
+        type={type}
       >
         <IconPolygon />
       </ToggleBtn>
