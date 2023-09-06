@@ -55,7 +55,7 @@ export const App = () => {
             path="/specialistDoctors"
             element={<SpecialistDoctorsPage />}
           />
-          <Route path="/directions/:direction/" element={<DirectionPage />} />
+          <Route path="/direction/" element={<DirectionPage />} />
           <Route path="/problems" element={<ProblemsPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
