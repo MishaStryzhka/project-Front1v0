@@ -19,6 +19,8 @@ const InputRadio = ({
 }) => {
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  false && console.log('searchParams', searchParams);
+
   const handleKeyDown = useCallback(evt => {
     document.body.style.overflow = 'auto';
     if (evt.code === 'Escape') {
