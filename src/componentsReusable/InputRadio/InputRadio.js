@@ -10,13 +10,8 @@ import IconPolygon from 'images/icons/IconPolygon';
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
-const InputRadio = ({
-  width,
-  selectedValue,
-  values,
-  name,
-  type = 'normal',
-}) => {
+const InputRadio = e => {
+  const { width, selectedValue, values, name, type = 'normal', className } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   false && console.log('searchParams', searchParams);
@@ -28,11 +23,17 @@ const InputRadio = ({
     }
   }, []);
 
-  const handleClose = useCallback(e => {
-    if (e.target.id !== 'ToggleBtn' && e.target.id !== 'InputRadioListBox') {
-      setIsOpenMenu(false);
-    }
-  }, []);
+  const handleClose = useCallback(
+    e => {
+      if (
+        e.target.id !== `ToggleBtn-${name}` &&
+        e.target.id !== `InputRadioListBox-${name}`
+      ) {
+        setIsOpenMenu(false);
+      }
+    },
+    [name]
+  );
 
   useEffect(() => {
     window.addEventListener('keydown', handleKeyDown);
@@ -61,8 +62,12 @@ const InputRadio = ({
   };
 
   return (
-    <InputRadioBox width={width}>
-      <ListBox $isOpenMenu={isOpenMenu} id="InputRadioListBox">
+    <InputRadioBox width={width} className={className}>
+      <ListBox
+        $isOpenMenu={isOpenMenu}
+        id={`InputRadioListBox-${name}`}
+        type={type}
+      >
         {keys.map(value => {
           return (
             <Item key={value}>
@@ -80,7 +85,7 @@ const InputRadio = ({
         {values[selectedValue]}
       </StyledInputRadio>
       <ToggleBtn
-        id="ToggleBtn"
+        id={`ToggleBtn-${name}`}
         $isOpenMenu={isOpenMenu}
         onClick={() => {
           setIsOpenMenu(!isOpenMenu);
