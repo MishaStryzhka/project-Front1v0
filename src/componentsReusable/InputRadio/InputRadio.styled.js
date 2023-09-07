@@ -55,7 +55,6 @@ export const ListBox = styled.div`
   width: 100%;
 
   transform: scale(1, 1);
-  border-radius: 10px;
 
   border: 2px solid ${({ theme }) => theme.color.main};
 
@@ -74,6 +73,8 @@ export const ListBox = styled.div`
       gap: 10px;
 
       padding: 15px;
+
+      border-radius: 10px;
     `;
     } else if (type === 'min') {
       return `
@@ -82,6 +83,8 @@ export const ListBox = styled.div`
       gap: 3px;
 
       padding: 10px;
+
+      border-radius: 5px;
       `;
     }
   }}
