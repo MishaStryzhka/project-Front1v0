@@ -15,6 +15,7 @@ import {
   StyledInputRadio,
   StyledPagination,
 } from './DirectionPage.styled';
+import { quantityListValue } from 'helpers/quantityList';
 
 const users = [
   {
@@ -185,6 +186,7 @@ const DirectionPage = () => {
 
   const direction = searchParams.get('direction');
   const sort = searchParams.get('sort');
+  const quantity = searchParams.get('quantity');
 
   return (
     <Container>
@@ -223,8 +225,8 @@ const DirectionPage = () => {
           </DoctorsBox>
           <StyledInputRadio
             width="150"
-            selectedValue={sort || 'fromAToZ'}
-            values={sortListValue}
+            selectedValue={quantity || '10'}
+            values={quantityListValue}
             name="quantity"
             type="min"
           />
