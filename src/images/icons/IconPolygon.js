@@ -1,14 +1,13 @@
 import * as React from 'react';
 
-const IconPolygon = props => (
+const IconPolygon = ({ type = 'normal' }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={20}
     height={20}
-    fill="none"
-    {...props}
+    viewBox="0 0 10 10"
   >
-    <path fill="#04827A" d="M10 20 0 0h20L10 20Z" />
+    <path fill="#04827A" d="M5 10L-8.74228e-07 8.74228e-07L10 0L5 10Z" />
   </svg>
 );
 export default IconPolygon;

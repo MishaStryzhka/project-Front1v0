@@ -37,7 +37,7 @@ export const ToggleBtn = styled.button`
     } else if (type === 'min') {
       return `
       width: 10px;
-      height: 10px;
+      height:10px;
 
       right: 5px;
       `;
@@ -47,20 +47,17 @@ export const ToggleBtn = styled.button`
 
 export const ListBox = styled.div`
   position: absolute;
-  top: 30px;
 
   display: flex;
   flex-direction: column;
-  gap: 10px;
 
   box-sizing: border-box;
   width: 100%;
 
   transform: scale(1, 1);
-  padding: 25px 15px 15px 15px;
   border-radius: 10px;
 
-  border: 1px solid ${({ theme }) => theme.color.main};
+  border: 2px solid ${({ theme }) => theme.color.main};
 
   color: ${({ theme }) => theme.color.btnLogOut};
   background-color: ${({ theme }) => theme.color.primary};
@@ -68,15 +65,32 @@ export const ListBox = styled.div`
   ${({ $isOpenMenu }) => !$isOpenMenu && 'transform: scale(1, 0)'};
   transform-origin: top;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  ${({ type }) => {
+    if (type === 'normal') {
+      return `
+      top: 50px;
+
+      gap: 10px;
+
+      padding: 15px;
+    `;
+    } else if (type === 'min') {
+      return `
+      top: 20px;
+
+      gap: 3px;
+
+      padding: 10px;
+      `;
+    }
+  }}
 `;
 
 export const Item = styled.li`
   list-style: none;
 
-  // text-overflow: ellipsis;
-  // overflow: hidden;
-
-  // height: 21px;
+  display: flex;
 `;
 
 export const ItemField = styled(Field)`
@@ -86,8 +100,8 @@ export const ItemField = styled(Field)`
 export const ItemLabel = styled.label`
   color: ${({ theme, $active }) =>
     $active ? theme.color.main : theme.color.secondary};
+
   font-family: ${({ theme }) => theme.fontFamily};
-  font-size: 16px;
   font-style: normal;
   font-weight: 400;
 
@@ -101,8 +115,18 @@ export const ItemLabel = styled.label`
 export const StyledBtn = styled.button`
   color: ${({ theme, $active }) =>
     $active ? theme.color.main : theme.color.secondary};
+  ${({ type }) => {
+    if (type === 'normal') {
+      return `
+      font-size: 16px;
+      `;
+    } else if (type === 'min') {
+      return `
+      font-size: 12px;
+        `;
+    }
+  }}
   font-family: ${({ theme }) => theme.fontFamily};
-  font-size: 16px;
   font-style: normal;
   font-weight: 400;
 
@@ -155,7 +179,7 @@ export const StyledInputRadio = styled.p`
   width: ${({ width }) => width}px;
   box-sizing: border-box;
 
-  border: 1px solid
+  border: 2px solid
     ${({ theme, error }) => (error ? theme.color.error : theme.color.main)};
   outline: none;
 

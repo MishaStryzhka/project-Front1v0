@@ -12,5 +12,5 @@ export const StyledMainContent = styled.div`
 
   background: ${({ theme }) => theme.color.primary};
 
-  padding: 0 170px;
+  padding: 0 40px;
 `;

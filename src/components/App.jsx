@@ -16,7 +16,7 @@ import AccountData from './AccountData/AccountData';
 import PersonalData from './PersonalData/PersonalData';
 import DirectionWork from './DirectionWork/DirectionWork';
 import Communication from './Communication/Communication';
-import DirectionPage from 'pages/mainPages/DirectionPage';
+import DirectionPage from 'pages/mainPages/DirectionPage/DirectionPage';
 
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
 const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
