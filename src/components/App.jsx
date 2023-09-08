@@ -17,7 +17,6 @@ import PersonalData from './PersonalData/PersonalData';
 import DirectionWork from './DirectionWork/DirectionWork';
 import Communication from './Communication/Communication';
 import DirectionPage from 'pages/mainPages/DirectionPage/DirectionPage';
-import ProblemsListPage from 'pages/mainPages/ProblemsPage';
 import ProblemPage from 'pages/mainPages/ProblemPage/ProblemPage';
 
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
@@ -25,7 +24,7 @@ const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
 const MainPage = lazy(() => import('pages/mainPages/MainPage'));
 const NotFoundPage = lazy(() => import('pages/mainPages/NotFoundPage'));
 
-const ProblemsPage = lazy(() => import('pages/mainPages/ProblemsPage'));
+const ProblemsListPage = lazy(() => import('pages/mainPages/ProblemsPage'));
 const SpecialistDoctorsPage = lazy(() =>
   import('pages/mainPages/SpecialistDoctorsPage/SpecialistDoctorsPage')
 );
