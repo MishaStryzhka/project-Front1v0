@@ -45,14 +45,12 @@ export const ToggleBtn = styled.button`
   }}
 `;
 
-export const ListBox = styled.div`
+export const WrapScroll = styled.div`
   position: absolute;
-
-  display: flex;
-  flex-direction: column;
 
   box-sizing: border-box;
   width: 100%;
+  padding: 2px 1px;
 
   transform: scale(1, 1);
 
@@ -65,27 +63,62 @@ export const ListBox = styled.div`
   transform-origin: top;
   transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
 
+  z-index: 1;
+
   ${({ type }) => {
     if (type === 'normal') {
       return `
-      top: 50px;
+    top: 50px;
 
-      gap: 10px;
-
-      padding: 15px;
-
-      border-radius: 10px;
-    `;
+    border-radius: 10px;
+  `;
     } else if (type === 'min') {
       return `
-      top: 20px;
+    top: 20px;
 
-      gap: 3px;
+    border-radius: 5px;
+    `;
+    }
+  }}
+`;
 
-      padding: 10px;
+export const ListBox = styled.div`
+  display: flex;
+  flex-direction: column;
 
-      border-radius: 5px;
-      `;
+  box-sizing: border-box;
+  max-height: 300px;
+  overflow-y: scroll;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+  &::-webkit-scrollbar-track {
+    // background: orange; /* color of the tracking area */
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme }) => theme.color.main};
+    border-radius: 30px; /* roundness of the scroll thumb */
+    // border-right: 2px solid ${({ theme }) => theme.color.primary};
+  }
+
+  ${({ type }) => {
+    if (type === 'normal') {
+      return `
+    gap: 10px;
+
+    padding: 13px 10px 13px 15px;
+
+    border-radius: 15px;
+
+  `;
+    } else if (type === 'min') {
+      return `
+    gap: 3px;
+
+    padding: 10px;
+
+    `;
     }
   }}
 `;

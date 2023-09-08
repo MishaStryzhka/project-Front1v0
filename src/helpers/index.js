@@ -1,11 +1,19 @@
 import { cropImage } from './cropImage';
 import { directionListValue } from './directionsList';
+import { hoursOfWorkListValue } from './hoursOfWorkList';
+import { locationListValue } from './locationsList';
+import { problemListValue } from './problemsList';
 import { quantityListValue } from './quantityList';
 import { sortListValue } from './sortList';
+import { workExperienceListValue } from './workExperienceList';
 
 module.exports = {
   cropImage,
   directionListValue,
   sortListValue,
   quantityListValue,
+  problemListValue,
+  locationListValue,
+  hoursOfWorkListValue,
+  workExperienceListValue,
 };

@@ -17,6 +17,8 @@ import PersonalData from './PersonalData/PersonalData';
 import DirectionWork from './DirectionWork/DirectionWork';
 import Communication from './Communication/Communication';
 import DirectionPage from 'pages/mainPages/DirectionPage/DirectionPage';
+import ProblemsListPage from 'pages/mainPages/ProblemsPage';
+import ProblemPage from 'pages/mainPages/ProblemPage/ProblemPage';
 
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
 const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
@@ -51,12 +53,10 @@ export const App = () => {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<MainPage />} />
           <Route path="/main" element={<MainPage />} />
-          <Route
-            path="/specialistDoctors"
-            element={<SpecialistDoctorsPage />}
-          />
-          <Route path="/direction/" element={<DirectionPage />} />
-          <Route path="/problems" element={<ProblemsPage />} />
+          <Route path="/directionsList" element={<SpecialistDoctorsPage />} />
+          <Route path="/direction" element={<DirectionPage />} />
+          <Route path="/problemsList" element={<ProblemsListPage />} />
+          <Route path="/problem" element={<ProblemPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
           <Route

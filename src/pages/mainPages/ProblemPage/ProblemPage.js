@@ -1,12 +1,12 @@
-import { nanoid } from '@reduxjs/toolkit';
 import Container from 'components/Container/Container';
 import { Title } from 'components/FormLogin/FormLogin.styled';
 import InputRadio from 'componentsReusable/InputRadio/InputRadio';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import PageContainer from 'componentsReusable/PageContainer/PageContainer';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
-import { directionListValue } from 'helpers/directionsList';
+import { problemListValue } from 'helpers/problemsList';
 import { sortListValue } from 'helpers/sortList';
+import { Helmet } from 'react-helmet';
 import { useSearchParams } from 'react-router-dom';
 import {
   DoctorsAvatars,
@@ -14,9 +14,12 @@ import {
   DoctorsItem,
   StyledInputRadio,
   StyledPagination,
-} from './DirectionPage.styled';
+} from '../DirectionPage/DirectionPage.styled';
+import { nanoid } from '@reduxjs/toolkit';
 import { quantityListValue } from 'helpers/quantityList';
-import { Helmet } from 'react-helmet';
+import { locationListValue } from 'helpers/locationsList';
+import { hoursOfWorkListValue } from 'helpers/hoursOfWorkList';
+import { workExperienceListValue } from 'helpers/workExperienceList';
 
 const users = [
   {
@@ -181,31 +184,55 @@ const users = [
   },
 ];
 
-const DirectionPage = () => {
+const ProblemPage = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   false && setSearchParams({ qwe: '' });
 
-  const direction = searchParams.get('direction');
+  const problem = searchParams.get('problem');
   const sort = searchParams.get('sort');
   const quantity = searchParams.get('quantity');
+  const location = searchParams.get('location');
+  const hoursOfWork = searchParams.get('hoursOfWork');
+  const workExperience = searchParams.get('workExperience');
 
   return (
     <Container>
       <Helmet>
-        <title>{directionListValue[direction]}</title>
+        <title>{problemListValue[problem]}</title>
       </Helmet>
       <PageContainer>
         <SideBarPage>
           <InputRadio
             width="220"
-            selectedValue={direction}
-            values={directionListValue}
-            name="direction"
+            selectedValue={problem}
+            values={problemListValue}
+            name="problem"
+          />
+          <InputRadio
+            width="220"
+            selectedValue={location}
+            defaultValue={'Місцерозташування'}
+            values={locationListValue}
+            name="location"
+          />
+          <InputRadio
+            width="220"
+            selectedValue={hoursOfWork}
+            defaultValue={'Години роботи'}
+            values={hoursOfWorkListValue}
+            name="hoursOfWork"
+          />
+          <InputRadio
+            width="220"
+            selectedValue={workExperience}
+            defaultValue={'Стаж роботи лікаря'}
+            values={workExperienceListValue}
+            name="workExperience"
           />
         </SideBarPage>
 
         <MainContent>
-          <Title>{directionListValue[direction]}</Title>
+          <Title>{problemListValue[problem]}</Title>
 
           <p>Review</p>
 
@@ -216,6 +243,7 @@ const DirectionPage = () => {
             name="sort"
             type="min"
           />
+
           <DoctorsBox>
             {users.map(user => (
               <DoctorsItem key={user.id}>
@@ -242,4 +270,4 @@ const DirectionPage = () => {
   );
 };
 
-export default DirectionPage;
+export default ProblemPage;
