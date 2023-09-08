@@ -1,15 +1,25 @@
 import { Helmet } from 'react-helmet';
+import {
+  StyledContainer,
+  StyledTitle,
+} from './SpecialistDoctorsPage/SpecialistDoctorsPage.styled';
+import NavList from 'componentsReusable/NavLIst/NavList';
+import { problemListValue } from 'helpers/problemsList';
 
-const ProblemsPage = () => {
+const ProblemsListPage = () => {
   return (
     <>
       <Helmet>
         <title>Проблеми</title>
       </Helmet>
 
-      <p>Problems Page</p>
+      <StyledContainer>
+        <StyledTitle>Оберіть свою проблему</StyledTitle>
+
+        <NavList name="problem" list={problemListValue} />
+      </StyledContainer>
     </>
   );
 };
 
-export default ProblemsPage;
+export default ProblemsListPage;

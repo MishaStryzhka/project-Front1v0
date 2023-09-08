@@ -17,8 +17,8 @@ export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
           {user?.userType !== 'doctor' && (
             <Btn to="/news" type="link" text="Залишити заявку" />
           )}
-          <Btn to="/specialistDoctors" type="link" text="Спеціалісти" />
-          <Btn to="/problems" type="link" text="Проблеми" />
+          <Btn to="/directionsList" type="link" text="Спеціалісти" />
+          <Btn to="/problemsList" type="link" text="Проблеми" />
           <FormSearch />
           <Btn id="btnOpenBurgerMenu" onClick={() => setIsOpenMenu(true)}>
             <IconUser />

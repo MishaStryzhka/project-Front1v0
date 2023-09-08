@@ -5,13 +5,22 @@ import {
   StyledBtn,
   StyledInputRadio,
   ToggleBtn,
+  WrapScroll,
 } from './InputRadio.styled';
 import IconPolygon from 'images/icons/IconPolygon';
 import { useCallback, useEffect, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 const InputRadio = e => {
-  const { width, selectedValue, values, name, type = 'normal', className } = e;
+  const {
+    width,
+    selectedValue,
+    values,
+    name,
+    type = 'normal',
+    className,
+    defaultValue,
+  } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
   false && console.log('searchParams', searchParams);
@@ -63,26 +72,28 @@ const InputRadio = e => {
 
   return (
     <InputRadioBox width={width} className={className}>
-      <ListBox
+      <WrapScroll
         $isOpenMenu={isOpenMenu}
         id={`InputRadioListBox-${name}`}
         type={type}
       >
-        {keys.map(value => {
-          return (
-            <Item key={value}>
-              <StyledBtn
-                onClick={() => newSetSearchParams(name, value)}
-                $active={selectedValue === value}
-              >
-                {values[value]}
-              </StyledBtn>
-            </Item>
-          );
-        })}
-      </ListBox>
+        <ListBox type={type}>
+          {keys.map(value => {
+            return (
+              <Item key={value}>
+                <StyledBtn
+                  onClick={() => newSetSearchParams(name, value)}
+                  $active={selectedValue === value}
+                >
+                  {values[value]}
+                </StyledBtn>
+              </Item>
+            );
+          })}
+        </ListBox>
+      </WrapScroll>
       <StyledInputRadio type={type} width={width}>
-        {values[selectedValue]}
+        {values[selectedValue] || defaultValue}
       </StyledInputRadio>
       <ToggleBtn
         id={`ToggleBtn-${name}`}
