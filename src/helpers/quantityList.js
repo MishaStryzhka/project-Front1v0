@@ -1,6 +1,6 @@
-export const quantityListValue = {
-  10: '10',
-  20: '20',
-  50: '50',
-  100: '100',
-};
+export const quantityListValue = [
+  { id: '10', name: '10' },
+  { id: '20', name: '20' },
+  { id: '50', name: '50' },
+  { id: '100', name: '100' },
+];

@@ -30,4 +30,12 @@ export const StyledNavLink = styled(NavLink)`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  width: 100%;
+  height: 100%;
+  padding: 0 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;

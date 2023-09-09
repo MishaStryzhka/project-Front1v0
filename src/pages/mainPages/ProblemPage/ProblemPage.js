@@ -1,4 +1,4 @@
-import Container from 'components/Container/Container';
+import Container from 'componentsReusable/Container/Container';
 import { Title } from 'components/FormLogin/FormLogin.styled';
 import InputRadio from 'componentsReusable/InputRadio/InputRadio';
 import MainContent from 'componentsReusable/MainContent/MainContent';
@@ -188,43 +188,62 @@ const ProblemPage = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   false && setSearchParams({ qwe: '' });
 
-  const problem = searchParams.get('problem');
-  const sort = searchParams.get('sort');
-  const quantity = searchParams.get('quantity');
-  const location = searchParams.get('location');
-  const hoursOfWork = searchParams.get('hoursOfWork');
-  const workExperience = searchParams.get('workExperience');
+  // const problem = searchParams.get('problem');
+  // const sort = searchParams.get('sort');
+  // const quantity = searchParams.get('quantity');
+  // const location = searchParams.get('location');
+  // const hoursOfWork = searchParams.get('hoursOfWork');
+  // const workExperience = searchParams.get('workExperience');
+
+  const problem = problemListValue.find(
+    option => option.id === searchParams.get('problem')
+  );
+  const sort = sortListValue.find(
+    option => option.id === searchParams.get('sort')
+  );
+  const quantity = quantityListValue.find(
+    option => option.id === searchParams.get('quantity')
+  );
+  const location = locationListValue.find(
+    option => option.id === searchParams.get('location')
+  );
+  const hoursOfWork = hoursOfWorkListValue.find(
+    option => option.id === searchParams.get('hoursOfWork')
+  );
+  const workExperience = workExperienceListValue.find(
+    option => option.id === searchParams.get('workExperience')
+  );
 
   return (
     <Container>
       <Helmet>
-        <title>{problemListValue[problem]}</title>
+        <title>{problem?.name}</title>
       </Helmet>
       <PageContainer>
         <SideBarPage>
           <InputRadio
             width="220"
-            selectedValue={problem}
+            selectedValue={problem?.id}
             values={problemListValue}
             name="problem"
           />
           <InputRadio
             width="220"
-            selectedValue={location}
+            selectedValue={location?.id}
             defaultValue={'Місцерозташування'}
             values={locationListValue}
             name="location"
           />
           <InputRadio
             width="220"
-            selectedValue={hoursOfWork}
+            selectedValue={hoursOfWork?.id}
             defaultValue={'Години роботи'}
             values={hoursOfWorkListValue}
             name="hoursOfWork"
           />
           <InputRadio
             width="220"
-            selectedValue={workExperience}
+            selectedValue={workExperience?.id}
             defaultValue={'Стаж роботи лікаря'}
             values={workExperienceListValue}
             name="workExperience"
@@ -232,13 +251,13 @@ const ProblemPage = () => {
         </SideBarPage>
 
         <MainContent>
-          <Title>{problemListValue[problem]}</Title>
+          <Title>{problem?.name}</Title>
 
           <p>Review</p>
 
           <StyledInputRadio
             width="150"
-            selectedValue={sort || 'fromAToZ'}
+            selectedValue={sort?.id || 'fromAToZ'}
             values={sortListValue}
             name="sort"
             type="min"
@@ -257,7 +276,7 @@ const ProblemPage = () => {
           </DoctorsBox>
           <StyledInputRadio
             width="150"
-            selectedValue={quantity || '10'}
+            selectedValue={quantity?.id || '10'}
             values={quantityListValue}
             name="quantity"
             type="min"

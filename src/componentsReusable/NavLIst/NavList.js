@@ -1,13 +1,12 @@
 import { StyledNavItem, StyledNavLink, StyledNavList } from './NavList.styled';
 
 const NavList = ({ name, list = {} }) => {
-  const entries = Object.entries(list);
   return (
     <StyledNavList>
-      {entries.map(el => (
-        <StyledNavItem key={el[0]}>
-          <StyledNavLink to={`/${name}/?${name}=${el[0]}`}>
-            {el[1]}
+      {list.map(el => (
+        <StyledNavItem key={el.id}>
+          <StyledNavLink to={`/${name}/?${name}=${el.id}`}>
+            {el.name}
           </StyledNavLink>
         </StyledNavItem>
       ))}

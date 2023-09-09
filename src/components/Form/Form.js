@@ -1,5 +1,10 @@
 import SecondaryButton from 'components/SecondaryButton/SecondaryButton';
-import { BtnBox, FormDescription, StyledForm } from './Form.styled';
+import {
+  BtnBox,
+  FormDescription,
+  StyledForm,
+  StyledPrimaryButton,
+} from './Form.styled';
 import PrimaryButton from 'components/PrimaryButton/PrimaryButton';
 
 const Form = ({
@@ -9,6 +14,9 @@ const Form = ({
   next,
   children,
   save,
+  saveDraft,
+  viewCard,
+  sendRequest,
 }) => {
   return (
     <StyledForm>
@@ -22,10 +30,14 @@ const Form = ({
       </div>
 
       <BtnBox>
-        <SecondaryButton disabled type="button">
-          Переглянути картку як користувач
-        </SecondaryButton>
-        <SecondaryButton type="submit">Зберегти чернетку</SecondaryButton>
+        {viewCard && (
+          <SecondaryButton disabled type="button">
+            Переглянути картку як користувач
+          </SecondaryButton>
+        )}
+        {saveDraft && (
+          <SecondaryButton type="submit">Зберегти чернетку</SecondaryButton>
+        )}
         {(handlePublish || next) && (
           <PrimaryButton type="button" onClick={handlePublish || next}>
             {(handlePublish && 'Опублікувати') ||
@@ -37,6 +49,11 @@ const Form = ({
           <PrimaryButton type="submit" onClick={save}>
             Зберегти
           </PrimaryButton>
+        )}
+        {sendRequest && (
+          <StyledPrimaryButton type="submit" onClick={sendRequest}>
+            Відправити заявку
+          </StyledPrimaryButton>
         )}
       </BtnBox>
     </StyledForm>

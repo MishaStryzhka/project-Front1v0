@@ -5,9 +5,15 @@ const PrimaryButton = ({
   disabled = false,
   type = 'button',
   onClick,
+  className,
 }) => {
   return (
-    <Button type={type} onClick={onClick} disabled={disabled}>
+    <Button
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      className={className}
+    >
       {children}
     </Button>
   );

@@ -24,9 +24,9 @@ const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
 const MainPage = lazy(() => import('pages/mainPages/MainPage'));
 const NotFoundPage = lazy(() => import('pages/mainPages/NotFoundPage'));
 
-const ProblemsListPage = lazy(() => import('pages/mainPages/ProblemsPage'));
-const SpecialistDoctorsPage = lazy(() =>
-  import('pages/mainPages/SpecialistDoctorsPage/SpecialistDoctorsPage')
+const ProblemsListPage = lazy(() => import('pages/mainPages/ProblemsListPage'));
+const DirectionsListPage = lazy(() =>
+  import('pages/mainPages/DirectionsListPage/DirectionsListPage')
 );
 // const AccountData = lazy(() => import('./AccountData/AccountData'));
 // const PersonalData = lazy(() => import('./PersonalData/PersonalData'));
@@ -52,7 +52,7 @@ export const App = () => {
         <Route path="/" element={<SharedLayout />}>
           <Route index element={<MainPage />} />
           <Route path="/main" element={<MainPage />} />
-          <Route path="/directionsList" element={<SpecialistDoctorsPage />} />
+          <Route path="/directionsList" element={<DirectionsListPage />} />
           <Route path="/direction" element={<DirectionPage />} />
           <Route path="/problemsList" element={<ProblemsListPage />} />
           <Route path="/problem" element={<ProblemPage />} />

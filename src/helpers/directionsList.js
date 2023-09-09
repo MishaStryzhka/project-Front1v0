@@ -1,11 +1,15 @@
-export const directionListValue = {
-  therapeuticDentistry: 'Терапевтична стоматологія',
-  orthodontics: 'Ортодонтія',
-  surgicalDentistry: 'Хірургічна стоматологія',
-  prosthesis: 'Протезування',
-  endodontics: 'Ендодонтія',
-  parandotology: 'Парандотологія',
-  childrensDentistry: 'Дитяча стоматологія',
-  aestheticDentistry: 'Естетична стоматологія',
-  radiology: 'Рентгенологія',
-};
+export const directionListValue = [
+  {
+    id: 'therapeuticDentistry',
+    name: 'Терапевтична стоматологія',
+    description: '',
+  },
+  { id: 'orthodontics', name: 'Ортодонтія', description: '' },
+  { id: 'surgicalDentistry', name: 'Хірургічна стоматологія', description: '' },
+  { id: 'prosthesis', name: 'Протезування', description: '' },
+  { id: 'endodontics', name: 'Ендодонтія', description: '' },
+  { id: 'parandotology', name: 'Парандотологія', description: '' },
+  { id: 'childrensDentistry', name: 'Дитяча стоматологія', description: '' },
+  { id: 'aestheticDentistry', name: 'Естетична стоматологія', description: '' },
+  { id: 'radiology', name: 'Рентгенологія', description: '' },
+];

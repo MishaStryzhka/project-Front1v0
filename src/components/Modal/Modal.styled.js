@@ -20,22 +20,45 @@ export const CloseWrap = styled.div`
   justify-content: flex-end;
 `;
 export const ModalContainer = styled.div`
-  background-color: ${p => p.theme.color.background};
-  // min-width: 500px;
+  border: 2px solid var(--Main, #04827a);
+  background: ${({ theme }) => theme.color.primary};
 
   padding: 14px;
   margin: 0 auto;
-  border-radius: 20px;
+  border-radius: 10px;
 
   position: relative;
   // width: 800px;
   padding: 80px 100px;
+
+  max-height: 75vh;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 0px;
+  }
+
+  &::-webkit-scrollbar-track {
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 30px; /* roundness of the scroll thumb */
+    cursor: pointer;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.color.main}50;
+    }
+  }
 `;
 
 export const ModalContentContainer = styled.div`
   width: 800px;
   padding: 80px 100px;
 `;
+
+export const WrapBtnClose = styled.div``;
 
 export const BtnClose = styled.button`
   position: absolute;

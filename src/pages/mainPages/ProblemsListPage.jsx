@@ -2,7 +2,7 @@ import { Helmet } from 'react-helmet';
 import {
   StyledContainer,
   StyledTitle,
-} from './SpecialistDoctorsPage/SpecialistDoctorsPage.styled';
+} from './DirectionsListPage/DirectionsListPage.styled';
 import NavList from 'componentsReusable/NavLIst/NavList';
 import { problemListValue } from 'helpers/problemsList';
 

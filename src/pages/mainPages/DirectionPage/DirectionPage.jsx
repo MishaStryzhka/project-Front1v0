@@ -1,13 +1,13 @@
+import { Helmet } from 'react-helmet';
 import { nanoid } from '@reduxjs/toolkit';
-import Container from 'components/Container/Container';
 import { Title } from 'components/FormLogin/FormLogin.styled';
+
+import Container from 'componentsReusable/Container/Container';
 import InputRadio from 'componentsReusable/InputRadio/InputRadio';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import PageContainer from 'componentsReusable/PageContainer/PageContainer';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
-import { directionListValue } from 'helpers/directionsList';
-import { sortListValue } from 'helpers/sortList';
-import { useSearchParams } from 'react-router-dom';
+
 import {
   DoctorsAvatars,
   DoctorsBox,
@@ -15,8 +15,11 @@ import {
   StyledInputRadio,
   StyledPagination,
 } from './DirectionPage.styled';
+
+import { directionListValue } from 'helpers/directionsList';
+import { sortListValue } from 'helpers/sortList';
+import { useSearchParams } from 'react-router-dom';
 import { quantityListValue } from 'helpers/quantityList';
-import { Helmet } from 'react-helmet';
 
 const users = [
   {
@@ -185,9 +188,21 @@ const DirectionPage = () => {
   let [searchParams, setSearchParams] = useSearchParams();
   false && setSearchParams({ qwe: '' });
 
-  const direction = searchParams.get('direction');
-  const sort = searchParams.get('sort');
-  const quantity = searchParams.get('quantity');
+  // const direction = searchParams.get('direction');
+  // const sort = searchParams.get('sort');
+  // const quantity = searchParams.get('quantity');
+
+  const direction = directionListValue.find(
+    option => option.id === searchParams.get('direction')
+  );
+  const sort = sortListValue.find(
+    option => option.id === searchParams.get('sort')
+  );
+  const quantity = quantityListValue.find(
+    option => option.id === searchParams.get('quantity')
+  );
+
+  console.log('direction', direction);
 
   return (
     <Container>
@@ -198,27 +213,27 @@ const DirectionPage = () => {
         <SideBarPage>
           <InputRadio
             width="220"
-            selectedValue={direction}
+            selectedValue={direction?.id}
             values={directionListValue}
             name="direction"
           />
         </SideBarPage>
 
         <MainContent>
-          <Title>{directionListValue[direction]}</Title>
+          <Title>{direction?.name}</Title>
 
           <p>Review</p>
 
           <StyledInputRadio
             width="150"
-            selectedValue={sort || 'fromAToZ'}
+            selectedValue={sort?.id || 'fromAToZ'}
             values={sortListValue}
             name="sort"
             type="min"
           />
           <DoctorsBox>
             {users.map(user => (
-              <DoctorsItem key={user.id}>
+              <DoctorsItem key={user?.id}>
                 <DoctorsAvatars alt="" />
                 <p>{user.lastName}</p>
                 <p>{user.firstName}</p>
@@ -229,7 +244,7 @@ const DirectionPage = () => {
           </DoctorsBox>
           <StyledInputRadio
             width="150"
-            selectedValue={quantity || '10'}
+            selectedValue={quantity?.id || '10'}
             values={quantityListValue}
             name="quantity"
             type="min"
