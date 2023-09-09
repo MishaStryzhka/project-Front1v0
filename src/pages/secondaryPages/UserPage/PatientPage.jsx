@@ -1,4 +1,4 @@
-import Container from 'components/Container/Container';
+import Container from 'componentsReusable/Container/Container';
 import { Title } from 'components/FormLogin/FormLogin.styled';
 import FormPatientPage from 'components/FormPatientPage/FormPatientPage';
 import ModalRefreshEmail from 'components/ModalRefreshEmail/ModalRefreshEmail';

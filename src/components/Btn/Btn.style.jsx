@@ -9,6 +9,7 @@ export const StyledBtn = styled.button`
 
   display: flex;
 
+  color: ${({ theme }) => theme.color.primary};
   font-family: Manrope;
   font-size: 16px;
   font-style: normal;
@@ -24,6 +25,7 @@ export const StyledBtn = styled.button`
 
   min-width: 40px;
   min-height: 40px;
+  padding: ${({ children }) => (children[1] ? '10px' : '10px 20px')};
 
   &:hover {
     // background: ${({ theme }) => theme.color.gradient};

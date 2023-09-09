@@ -46,22 +46,27 @@ export const ToggleBtn = styled.button`
 `;
 
 export const WrapScroll = styled.div`
-  position: absolute;
+  // position: absolute;
 
   box-sizing: border-box;
   width: 100%;
   padding: 2px 1px;
 
+  overflow: hidden;
+
   transform: scale(1, 1);
+  max-height: 300px;
 
   border: 2px solid ${({ theme }) => theme.color.main};
 
   color: ${({ theme }) => theme.color.btnLogOut};
   background-color: ${({ theme }) => theme.color.primary};
 
-  ${({ $isOpenMenu }) => !$isOpenMenu && 'transform: scale(1, 0)'};
+  ${({ $isOpenMenu }) =>
+    !$isOpenMenu && 'transform: scale(1, 0); max-height: 0'};
   transform-origin: top;
-  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1),
+    max-height 500ms cubic-bezier(0.4, 0, 0.2, 1);
 
   z-index: 1;
 
@@ -74,6 +79,8 @@ export const WrapScroll = styled.div`
   `;
     } else if (type === 'min') {
       return `
+    position: absolute;
+
     top: 20px;
 
     border-radius: 5px;

@@ -1,7 +1,7 @@
-export const hoursOfWorkListValue = {
-  hoursOfWork_1: 'пн-пт, кожного дня',
-  hoursOfWork_2: 'пн-сб, кожного дня',
-  hoursOfWork_3: 'пн-пт, парні дні',
-  hoursOfWork_4: 'пн-пт, непарні дні',
-  hoursOfWork_5: 'гнучкий графік роботи',
-};
+export const hoursOfWorkListValue = [
+  { id: 'hoursOfWork_1', name: 'пн-пт, кожного дня' },
+  { id: 'hoursOfWork_2', name: 'пн-сб, кожного дня' },
+  { id: 'hoursOfWork_3', name: 'пн-пт, парні дні' },
+  { id: 'hoursOfWork_4', name: 'пн-пт, непарні дні' },
+  { id: 'hoursOfWork_5', name: 'гнучкий графік роботи' },
+];

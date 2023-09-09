@@ -54,8 +54,6 @@ const InputRadio = e => {
     };
   }, [handleKeyDown, handleClose]);
 
-  const keys = Object.keys(values);
-
   const newSetSearchParams = (key, value) => {
     setSearchParams(pref => {
       const Query = {};
@@ -70,30 +68,12 @@ const InputRadio = e => {
     });
   };
 
+  const selectedEl = values.find(option => option.id === selectedValue);
+
   return (
     <InputRadioBox width={width} className={className}>
-      <WrapScroll
-        $isOpenMenu={isOpenMenu}
-        id={`InputRadioListBox-${name}`}
-        type={type}
-      >
-        <ListBox type={type}>
-          {keys.map(value => {
-            return (
-              <Item key={value}>
-                <StyledBtn
-                  onClick={() => newSetSearchParams(name, value)}
-                  $active={selectedValue === value}
-                >
-                  {values[value]}
-                </StyledBtn>
-              </Item>
-            );
-          })}
-        </ListBox>
-      </WrapScroll>
       <StyledInputRadio type={type} width={width}>
-        {values[selectedValue] || defaultValue}
+        {selectedEl?.name || defaultValue}
       </StyledInputRadio>
       <ToggleBtn
         id={`ToggleBtn-${name}`}
@@ -105,6 +85,26 @@ const InputRadio = e => {
       >
         <IconPolygon />
       </ToggleBtn>
+      <WrapScroll
+        $isOpenMenu={isOpenMenu}
+        id={`InputRadioListBox-${name}`}
+        type={type}
+      >
+        <ListBox type={type}>
+          {values.map(value => {
+            return (
+              <Item key={value.id}>
+                <StyledBtn
+                  onClick={() => newSetSearchParams(name, value.id)}
+                  $active={selectedValue === value.id}
+                >
+                  {value.name}
+                </StyledBtn>
+              </Item>
+            );
+          })}
+        </ListBox>
+      </WrapScroll>
     </InputRadioBox>
   );
 };

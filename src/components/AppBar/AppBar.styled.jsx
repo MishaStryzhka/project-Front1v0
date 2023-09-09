@@ -1,5 +1,5 @@
 import Btn from 'components/Btn/Btn';
-import Container from 'components/Container/Container';
+import Container from 'componentsReusable/Container/Container';
 import styled from 'styled-components';
 
 export const StyledAppBar = styled.header`

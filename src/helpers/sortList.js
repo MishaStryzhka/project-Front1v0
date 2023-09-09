@@ -1,6 +1,6 @@
-export const sortListValue = {
-  byWorkExperience: 'За стажем роботи',
-  fromAToZ: 'Від А до Я',
-  fromZToA: 'Від Я до А',
-  byRating: 'За рейтингом',
-};
+export const sortListValue = [
+  { id: 'byWorkExperience', name: 'За стажем роботи' },
+  { id: 'fromAToZ', name: 'Від А до Я' },
+  { id: 'fromZToA', name: 'Від Я до А' },
+  { id: 'byRating', name: 'За рейтингом' },
+];
