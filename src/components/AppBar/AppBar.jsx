@@ -5,8 +5,6 @@ import FormSearch from 'components/FormSearch/FormSearch';
 import IconUser from 'images/icons/IconUser';
 import BurgerMenu from 'components/BurgerMenu/BurgerMenu';
 import { useAuth } from 'hooks';
-import { createPortal } from 'react-dom';
-import Modal from 'components/Modal/Modal';
 import { useState } from 'react';
 import ModalLeaveRequest from 'components/ModalLeaveRequest/ModalLeaveRequest';
 
