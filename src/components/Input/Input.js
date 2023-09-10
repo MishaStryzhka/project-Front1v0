@@ -13,6 +13,7 @@ const Input = ({
   required = false,
   disabled = false,
   width = '800px',
+  height = '50px',
   showPlaceholder = false,
   placeholder = 'placeholder',
   min,
@@ -36,6 +37,7 @@ const Input = ({
         required={required}
         disabled={disabled}
         width={width}
+        height={height}
         $style={$style}
       />
       {(!value || showPlaceholder) && (

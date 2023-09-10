@@ -14,12 +14,12 @@ export const StyledPhoneInput = styled(PhoneInput)`
   letter-spacing: 0.64px;
 
   padding: 15px;
-  width: 800px;
+  width: 100%;
   height: 50px;
   box-sizing: border-box;
   border-radius: 10px;
 
-  border: 1px solid
+  border: 2px solid
     ${({ theme, error }) => (error ? theme.color.error : theme.color.main)};
   outline: none;
 

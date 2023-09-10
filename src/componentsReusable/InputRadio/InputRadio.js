@@ -9,7 +9,6 @@ import {
 } from './InputRadio.styled';
 import IconPolygon from 'images/icons/IconPolygon';
 import { useCallback, useEffect, useState } from 'react';
-import { useSearchParams } from 'react-router-dom';
 
 const InputRadio = e => {
   const {
@@ -20,10 +19,10 @@ const InputRadio = e => {
     type = 'normal',
     className,
     defaultValue,
+    onChange,
+    required,
   } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
-  false && console.log('searchParams', searchParams);
 
   const handleKeyDown = useCallback(evt => {
     document.body.style.overflow = 'auto';
@@ -54,25 +53,11 @@ const InputRadio = e => {
     };
   }, [handleKeyDown, handleClose]);
 
-  const newSetSearchParams = (key, value) => {
-    setSearchParams(pref => {
-      const Query = {};
-      for (const [key, value] of pref.entries()) {
-        Query[key] = value;
-      }
-
-      return {
-        ...Query,
-        [key]: value,
-      };
-    });
-  };
-
   const selectedEl = values.find(option => option.id === selectedValue);
 
   return (
     <InputRadioBox width={width} className={className}>
-      <StyledInputRadio type={type} width={width}>
+      <StyledInputRadio type={type} width={width} required={required}>
         {selectedEl?.name || defaultValue}
       </StyledInputRadio>
       <ToggleBtn
@@ -81,7 +66,8 @@ const InputRadio = e => {
         onClick={() => {
           setIsOpenMenu(!isOpenMenu);
         }}
-        type={type}
+        type="button"
+        $styledtype={type}
       >
         <IconPolygon />
       </ToggleBtn>
@@ -95,7 +81,8 @@ const InputRadio = e => {
             return (
               <Item key={value.id}>
                 <StyledBtn
-                  onClick={() => newSetSearchParams(name, value.id)}
+                  type="button"
+                  onClick={() => onChange(value.id)}
                   $active={selectedValue === value.id}
                 >
                   {value.name}
