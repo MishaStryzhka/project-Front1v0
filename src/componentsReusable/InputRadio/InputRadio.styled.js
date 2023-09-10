@@ -26,15 +26,15 @@ export const ToggleBtn = styled.button`
     pointer-events: none;
   }
 
-  ${({ type }) => {
-    if (type === 'normal') {
+  ${({ $styledtype }) => {
+    if ($styledtype === 'normal') {
       return `
       width: 40px;
       height: 40px;
 
       right: 0;
     `;
-    } else if (type === 'min') {
+    } else if ($styledtype === 'min') {
       return `
       width: 10px;
       height:10px;
@@ -99,14 +99,21 @@ export const ListBox = styled.div`
 
   &::-webkit-scrollbar {
     width: 8px;
+    height: 0px;
   }
   &::-webkit-scrollbar-track {
     // background: orange; /* color of the tracking area */
   }
   &::-webkit-scrollbar-thumb {
-    background-color: ${({ theme }) => theme.color.main};
+    background-color: transparent;
     border-radius: 30px; /* roundness of the scroll thumb */
-    // border-right: 2px solid ${({ theme }) => theme.color.primary};
+    cursor: pointer;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.color.main}50;
+    }
   }
 
   ${({ type }) => {
@@ -233,4 +240,11 @@ export const StyledInputRadio = styled.p`
   overflow: hidden;
 
   white-space: nowrap;
+
+  &::after {
+    display: none;
+    ${({ required }) => required && 'display: initial;'}
+    content: '*';
+    color: red;
+  }
 `;

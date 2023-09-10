@@ -186,14 +186,6 @@ const users = [
 
 const ProblemPage = () => {
   let [searchParams, setSearchParams] = useSearchParams();
-  false && setSearchParams({ qwe: '' });
-
-  // const problem = searchParams.get('problem');
-  // const sort = searchParams.get('sort');
-  // const quantity = searchParams.get('quantity');
-  // const location = searchParams.get('location');
-  // const hoursOfWork = searchParams.get('hoursOfWork');
-  // const workExperience = searchParams.get('workExperience');
 
   const problem = problemListValue.find(
     option => option.id === searchParams.get('problem')
@@ -214,6 +206,20 @@ const ProblemPage = () => {
     option => option.id === searchParams.get('workExperience')
   );
 
+  const newSetSearchParams = (key, value) => {
+    setSearchParams(pref => {
+      const Query = {};
+      for (const [key, value] of pref.entries()) {
+        Query[key] = value;
+      }
+
+      return {
+        ...Query,
+        [key]: value,
+      };
+    });
+  };
+
   return (
     <Container>
       <Helmet>
@@ -226,6 +232,7 @@ const ProblemPage = () => {
             selectedValue={problem?.id}
             values={problemListValue}
             name="problem"
+            onChange={value => newSetSearchParams('problem', value)}
           />
           <InputRadio
             width="220"
@@ -233,6 +240,7 @@ const ProblemPage = () => {
             defaultValue={'Місцерозташування'}
             values={locationListValue}
             name="location"
+            onChange={value => newSetSearchParams('location', value)}
           />
           <InputRadio
             width="220"
@@ -240,6 +248,7 @@ const ProblemPage = () => {
             defaultValue={'Години роботи'}
             values={hoursOfWorkListValue}
             name="hoursOfWork"
+            onChange={value => newSetSearchParams('hoursOfWork', value)}
           />
           <InputRadio
             width="220"
@@ -247,6 +256,7 @@ const ProblemPage = () => {
             defaultValue={'Стаж роботи лікаря'}
             values={workExperienceListValue}
             name="workExperience"
+            onChange={value => newSetSearchParams('workExperience', value)}
           />
         </SideBarPage>
 
@@ -260,6 +270,7 @@ const ProblemPage = () => {
             selectedValue={sort?.id || 'fromAToZ'}
             values={sortListValue}
             name="sort"
+            onChange={value => newSetSearchParams('sort', value)}
             type="min"
           />
 
@@ -279,6 +290,7 @@ const ProblemPage = () => {
             selectedValue={quantity?.id || '10'}
             values={quantityListValue}
             name="quantity"
+            onChange={value => newSetSearchParams('quantity', value)}
             type="min"
           />
 

@@ -202,7 +202,19 @@ const DirectionPage = () => {
     option => option.id === searchParams.get('quantity')
   );
 
-  console.log('direction', direction);
+  const newSetSearchParams = (key, value) => {
+    setSearchParams(pref => {
+      const Query = {};
+      for (const [key, value] of pref.entries()) {
+        Query[key] = value;
+      }
+
+      return {
+        ...Query,
+        [key]: value,
+      };
+    });
+  };
 
   return (
     <Container>
@@ -216,6 +228,7 @@ const DirectionPage = () => {
             selectedValue={direction?.id}
             values={directionListValue}
             name="direction"
+            onChange={value => newSetSearchParams('direction', value)}
           />
         </SideBarPage>
 
@@ -229,6 +242,7 @@ const DirectionPage = () => {
             selectedValue={sort?.id || 'fromAToZ'}
             values={sortListValue}
             name="sort"
+            onChange={value => newSetSearchParams('sort', value)}
             type="min"
           />
           <DoctorsBox>
@@ -247,6 +261,7 @@ const DirectionPage = () => {
             selectedValue={quantity?.id || '10'}
             values={quantityListValue}
             name="quantity"
+            onChange={value => newSetSearchParams('quantity', value)}
             type="min"
           />
 

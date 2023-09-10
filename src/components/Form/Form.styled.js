@@ -32,7 +32,6 @@ export const BtnBox = styled.div`
 
   display: flex;
   justify-content: space-between;
-  ${e => console.log('e', e)}
 `;
 
 export const StyledPrimaryButton = styled(PrimaryButton)`

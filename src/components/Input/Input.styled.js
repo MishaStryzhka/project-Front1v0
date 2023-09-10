@@ -15,16 +15,37 @@ export const StyledField = styled(Field)`
 
   padding: 15px;
   width: ${({ width }) => width};
-  height: 50px;
+  height: ${({ height }) => height};
   box-sizing: border-box;
   border-radius: 10px;
 
-  border: 1px solid
+  border: 2px solid
     ${({ theme, error }) => (error ? theme.color.error : theme.color.main)};
   outline: none;
 
   color: ${({ theme }) => theme.color.btnLogOut};
   ${({ $style }) => $style && $style}
+
+  max-height: 75vh;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 8px;
+    height: 0px;
+  }
+
+  &::-webkit-scrollbar-track {
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: transparent;
+    border-radius: 30px; /* roundness of the scroll thumb */
+    cursor: pointer;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-thumb {
+      background-color: ${({ theme }) => theme.color.main}50;
+    }
+  }
 `;
 
 export const Placeholder = styled.div`
@@ -51,7 +72,7 @@ export const Placeholder = styled.div`
   &::after {
     display: none;
     ${({ required }) => required && 'display: block;'}
-    content: ' *';
+    content:  '*';
     color: red;
   }
 `;
