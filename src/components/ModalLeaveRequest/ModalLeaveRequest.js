@@ -11,7 +11,6 @@ import {
   WrapPhoneInput,
 } from 'components/FormPatientPage/FormPatientPage.styled';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
-import { StyledInputRadio } from 'componentsReusable/InputRadio/InputRadio.styled';
 import InputRadio from 'componentsReusable/InputRadio/InputRadio';
 import { locationListValue } from 'helpers/locationsList';
 import { problemListValue } from 'helpers/problemsList';
@@ -214,7 +213,9 @@ const ModalLeaveRequest = ({ onClick }) => {
                     onChange={value => setFieldValue('problem', value)}
                   />
 
-                  <LabelCheckboxStyled>
+                  <LabelCheckboxStyled
+                    style={{ paddingTop: 0, marginTop: -20, marginBottom: -20 }}
+                  >
                     <FieldCheckboxStyled
                       type={'checkbox'}
                       name="needPediatricDentist"
