@@ -70,14 +70,14 @@ export const WrapScroll = styled.div`
 
   z-index: 1;
 
-  ${({ type }) => {
-    if (type === 'normal') {
+  ${({ $styledType }) => {
+    if ($styledType === 'normal') {
       return `
     top: 50px;
 
     border-radius: 10px;
   `;
-    } else if (type === 'min') {
+    } else if ($styledType === 'min') {
       return `
     position: absolute;
 
@@ -116,8 +116,8 @@ export const ListBox = styled.div`
     }
   }
 
-  ${({ type }) => {
-    if (type === 'normal') {
+  ${({ $styledType }) => {
+    if ($styledType === 'normal') {
       return `
     gap: 10px;
 
@@ -126,7 +126,9 @@ export const ListBox = styled.div`
     border-radius: 15px;
 
   `;
-    } else if (type === 'min') {
+    } else if ($styledType === 'min') {
+      console.log('qwe');
+
       return `
     gap: 3px;
 
@@ -165,12 +167,12 @@ export const ItemLabel = styled.label`
 export const StyledBtn = styled.button`
   color: ${({ theme, $active }) =>
     $active ? theme.color.main : theme.color.secondary};
-  ${({ type }) => {
-    if (type === 'normal') {
+  ${({ $styledType }) => {
+    if ($styledType === 'normal') {
       return `
       font-size: 16px;
       `;
-    } else if (type === 'min') {
+    } else if ($styledType === 'min') {
       return `
       font-size: 12px;
         `;
@@ -198,8 +200,8 @@ export const StyledInputRadio = styled.p`
 
   position: relative;
 
-  ${({ type }) => {
-    if (type === 'normal') {
+  ${({ $styledType }) => {
+    if ($styledType === 'normal') {
       return `
     font-size: 16px;
     font-style: normal;
@@ -211,7 +213,7 @@ export const StyledInputRadio = styled.p`
     height: 50px;
     border-radius: 10px;
     `;
-    } else if (type === 'min') {
+    } else if ($styledType === 'min') {
       return `
     font-size: 12px;
     font-style: normal;
