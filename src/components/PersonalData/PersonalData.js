@@ -243,16 +243,10 @@ const PersonalData = () => {
                       return (
                         <Label key={values.phones.length === 0 ? 0 : index}>
                           <Input
+                            width="800px"
                             as={PhoneInputField}
                             error={null}
-                            // type={'text'}
                             value={phone}
-                            // name="patronymic"
-                            // onChange={e => {
-                            //   error = null;
-                            //   handleChange(e);
-                            // }}
-                            // onBlur={handleBlur}
                             field={{ name: 'phones', value: phone }}
                             setFieldValue={value => {
                               const newPhones = [...values.phones];
@@ -281,7 +275,6 @@ const PersonalData = () => {
                               );
                             }}
                             required
-                            // showPlaceholder={phone}
                             placeholder="+380 __ ___ ____"
                           />
                         </Label>

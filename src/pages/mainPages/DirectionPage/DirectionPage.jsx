@@ -243,7 +243,7 @@ const DirectionPage = () => {
             values={sortListValue}
             name="sort"
             onChange={value => newSetSearchParams('sort', value)}
-            type="min"
+            styledType="min"
           />
           <DoctorsBox>
             {users.map(user => (
@@ -262,7 +262,7 @@ const DirectionPage = () => {
             values={quantityListValue}
             name="quantity"
             onChange={value => newSetSearchParams('quantity', value)}
-            type="min"
+            styledType="min"
           />
 
           <StyledPagination />

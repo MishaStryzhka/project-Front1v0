@@ -1,3 +1,4 @@
+import Calendar from 'componentsReusable/Calendar/Calendar';
 import {
   InputRadioBox,
   Item,
@@ -12,15 +13,16 @@ import { useCallback, useEffect, useState } from 'react';
 
 const InputRadio = e => {
   const {
-    width,
+    width, // "800px", ...
     selectedValue,
     values,
     name,
-    type = 'normal',
+    styledType = 'normal', // "normal", "min"
     className,
     defaultValue,
     onChange,
     required,
+    type, // "calendar"
   } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
@@ -53,11 +55,15 @@ const InputRadio = e => {
     };
   }, [handleKeyDown, handleClose]);
 
-  const selectedEl = values.find(option => option.id === selectedValue);
+  const selectedEl = values?.find(option => option.id === selectedValue);
 
   return (
     <InputRadioBox width={width} className={className}>
-      <StyledInputRadio type={type} width={width} required={required}>
+      <StyledInputRadio
+        $styledType={styledType}
+        width={width}
+        required={required}
+      >
         {selectedEl?.name || defaultValue}
       </StyledInputRadio>
       <ToggleBtn
@@ -67,30 +73,41 @@ const InputRadio = e => {
           setIsOpenMenu(!isOpenMenu);
         }}
         type="button"
-        $styledtype={type}
+        $styledtype={styledType}
       >
         <IconPolygon />
       </ToggleBtn>
       <WrapScroll
         $isOpenMenu={isOpenMenu}
         id={`InputRadioListBox-${name}`}
-        type={type}
+        $styledType={styledType}
       >
-        <ListBox type={type}>
-          {values.map(value => {
-            return (
-              <Item key={value.id}>
-                <StyledBtn
-                  type="button"
-                  onClick={() => onChange(value.id)}
-                  $active={selectedValue === value.id}
-                >
-                  {value.name}
-                </StyledBtn>
-              </Item>
-            );
-          })}
-        </ListBox>
+        {values && (
+          <ListBox $styledType={styledType}>
+            {values?.map(value => {
+              return (
+                <Item key={value.id}>
+                  <StyledBtn
+                    type="button"
+                    onClick={() => onChange(value.id)}
+                    $active={selectedValue === value.id}
+                  >
+                    {value.name}
+                  </StyledBtn>
+                </Item>
+              );
+            })}
+          </ListBox>
+        )}
+        {type === 'date' && (
+          <Calendar
+            value={selectedValue}
+            onChange={date => {
+              console.log('date', date);
+              onChange(date);
+            }}
+          />
+        )}
       </WrapScroll>
     </InputRadioBox>
   );

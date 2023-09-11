@@ -1,5 +1,5 @@
 import Form from 'components/Form/Form';
-import { Box, InputWrap } from './ModalLeaveRequest.styled';
+import { Box, HoursWrap, InputWrap } from './ModalLeaveRequest.styled';
 import { StyledTitle } from 'pages/mainPages/DirectionsListPage/DirectionsListPage.styled';
 import { Formik } from 'formik';
 import { Label } from 'components/PersonalData/PersonalData.styled';
@@ -43,6 +43,8 @@ const ModalLeaveRequest = ({ onClick }) => {
             lastName: '',
             firstName: '',
             phones: [],
+            dateOfReception: '',
+            preferredHours: ['', ''],
             age: '',
             location: '',
             problem: '',
@@ -62,8 +64,6 @@ const ModalLeaveRequest = ({ onClick }) => {
             handleBlur,
             handleSubmit,
           }) => {
-            console.log('values.problem', values);
-
             return (
               <Form
                 // onSubmit={handleSubmit}
@@ -74,7 +74,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                 <InputWrap>
                   <Label>
                     <Input
-                      width="700px"
+                      width="800px"
                       error={
                         errors.lastName && touched.lastName && errors.lastName
                       }
@@ -93,7 +93,7 @@ const ModalLeaveRequest = ({ onClick }) => {
 
                   <Label>
                     <Input
-                      width="700px"
+                      width="800px"
                       error={
                         errors.firstName &&
                         touched.firstName &&
@@ -122,7 +122,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                         return (
                           <Label key={values.phones.length === 0 ? 0 : index}>
                             <Input
-                              width="700px"
+                              width="800px"
                               as={PhoneInputField}
                               error={null}
                               value={phone}
@@ -177,9 +177,66 @@ const ModalLeaveRequest = ({ onClick }) => {
                     </ButtonRefresh>
                   </WrapPhone>
 
+                  <InputRadio
+                    width="800px"
+                    selectedValue={values.dateOfReception}
+                    defaultValue={'Дата на коли потрібен прийом'}
+                    name="dateOfReception"
+                    onChange={value => setFieldValue('dateOfReception', value)}
+                    required
+                    type="date"
+                  />
+
+                  <Label>
+                    <HoursWrap>
+                      <p>Бажані години *</p>
+                      <Input
+                        // error={
+                        //   errors.preferredHours &&
+                        //   touched.preferredHours &&
+                        //   errors.preferredHours
+                        // }
+                        type={'number'}
+                        value={values.preferredHours[0]}
+                        name="preferredHours"
+                        onChange={e => {
+                          const { value } = e.currentTarget;
+                          setFieldValue('preferredHours', [
+                            value,
+                            values.preferredHours[1],
+                          ]);
+                        }}
+                        onBlur={handleBlur}
+                        placeholder="Від"
+                        width="100px"
+                        pattern="[0-9]{2}:[0-9]{2}"
+                      />
+                      <Input
+                        // error={
+                        //   errors.preferredHours &&
+                        //   touched.preferredHours &&
+                        //   errors.preferredHours
+                        // }
+                        type={'number'}
+                        value={values.preferredHours[1]}
+                        name="preferredHours"
+                        onChange={e => {
+                          const { value } = e.currentTarget;
+                          setFieldValue('preferredHours', [
+                            values.preferredHours[0],
+                            value,
+                          ]);
+                        }}
+                        onBlur={handleBlur}
+                        placeholder="До"
+                        width="100px"
+                      />
+                    </HoursWrap>
+                  </Label>
+
                   <Label>
                     <Input
-                      width="700px"
+                      width="800px"
                       error={errors.age && touched.age && errors.age}
                       type={'text'}
                       value={values.age}
@@ -195,7 +252,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                   </Label>
 
                   <InputRadio
-                    width="700"
+                    width="800px"
                     selectedValue={values.location}
                     defaultValue={'Район міста'}
                     values={locationListValue}
@@ -205,7 +262,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                   />
 
                   <InputRadio
-                    width="700"
+                    width="800px"
                     selectedValue={values.problem}
                     defaultValue={'Проблема'}
                     values={problemListValue}
@@ -228,7 +285,7 @@ const ModalLeaveRequest = ({ onClick }) => {
 
                   <Label>
                     <Input
-                      width="700px"
+                      width="800px"
                       error={errors.budget && touched.budget && errors.budget}
                       type={'number'}
                       value={values.budget}
@@ -246,7 +303,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                   <Label>
                     <Input
                       as={'textarea'}
-                      width="700px"
+                      width="800px"
                       height="150px"
                       error={
                         errors.descriptionProblem &&

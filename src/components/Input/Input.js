@@ -19,6 +19,7 @@ const Input = ({
   min,
   max,
   $style,
+  pattern,
 }) => {
   return (
     <div style={{ position: 'relative' }}>
@@ -39,6 +40,7 @@ const Input = ({
         width={width}
         height={height}
         $style={$style}
+        pattern={pattern}
       />
       {(!value || showPlaceholder) && (
         <Placeholder type={field} required={required}>

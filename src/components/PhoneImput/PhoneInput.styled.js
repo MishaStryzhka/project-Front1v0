@@ -14,7 +14,7 @@ export const StyledPhoneInput = styled(PhoneInput)`
   letter-spacing: 0.64px;
 
   padding: 15px;
-  width: 100%;
+  width: ${({ width }) => width};
   height: 50px;
   box-sizing: border-box;
   border-radius: 10px;

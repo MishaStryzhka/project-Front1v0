@@ -8,6 +8,7 @@ const PhoneInputField = props => {
     field: { name, value },
     setFieldValue,
     country = 'UA',
+    width,
   } = props;
 
   const onValueChange = phoneNumber => {
@@ -21,6 +22,7 @@ const PhoneInputField = props => {
       value={value}
       onChange={e => onValueChange(e || '')}
       country={country}
+      width={width}
     />
   );
 };
