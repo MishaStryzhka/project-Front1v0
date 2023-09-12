@@ -8,8 +8,8 @@ const IconCross = props => (
     fill="none"
     {...props}
   >
-    <path d="M1 16L15.8492 1.15076" stroke="#04827A" />
-    <path d="M1 1L15.8492 15.8492" stroke="#04827A" />
+    <path d="M1 16L15.8492 1.15076" stroke="#396DFF" />
+    <path d="M1 1L15.8492 15.8492" stroke="#396DFF" />
   </svg>
 );
 export default IconCross;

@@ -73,7 +73,7 @@ export const Placeholder = styled.div`
     display: none;
     ${({ required }) => required && 'display: block;'}
     content:  '*';
-    color: red;
+    color: ${({ theme }) => theme.color.error};
   }
 `;
 

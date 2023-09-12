@@ -180,11 +180,11 @@ const ModalLeaveRequest = ({ onClick }) => {
                   <InputRadio
                     width="800px"
                     selectedValue={values.dateOfReception}
-                    defaultValue={'Дата на коли потрібен прийом'}
                     name="dateOfReception"
                     onChange={value => setFieldValue('dateOfReception', value)}
                     required
                     type="date"
+                    placeholder="Дата на коли потрібен прийом"
                   />
 
                   <Label>
@@ -196,7 +196,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                         //   touched.preferredHours &&
                         //   errors.preferredHours
                         // }
-                        type={'number'}
+                        type={'time'}
                         value={values.preferredHours[0]}
                         name="preferredHours"
                         onChange={e => {
@@ -208,7 +208,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                         }}
                         onBlur={handleBlur}
                         placeholder="Від"
-                        width="100px"
+                        width="130px"
                         pattern="[0-9]{2}:[0-9]{2}"
                       />
                       <Input
@@ -254,20 +254,21 @@ const ModalLeaveRequest = ({ onClick }) => {
                   <InputRadio
                     width="800px"
                     selectedValue={values.location}
-                    defaultValue={'Район міста'}
                     values={locationListValue}
                     name="location"
                     onChange={value => setFieldValue('location', value)}
                     required
+                    placeholder="Район міста"
                   />
 
                   <InputRadio
                     width="800px"
                     selectedValue={values.problem}
-                    defaultValue={'Проблема'}
                     values={problemListValue}
                     name="problem"
                     onChange={value => setFieldValue('problem', value)}
+                    required
+                    placeholder="Проблема"
                   />
 
                   <LabelCheckboxStyled

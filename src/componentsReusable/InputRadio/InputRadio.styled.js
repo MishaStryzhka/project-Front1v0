@@ -243,10 +243,10 @@ export const StyledInputRadio = styled.p`
 
   white-space: nowrap;
 
-  &::after {
-    display: none;
-    ${({ required }) => required && 'display: initial;'}
-    content: '*';
-    color: red;
-  }
+  // &::after {
+  //   display: none;
+  //   ${({ required }) => required && 'display: initial;'}
+  //   content: '*';
+  //   color: red;
+  // }
 `;

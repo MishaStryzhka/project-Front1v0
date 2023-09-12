@@ -16,8 +16,11 @@ export const FormDescription = styled.p`
   font-weight: 400;
   line-height: normal;
 
-  > span {
-    color: red;
+  &::after {
+    display: none;
+    ${({ required }) => required && 'display: initial;'}
+    content: '*';
+    color: ${({ theme }) => theme.color.error};
   }
 `;
 
@@ -37,8 +40,11 @@ export const Placeholder = styled.p`
   top: 15px;
   left: ${({ type }) => (type === 'tel' ? '61px' : '17px')};
 
-  > span {
-    color: red;
+  &::after {
+    display: none;
+    ${({ required }) => required && 'display: initial;'}
+    content: '*';
+    color: ${({ theme }) => theme.color.error};
   }
 `;
 
