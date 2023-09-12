@@ -7,7 +7,7 @@ const IconCheckboxSmall = props => (
     height={16}
     fill="none"
   >
-    <rect width={15} height={15} x={0.5} y={0.5} stroke="#04827A" rx={3.5} />
+    <rect width={15} height={15} x={0.5} y={0.5} stroke="#396DFF" rx={3.5} />
   </svg>
 );
 export default IconCheckboxSmall;

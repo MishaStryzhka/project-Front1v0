@@ -10,6 +10,7 @@ import {
 } from './InputRadio.styled';
 import IconPolygon from 'images/icons/IconPolygon';
 import { useCallback, useEffect, useState } from 'react';
+import { Placeholder } from 'components/FormPatientPage/FormPatientPage.styled';
 
 const InputRadio = e => {
   const {
@@ -23,6 +24,8 @@ const InputRadio = e => {
     onChange,
     required,
     type, // "calendar"
+    showPlaceholder = false,
+    placeholder,
   } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
@@ -66,6 +69,9 @@ const InputRadio = e => {
       >
         {selectedEl?.name || defaultValue}
       </StyledInputRadio>
+      {(!selectedValue || showPlaceholder) && (
+        <Placeholder required={required}>{placeholder}</Placeholder>
+      )}
       <ToggleBtn
         id={`ToggleBtn-${name}`}
         $isOpenMenu={isOpenMenu}

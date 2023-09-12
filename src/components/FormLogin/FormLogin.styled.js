@@ -189,7 +189,7 @@ export const NavWrap = styled.div`
 `;
 
 export const TextCheckbox = styled.span`
-  color: ${({ theme }) => theme.color.main};
+  color: ${({ theme }) => theme.color.secondary};
 
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 16px;

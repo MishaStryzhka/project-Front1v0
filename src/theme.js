@@ -1,8 +1,8 @@
 const lightTheme = {
   bodyColor: '',
 
-  main: '#04827A', // dark green
-  secondaryMain: '#F5BC20', // yellow
+  main: '#396DFF', // dark green
+  secondaryMain: '#F9E0F3', // CTA
 
   primary: '#FFFFFF', // White
   secondary: '#000', // Black
@@ -11,7 +11,7 @@ const lightTheme = {
   btnDark: '#C3E2E7', // Light blue
   btnLight: '#E5E8EF', // Light grayish blue
 
-  error: 'red', //
+  error: '#AF0101', //
 
   background: '#EEF1F7', //
   card: '#DDD', //
