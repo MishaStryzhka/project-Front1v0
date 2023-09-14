@@ -9,6 +9,11 @@ export const directionListValue = [
   { id: 'prosthesis', name: 'Протезування', description: '' },
   { id: 'endodontics', name: 'Ендодонтія', description: '' },
   { id: 'parandotology', name: 'Парандотологія', description: '' },
+  {
+    id: 'maxillofacialSurgery',
+    name: 'Щелепно-лицьова хірургія',
+    description: '',
+  },
   { id: 'childrensDentistry', name: 'Дитяча стоматологія', description: '' },
   { id: 'aestheticDentistry', name: 'Естетична стоматологія', description: '' },
   { id: 'radiology', name: 'Рентгенологія', description: '' },
