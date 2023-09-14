@@ -1,6 +1,10 @@
 import Form from 'components/Form/Form';
-import { Box, HoursWrap, InputWrap } from './ModalLeaveRequest.styled';
-import { StyledTitle } from 'pages/mainPages/DirectionsListPage/DirectionsListPage.styled';
+import {
+  Box,
+  HoursWrap,
+  InputWrap,
+  StyledTitle,
+} from './ModalLeaveRequest.styled';
 import { Formik } from 'formik';
 import { Label } from 'components/PersonalData/PersonalData.styled';
 import Input from 'components/Input/Input';
