@@ -61,7 +61,8 @@ const InputRadio = e => {
   }, [handleKeyDown, handleClose]);
 
   const selectedEl = values?.find(option => option.id === selectedValue);
-
+  console.log('selectedValue', selectedValue)
+  // console.log('showPlaceholder', showPlaceholder)
   return (
     <InputRadioBox width={width} className={className}>
       <StyledInputRadio
@@ -69,12 +70,10 @@ const InputRadio = e => {
         width={width}
         required={required}
       >
-       {selectedEl?.name || defaultValue } 
+       {selectedEl?.name || defaultValue || (selectedValue !== "" && selectedValue.toLocaleDateString()) } 
       </StyledInputRadio>
-      {(!selectedValue || showPlaceholder) ?
-      <Placeholder required={required}>{placeholder}</Placeholder>: (
-      <Placeholder required={required}>555</Placeholder>
-      )}
+      {(!selectedValue || showPlaceholder) &&
+      <Placeholder required={required}>{placeholder}</Placeholder>}
       <ToggleBtn
         id={`ToggleBtn-${name}`}
         $isOpenMenu={isOpenMenu}
@@ -112,7 +111,6 @@ const InputRadio = e => {
           <WrapCalendar
             value={selectedValue}
             onChange={date => {
-              console.log('date', date);
               onChange(date);
             }}
           />
