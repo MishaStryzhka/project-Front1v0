@@ -1,4 +1,4 @@
-import Calendar from 'componentsReusable/Calendar/Calendar';
+import WrapCalendar from 'componentsReusable/Calendar/Calendar';
 import {
   InputRadioBox,
   Item,
@@ -9,7 +9,9 @@ import {
   WrapScroll,
 } from './InputRadio.styled';
 import IconPolygon from 'images/icons/IconPolygon';
-import { useCallback, useEffect, useState } from 'react';
+import { 
+  useCallback, useEffect,
+   useState } from 'react';
 import { Placeholder } from 'components/FormPatientPage/FormPatientPage.styled';
 
 const InputRadio = e => {
@@ -67,10 +69,11 @@ const InputRadio = e => {
         width={width}
         required={required}
       >
-        {selectedEl?.name || defaultValue}
+       {selectedEl?.name || defaultValue } 
       </StyledInputRadio>
-      {(!selectedValue || showPlaceholder) && (
-        <Placeholder required={required}>{placeholder}</Placeholder>
+      {(!selectedValue || showPlaceholder) ?
+      <Placeholder required={required}>{placeholder}</Placeholder>: (
+      <Placeholder required={required}>555</Placeholder>
       )}
       <ToggleBtn
         id={`ToggleBtn-${name}`}
@@ -106,7 +109,7 @@ const InputRadio = e => {
           </ListBox>
         )}
         {type === 'date' && (
-          <Calendar
+          <WrapCalendar
             value={selectedValue}
             onChange={date => {
               console.log('date', date);
