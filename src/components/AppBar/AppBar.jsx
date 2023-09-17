@@ -1,5 +1,4 @@
-import Btn from 'components/Btn/Btn';
-import { NavContainer, StyledAppBar, StyledContainer } from './AppBar.styled';
+import { NavWrap, StyledAppBar, StyledContainer } from './AppBar.styled';
 import Logo from 'components/Logo/Logo';
 import FormSearch from 'components/FormSearch/FormSearch';
 import IconUser from 'images/icons/IconUser';
@@ -7,31 +6,43 @@ import BurgerMenu from 'components/BurgerMenu/BurgerMenu';
 import { useAuth } from 'hooks';
 import { useState } from 'react';
 import ModalLeaveRequest from 'components/ModalLeaveRequest/ModalLeaveRequest';
+import HeaderButton from 'componentsReusable/Button/HeaderButton/HeaderButton';
 
 export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
   const [isOpenModalLeaveRequest, setIsOpenModalLeaveRequest] = useState(false);
 
   const { user } = useAuth();
 
+  console.log('isOpenMenu', isOpenMenu);
+
   return (
     <>
       <StyledAppBar>
         <StyledContainer>
-          <NavContainer>
-            <Logo />
+          <Logo />
+          <NavWrap>
             {user?.userType !== 'doctor' && (
-              <Btn
-                onClick={() => setIsOpenModalLeaveRequest(true)}
-                text="Залишити заявку"
-              />
+              <HeaderButton onClick={() => setIsOpenModalLeaveRequest(true)}>
+                Залишити заявку
+              </HeaderButton>
             )}
-            <Btn to="/directionsList" type="link" text="Спеціалісти" />
-            <Btn to="/problemsList" type="link" text="Скарги" />
+            <HeaderButton to="/directionsList" type="link">
+              Спеціалісти
+            </HeaderButton>
+            <HeaderButton to="/problemsList" type="link">
+              Скарги
+            </HeaderButton>
             <FormSearch />
-            <Btn id="btnOpenBurgerMenu" onClick={() => setIsOpenMenu(true)}>
+            <HeaderButton
+              id="btnOpenBurgerMenu"
+              onClick={() => {
+                console.log('qqq');
+                setIsOpenMenu(true);
+              }}
+            >
               <IconUser />
-            </Btn>
-          </NavContainer>
+            </HeaderButton>
+          </NavWrap>
           {isOpenMenu && <BurgerMenu setIsOpenMenu={setIsOpenMenu} />}
         </StyledContainer>
       </StyledAppBar>

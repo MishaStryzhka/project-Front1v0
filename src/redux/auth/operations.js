@@ -220,12 +220,10 @@ export const refreshEmail = createAsyncThunk(
 
       return res.data;
     } catch (error) {
-      console.log('error', error);
-
-      // return thunkAPI.rejectWithValue({
-      //   status: error.response.status,
-      //   message: error.response.data.message,
-      // });
+      return thunkAPI.rejectWithValue({
+        status: error.response.status,
+        message: error.response.data.message,
+      });
     }
   }
 );

@@ -12,12 +12,12 @@ export const StuledInput = styled.input`
   outline: none;
 
   box-sizing: border-box;
-  width: 200px;
+  width: 300px;
   height: 40px;
   padding: 10px 20px;
 
-  border-radius: 10px;
-  border: 2px solid ${({ theme }) => theme.color.primary};
+  border-radius: 50px;
+  border: 2px solid #9bb8ff;
 
   background-color: transparent;
 
@@ -30,8 +30,6 @@ export const StuledInput = styled.input`
 `;
 
 export const Wrap = styled.div`
-  //   margin-top: 24px;
-  //   width: 100%;
   position: relative;
   display: flex;
   justify-content: space-between;
