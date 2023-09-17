@@ -34,7 +34,7 @@ const InputRadio = e => {
   const handleKeyDown = useCallback(evt => {
     document.body.style.overflow = 'auto';
     if (evt.code === 'Escape') {
-      setIsOpenMenu(false);
+      // setIsOpenMenu(false);
     }
   }, []);
 
@@ -44,7 +44,7 @@ const InputRadio = e => {
         e.target.id !== `ToggleBtn-${name}` &&
         e.target.id !== `InputRadioListBox-${name}`
       ) {
-        setIsOpenMenu(false);
+        // setIsOpenMenu(false);
       }
     },
     [name]

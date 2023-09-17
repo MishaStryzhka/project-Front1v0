@@ -7,6 +7,7 @@ import {
   updateUserInfo,
   updateUserType,
   deleteAccount,
+  refreshEmail,
 } from './operations';
 
 const initialState = {
@@ -87,6 +88,16 @@ const authSlice = createSlice({
         state.token = null;
         state.userType = null;
         state.isLoggedIn = null;
+      })
+      .addCase(refreshEmail.pending, state => {
+        state.isRefreshing = true;
+      })
+      .addCase(refreshEmail.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.isRefreshing = false;
+      })
+      .addCase(refreshEmail.rejected, (state, action) => {
+        console.log('action', action);
       });
   },
 });

@@ -9,10 +9,12 @@ export const StyledAppBar = styled.header`
 
 export const StyledContainer = styled(Container)`
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  justify-content: space-between;
   position: relative;
+
   height: 120px;
+  padding: 0 40px;
+  box-sizing: border-box;
 `;
 
 export const NavContainer = styled.div`
@@ -21,6 +23,12 @@ export const NavContainer = styled.div`
   align-items: center;
 
   column-gap: 40px;
+`;
+
+export const NavWrap = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 40px;
 `;
 
 export const UserBox = styled.div`

@@ -1,10 +1,9 @@
-import IconLogo from 'images/icons/IconLogo';
-import { StyledNavLink } from './Logo.styled';
+import { StyledLogo, StyledNavLink } from './Logo.styled';
 
 export const Logo = () => {
   return (
-    <StyledNavLink to="/main">
-      <IconLogo />
+    <StyledNavLink to="/">
+      <StyledLogo>DentistPortal</StyledLogo>
     </StyledNavLink>
   );
 };
