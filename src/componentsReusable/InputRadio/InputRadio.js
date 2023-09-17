@@ -1,4 +1,4 @@
-import Calendar from 'componentsReusable/Calendar/Calendar';
+import WrapCalendar from 'componentsReusable/Calendar/Calendar';
 import {
   InputRadioBox,
   Item,
@@ -9,7 +9,9 @@ import {
   WrapScroll,
 } from './InputRadio.styled';
 import IconPolygon from 'images/icons/IconPolygon';
-import { useCallback, useEffect, useState } from 'react';
+import { 
+  useCallback, useEffect,
+   useState } from 'react';
 import { Placeholder } from 'components/FormPatientPage/FormPatientPage.styled';
 
 const InputRadio = e => {
@@ -59,7 +61,8 @@ const InputRadio = e => {
   }, [handleKeyDown, handleClose]);
 
   const selectedEl = values?.find(option => option.id === selectedValue);
-
+  console.log('selectedValue', selectedValue)
+  // console.log('showPlaceholder', showPlaceholder)
   return (
     <InputRadioBox width={width} className={className}>
       <StyledInputRadio
@@ -67,11 +70,10 @@ const InputRadio = e => {
         width={width}
         required={required}
       >
-        {selectedEl?.name || defaultValue}
+       {selectedEl?.name || defaultValue || (selectedValue !== "" && selectedValue.toLocaleDateString()) } 
       </StyledInputRadio>
-      {(!selectedValue || showPlaceholder) && (
-        <Placeholder required={required}>{placeholder}</Placeholder>
-      )}
+      {(!selectedValue || showPlaceholder) &&
+      <Placeholder required={required}>{placeholder}</Placeholder>}
       <ToggleBtn
         id={`ToggleBtn-${name}`}
         $isOpenMenu={isOpenMenu}
@@ -106,10 +108,9 @@ const InputRadio = e => {
           </ListBox>
         )}
         {type === 'date' && (
-          <Calendar
+          <WrapCalendar
             value={selectedValue}
             onChange={date => {
-              console.log('date', date);
               onChange(date);
             }}
           />

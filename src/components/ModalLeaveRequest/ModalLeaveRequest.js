@@ -68,6 +68,9 @@ const ModalLeaveRequest = ({ onClick }) => {
             handleBlur,
             handleSubmit,
           }) => {
+            console.log('values', values.dateOfReception
+          )
+  
             return (
               <Form
                 // onSubmit={handleSubmit}

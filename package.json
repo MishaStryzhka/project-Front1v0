@@ -11,6 +11,8 @@
     "axios": "^1.4.0",
     "formik": "^2.4.3",
     "react": "^18.1.0",
+    "react-calendar": "^4.6.0",
+    "react-datepicker": "^4.17.0",
     "react-dom": "^18.1.0",
     "react-easy-crop": "^5.0.0",
     "react-helmet": "^6.1.0",
