@@ -39,6 +39,7 @@ export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
                 console.log('qqq');
                 setIsOpenMenu(true);
               }}
+              active={isOpenMenu}
             >
               <IconUser />
             </HeaderButton>

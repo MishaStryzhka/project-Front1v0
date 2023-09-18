@@ -32,6 +32,10 @@ export const StyledBtn = styled.button`
   justify-content: center;
   align-items: center;
   border-radius: 10px;
+  > svg {
+    pointer-events: none;
+    fill: ${({ theme }) => theme.color.primary};
+  }
 
   &:hover {
     font-weight: 500;
@@ -44,8 +48,15 @@ export const StyledBtn = styled.button`
       }
     }
   }
-  > svg {
-    pointer-events: none;
-    fill: ${({ theme }) => theme.color.primary};
-  }
+  ${({ active, theme }) =>
+    active &&
+    `
+  background-color: ${theme.color.primary};
+    > svg {
+      fill: ${theme.color.main};
+      > path {
+        stroke: ${theme.color.main};
+      }
+    }
+  `}
 `;

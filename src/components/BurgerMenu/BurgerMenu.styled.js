@@ -3,6 +3,7 @@ import { styled } from 'styled-components';
 
 export const BurgerMenuContainer = styled.div`
   position: absolute;
+  right: 40px;
   bottom: -40px;
 
   display: flex;

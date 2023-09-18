@@ -8,6 +8,7 @@ const HeaderButton = ({
   to,
   children,
   id,
+  active,
 }) => {
   return type === 'link' ? (
     <StyledNavLink
@@ -26,6 +27,7 @@ const HeaderButton = ({
       type={type}
       children={children}
       id={id}
+      active={active}
     >
       {children}
     </StyledBtn>
