@@ -1,21 +1,6 @@
-import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
-export const StyledNavLink = styled(NavLink)`
-  color: ${({ theme }) => theme.color.primary};
-  text-align: center;
-  font-family: Rubik;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  text-decoration-line: underline;
-  &:hover {
-    font-weight: 500;
-  }
-`;
-
-export const StyledBtn = styled.button`
+export const StyledUserBtn = styled.button`
   color: ${({ theme }) => theme.color.primary};
   text-align: center;
   font-family: Rubik;
@@ -39,5 +24,24 @@ export const StyledBtn = styled.button`
 
   &:hover {
     font-weight: 500;
+
+    background-color: ${({ theme }) => theme.color.primary};
+    > svg {
+      fill: ${({ theme }) => theme.color.main};
+      > path {
+        stroke: ${({ theme }) => theme.color.main};
+      }
+    }
   }
+  ${({ active, theme }) =>
+    active &&
+    `
+  background-color: ${theme.color.primary};
+    > svg {
+      fill: ${theme.color.main};
+      > path {
+        stroke: ${theme.color.main};
+      }
+    }
+  `}
 `;
