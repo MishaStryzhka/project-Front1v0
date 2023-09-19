@@ -7,6 +7,7 @@ import { useAuth } from 'hooks';
 import { useState } from 'react';
 import ModalLeaveRequest from 'components/ModalLeaveRequest/ModalLeaveRequest';
 import HeaderButton from 'componentsReusable/Button/HeaderButton/HeaderButton';
+import UserBtn from 'components/UserBtn/UserBtn';
 
 export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
   const [isOpenModalLeaveRequest, setIsOpenModalLeaveRequest] = useState(false);
@@ -33,7 +34,7 @@ export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
               Скарги
             </HeaderButton>
             <FormSearch />
-            <HeaderButton
+            <UserBtn
               id="btnOpenBurgerMenu"
               onClick={() => {
                 console.log('qqq');
@@ -42,7 +43,7 @@ export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
               active={isOpenMenu}
             >
               <IconUser />
-            </HeaderButton>
+            </UserBtn>
           </NavWrap>
           {isOpenMenu && <BurgerMenu setIsOpenMenu={setIsOpenMenu} />}
         </StyledContainer>
