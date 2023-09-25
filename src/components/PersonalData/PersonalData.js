@@ -32,7 +32,7 @@ import {
   YearsWrap,
 } from './PersonalData.styled';
 import React, { useState } from 'react';
-import Modal from 'components/Modal/Modal';
+import Modal from 'componentsReusable/Modal/Modal';
 import { TitleModal } from 'components/ModalRefreshEmail/ModalRefreshEmail.styled';
 import CropperWrap from 'components/CropperWrap/CropperWrap';
 import { useAuth } from 'hooks';

@@ -1,6 +1,6 @@
 import FormRegister from 'components/FormRegister/FormRegister';
 import FormTypeUser from 'components/FormTypeUser/FormTypeUser';
-import Modal from 'components/Modal/Modal';
+import Modal from 'componentsReusable/Modal/Modal';
 import OrBoxAotorization from 'components/OrBoxAotorization/OrBoxAotorization';
 import { useAuth } from 'hooks';
 import { useEffect, useState } from 'react';

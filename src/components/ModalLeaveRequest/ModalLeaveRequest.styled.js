@@ -22,3 +22,8 @@ export const StyledTitle = styled(Title)`
   width: initial;
   padding-top: initial;
 `;
+
+export const WrapDate = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;

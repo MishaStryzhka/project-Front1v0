@@ -4,6 +4,7 @@ import {
   HoursWrap,
   InputWrap,
   StyledTitle,
+  WrapDate,
 } from './ModalLeaveRequest.styled';
 import { Formik } from 'formik';
 import { Label } from 'components/PersonalData/PersonalData.styled';
@@ -24,8 +25,9 @@ import {
   LabelCheckboxStyled,
   TextCheckbox,
 } from 'components/FormLogin/FormLogin.styled';
+import InputCalendar from 'componentsReusable/InputCalendar/InputCalendar';
 
-const { default: Modal } = require('components/Modal/Modal');
+const { default: Modal } = require('componentsReusable/Modal/Modal');
 const { createPortal } = require('react-dom');
 
 const ModalLeaveRequest = ({ onClick }) => {
@@ -181,17 +183,19 @@ const ModalLeaveRequest = ({ onClick }) => {
                     </ButtonRefresh>
                   </WrapPhone>
 
-                  <InputRadio
-                    width="800px"
-                    selectedValue={values.dateOfReception}
-                    name="dateOfReception"
-                    onChange={value => setFieldValue('dateOfReception', value)}
-                    required
-                    type="date"
-                    placeholder="Дата на коли потрібен прийом"
-                  />
+                  <WrapDate>
+                    <InputCalendar
+                      width="300px"
+                      selectedValue={values.dateOfReception}
+                      name="dateOfReception"
+                      onChange={value =>
+                        setFieldValue('dateOfReception', value)
+                      }
+                      required
+                      type="date"
+                      placeholder=""
+                    />
 
-                  <Label>
                     <HoursWrap>
                       <p>Бажані години *</p>
                       <Input
@@ -212,8 +216,8 @@ const ModalLeaveRequest = ({ onClick }) => {
                         }}
                         onBlur={handleBlur}
                         placeholder="Від"
-                        width="130px"
-                        pattern="[0-9]{2}:[0-9]{2}"
+                        width="150px"
+                        pattern="\d{4}-\d{2}-\d{2}"
                       />
                       <Input
                         // error={
@@ -236,7 +240,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                         width="100px"
                       />
                     </HoursWrap>
-                  </Label>
+                  </WrapDate>
 
                   <Label>
                     <Input

@@ -27,7 +27,7 @@ export const StyledField = styled(Field)`
   ${({ $style }) => $style && $style}
 
   max-height: 75vh;
-  overflow-y: auto;
+  // overflow-y: auto;
   &::-webkit-scrollbar {
     width: 8px;
     height: 0px;
@@ -46,6 +46,10 @@ export const StyledField = styled(Field)`
       background-color: ${({ theme }) => theme.color.main}50;
     }
   }
+
+  ${({ required }) => {
+    return required && '';
+  }};
 `;
 
 export const Placeholder = styled.div`

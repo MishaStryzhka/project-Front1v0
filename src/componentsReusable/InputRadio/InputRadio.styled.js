@@ -89,7 +89,7 @@ export const WrapScroll = styled.div`
   }}
 `;
 
-export const ListBox = styled.div`
+export const ListBox = styled.ul`
   display: flex;
   flex-direction: column;
 
