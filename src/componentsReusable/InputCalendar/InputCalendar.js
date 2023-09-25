@@ -23,12 +23,6 @@ const InputCalendar = e => {
   } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
-  selectedValue &&
-    console.log(
-      'selectedValue',
-      dateFormat(new Date(selectedValue), 'yyyy-mm-dd')
-    );
-
   const handleKeyDown = useCallback(evt => {
     document.body.style.overflow = 'auto';
     if (evt.code === 'Escape') {
@@ -68,17 +62,13 @@ const InputCalendar = e => {
         }
         onChange={e => {
           onChange(e.currentTarget.value);
-          console.log('e', e.currentTarget.value);
         }}
-        // required={required}
-        // placeholder={placeholder}
       />
       {!selectedValue && (
         <StyledPlaceholder required={required}></StyledPlaceholder>
       )}
       <ToggleBtn
         id={`ToggleBtn-${name}`}
-        // $isOpenMenu={isOpenMenu}
         onClick={() => {
           setIsOpenMenu(!isOpenMenu);
         }}
@@ -91,7 +81,6 @@ const InputCalendar = e => {
           <Calendar
             value={selectedValue}
             onChange={date => {
-              console.log('date', date);
               onChange(date);
             }}
           />
