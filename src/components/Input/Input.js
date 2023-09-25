@@ -39,8 +39,6 @@ const Input = ({
         width={width}
         height={height}
         $style={$style}
-        // placeholder={placeholder}
-        errorMessage="sada"
       />
       {!value && (
         <Placeholder type={field} required={required}>

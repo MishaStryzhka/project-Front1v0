@@ -10,6 +10,8 @@ import {
 import IconCalendar from 'images/icons/IconCalendar';
 import Input from 'components/Input/Input';
 
+import dateFormat from 'dateformat';
+
 const InputCalendar = e => {
   const {
     width, // "800px", ...
@@ -20,6 +22,12 @@ const InputCalendar = e => {
     required,
   } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+
+  selectedValue &&
+    console.log(
+      'selectedValue',
+      dateFormat(new Date(selectedValue), 'yyyy-mm-dd')
+    );
 
   const handleKeyDown = useCallback(evt => {
     document.body.style.overflow = 'auto';
@@ -55,7 +63,9 @@ const InputCalendar = e => {
       <Input
         type="date"
         width={width}
-        value={selectedValue}
+        value={
+          selectedValue ? dateFormat(new Date(selectedValue), 'yyyy-mm-dd') : ''
+        }
         onChange={e => {
           onChange(e.currentTarget.value);
           console.log('e', e.currentTarget.value);
