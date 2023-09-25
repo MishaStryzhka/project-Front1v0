@@ -1,6 +1,5 @@
 import Calendar from 'componentsReusable/Calendar/Calendar';
 import { useCallback, useEffect, useState } from 'react';
-import { Placeholder } from 'components/FormPatientPage/FormPatientPage.styled';
 import {
   InputCalendarBox,
   ScrollBox,
@@ -19,7 +18,6 @@ const InputCalendar = e => {
     className,
     onChange,
     required,
-    placeholder,
   } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
