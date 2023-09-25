@@ -19,7 +19,9 @@ const BurgerMenu = () => {
       {isLoggedIn ? (
         <>
           <StyledNavLink
-            to={`/${userType === 'doctor' ? 'doctor/accountData' : 'patient'}/`}
+            to={`/${
+              userType === 'doctor' ? 'user/doctor/accountData' : 'user/patient'
+            }/`}
           >
             Мій профіль
           </StyledNavLink>

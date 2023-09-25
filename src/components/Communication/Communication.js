@@ -35,11 +35,6 @@ const Communication = () => {
         handleBlur,
         handleSubmit,
       }) => {
-        console.log(
-          'values.communicationWithDoctor',
-          values.communicationWithDoctor
-        );
-
         return (
           <Form
             onSubmit={handleSubmit}

@@ -10,14 +10,15 @@ import { RestrictedRoute } from 'rotes/RestrictedRoute';
 import { PrivateRoute } from 'rotes/PrivateRoute';
 
 import SharedLayout from 'components/SharedLayout/SharedLayout';
-import DoctorPage from 'pages/secondaryPages/UserPage/DoctorPage';
-import PatientPage from 'pages/secondaryPages/UserPage/PatientPage';
+import UserDoctorPage from 'pages/secondaryPages/UserPage/UserDoctorPage/UserDoctorPage';
+import PatientPage from 'pages/secondaryPages/UserPage/UserPatientPage/PatientPage';
 import AccountData from './AccountData/AccountData';
 import PersonalData from './PersonalData/PersonalData';
 import DirectionWork from './DirectionWork/DirectionWork';
 import Communication from './Communication/Communication';
 import DirectionPage from 'pages/mainPages/DirectionPage/DirectionPage';
 import ProblemPage from 'pages/mainPages/ProblemPage/ProblemPage';
+import UserPage from 'pages/secondaryPages/UserPage/UserPage/UserPage';
 
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
 const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
@@ -63,7 +64,7 @@ export const App = () => {
             element={
               <RestrictedRoute
                 redirectTo={`/${
-                  userType === 'doctor' ? 'doctor/accountData' : 'patient'
+                  userType === 'doctor' ? 'user/doctor/accountData' : 'patient'
                 }/`}
                 component={<LoginPage />}
               />
@@ -74,7 +75,7 @@ export const App = () => {
             element={
               <RestrictedRoute
                 redirectTo={`/${
-                  userType === 'doctor' ? 'doctor/accountData' : 'patient'
+                  userType === 'doctor' ? 'user/doctor/accountData' : 'patient'
                 }/`}
                 component={<RegisterPage />}
               />
@@ -85,22 +86,31 @@ export const App = () => {
             element={
               <RestrictedRoute
                 redirectTo={`/${
-                  userType === 'doctor' ? 'doctor/accountData' : 'patient'
+                  userType === 'doctor' ? 'user/doctor/accountData' : 'patient'
                 }/`}
                 component={<RegisterPage />}
               />
             }
           />
           <Route
-            path="/patient"
+            path="/user/:id"
+            element={
+              <PrivateRoute redirectTo="/login" component={<UserPage />} />
+            }
+          />
+          <Route
+            path="/user/patient"
             element={
               <PrivateRoute redirectTo="/login" component={<PatientPage />} />
             }
           />
           <Route
-            path="/doctor"
+            path="/user/doctor"
             element={
-              <PrivateRoute redirectTo="/login" component={<DoctorPage />} />
+              <PrivateRoute
+                redirectTo="/login"
+                component={<UserDoctorPage />}
+              />
             }
           >
             <Route path="accountData/" element={<AccountData />} />

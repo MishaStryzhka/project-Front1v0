@@ -8,7 +8,7 @@ const ProblemsListPage = () => {
   return (
     <>
       <Helmet>
-        <title>Проблеми</title>
+        <title>Скарги</title>
       </Helmet>
 
       <Container>

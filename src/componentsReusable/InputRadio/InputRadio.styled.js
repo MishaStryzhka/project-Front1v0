@@ -127,8 +127,6 @@ export const ListBox = styled.div`
 
   `;
     } else if ($styledType === 'min') {
-      console.log('qwe');
-
       return `
     gap: 3px;
 
