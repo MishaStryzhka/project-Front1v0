@@ -45,6 +45,8 @@ const UserPage = () => {
     howApplicationsAreReceived: [],
   };
 
+  console.log('user', user);
+
   return <p>UserPage</p>;
 };
 
