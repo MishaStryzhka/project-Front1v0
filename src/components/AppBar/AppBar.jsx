@@ -14,8 +14,6 @@ export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
 
   const { user } = useAuth();
 
-  console.log('isOpenMenu', isOpenMenu);
-
   return (
     <>
       <StyledAppBar>
@@ -37,7 +35,6 @@ export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
             <UserBtn
               id="btnOpenBurgerMenu"
               onClick={() => {
-                console.log('qqq');
                 setIsOpenMenu(true);
               }}
               active={isOpenMenu}

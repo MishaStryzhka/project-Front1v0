@@ -18,7 +18,7 @@ import {
 
 import { directionListValue } from 'helpers/directionsList';
 import { sortListValue } from 'helpers/sortList';
-import { useSearchParams } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 import { quantityListValue } from 'helpers/quantityList';
 
 const users = [
@@ -248,11 +248,13 @@ const DirectionPage = () => {
           <DoctorsBox>
             {users.map(user => (
               <DoctorsItem key={user?.id}>
-                <DoctorsAvatars alt="" />
-                <p>{user.lastName}</p>
-                <p>{user.firstName}</p>
-                <p>{user.jobs[0].name}</p>
-                <p>{user.experienceYears}</p>
+                <NavLink to={`/user/${user?.id}`}>
+                  <DoctorsAvatars alt="" />
+                  <p>{user.lastName}</p>
+                  <p>{user.firstName}</p>
+                  <p>{user.jobs[0].name}</p>
+                  <p>{user.experienceYears}</p>
+                </NavLink>
               </DoctorsItem>
             ))}
           </DoctorsBox>
