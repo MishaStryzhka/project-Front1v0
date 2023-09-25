@@ -15,11 +15,10 @@ const Input = ({
   width = '800px',
   height = '50px',
   showPlaceholder = false,
-  placeholder = 'placeholder',
+  placeholder = '',
   min,
   max,
   $style,
-  pattern,
 }) => {
   return (
     <div style={{ position: 'relative' }}>
@@ -40,9 +39,10 @@ const Input = ({
         width={width}
         height={height}
         $style={$style}
-        pattern={pattern}
+        // placeholder={placeholder}
+        errorMessage="sada"
       />
-      {(!value || showPlaceholder) && (
+      {!value && (
         <Placeholder type={field} required={required}>
           {placeholder}
         </Placeholder>
