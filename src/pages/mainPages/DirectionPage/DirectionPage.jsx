@@ -3,7 +3,7 @@ import { nanoid } from '@reduxjs/toolkit';
 import { Title } from 'components/FormLogin/FormLogin.styled';
 
 import Container from 'componentsReusable/Container/Container';
-import InputRadio from 'componentsReusable/InputRadio/InputRadio';
+import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import PageContainer from 'componentsReusable/PageContainer/PageContainer';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';

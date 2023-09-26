@@ -3,6 +3,7 @@ import {
   Box,
   HoursWrap,
   InputWrap,
+  ListDate,
   StyledTitle,
   WrapDate,
 } from './ModalLeaveRequest.styled';
@@ -16,7 +17,7 @@ import {
   WrapPhoneInput,
 } from 'components/FormPatientPage/FormPatientPage.styled';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
-import InputRadio from 'componentsReusable/InputRadio/InputRadio';
+import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
 import { locationListValue } from 'helpers/locationsList';
 import { problemListValue } from 'helpers/problemsList';
 import Checkbox from 'components/Checkbox/Checkbox';
@@ -25,7 +26,10 @@ import {
   LabelCheckboxStyled,
   TextCheckbox,
 } from 'components/FormLogin/FormLogin.styled';
-import InputCalendar from 'componentsReusable/InputCalendar/InputCalendar';
+import InputDate from 'componentsReusable/Inputs/InputDate/InputDate';
+import InputHours from 'componentsReusable/Inputs/InputHours/InputHours';
+import dateFormat from 'dateformat';
+import { nanoid } from '@reduxjs/toolkit';
 
 const { default: Modal } = require('componentsReusable/Modal/Modal');
 const { createPortal } = require('react-dom');
@@ -49,7 +53,14 @@ const ModalLeaveRequest = ({ onClick }) => {
             lastName: '',
             firstName: '',
             phones: [],
-            dateOfReception: '',
+            dateOfReception: [
+              {
+                id: nanoid(),
+                day: '',
+                from: '',
+                to: '',
+              },
+            ],
             preferredHours: ['', ''],
             age: '',
             location: '',
@@ -70,9 +81,6 @@ const ModalLeaveRequest = ({ onClick }) => {
             handleBlur,
             handleSubmit,
           }) => {
-            console.log('values', values.dateOfReception
-          )
-  
             return (
               <Form
                 // onSubmit={handleSubmit}
@@ -186,64 +194,87 @@ const ModalLeaveRequest = ({ onClick }) => {
                     </ButtonRefresh>
                   </WrapPhone>
 
-                  <WrapDate>
-                    <InputCalendar
-                      width="300px"
-                      selectedValue={values.dateOfReception}
-                      name="dateOfReception"
-                      onChange={value =>
-                        setFieldValue('dateOfReception', value)
-                      }
-                      required
-                      type="date"
-                      placeholder=""
-                    />
+                  <Label>
+                    <ListDate>
+                      {values.dateOfReception.map(dateValue => {
+                        const index = values.dateOfReception.findIndex(
+                          option => option.id === dateValue.id
+                        );
+                        return (
+                          <WrapDate key={dateValue.id}>
+                            <InputDate
+                              width="300px"
+                              selectedValue={dateValue.day}
+                              name="dateOfReception"
+                              onChange={value => {
+                                const newDateOfReception = [
+                                  ...values.dateOfReception,
+                                ];
 
-                    <HoursWrap>
-                      <p>Бажані години *</p>
-                      <Input
-                        // error={
-                        //   errors.preferredHours &&
-                        //   touched.preferredHours &&
-                        //   errors.preferredHours
-                        // }
-                        type={'time'}
-                        value={values.preferredHours[0]}
-                        name="preferredHours"
-                        onChange={e => {
-                          const { value } = e.currentTarget;
-                          setFieldValue('preferredHours', [
-                            value,
-                            values.preferredHours[1],
-                          ]);
-                        }}
-                        onBlur={handleBlur}
-                        placeholder="Від"
-                        width="150px"
-                        pattern="\d{4}-\d{2}-\d{2}"
-                      />
-                      <Input
-                        // error={
-                        //   errors.preferredHours &&
-                        //   touched.preferredHours &&
-                        //   errors.preferredHours
-                        // }
-                        type={'number'}
-                        value={values.preferredHours[1]}
-                        name="preferredHours"
-                        onChange={e => {
-                          const { value } = e.currentTarget;
-                          setFieldValue('preferredHours', [
-                            values.preferredHours[0],
-                            value,
-                          ]);
-                        }}
-                        onBlur={handleBlur}
-                        placeholder="До"
-                        width="100px"
-                      />
-                    </HoursWrap>
-                  </WrapDate>
+                                newDateOfReception.splice(index, 1, {
+                                  ...dateValue,
+                                  day: value,
+                                });
+
+                                setFieldValue(
+                                  'dateOfReception',
+                                  newDateOfReception
+                                );
+                              }}
+                              required
+                              type="date"
+                              placeholder=""
+                            />
+
+                            <InputHours
+                              disabled={!dateValue.day}
+                              width="300px"
+                              selectedValue={dateValue}
+                              name="dateOfReception"
+                              onChange={value => {
+                                const newDateOfReception = [
+                                  ...values.dateOfReception,
+                                ];
+
+                                newDateOfReception.splice(index, 1, value);
+
+                                setFieldValue(
+                                  'dateOfReception',
+                                  newDateOfReception
+                                );
+                              }}
+                              required
+                              type="date"
+                              placeholder=""
+                            />
+                          </WrapDate>
+                        );
+                      })}
+                    </ListDate>
+
+                    <ButtonRefresh
+                      disabled={
+                        values.dateOfReception.findIndex(
+                          option => option.day === ''
+                        ) !== -1 ||
+                        values.dateOfReception.length === 0 ||
+                        values.dateOfReception.length >= 3
+                      }
+                      type="button"
+                      onClick={() => {
+                        const newDate = [...values.dateOfReception];
+                        newDate.push({
+                          id: nanoid(),
+                          day: '',
+                          from: '',
+                          to: '',
+                        });
+                        setFieldValue('dateOfReception', newDate);
+                      }}
+                    >
+                      + Додати дату
+                    </ButtonRefresh>
+                  </Label>
 
                   <Label>
                     <Input

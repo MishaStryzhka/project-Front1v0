@@ -1,4 +1,4 @@
-import InputRadio from 'componentsReusable/InputRadio/InputRadio';
+import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
 import Pagination from 'componentsReusable/Pagination/Pagination';
 import { styled } from 'styled-components';
 
