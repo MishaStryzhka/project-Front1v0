@@ -9,9 +9,7 @@ import {
   WrapScroll,
 } from './InputRadio.styled';
 import IconPolygon from 'images/icons/IconPolygon';
-import { 
-  useCallback, useEffect,
-   useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Placeholder } from 'components/FormPatientPage/FormPatientPage.styled';
 
 const InputRadio = e => {
@@ -61,7 +59,7 @@ const InputRadio = e => {
   }, [handleKeyDown, handleClose]);
 
   const selectedEl = values?.find(option => option.id === selectedValue);
-  console.log('selectedValue', selectedValue)
+  // console.log('selectedValue', selectedValue)
   // console.log('showPlaceholder', showPlaceholder)
   return (
     <InputRadioBox width={width} className={className}>
@@ -70,10 +68,13 @@ const InputRadio = e => {
         width={width}
         required={required}
       >
-       {selectedEl?.name || defaultValue || (selectedValue !== "" && selectedValue.toLocaleDateString()) } 
+        {selectedEl?.name ||
+          defaultValue ||
+          (selectedValue !== '' && selectedValue.toLocaleDateString())}
       </StyledInputRadio>
-      {(!selectedValue || showPlaceholder) &&
-      <Placeholder required={required}>{placeholder}</Placeholder>}
+      {(!selectedValue || showPlaceholder) && (
+        <Placeholder required={required}>{placeholder}</Placeholder>
+      )}
       <ToggleBtn
         id={`ToggleBtn-${name}`}
         $isOpenMenu={isOpenMenu}

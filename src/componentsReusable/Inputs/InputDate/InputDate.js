@@ -6,13 +6,13 @@ import {
   StyledPlaceholder,
   ToggleBtn,
   WrapScroll,
-} from './InputCalendar.styled';
+} from './InputDate.styled';
 import IconCalendar from 'images/icons/IconCalendar';
 import Input from 'components/Input/Input';
 
 import dateFormat from 'dateformat';
 
-const InputCalendar = e => {
+const InputDate = e => {
   const {
     width, // "800px", ...
     selectedValue,
@@ -34,7 +34,7 @@ const InputCalendar = e => {
     e => {
       if (
         e.target.id !== `ToggleBtn-${name}` &&
-        e.target.id !== `InputCalendar-${name}`
+        e.target.id !== `InputDate-${name}`
       ) {
         setIsOpenMenu(false);
       }
@@ -79,9 +79,9 @@ const InputCalendar = e => {
       <WrapScroll $isOpenMenu={isOpenMenu} id={`InputCalendar-${name}`}>
         <ScrollBox>
           <Calendar
-            value={selectedValue}
+            value={dateFormat(selectedValue, 'yyyy-mm-dd')}
             onChange={date => {
-              onChange(date);
+              onChange(dateFormat(date, 'yyyy-mm-dd'));
             }}
           />
         </ScrollBox>
@@ -90,8 +90,4 @@ const InputCalendar = e => {
   );
 };
 
-// const InputCalendar = () => {
-//   return;
-// };
-
-export default InputCalendar;
+export default InputDate;

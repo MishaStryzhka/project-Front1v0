@@ -23,7 +23,9 @@ export const StyledTitle = styled(Title)`
   padding-top: initial;
 `;
 
-export const WrapDate = styled.div`
+export const ListDate = styled.ul``;
+
+export const WrapDate = styled.li`
   display: flex;
   justify-content: space-between;
 `;
