@@ -7,7 +7,6 @@ import {
 } from './InputHours.styled';
 import { useCallback } from 'react';
 import { useEffect } from 'react';
-import Input from 'components/Input/Input';
 import dateFormat from 'dateformat';
 import {
   ScrollBox,
@@ -16,8 +15,6 @@ import {
   WrapScroll,
 } from '../InputDate/InputDate.styled';
 import IconClock from 'images/icons/IconClock';
-import Calendar from 'react-calendar';
-import { date } from 'yup';
 import { useAuth } from 'hooks';
 import theme from 'theme';
 import TimePicker from 'componentsReusable/TimePicker/TimePicker';
