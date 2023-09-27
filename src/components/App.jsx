@@ -21,7 +21,7 @@ import ProblemPage from 'pages/mainPages/ProblemPage/ProblemPage';
 import UserPage from 'pages/secondaryPages/UserPage/UserPage/UserPage';
 
 const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
-const LoginPage = lazy(() => import('pages/authPages/LoginPage'));
+const LoginPage = lazy(() => import('pages/authPages/LoginPage/LoginPage'));
 const MainPage = lazy(() => import('pages/mainPages/MainPage'));
 const NotFoundPage = lazy(() => import('pages/mainPages/NotFoundPage'));
 

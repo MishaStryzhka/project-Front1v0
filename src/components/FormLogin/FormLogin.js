@@ -1,18 +1,13 @@
 import { Formik } from 'formik';
 import { validationLoginSchema } from 'schemas';
 import {
-  Button,
   FieldCheckboxStyled,
   FieldStyled,
   FormStyled,
   Label,
   LabelCheckboxStyled,
   ImputWrap,
-  StyledNavLink,
   TextError,
-  Title,
-  StyledRefreshPassword,
-  NavWrap,
   TextCheckbox,
 } from './FormLogin.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
@@ -23,7 +18,6 @@ const FormLogin = ({ onSubmit }) => {
 
   return (
     <>
-      <Title>Вхід</Title>
       <Formik
         initialValues={{
           email: '',
@@ -42,7 +36,7 @@ const FormLogin = ({ onSubmit }) => {
           handleSubmit,
         }) => {
           return (
-            <FormStyled onSubmit={handleSubmit}>
+            <FormStyled id="FormLogin" onSubmit={handleSubmit}>
               <ImputWrap>
                 <Label>
                   <FieldStyled
@@ -55,7 +49,7 @@ const FormLogin = ({ onSubmit }) => {
                       handleChange(e);
                     }}
                     onBlur={handleBlur}
-                    placeholder="e-mail"
+                    placeholder="E-mail"
                     required
                   />
                   {errors.email && touched.email && (
@@ -89,28 +83,16 @@ const FormLogin = ({ onSubmit }) => {
                 </Label>
               </ImputWrap>
 
-              <StyledRefreshPassword to="/refreshPassword">
-                Забули пароль?
-              </StyledRefreshPassword>
-
-              <NavWrap>
-                <StyledNavLink to="/register">
-                  Створити користувача
-                </StyledNavLink>
-                <div>
-                  <Button type="submit">Вхід</Button>
-                  <LabelCheckboxStyled>
-                    <FieldCheckboxStyled
-                      type={'checkbox'}
-                      name="rememberMe"
-                      // onChange={handleChange}
-                      onBlur={handleBlur}
-                      component={Checkbox}
-                    />
-                    <TextCheckbox>запам’ятати мене</TextCheckbox>
-                  </LabelCheckboxStyled>
-                </div>
-              </NavWrap>
+              <LabelCheckboxStyled>
+                <FieldCheckboxStyled
+                  type={'checkbox'}
+                  name="rememberMe"
+                  // onChange={handleChange}
+                  onBlur={handleBlur}
+                  component={Checkbox}
+                />
+                <TextCheckbox>запам’ятати мене</TextCheckbox>
+              </LabelCheckboxStyled>
             </FormStyled>
           );
         }}

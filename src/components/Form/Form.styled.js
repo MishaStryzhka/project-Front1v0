@@ -7,9 +7,6 @@ export const StyledForm = styled(Form)`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-
-  flex-grow: 3;
-  padding: 40px 0 75px 0;
 `;
 
 export const FormDescription = styled.p`

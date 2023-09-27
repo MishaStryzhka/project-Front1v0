@@ -1,17 +1,15 @@
 import {
-  Button,
   FieldStyled,
   FormStyled,
   ImputWrap,
   Label,
-  NavWrap,
   TextError,
-  Title,
 } from 'components/FormLogin/FormLogin.styled';
 import PassValidateBox from 'components/PassValidateBox/PassValidateBox';
 import { Formik } from 'formik';
 import { validationRegisterSchema } from 'schemas';
 import { useAuth } from 'hooks';
+import Title from 'componentsReusable/Titles/Title/Title';
 
 const FormRegister = ({ onSubmit }) => {
   let { error } = useAuth();
@@ -112,9 +110,9 @@ const FormRegister = ({ onSubmit }) => {
                   )}
                 </Label>
               </ImputWrap>
-              <NavWrap>
+              {/* <NavWrap>
                 <Button type="submit">Зберегти та продовжити </Button>
-              </NavWrap>
+              </NavWrap> */}
             </FormStyled>
           );
         }}

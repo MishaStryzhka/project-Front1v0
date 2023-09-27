@@ -6,7 +6,7 @@ import BurgerMenu from 'components/BurgerMenu/BurgerMenu';
 import { useAuth } from 'hooks';
 import { useState } from 'react';
 import ModalLeaveRequest from 'components/ModalLeaveRequest/ModalLeaveRequest';
-import HeaderButton from 'componentsReusable/Button/HeaderButton/HeaderButton';
+import HeaderButton from 'componentsReusable/Buttons/HeaderButton/HeaderButton';
 import UserBtn from 'components/UserBtn/UserBtn';
 
 export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {

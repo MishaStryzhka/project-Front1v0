@@ -43,7 +43,7 @@ const ModalLeaveRequest = ({ onClick }) => {
   return createPortal(
     <Modal onClick={() => onClick()}>
       <Box>
-        <StyledTitle>
+        <StyledTitle type="modal">
           Залиште свою заявку, і лікар з вами зв’яжеться!
         </StyledTitle>
         <Formik

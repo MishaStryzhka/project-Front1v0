@@ -20,6 +20,7 @@ export const CloseWrap = styled.div`
   justify-content: flex-end;
 `;
 export const ModalContainer = styled.div`
+  width: 800px;
   border: 2px solid ${({ theme }) => theme.color.main};
   background: ${({ theme }) => theme.color.primary};
 

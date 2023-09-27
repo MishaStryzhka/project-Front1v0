@@ -1,11 +1,4 @@
-import SecondaryButton from 'components/SecondaryButton/SecondaryButton';
-import {
-  BtnBox,
-  FormDescription,
-  StyledForm,
-  StyledPrimaryButton,
-} from './Form.styled';
-import PrimaryButton from 'components/PrimaryButton/PrimaryButton';
+import { FormDescription, StyledForm } from './Form.styled';
 
 const Form = ({
   onSubmit,
@@ -17,19 +10,18 @@ const Form = ({
   saveDraft,
   viewCard,
   sendRequest,
+  id,
 }) => {
   return (
-    <StyledForm>
-      <div>
-        {isRequiredFields && (
-          <FormDescription>
-            <span>*</span> - обов’язкові поля
-          </FormDescription>
-        )}
-        {children}
-      </div>
+    <StyledForm id={id}>
+      {isRequiredFields && (
+        <FormDescription>
+          <span>*</span> - обов’язкові поля
+        </FormDescription>
+      )}
+      {children}
 
-      <BtnBox>
+      {/* <BtnBox>
         {viewCard && (
           <SecondaryButton disabled type="button">
             Переглянути картку як користувач
@@ -55,7 +47,7 @@ const Form = ({
             Відправити заявку
           </StyledPrimaryButton>
         )}
-      </BtnBox>
+      </BtnBox> */}
     </StyledForm>
   );
 };
