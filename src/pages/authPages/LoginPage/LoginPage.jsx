@@ -1,4 +1,3 @@
-import Container from 'componentsReusable/Container/Container';
 import FormLogin from 'components/FormLogin/FormLogin';
 import OrBoxAotorization from 'components/OrBoxAotorization/OrBoxAotorization';
 
