@@ -2,7 +2,7 @@ import Container from 'componentsReusable/Container/Container';
 import PageContainer from 'componentsReusable/PageContainer/PageContainer';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
 import MainContent from 'componentsReusable/MainContent/MainContent';
-import Title from 'componentsReusable/Title/Title';
+import Title from 'componentsReusable/Titles/Title/Title';
 import NavigationContainer from 'components/NavigationContainer/NavigationContainer';
 import { Outlet } from 'react-router-dom';
 import { StyledNavLink } from './UserDoctorPage.styled';

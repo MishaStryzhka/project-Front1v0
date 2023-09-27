@@ -4,13 +4,11 @@ export const StyledMainContent = styled.div`
   display: flex;
   flex-direction: column;
 
-  box-sizing: border-box;
-  width: 1140px;
-  height: 100%;
+  width: ${({ width }) => width};
 
-  border-top-left-radius: 40px;
+  background: ${({ theme }) => theme.color.background1};
+  border-radius: 20px;
 
-  background: ${({ theme }) => theme.color.primary};
-
-  padding: 0 40px;
+  padding: 40px;
+  margin: 0 auto;
 `;

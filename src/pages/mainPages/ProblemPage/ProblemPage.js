@@ -1,5 +1,4 @@
 import Container from 'componentsReusable/Container/Container';
-import { Title } from 'components/FormLogin/FormLogin.styled';
 import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import PageContainer from 'componentsReusable/PageContainer/PageContainer';
@@ -20,6 +19,7 @@ import { quantityListValue } from 'helpers/quantityList';
 import { locationListValue } from 'helpers/locationsList';
 import { hoursOfWorkListValue } from 'helpers/hoursOfWorkList';
 import { workExperienceListValue } from 'helpers/workExperienceList';
+import Title from 'componentsReusable/Titles/Title/Title';
 
 const users = [
   {
@@ -261,7 +261,7 @@ const ProblemPage = () => {
         </SideBarPage>
 
         <MainContent>
-          <Title>{problem?.name}</Title>
+          <Title type="page">{problem?.name}</Title>
 
           <p>Review</p>
 

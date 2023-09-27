@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const StyledTitle = styled.h1`
-  color: ${({ theme }) => theme.color.text};
-  text-align: center;
-  font-family: Rubik;
+  color: ${({ theme }) => theme.color.secondary};
+
+  font-family: ${({ theme }) => theme.fontFamily};
   font-size: 40px;
   font-style: normal;
   font-weight: 600;

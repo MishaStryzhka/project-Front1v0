@@ -1,6 +1,6 @@
 import IconGoogle from 'images/icons/IconGoogle';
 import { Line, LineText } from './OrBoxAotorization.styled';
-import IconFacebook from 'images/icons/IconFacebook';
+// import IconFacebook from 'images/icons/IconFacebook';
 
 const OrBoxAotorization = () => {
   return (
@@ -9,6 +9,8 @@ const OrBoxAotorization = () => {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+
+        paddingTop: 40,
       }}
     >
       <div
@@ -16,7 +18,6 @@ const OrBoxAotorization = () => {
           display: 'flex',
           justifyContent: 'space-between',
           width: 800,
-          paddingTop: 52,
           alignItems: 'center',
         }}
       >
@@ -37,9 +38,9 @@ const OrBoxAotorization = () => {
         <a href="https://project-back1v0.onrender.com/api/users/google/">
           <IconGoogle />
         </a>
-        <a href="https://project-back1v0.onrender.com/api/users/facebook/">
+        {/* <a href="https://project-back1v0.onrender.com/api/users/facebook/">
           <IconFacebook />
-        </a>
+        </a> */}
       </div>
     </div>
   );

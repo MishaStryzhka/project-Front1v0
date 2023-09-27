@@ -1,17 +1,17 @@
 import Container from 'componentsReusable/Container/Container';
-import { Title } from 'components/FormLogin/FormLogin.styled';
 import FormPatientPage from 'components/FormPatientPage/FormPatientPage';
 import ModalRefreshEmail from 'components/ModalRefreshEmail/ModalRefreshEmail';
 import ModalRefreshPassword from 'components/ModalRefreshPassword/ModalRefreshPassword';
 import NavigationContainer from 'components/NavigationContainer/NavigationContainer';
 import { useState } from 'react';
+import Title from 'componentsReusable/Titles/Title/Title';
 
 export const PatientPage = () => {
   const [onChange, setOnChange] = useState(null);
 
   return (
     <Container>
-      <Title>Особистий кабінет пацієнта</Title>
+      <Title type="page">Особистий кабінет пацієнта</Title>
 
       <NavigationContainer />
 

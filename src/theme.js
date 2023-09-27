@@ -1,5 +1,4 @@
 const lightTheme = {
-  main: '#396DFF', // dark green
   secondaryMain: '#F9E0F3', // CTA
 
   primary: '#FFFFFF', // White
@@ -19,9 +18,17 @@ const lightTheme = {
   gradient: 'linear-gradient(to left, #419ef1 0%, #9bd0ff 100%)', //gradient
 
   // ++++++++
+  main: '#396DFF', // dark green
+
   text: '#00185C',
   background1: '#f1f5ff',
   secondaryColor: '#DEFFD9',
+
+  CTA: '#f9e0f3',
+  CTAHover: '#FFD3F5',
+  CTAPressed: '#FFC8F2',
+
+  disable: '#DDD',
 };
 
 const darktheme = {

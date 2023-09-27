@@ -1,6 +1,5 @@
 import { Helmet } from 'react-helmet';
 import { nanoid } from '@reduxjs/toolkit';
-import { Title } from 'components/FormLogin/FormLogin.styled';
 
 import Container from 'componentsReusable/Container/Container';
 import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
@@ -20,6 +19,7 @@ import { directionListValue } from 'helpers/directionsList';
 import { sortListValue } from 'helpers/sortList';
 import { NavLink, useSearchParams } from 'react-router-dom';
 import { quantityListValue } from 'helpers/quantityList';
+import Title from 'componentsReusable/Titles/Title/Title';
 
 const users = [
   {
@@ -233,7 +233,7 @@ const DirectionPage = () => {
         </SideBarPage>
 
         <MainContent>
-          <Title>{direction?.name}</Title>
+          <Title page="page">{direction?.name}</Title>
 
           <p>Review</p>
 

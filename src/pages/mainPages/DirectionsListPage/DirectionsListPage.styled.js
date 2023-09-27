@@ -1,4 +1,4 @@
-import Title from 'componentsReusable/Title/Title';
+import Title from 'componentsReusable/Titles/Title/Title';
 import { styled } from 'styled-components';
 
 export const StyledTitle = styled(Title)`

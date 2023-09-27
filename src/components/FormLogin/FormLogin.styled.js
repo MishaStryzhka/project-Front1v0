@@ -3,29 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { Form, Field } from 'formik';
 
 export const FormStyled = styled(Form)`
-  padding-top: 75px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-`;
-
-export const Title = styled.h2`
-  color: ${({ theme }) => theme.color.secondary};
-
-  font-family: ${({ theme }) => theme.fontFamily};
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-
-  padding-top: 75px;
-  // margin: auto;
-  // width: 800px;
-  text-align: center;
 `;
 
 export const ImputWrap = styled.div`
-  padding-top: 26px;
+  // padding-top: 26px;
 
   display: flex;
   flex-direction: column;
@@ -39,7 +22,7 @@ export const FieldStyled = styled(Field)`
   position: relative;
 
   font-size: 16px;
-  font-style: normal;
+  font-style: italic;
   font-weight: 400;
   line-height: 1.5;
   letter-spacing: 0.64px;
@@ -50,11 +33,13 @@ export const FieldStyled = styled(Field)`
   box-sizing: border-box;
   border-radius: 10px;
 
-  border: 1px solid
+  border: 2px solid
     ${({ theme, error }) => (error ? theme.color.error : theme.color.main)};
   outline: none;
 
   color: ${({ theme }) => theme.color.btnLogOut};
+
+  background-color: ${({ theme }) => theme.color.primary} !important;
 `;
 
 export const LabelCheckboxStyled = styled.label`
@@ -136,17 +121,6 @@ export const StyledNavLink = styled(NavLink)`
   border-radius: 10px;
 `;
 
-export const Text = styled.p`
-  text-align: center;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.48px;
-
-  color: #888;
-`;
-
 export const TextError = styled.p`
   color: ${({ theme }) => theme.color.error};
   margin-top: 4px;
@@ -159,37 +133,8 @@ export const TextError = styled.p`
   line-height: normal;
 `;
 
-export const SuccessText = styled.div`
-  margin-top: 4px;
-  margin-left: 16px;
-  font-size: 12px;
-  line-height: 1.3;
-  font-weight: 400;
-  color: ${({ theme }) => theme.color.indicator};
-`;
-
-export const WrapIcons = styled.div`
-  position: absolute;
-  top: 12px;
-  right: 16px;
-  display: flex;
-  gap: 8px;
-  @media screen and (min-width: 768px) {
-    gap: 15px;
-  }
-`;
-
-export const NavWrap = styled.div`
-  display: flex;
-  justify-content: center;
-  box-sizing: border-box;
-  column-gap: 80px;
-
-  padding-top: 52px;
-`;
-
 export const TextCheckbox = styled.span`
-  color: ${({ theme }) => theme.color.secondary};
+  color: ${({ theme }) => theme.color.main};
 
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 16px;

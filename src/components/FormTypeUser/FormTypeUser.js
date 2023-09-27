@@ -4,7 +4,6 @@ import {
   FieldCheckboxStyled,
   ImputWrap,
   LabelCheckboxStyled,
-  NavWrap,
 } from 'components/FormLogin/FormLogin.styled';
 import { LabelCheckboxText } from 'components/FormRegister/FormRegister.styled';
 import { Formik } from 'formik';
@@ -51,9 +50,7 @@ const FormTypeUser = ({ onSubmit }) => {
                   </LabelCheckboxText>
                 </LabelCheckboxStyled>
               </ImputWrap>
-              <NavWrap>
-                <Button type="submit">Зберегти та продовжити </Button>
-              </NavWrap>
+              <Button type="submit">Зберегти та продовжити </Button>
             </FormStyled>
           );
         }}
