@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { StyledNavLink } from './DoctorPageContainer.styled';
-import { Title } from 'components/FormLogin/FormLogin.styled';
+import { Title } from 'components/Forms/FormLogin/FormLogin.styled';
 import NavigationContainer from 'components/NavigationContainer/NavigationContainer';
 import PageContainer from 'componentsReusable/PageContainer/PageContainer';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';

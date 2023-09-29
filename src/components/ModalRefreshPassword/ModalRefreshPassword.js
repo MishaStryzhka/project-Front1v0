@@ -12,8 +12,8 @@ import {
   ImputWrap,
   Label,
   TextError,
-} from 'components/FormLogin/FormLogin.styled';
-import { Placeholder } from 'components/FormPatientPage/FormPatientPage.styled';
+} from 'components/Forms/FormLogin/FormLogin.styled';
+import { Placeholder } from 'components/Forms/FormPersonalDataPatient/FormPersonalDataPatient.styled';
 import { validationRefreshPasswordSchema } from 'schemas/RefreshPasswordSchema';
 import PassValidateBox from 'components/PassValidateBox/PassValidateBox';
 import { useDispatch } from 'react-redux';

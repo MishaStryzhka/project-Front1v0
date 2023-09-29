@@ -10,7 +10,7 @@ import {
   StyledLegend,
 } from './DirectionWork.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
-import Form from 'components/Form/Form';
+import Form from 'components/Forms/Form/Form';
 
 const DirectionWork = () => {
   const onSubmit = value => {

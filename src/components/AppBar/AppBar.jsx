@@ -1,6 +1,6 @@
 import { NavWrap, StyledAppBar, StyledContainer } from './AppBar.styled';
 import Logo from 'components/Logo/Logo';
-import FormSearch from 'components/FormSearch/FormSearch';
+import FormSearch from 'components/Forms/FormSearch/FormSearch';
 import IconUser from 'images/icons/IconUser';
 import BurgerMenu from 'components/BurgerMenu/BurgerMenu';
 import { useAuth } from 'hooks';

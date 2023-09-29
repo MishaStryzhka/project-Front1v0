@@ -27,7 +27,7 @@ export const FieldStyled = styled(Field)`
   line-height: 1.5;
   letter-spacing: 0.64px;
 
-  padding: 15px;
+  padding: 0 15px;
   width: 800px;
   height: 50px;
   box-sizing: border-box;
@@ -38,16 +38,12 @@ export const FieldStyled = styled(Field)`
   outline: none;
 
   color: ${({ theme }) => theme.color.btnLogOut};
-
-  background-color: ${({ theme }) => theme.color.primary} !important;
 `;
 
-export const LabelCheckboxStyled = styled.label`
+export const LabelCheckbox = styled.label`
   display: flex;
   column-gap: 20px;
   padding-top: 22px;
-
-  // background-color: red;
 `;
 
 export const FieldCheckboxStyled = styled(Field)`

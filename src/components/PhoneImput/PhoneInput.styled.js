@@ -5,6 +5,8 @@ export const StyledPhoneInput = styled(PhoneInput)`
   ${({ disabled }) => disabled && 'pointer-events: none;'}
   display: flex;
 
+  overflow: hidden;
+
   position: relative;
 
   font-size: 16px;
@@ -13,7 +15,7 @@ export const StyledPhoneInput = styled(PhoneInput)`
   line-height: 1.5;
   letter-spacing: 0.64px;
 
-  padding: 15px;
+  padding-left: 15px;
   width: ${({ width }) => width};
   height: 50px;
   box-sizing: border-box;
@@ -24,6 +26,11 @@ export const StyledPhoneInput = styled(PhoneInput)`
   outline: none;
 
   > .PhoneInputInput {
+    padding: 0;
+    padding-left: 3.3px;
+
+    height: 100%;
+
     color: ${({ theme, value }) => (value ? theme.color.secondary : '#adadad')};
 
     font-family: Rubik;
@@ -37,7 +44,7 @@ export const StyledPhoneInput = styled(PhoneInput)`
     outline: none;
 
     &:focus-visible {
-      border: 3px solid ${({ theme }) => theme.color.primary} !important;
+      // border: ;
     }
   }
 `;

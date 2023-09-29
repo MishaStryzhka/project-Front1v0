@@ -10,6 +10,8 @@ export const StyledContainer = styled(Container)`
 `;
 
 export const StyledMainContent = styled(MainContent)`
+  padding: 40px;
+  margin: 0 auto;
   gap: 40px;
 `;
 
@@ -58,4 +60,5 @@ export const WrapRegister = styled.p`
 
 export const StyledRegister = styled(NavLink)`
   text-decoration-line: underline;
+  padding-left: 5px;
 `;

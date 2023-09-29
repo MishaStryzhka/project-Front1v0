@@ -5,6 +5,10 @@ export const StyledSideBarPage = styled.div`
   flex-direction: column;
   row-gap: 40px;
 
+  height: max-content;
   box-sizing: border-box;
-  padding: 81px 40px;
+  padding: 40px 50px;
+  border-radius: 20px;
+
+  background: ${({ theme }) => theme.color.background1};
 `;

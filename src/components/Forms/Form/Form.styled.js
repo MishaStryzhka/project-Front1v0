@@ -1,4 +1,3 @@
-import PrimaryButton from 'components/PrimaryButton/PrimaryButton';
 import { Form } from 'formik';
 import { styled } from 'styled-components';
 
@@ -31,8 +30,4 @@ export const BtnBox = styled.div`
 
   display: flex;
   justify-content: space-between;
-`;
-
-export const StyledPrimaryButton = styled(PrimaryButton)`
-  margin-left: auto;
 `;

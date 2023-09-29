@@ -1,4 +1,4 @@
-import Form from 'components/Form/Form';
+import Form from 'components/Forms/Form/Form';
 import { Formik } from 'formik';
 import { useAuth } from 'hooks';
 import Modal from 'componentsReusable/Modal/Modal';
@@ -12,7 +12,7 @@ import {
   FieldStyled,
   Label,
   TextError,
-} from 'components/FormLogin/FormLogin.styled';
+} from 'components/Forms/FormLogin/FormLogin.styled';
 import {
   ButtonWrapper,
   FormDescription,

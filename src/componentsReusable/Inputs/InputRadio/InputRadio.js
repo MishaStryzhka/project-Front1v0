@@ -10,7 +10,7 @@ import {
 } from './InputRadio.styled';
 import IconPolygon from 'images/icons/IconPolygon';
 import { useCallback, useEffect, useState } from 'react';
-import { Placeholder } from 'components/FormPatientPage/FormPatientPage.styled';
+import { Placeholder } from 'components/Forms/FormPersonalDataPatient/FormPersonalDataPatient.styled';
 
 const InputRadio = e => {
   const {

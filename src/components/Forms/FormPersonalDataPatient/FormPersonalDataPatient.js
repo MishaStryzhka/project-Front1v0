@@ -5,7 +5,7 @@ import {
   ImputWrap,
   Label,
   TextError,
-} from 'components/FormLogin/FormLogin.styled';
+} from 'components/Forms/FormLogin/FormLogin.styled';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import { Formik } from 'formik';
 import { useAuth } from 'hooks';
@@ -25,13 +25,13 @@ import {
   WrapInputRadio,
   WrapPhone,
   WrapPhoneInput,
-} from './FormPatientPage.styled';
+} from './FormPersonalDataPatient.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
 import IconRemove from 'images/icons/IconRemove';
 import { deleteAccount } from 'redux/auth/operations';
 import { useDispatch } from 'react-redux';
 
-const FormPatientPage = ({ setOnChange }) => {
+const FormPersonalDataPatient = ({ setOnChange }) => {
   let { user, error } = useAuth();
   const dispatch = useDispatch();
 
@@ -48,24 +48,9 @@ const FormPatientPage = ({ setOnChange }) => {
     );
   };
 
-  const handleRefreshEmail = () => {
-    setOnChange('email');
-  };
-
-  const handleRefreshPassword = () => {
-    setOnChange('password');
-  };
-
-  const handleRemoveAccount = () => {
-    console.log('Remove account');
-    dispatch(deleteAccount());
-  };
-
   return (
     <Formik
       initialValues={{
-        email: user.email,
-        password: '********',
         lastName: '',
         firstName: '',
         patronymic: '',
@@ -85,59 +70,12 @@ const FormPatientPage = ({ setOnChange }) => {
         handleSubmit,
       }) => {
         return (
-          <FormStyledPatient as={FormStyled} onSubmit={handleSubmit}>
-            <FormDescription>
-              <span>*</span> - обов’язкові поля
-            </FormDescription>
+          <FormStyledPatient
+            id="formPersonalDataPatient"
+            as={FormStyled}
+            // onSubmit={handleSubmit}
+          >
             <ImputWrap>
-              <Label>
-                <FieldStyled
-                  disabled={true}
-                  error={errors.email && touched.email && errors.email}
-                  valid={values.email}
-                  type="email"
-                  name="email"
-                  onChange={e => {
-                    error = null;
-                    handleChange(e);
-                  }}
-                  onBlur={handleBlur}
-                  required
-                />
-                <ButtonRefresh type="button" onClick={handleRefreshEmail}>
-                  Змінити e-mail
-                </ButtonRefresh>
-                {!values.email && <Placeholder>email</Placeholder>}
-                {errors.email && touched.email && (
-                  <TextError>{errors.email}</TextError>
-                )}
-              </Label>
-
-              <Label>
-                <FieldStyled
-                  disabled={true}
-                  error={errors.password && touched.password && errors.password}
-                  type={'password'}
-                  name="password"
-                  onChange={e => {
-                    error = null;
-                    handleChange(e);
-                  }}
-                  onBlur={handleBlur}
-                  required
-                />
-                <ButtonRefresh type="button" onClick={handleRefreshPassword}>
-                  Змінити пароль
-                </ButtonRefresh>
-                {!values.password && <Placeholder>Пароль</Placeholder>}
-                {errors.password && touched.password && (
-                  <TextError>{errors.password}</TextError>
-                )}
-                {error?.status === 401 && (
-                  <TextError>Електронна пошта або пароль неправильні</TextError>
-                )}
-              </Label>
-
               <Label>
                 <FieldStyled
                   error={errors.lastName && touched.lastName && errors.lastName}
@@ -152,7 +90,7 @@ const FormPatientPage = ({ setOnChange }) => {
                 />
                 {!values.lastName && (
                   <Placeholder>
-                    Прізвище <span>*</span>
+                    Прізвище <span> (обов’язкове поле)</span>
                   </Placeholder>
                 )}
                 {errors.lastName && touched.lastName && (
@@ -179,7 +117,7 @@ const FormPatientPage = ({ setOnChange }) => {
                 />
                 {!values.firstName && (
                   <Placeholder>
-                    Ім’я <span>*</span>
+                    Ім’я <span> (обов’язкове поле)</span>
                   </Placeholder>
                 )}
                 {errors.firstName && touched.firstName && (
@@ -255,7 +193,7 @@ const FormPatientPage = ({ setOnChange }) => {
 
                         {phone === '' && (
                           <Placeholder type="tel">
-                            +380 __ ___ ____ <span>*</span>
+                            +380 __ ___ ____ <span> (обов’язкове поле)</span>
                           </Placeholder>
                         )}
                       </Label>
@@ -279,7 +217,9 @@ const FormPatientPage = ({ setOnChange }) => {
               </WrapPhone>
 
               <ContactMethodLabel>
-                <StyledLegend>Спосіб зв’язку *</StyledLegend>
+                <StyledLegend>
+                  Спосіб зв’язку <span>(обов’язкове поле)</span>
+                </StyledLegend>
                 <RadioInputWrap>
                   <WrapInputRadio>
                     <StyledField
@@ -305,13 +245,6 @@ const FormPatientPage = ({ setOnChange }) => {
                 </RadioInputWrap>
               </ContactMethodLabel>
             </ImputWrap>
-
-            <ButtonWrapper>
-              <StyledButton type="button" onClick={() => handleRemoveAccount()}>
-                <IconRemove /> Видалити акаунт
-              </StyledButton>
-              <Button type="submit">Зберегти</Button>
-            </ButtonWrapper>
           </FormStyledPatient>
         );
       }}
@@ -319,4 +252,4 @@ const FormPatientPage = ({ setOnChange }) => {
   );
 };
 
-export default FormPatientPage;
+export default FormPersonalDataPatient;

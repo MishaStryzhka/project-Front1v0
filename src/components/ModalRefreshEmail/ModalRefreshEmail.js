@@ -14,8 +14,8 @@ import {
   ImputWrap,
   Label,
   TextError,
-} from 'components/FormLogin/FormLogin.styled';
-import { Placeholder } from 'components/FormPatientPage/FormPatientPage.styled';
+} from 'components/Forms/FormLogin/FormLogin.styled';
+import { Placeholder } from 'components/Forms/FormPersonalDataPatient/FormPersonalDataPatient.styled';
 import { useDispatch } from 'react-redux';
 import { refreshEmail } from 'redux/auth/operations';
 

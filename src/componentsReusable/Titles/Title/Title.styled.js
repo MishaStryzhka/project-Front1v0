@@ -13,7 +13,8 @@ export const StyledTitle = styled.h1`
     font-weight: 600;`) ||
     (type === 'modal' &&
       `font-size: 30px;
-    font-weight: 400;`) ||
+    font-weight: 400;
+    text-align: center;`) ||
     `font-size: 30px;
     font-weight: 600;`}
 `;

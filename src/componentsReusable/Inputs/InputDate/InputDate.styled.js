@@ -1,4 +1,4 @@
-import { Placeholder } from 'components/FormPatientPage/FormPatientPage.styled';
+import { Placeholder } from 'components/Forms/FormPersonalDataPatient/FormPersonalDataPatient.styled';
 import styled from 'styled-components';
 
 export const InputCalendarBox = styled.div`

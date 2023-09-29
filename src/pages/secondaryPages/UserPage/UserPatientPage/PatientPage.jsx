@@ -1,5 +1,5 @@
 import Container from 'componentsReusable/Container/Container';
-import FormPatientPage from 'components/FormPatientPage/FormPatientPage';
+import FormPatientPage from 'components/Forms/FormPersonalDataPatient/FormPersonalDataPatient';
 import ModalRefreshEmail from 'components/ModalRefreshEmail/ModalRefreshEmail';
 import ModalRefreshPassword from 'components/ModalRefreshPassword/ModalRefreshPassword';
 import NavigationContainer from 'components/NavigationContainer/NavigationContainer';

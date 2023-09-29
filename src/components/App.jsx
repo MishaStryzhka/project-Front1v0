@@ -20,7 +20,9 @@ import DirectionPage from 'pages/mainPages/DirectionPage/DirectionPage';
 import ProblemPage from 'pages/mainPages/ProblemPage/ProblemPage';
 import UserPage from 'pages/secondaryPages/UserPage/UserPage/UserPage';
 
-const RegisterPage = lazy(() => import('pages/authPages/RegisterPage'));
+const RegisterPage = lazy(() =>
+  import('pages/authPages/RegisterPage/RegisterPage')
+);
 const LoginPage = lazy(() => import('pages/authPages/LoginPage/LoginPage'));
 const MainPage = lazy(() => import('pages/mainPages/MainPage'));
 const NotFoundPage = lazy(() => import('pages/mainPages/NotFoundPage'));
@@ -62,21 +64,14 @@ export const App = () => {
           <Route
             path="/login"
             element={
-              <RestrictedRoute
-                redirectTo={`/${
-                  userType === 'doctor' ? 'user/doctor/accountData' : 'patient'
-                }/`}
-                component={<LoginPage />}
-              />
+              <RestrictedRoute redirectTo="/user" component={<LoginPage />} />
             }
           />
           <Route
             path="/register"
             element={
               <RestrictedRoute
-                redirectTo={`/${
-                  userType === 'doctor' ? 'user/doctor/accountData' : 'patient'
-                }/`}
+                redirectTo="/user"
                 component={<RegisterPage />}
               />
             }
@@ -85,34 +80,30 @@ export const App = () => {
             path="/register/typeUser"
             element={
               <RestrictedRoute
-                redirectTo={`/${
-                  userType === 'doctor' ? 'user/doctor/accountData' : 'patient'
-                }/`}
+                redirectTo="/user"
                 component={<RegisterPage />}
               />
             }
           />
-          <Route
+          {/* <Route
             path="/user/:id"
             element={
               <PrivateRoute redirectTo="/login" component={<UserPage />} />
             }
-          />
-          <Route
+          /> */}
+          {/* <Route
             path="/user/patient"
             element={
               <PrivateRoute redirectTo="/login" component={<PatientPage />} />
             }
-          />
+          /> */}
           <Route
-            path="/user/doctor"
+            path="/user"
             element={
-              <PrivateRoute
-                redirectTo="/login"
-                component={<UserDoctorPage />}
-              />
+              <PrivateRoute redirectTo="/login" component={<UserPage />} />
             }
           >
+            <Route index element={<AccountData />} />
             <Route path="accountData/" element={<AccountData />} />
             <Route path="personalData/" element={<PersonalData />} />
             <Route path="directionWork/" element={<DirectionWork />} />

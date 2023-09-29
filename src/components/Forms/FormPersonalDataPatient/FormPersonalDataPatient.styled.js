@@ -2,7 +2,7 @@ import { Field, Form } from 'formik';
 import { styled } from 'styled-components';
 
 export const FormStyledPatient = styled(Form)`
-  padding: 40px 0;
+  padding-top: 40px;
 `;
 
 export const FormDescription = styled.p`
@@ -62,8 +62,9 @@ export const ButtonRefresh = styled.button`
   font-weight: 400;
   line-height: normal;
 
+  text-decoration-line: underline;
+
   &:hover {
-    ${({ disabled }) => !disabled && 'text-decoration-line: underline'};
   }
 `;
 
@@ -86,6 +87,9 @@ export const StyledLegend = styled.legend`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+  & span {
+    color: ${({ theme }) => theme.color.disable};
+  }
 `;
 
 export const RadioInputWrap = styled.div`
@@ -113,7 +117,8 @@ export const StyledField = styled(Field)`
 `;
 
 export const ButtonWrapper = styled.div`
-  padding-top: 80px;
+  padding-top: 40px;
+  margin: 0 auto;
 
   width: 800px;
 

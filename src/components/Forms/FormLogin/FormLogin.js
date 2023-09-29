@@ -5,7 +5,7 @@ import {
   FieldStyled,
   FormStyled,
   Label,
-  LabelCheckboxStyled,
+  LabelCheckbox,
   ImputWrap,
   TextError,
   TextCheckbox,
@@ -83,7 +83,7 @@ const FormLogin = ({ onSubmit }) => {
                 </Label>
               </ImputWrap>
 
-              <LabelCheckboxStyled>
+              <LabelCheckbox>
                 <FieldCheckboxStyled
                   type={'checkbox'}
                   name="rememberMe"
@@ -92,7 +92,7 @@ const FormLogin = ({ onSubmit }) => {
                   component={Checkbox}
                 />
                 <TextCheckbox>запам’ятати мене</TextCheckbox>
-              </LabelCheckboxStyled>
+              </LabelCheckbox>
             </FormStyled>
           );
         }}
