@@ -9,7 +9,6 @@ import PassValidateBox from 'components/PassValidateBox/PassValidateBox';
 import { Formik } from 'formik';
 import { validationRegisterSchema } from 'schemas';
 import { useAuth } from 'hooks';
-import Title from 'componentsReusable/Titles/Title/Title';
 
 const FormRegister = ({ onSubmit }) => {
   let { error } = useAuth();

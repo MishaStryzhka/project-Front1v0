@@ -2,11 +2,10 @@ import CheckboxToggle from 'components/CheckboxToggle/CheckboxToggle';
 import {
   FieldCheckboxStyled,
   ImputWrap,
-  LabelCheckbox,
 } from 'components/Forms/FormLogin/FormLogin.styled';
 import { LabelCheckboxText } from 'components/Forms/FormRegister/FormRegister.styled';
 import { Formik } from 'formik';
-import { FormStyled, StyledLabelCheckbox, Title } from './FormTypeUser.styled';
+import { FormStyled, StyledLabelCheckbox } from './FormTypeUser.styled';
 
 const FormTypeUser = ({ onSubmit }) => {
   return (

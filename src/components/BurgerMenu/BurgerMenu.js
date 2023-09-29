@@ -8,7 +8,7 @@ import { logOut } from 'redux/auth/operations';
 import { useDispatch } from 'react-redux';
 
 const BurgerMenu = () => {
-  const { isLoggedIn, userType } = useAuth();
+  const { isLoggedIn } = useAuth();
   const dispatch = useDispatch();
 
   const hendlelogout = () => {
