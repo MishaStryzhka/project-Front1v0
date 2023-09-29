@@ -1,5 +1,4 @@
 import {
-  Button,
   FieldStyled,
   FormStyled,
   ImputWrap,
@@ -12,14 +11,11 @@ import { useAuth } from 'hooks';
 import { validationPatientPageSchema } from 'schemas';
 import {
   ButtonRefresh,
-  ButtonWrapper,
   ContactMethodLabel,
-  FormDescription,
   FormStyledPatient,
   Placeholder,
   RadioInputWrap,
   RadioLabel,
-  StyledButton,
   StyledField,
   StyledLegend,
   WrapInputRadio,
@@ -27,13 +23,9 @@ import {
   WrapPhoneInput,
 } from './FormPersonalDataPatient.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
-import IconRemove from 'images/icons/IconRemove';
-import { deleteAccount } from 'redux/auth/operations';
-import { useDispatch } from 'react-redux';
 
 const FormPersonalDataPatient = ({ setOnChange }) => {
-  let { user, error } = useAuth();
-  const dispatch = useDispatch();
+  let { error } = useAuth();
 
   const onSubmit = value => {
     const { lastName, firstName, patronymic, phones, contactMethod } = value;

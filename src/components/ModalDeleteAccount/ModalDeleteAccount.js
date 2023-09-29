@@ -1,7 +1,7 @@
 import Modal from 'componentsReusable/Modal/Modal';
 import { TitleModal } from '../ModalRefreshEmail/ModalRefreshEmail.styled';
 import { useDispatch } from 'react-redux';
-import { deleteAccount, refreshPassword } from 'redux/auth/operations';
+import { deleteAccount } from 'redux/auth/operations';
 import SecondaryButton from 'componentsReusable/Buttons/SecondaryButton/SecondaryButton';
 import { StyledButtonWrapper } from './ModalDeleteAccount.styled';
 

@@ -2,9 +2,7 @@ import Container from 'componentsReusable/Container/Container';
 import PageContainer from 'componentsReusable/PageContainer/PageContainer';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
 import { StyledNavLink } from './UserPage.styled';
-import MainContent from 'componentsReusable/MainContent/MainContent';
 import { useAuth } from 'hooks';
-import Title from 'componentsReusable/Titles/Title/Title';
 import { Outlet } from 'react-router-dom';
 
 const UserPage = () => {
