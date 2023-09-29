@@ -10,8 +10,6 @@ import { RestrictedRoute } from 'rotes/RestrictedRoute';
 import { PrivateRoute } from 'rotes/PrivateRoute';
 
 import SharedLayout from 'components/SharedLayout/SharedLayout';
-import UserDoctorPage from 'pages/secondaryPages/UserPage/UserDoctorPage/UserDoctorPage';
-import PatientPage from 'pages/secondaryPages/UserPage/UserPatientPage/PatientPage';
 import AccountData from './AccountData/AccountData';
 import PersonalData from './PersonalData/PersonalData';
 import DirectionWork from './DirectionWork/DirectionWork';
@@ -39,7 +37,7 @@ const DirectionsListPage = lazy(() =>
 export const App = () => {
   const [currentTheme, setCurrentTheme] = useState('light');
   const dispatch = useDispatch();
-  const { isRefreshing, token, userType } = useAuth();
+  const { isRefreshing, token } = useAuth();
 
   currentTheme === null && setCurrentTheme('light');
 

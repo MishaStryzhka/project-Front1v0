@@ -17,8 +17,6 @@ import { useAuth } from 'hooks';
 import IconRemove from 'images/icons/IconRemove';
 import { useState } from 'react';
 import { ButtonWrapper, StyledImputWrap } from './AccountData.styled';
-import { deleteAccount } from 'redux/auth/operations';
-import { useDispatch } from 'react-redux';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import Title from 'componentsReusable/Titles/Title/Title';
 import ModalDeleteAccount from 'components/ModalDeleteAccount/ModalDeleteAccount';
@@ -28,12 +26,6 @@ const AccountData = () => {
 
   let { user, userType, error } = useAuth();
   const [onChange, setOnChange] = useState(null);
-  const dispatch = useDispatch();
-
-  const handleRemoveAccount = () => {
-    console.log('Remove account');
-    dispatch(deleteAccount());
-  };
 
   const onSubmit = value => {
     console.log('value', value);
