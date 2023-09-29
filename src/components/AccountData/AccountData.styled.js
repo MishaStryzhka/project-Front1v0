@@ -1,14 +1,18 @@
-import { ImputWrap } from 'components/FormLogin/FormLogin.styled';
-import { ButtonWrapper } from 'components/FormPatientPage/FormPatientPage.styled';
+import { ImputWrap } from 'components/Forms/FormLogin/FormLogin.styled';
 import { styled } from 'styled-components';
 
 export const StyledImputWrap = styled(ImputWrap)`
   padding-top: 0;
 `;
 
-export const StyledButtonWrapper = styled(ButtonWrapper)`
-  flex-direction: column;
-  row-gap: 80px;
+export const ButtonWrapper = styled.div`
+  padding-top: 40px;
+  margin: 0 auto;
+
+  width: 800px;
+
+  display: flex;
+  justify-content: space-between;
 `;
 
 export const BtnBox = styled.div`

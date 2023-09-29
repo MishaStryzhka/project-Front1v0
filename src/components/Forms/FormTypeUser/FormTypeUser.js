@@ -1,13 +1,11 @@
 import CheckboxToggle from 'components/CheckboxToggle/CheckboxToggle';
 import {
-  Button,
   FieldCheckboxStyled,
   ImputWrap,
-  LabelCheckboxStyled,
-} from 'components/FormLogin/FormLogin.styled';
-import { LabelCheckboxText } from 'components/FormRegister/FormRegister.styled';
+} from 'components/Forms/FormLogin/FormLogin.styled';
+import { LabelCheckboxText } from 'components/Forms/FormRegister/FormRegister.styled';
 import { Formik } from 'formik';
-import { FormStyled, Title } from './FormTypeUser.styled';
+import { FormStyled, StyledLabelCheckbox } from './FormTypeUser.styled';
 
 const FormTypeUser = ({ onSubmit }) => {
   return (
@@ -31,10 +29,9 @@ const FormTypeUser = ({ onSubmit }) => {
           handleSubmit,
         }) => {
           return (
-            <FormStyled onSubmit={handleSubmit}>
-              <Title>Виберіть тип користувача</Title>
-              <ImputWrap style={{ paddingTop: 28 }}>
-                <LabelCheckboxStyled>
+            <FormStyled id="FormTypeUser" onSubmit={handleSubmit}>
+              <ImputWrap>
+                <StyledLabelCheckbox>
                   <LabelCheckboxText value={values.userType}>
                     Пацієнт
                   </LabelCheckboxText>
@@ -48,9 +45,8 @@ const FormTypeUser = ({ onSubmit }) => {
                   <LabelCheckboxText value={!values.userType}>
                     Лікар
                   </LabelCheckboxText>
-                </LabelCheckboxStyled>
+                </StyledLabelCheckbox>
               </ImputWrap>
-              <Button type="submit">Зберегти та продовжити </Button>
             </FormStyled>
           );
         }}

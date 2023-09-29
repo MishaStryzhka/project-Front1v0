@@ -1,4 +1,4 @@
-import FormLogin from 'components/FormLogin/FormLogin';
+import FormLogin from 'components/Forms/FormLogin/FormLogin';
 import OrBoxAotorization from 'components/OrBoxAotorization/OrBoxAotorization';
 
 import { Helmet } from 'react-helmet';

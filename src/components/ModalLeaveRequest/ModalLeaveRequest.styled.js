@@ -31,3 +31,6 @@ export const WrapDate = styled.li`
   display: flex;
   justify-content: space-between;
 `;
+export const Label = styled.div`
+  position: relative;
+`;

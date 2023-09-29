@@ -1,5 +1,5 @@
-import FormRegister from 'components/FormRegister/FormRegister';
-import FormTypeUser from 'components/FormTypeUser/FormTypeUser';
+import FormRegister from 'components/Forms/FormRegister/FormRegister';
+import FormTypeUser from 'components/Forms/FormTypeUser/FormTypeUser';
 import Modal from 'componentsReusable/Modal/Modal';
 import OrBoxAotorization from 'components/OrBoxAotorization/OrBoxAotorization';
 import { useAuth } from 'hooks';
@@ -9,6 +9,12 @@ import { useDispatch } from 'react-redux';
 import { useLocation, useSearchParams } from 'react-router-dom';
 import { register, setAuthHeader, updateUserType } from 'redux/auth/operations';
 import { saveToken } from 'redux/auth/slice';
+import Title from 'componentsReusable/Titles/Title/Title';
+import {
+  StyledCTABigButton,
+  StyledContainer,
+  StyledMainContent,
+} from './RegisterPage.styled';
 
 const RegisterPage = () => {
   const location = useLocation();
@@ -46,23 +52,32 @@ const RegisterPage = () => {
   };
 
   return (
-    <>
+    <StyledContainer>
       <Helmet>
         <title>Registration</title>
       </Helmet>
 
-      <FormRegister
-        onSubmit={handleRegisterSubmit}
-        setIsOpenModal={setIsOpenModal}
-      />
+      <StyledMainContent width="800px">
+        <Title>Реєстрація нового користувача</Title>
+        <FormRegister onSubmit={handleRegisterSubmit} />
+      </StyledMainContent>
+
+      <StyledCTABigButton type="submit" form="FormRegister">
+        Зберегти та продовжити
+      </StyledCTABigButton>
+
       <OrBoxAotorization />
 
       {isOpenModal && (
         <Modal>
+          <Title type="modal">Виберіть тип користувача</Title>
           <FormTypeUser onSubmit={handleRegisterTypeUser} />
+          <StyledCTABigButton type="submit" form="FormTypeUser">
+            Увійти
+          </StyledCTABigButton>
         </Modal>
       )}
-    </>
+    </StyledContainer>
   );
 };
 

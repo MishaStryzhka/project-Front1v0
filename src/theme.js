@@ -23,6 +23,8 @@ const lightTheme = {
   text: '#00185C',
   background1: '#f1f5ff',
   secondaryColor: '#DEFFD9',
+  secondaryColorHover: '#D0FFC9',
+  secondaryColorPressed: '#C4FFBA',
 
   CTA: '#f9e0f3',
   CTAHover: '#FFD3F5',

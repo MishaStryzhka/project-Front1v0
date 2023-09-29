@@ -6,7 +6,7 @@ import {
   selectError,
   selectCurrentTheme,
   selectIsFirstLogin,
-  selectuserType,
+  selectUserType,
   selectToken,
 } from 'redux/auth/selectors';
 
@@ -17,7 +17,7 @@ export const useAuth = () => {
   const error = useSelector(selectError);
   const currentTheme = useSelector(selectCurrentTheme);
   const isFirstLogin = useSelector(selectIsFirstLogin);
-  const userType = useSelector(selectuserType);
+  const userType = useSelector(selectUserType);
   const token = useSelector(selectToken);
 
   return {

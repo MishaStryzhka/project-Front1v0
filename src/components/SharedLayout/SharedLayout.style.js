@@ -4,6 +4,7 @@ import styled from 'styled-components';
 export const ContainerLayout = styled.div`
   display: flex;
   flex-direction: column;
+  min-width: 1440px;
   height: 100vh;
 `;
 

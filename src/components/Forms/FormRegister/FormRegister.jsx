@@ -4,19 +4,17 @@ import {
   ImputWrap,
   Label,
   TextError,
-} from 'components/FormLogin/FormLogin.styled';
+} from 'components/Forms/FormLogin/FormLogin.styled';
 import PassValidateBox from 'components/PassValidateBox/PassValidateBox';
 import { Formik } from 'formik';
 import { validationRegisterSchema } from 'schemas';
 import { useAuth } from 'hooks';
-import Title from 'componentsReusable/Titles/Title/Title';
 
 const FormRegister = ({ onSubmit }) => {
   let { error } = useAuth();
 
   return (
     <>
-      <Title>Реєстрація нового користувача</Title>
       <Formik
         initialValues={{
           email: '',
@@ -40,7 +38,7 @@ const FormRegister = ({ onSubmit }) => {
           handleSubmit,
         }) => {
           return (
-            <FormStyled onSubmit={handleSubmit}>
+            <FormStyled id="FormRegister" onSubmit={handleSubmit}>
               <ImputWrap>
                 <Label>
                   <FieldStyled

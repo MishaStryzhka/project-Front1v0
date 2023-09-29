@@ -1,5 +1,4 @@
-import PrimaryButton from 'components/PrimaryButton/PrimaryButton';
-import SecondaryButton from 'components/SecondaryButton/SecondaryButton';
+import SecondaryButton from 'componentsReusable/Buttons/SecondaryButton/SecondaryButton';
 import getCroppedImg from 'helpers/cropImage';
 import { useAuth } from 'hooks';
 import { useState, useCallback, useEffect } from 'react';
@@ -81,9 +80,9 @@ const CropperWrap = ({ image, name, setImage, onClose }) => {
         >
           Скасувати
         </SecondaryButton>
-        <PrimaryButton disabled={isLoading} onClick={e => hendleSave(e)}>
-          Завантажити
-        </PrimaryButton>
+        <SecondaryButton disabled={isLoading} onClick={e => hendleSave(e)}>
+          Зберегти
+        </SecondaryButton>
       </PreviewButtonWraper>
     </>
   );

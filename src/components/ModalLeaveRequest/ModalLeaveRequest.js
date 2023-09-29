@@ -1,20 +1,20 @@
-import Form from 'components/Form/Form';
+import Form from 'components/Forms/Form/Form';
 import {
   Box,
   InputWrap,
+  Label,
   ListDate,
   StyledTitle,
   WrapDate,
 } from './ModalLeaveRequest.styled';
 import { Formik } from 'formik';
-import { Label } from 'components/PersonalData/PersonalData.styled';
 import Input from 'components/Input/Input';
 import { useAuth } from 'hooks';
 import {
   ButtonRefresh,
   WrapPhone,
   WrapPhoneInput,
-} from 'components/FormPatientPage/FormPatientPage.styled';
+} from 'components/Forms/FormPersonalDataPatient/FormPersonalDataPatient.styled';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
 import { locationListValue } from 'helpers/locationsList';
@@ -22,9 +22,9 @@ import { problemListValue } from 'helpers/problemsList';
 import Checkbox from 'components/Checkbox/Checkbox';
 import {
   FieldCheckboxStyled,
-  LabelCheckboxStyled,
+  LabelCheckbox,
   TextCheckbox,
-} from 'components/FormLogin/FormLogin.styled';
+} from 'components/Forms/FormLogin/FormLogin.styled';
 import InputDate from 'componentsReusable/Inputs/InputDate/InputDate';
 import InputHours from 'componentsReusable/Inputs/InputHours/InputHours';
 import { nanoid } from '@reduxjs/toolkit';
@@ -311,7 +311,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                     placeholder="Проблема"
                   />
 
-                  <LabelCheckboxStyled
+                  <LabelCheckbox
                     style={{ paddingTop: 0, marginTop: -20, marginBottom: -20 }}
                   >
                     <FieldCheckboxStyled
@@ -322,7 +322,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                       component={Checkbox}
                     />
                     <TextCheckbox>потрібен дитячий стоматолог</TextCheckbox>
-                  </LabelCheckboxStyled>
+                  </LabelCheckbox>
 
                   <Label>
                     <Input
