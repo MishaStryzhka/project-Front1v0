@@ -132,16 +132,20 @@ export const refreshUser = createAsyncThunk(
  */
 export const updateUserInfo = createAsyncThunk(
   'auth/update',
-  async ({ avatar, name, email, phone, city, birthday }, thunkAPI) => {
+  async (
+    { avatar, lastName, firstName, patronymic, phones, contactMethods },
+    thunkAPI
+  ) => {
     try {
       const formData = new FormData();
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('phone', phone || '');
-      formData.append('city', city || '');
-      formData.append('birthday', birthday || '');
+      formData.append('avatar', avatar);
+      formData.append('lastName', lastName);
+      formData.append('firstName', firstName);
+      formData.append('patronymic', patronymic);
+      formData.append('phones', phones || '');
+      formData.append('contactMethods', contactMethods || '');
 
-      const response = await axios.patch(`/users/current/update`, formData, {
+      const response = await axios.put(`/users/current/update`, formData, {
         headers: { 'content-type': 'multipart/form-data' },
       });
       return response.data;
