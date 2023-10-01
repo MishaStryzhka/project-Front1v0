@@ -23,12 +23,16 @@ import {
   WrapPhoneInput,
 } from './FormPersonalDataPatient.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
+import { useDispatch } from 'react-redux';
+import { updateUserInfo } from 'redux/auth/operations';
 
 const FormPersonalDataPatient = ({ setOnChange }) => {
+  const { user } = useAuth();
+  const dispatch = useDispatch();
   let { error } = useAuth();
 
   const onSubmit = value => {
-    const { lastName, firstName, patronymic, phones, contactMethod } = value;
+    const { lastName, firstName, patronymic, phones, contactMethods } = value;
 
     console.log(
       'value',
@@ -36,18 +40,30 @@ const FormPersonalDataPatient = ({ setOnChange }) => {
       firstName,
       patronymic,
       phones,
-      contactMethod
+      contactMethods
+    );
+
+    dispatch(
+      updateUserInfo({
+        lastName,
+        firstName,
+        patronymic,
+        phones,
+        contactMethods,
+      })
     );
   };
+
+  console.log('user.contactMethods', user.contactMethods);
 
   return (
     <Formik
       initialValues={{
-        lastName: '',
-        firstName: '',
-        patronymic: '',
-        phones: [],
-        contactMethod: '',
+        lastName: user.lastName || '',
+        firstName: user.firstName || '',
+        patronymic: user.patronymic || '',
+        phones: user.phones || [],
+        contactMethods: user.contactMethods || [],
       }}
       validationSchema={validationPatientPageSchema}
       onSubmit={onSubmit}
@@ -61,6 +77,8 @@ const FormPersonalDataPatient = ({ setOnChange }) => {
         handleBlur,
         handleSubmit,
       }) => {
+        console.log('values.contactMethods', values);
+
         return (
           <FormStyledPatient
             id="formPersonalDataPatient"
@@ -132,7 +150,6 @@ const FormPersonalDataPatient = ({ setOnChange }) => {
                     handleChange(e);
                   }}
                   onBlur={handleBlur}
-                  required
                 />
                 {!values.patronymic && <Placeholder>По-батькові</Placeholder>}
                 {errors.patronymic && touched.patronymic && (
@@ -154,8 +171,14 @@ const FormPersonalDataPatient = ({ setOnChange }) => {
                       <Label key={values.phones.length === 0 ? 0 : index}>
                         <FieldStyled
                           as={PhoneInputField}
-                          field={{ name: 'phones', value: phone }}
+                          field={{
+                            name: 'phones',
+                            // value: phone ? `+${phone}` : '',
+                            value: phone,
+                          }}
                           setFieldValue={value => {
+                            console.log('value', value.slice(1, 13));
+
                             const newPhones = [...values.phones];
                             if (
                               values.phones.indexOf('') &&
@@ -215,20 +238,20 @@ const FormPersonalDataPatient = ({ setOnChange }) => {
                 <RadioInputWrap>
                   <WrapInputRadio>
                     <StyledField
-                      type="radio"
+                      type="checkbox"
                       id="chat"
-                      name="contactMethod"
+                      name="contactMethods"
                       value="chat"
                       component={Checkbox}
-                    ></StyledField>
+                    />
 
                     <RadioLabel htmlFor="chat">чат</RadioLabel>
                   </WrapInputRadio>
                   <WrapInputRadio>
                     <StyledField
-                      type="radio"
+                      type="checkbox"
                       id="telegramBot"
-                      name="contactMethod"
+                      name="contactMethods"
                       value="telegramBot"
                       component={Checkbox}
                     />
