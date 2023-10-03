@@ -200,9 +200,7 @@ const FormPersonalDataPatient = () => {
               </WrapPhone>
 
               <ContactMethodLabel>
-                <StyledLegend>
-                  Спосіб зв’язку <span>(обов’язкове поле)</span>
-                </StyledLegend>
+                <StyledLegend>Спосіб зв’язку *</StyledLegend>
                 <RadioInputWrap required>
                   <WrapInputRadio>
                     <StyledField
