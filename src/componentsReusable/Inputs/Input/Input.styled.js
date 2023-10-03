@@ -23,7 +23,7 @@ export const StyledField = styled(Field)`
     ${({ theme, error }) => (error ? theme.color.error : theme.color.main)};
   outline: none;
 
-  color: ${({ theme }) => theme.color.btnLogOut};
+  color: ${({ theme }) => theme.color.text};
   ${({ $style }) => $style && $style}
 
   max-height: 75vh;
@@ -47,18 +47,39 @@ export const StyledField = styled(Field)`
     }
   }
 
+  ${({ value, theme, error }) =>
+    value
+      ? `
+  //     & + p {top: -9.5px;
+  // font-size: 12px;
+  // background-color: ${theme.color.primary};
+  // padding: 1px 5px;
+  // border: 2px solid
+  //   ${error ? theme.color.error : theme.color.main};
+  // border-radius: 5px;
+  }`
+      : `
+      // &:focus + p {
+      //   top: -9.5px;
+      //   font-size: 12px;
+      //   background-color: ${theme.color.primary};
+      //   padding: 1px 5px;
+      //   border: 2px solid
+      //     ${error ? theme.color.error : theme.color.main};
+      //   border-radius: 5px;
+      }`}
+
   ${({ required }) => {
     return required && '';
   }};
 `;
 
-export const Placeholder = styled.div`
+export const Placeholder = styled.p`
   display: flex;
   ${e => {
-    // console.log('e', e);
     return e?.type?.name === 'phones' && 'margin-left: 44px;';
   }}
-  color: ${({ theme }) => theme.color.placeholder};
+  color: ${({ theme }) => theme.color.text};
 
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 16px;
@@ -70,14 +91,15 @@ export const Placeholder = styled.div`
   white-space: nowrap;
 
   position: absolute;
-  top: 15px;
+  top: -25px;
   left: ${({ type }) => (type === 'tel' ? '61px' : '17px')};
 
   &::after {
     display: none;
     ${({ required }) => required && 'display: block;'}
     content:  '*';
-    color: ${({ theme }) => theme.color.error};
+    padding-left: 3px;
+    // color: ${({ theme }) => theme.color.error};
   }
 `;
 

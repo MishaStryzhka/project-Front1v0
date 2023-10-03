@@ -5,18 +5,14 @@ import Modal from 'componentsReusable/Modal/Modal';
 import {
   Box,
   InputWrap,
-  StyledTitle,
-} from 'components/ModalLeaveRequest/ModalLeaveRequest.styled';
-import {
-  Button,
-  FieldStyled,
-  Label,
-  TextError,
-} from 'components/Forms/FormLogin/FormLogin.styled';
+} from 'components/Modals/ModalLeaveRequest/ModalLeaveRequest.styled';
+import { Button, Label } from 'components/Forms/FormLogin/FormLogin.styled';
 import {
   ButtonWrapper,
   FormDescription,
-} from 'components/ModalRefreshEmail/ModalRefreshEmail.styled';
+} from 'components/Modals/ModalRefreshEmail/ModalRefreshEmail.styled';
+import Input from 'componentsReusable/Inputs/Input/Input';
+import Title from 'componentsReusable/Titles/Title/Title';
 
 const { createPortal } = require('react-dom');
 
@@ -32,7 +28,7 @@ const ModalResetPassword = ({ onClick }) => {
   return createPortal(
     <Modal onClick={() => onClick()}>
       <Box>
-        <StyledTitle type="modal">Забули пароль?</StyledTitle>
+        <Title type="modal">Забули пароль?</Title>
         <Formik
           initialValues={{ email: '' }}
           // validationSchema={validationDoctorPageSchema}
@@ -57,7 +53,7 @@ const ModalResetPassword = ({ onClick }) => {
               >
                 <InputWrap>
                   <Label>
-                    <FieldStyled
+                    <Input
                       error={errors.email && touched.email && errors.email}
                       valid={values.email}
                       type="email"
@@ -70,9 +66,6 @@ const ModalResetPassword = ({ onClick }) => {
                       placeholder="E-mail"
                       required
                     />
-                    {errors.email && touched.email && (
-                      <TextError>{errors.email}</TextError>
-                    )}
                   </Label>
                 </InputWrap>
               </Form>

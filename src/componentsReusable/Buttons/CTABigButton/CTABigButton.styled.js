@@ -9,9 +9,9 @@ export const StyledButton = styled.button`
   line-height: normal;
 
   display: flex;
-  width: 280px;
-  height: 120px;
-  padding: 10px;
+  // width: 280px;
+  // height: 120px;
+  padding: 40px;
   justify-content: center;
   align-items: center;
 

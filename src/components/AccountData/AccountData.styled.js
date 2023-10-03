@@ -19,3 +19,26 @@ export const BtnBox = styled.div`
   display: flex;
   justify-content: space-between;
 `;
+
+export const ButtonRefresh = styled.button`
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  cursor: pointer;
+
+  // padding-top: 10px;
+
+  color: ${({ theme, disabled }) =>
+    disabled ? theme.color.placeholder : theme.color.secondary};
+
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  text-decoration-line: underline;
+
+  &:hover {
+  }
+`;

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledTitle = styled.h1`
-  color: ${({ theme }) => theme.color.secondary};
+  color: ${({ theme }) => theme.color.text};
 
   font-family: ${({ theme }) => theme.fontFamily};
   font-style: normal;

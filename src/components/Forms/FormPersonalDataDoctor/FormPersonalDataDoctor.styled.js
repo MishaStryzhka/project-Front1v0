@@ -136,32 +136,6 @@ export const TextError = styled.p`
   line-height: normal;
 `;
 
-export const Placeholder = styled.p`
-  color: ${({ theme }) => theme.color.placeholder};
-
-  font-family: ${({ theme }) => theme.fontFamily};
-  font-size: 16px;
-  font-style: italic;
-  font-weight: 400;
-  line-height: normal;
-
-  pointer-events: none;
-  white-space: nowrap;
-
-  position: absolute;
-  top: 15px;
-  left: ${({ type }) => (type === 'tel' ? '61px' : '17px')};
-
-  > span {
-    color: red;
-  }
-
-  &::after {
-    content: '*';
-    color: red;
-  }
-`;
-
 export const WrapPhone = styled.div``;
 
 export const WrapPhoneInput = styled.div`

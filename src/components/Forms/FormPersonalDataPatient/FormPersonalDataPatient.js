@@ -1,5 +1,4 @@
 import {
-  FieldStyled,
   FormStyled,
   ImputWrap,
   Label,
@@ -8,9 +7,8 @@ import {
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import { Formik } from 'formik';
 import { useAuth } from 'hooks';
-import { validationPatientPageSchema } from 'schemas';
 import {
-  ButtonRefresh,
+  ButtonAdd,
   ContactMethodLabel,
   FormStyledPatient,
   Placeholder,
@@ -25,11 +23,14 @@ import {
 import Checkbox from 'components/Checkbox/Checkbox';
 import { useDispatch } from 'react-redux';
 import { updateUserInfo } from 'redux/auth/operations';
+import { validationPatientPageScheme } from 'schemas';
+import Input from 'componentsReusable/Inputs/Input/Input';
 
-const FormPersonalDataPatient = ({ setOnChange }) => {
+const FormPersonalDataPatient = () => {
   const { user } = useAuth();
+  console.log('user', user);
+
   const dispatch = useDispatch();
-  let { error } = useAuth();
 
   const onSubmit = value => {
     const { lastName, firstName, patronymic, phones, contactMethods } = value;
@@ -54,8 +55,6 @@ const FormPersonalDataPatient = ({ setOnChange }) => {
     );
   };
 
-  console.log('user.contactMethods', user.contactMethods);
-
   return (
     <Formik
       initialValues={{
@@ -63,9 +62,9 @@ const FormPersonalDataPatient = ({ setOnChange }) => {
         firstName: user.firstName || '',
         patronymic: user.patronymic || '',
         phones: user.phones || [],
-        contactMethods: user.contactMethods || [],
+        contactMethods: user.contactMethods || ['chat'],
       }}
-      validationSchema={validationPatientPageSchema}
+      validationSchema={validationPatientPageScheme}
       onSubmit={onSubmit}
     >
       {({
@@ -77,87 +76,56 @@ const FormPersonalDataPatient = ({ setOnChange }) => {
         handleBlur,
         handleSubmit,
       }) => {
-        console.log('values.contactMethods', values);
-
         return (
           <FormStyledPatient
-            id="formPersonalDataPatient"
+            id="formPersonalData"
             as={FormStyled}
             // onSubmit={handleSubmit}
           >
             <ImputWrap>
               <Label>
-                <FieldStyled
+                <Input
                   error={errors.lastName && touched.lastName && errors.lastName}
                   type={'text'}
                   name="lastName"
                   onChange={e => {
-                    error = null;
                     handleChange(e);
                   }}
                   onBlur={handleBlur}
                   required
+                  placeholder="Прізвище"
                 />
-                {!values.lastName && (
-                  <Placeholder>
-                    Прізвище <span> (обов’язкове поле)</span>
-                  </Placeholder>
-                )}
-                {errors.lastName && touched.lastName && (
-                  <TextError>{errors.lastName}</TextError>
-                )}
-                {error?.status === 401 && (
-                  <TextError>Електронна пошта або пароль неправильні</TextError>
-                )}
               </Label>
 
               <Label>
-                <FieldStyled
+                <Input
                   error={
                     errors.firstName && touched.firstName && errors.firstName
                   }
                   type={'text'}
                   name="firstName"
                   onChange={e => {
-                    error = null;
                     handleChange(e);
                   }}
                   onBlur={handleBlur}
                   required
+                  placeholder="Ім’я"
                 />
-                {!values.firstName && (
-                  <Placeholder>
-                    Ім’я <span> (обов’язкове поле)</span>
-                  </Placeholder>
-                )}
-                {errors.firstName && touched.firstName && (
-                  <TextError>{errors.firstName}</TextError>
-                )}
-                {error?.status === 401 && (
-                  <TextError>Електронна пошта або пароль неправильні</TextError>
-                )}
               </Label>
 
               <Label>
-                <FieldStyled
+                <Input
                   error={
                     errors.patronymic && touched.patronymic && errors.patronymic
                   }
                   type={'text'}
                   name="patronymic"
                   onChange={e => {
-                    error = null;
                     handleChange(e);
                   }}
                   onBlur={handleBlur}
+                  placeholder="По-батькові"
                 />
-                {!values.patronymic && <Placeholder>По-батькові</Placeholder>}
-                {errors.patronymic && touched.patronymic && (
-                  <TextError>{errors.patronymic}</TextError>
-                )}
-                {error?.status === 401 && (
-                  <TextError>Електронна пошта або пароль неправильні</TextError>
-                )}
               </Label>
 
               <WrapPhone>
@@ -169,7 +137,7 @@ const FormPersonalDataPatient = ({ setOnChange }) => {
                     const index = values.phones.indexOf(phone);
                     return (
                       <Label key={values.phones.length === 0 ? 0 : index}>
-                        <FieldStyled
+                        <Input
                           as={PhoneInputField}
                           field={{
                             name: 'phones',
@@ -204,18 +172,18 @@ const FormPersonalDataPatient = ({ setOnChange }) => {
                               index === -1 ? [value] : newPhones
                             );
                           }}
+                          required
+                          placeholder="Номер телефону"
                         />
 
                         {phone === '' && (
-                          <Placeholder type="tel">
-                            +380 __ ___ ____ <span> (обов’язкове поле)</span>
-                          </Placeholder>
+                          <Placeholder type="tel">+380 __ ___ ____</Placeholder>
                         )}
                       </Label>
                     );
                   })}
                 </WrapPhoneInput>
-                <ButtonRefresh
+                <ButtonAdd
                   disabled={
                     values.phones.indexOf('') !== -1 ||
                     values.phones.length === 0
@@ -228,14 +196,14 @@ const FormPersonalDataPatient = ({ setOnChange }) => {
                   }}
                 >
                   + Додати номер телефону
-                </ButtonRefresh>
+                </ButtonAdd>
               </WrapPhone>
 
               <ContactMethodLabel>
                 <StyledLegend>
                   Спосіб зв’язку <span>(обов’язкове поле)</span>
                 </StyledLegend>
-                <RadioInputWrap>
+                <RadioInputWrap required>
                   <WrapInputRadio>
                     <StyledField
                       type="checkbox"
@@ -253,11 +221,15 @@ const FormPersonalDataPatient = ({ setOnChange }) => {
                       id="telegramBot"
                       name="contactMethods"
                       value="telegramBot"
+                      required
                       component={Checkbox}
                     />
                     <RadioLabel htmlFor="telegramBot">телеграм-бот</RadioLabel>
                   </WrapInputRadio>
                 </RadioInputWrap>
+                {errors.patronymic && touched.patronymic && (
+                  <TextError>{errors.patronymic}</TextError>
+                )}
               </ContactMethodLabel>
             </ImputWrap>
           </FormStyledPatient>

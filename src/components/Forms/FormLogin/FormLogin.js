@@ -2,19 +2,20 @@ import { Formik } from 'formik';
 import { validationLoginSchema } from 'schemas';
 import {
   FieldCheckboxStyled,
-  FieldStyled,
   FormStyled,
   Label,
   LabelCheckbox,
   ImputWrap,
-  TextError,
   TextCheckbox,
 } from './FormLogin.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
 import { useAuth } from 'hooks';
+import Input from 'componentsReusable/Inputs/Input/Input';
 
 const FormLogin = ({ onSubmit }) => {
   let { error } = useAuth();
+
+  console.log('error', error);
 
   return (
     <>
@@ -39,9 +40,9 @@ const FormLogin = ({ onSubmit }) => {
             <FormStyled id="FormLogin" onSubmit={handleSubmit}>
               <ImputWrap>
                 <Label>
-                  <FieldStyled
+                  <Input
                     error={errors.email && touched.email && errors.email}
-                    valid={values.email}
+                    value={values.email}
                     type="email"
                     name="email"
                     onChange={e => {
@@ -50,18 +51,12 @@ const FormLogin = ({ onSubmit }) => {
                     }}
                     onBlur={handleBlur}
                     placeholder="E-mail"
-                    required
                   />
-                  {errors.email && touched.email && (
-                    <TextError>{errors.email}</TextError>
-                  )}
                 </Label>
 
                 <Label>
-                  <FieldStyled
-                    error={
-                      errors.password && touched.password && errors.password
-                    }
+                  <Input
+                    error={touched.password && errors.password}
                     type={'password'}
                     name="password"
                     onChange={e => {
@@ -70,16 +65,7 @@ const FormLogin = ({ onSubmit }) => {
                     }}
                     onBlur={handleBlur}
                     placeholder="Пароль"
-                    required
                   />
-                  {errors.password && touched.password && (
-                    <TextError>{errors.password}</TextError>
-                  )}
-                  {error?.status === 401 && (
-                    <TextError>
-                      Електронна пошта або пароль неправильні
-                    </TextError>
-                  )}
                 </Label>
               </ImputWrap>
 

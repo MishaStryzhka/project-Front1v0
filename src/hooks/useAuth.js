@@ -8,6 +8,7 @@ import {
   selectIsFirstLogin,
   selectUserType,
   selectToken,
+  selectResponse,
 } from 'redux/auth/selectors';
 
 export const useAuth = () => {
@@ -19,6 +20,7 @@ export const useAuth = () => {
   const isFirstLogin = useSelector(selectIsFirstLogin);
   const userType = useSelector(selectUserType);
   const token = useSelector(selectToken);
+  const response = useSelector(selectResponse);
 
   return {
     isLoggedIn,
@@ -29,5 +31,6 @@ export const useAuth = () => {
     isFirstLogin,
     userType,
     token,
+    response,
   };
 };

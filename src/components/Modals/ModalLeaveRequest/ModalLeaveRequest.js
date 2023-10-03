@@ -8,10 +8,10 @@ import {
   WrapDate,
 } from './ModalLeaveRequest.styled';
 import { Formik } from 'formik';
-import Input from 'components/Input/Input';
+import Input from 'componentsReusable/Inputs/Input/Input';
 import { useAuth } from 'hooks';
 import {
-  ButtonRefresh,
+  ButtonAdd,
   WrapPhone,
   WrapPhoneInput,
 } from 'components/Forms/FormPersonalDataPatient/FormPersonalDataPatient.styled';
@@ -176,7 +176,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                         );
                       })}
                     </WrapPhoneInput>
-                    <ButtonRefresh
+                    <ButtonAdd
                       disabled={
                         values.phones.indexOf('') !== -1 ||
                         values.phones.length === 0
@@ -189,7 +189,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                       }}
                     >
                       + Додати номер телефону
-                    </ButtonRefresh>
+                    </ButtonAdd>
                   </WrapPhone>
 
                   <Label>
@@ -250,7 +250,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                       })}
                     </ListDate>
 
-                    <ButtonRefresh
+                    <ButtonAdd
                       disabled={
                         values.dateOfReception.findIndex(
                           option => option.day === ''
@@ -271,7 +271,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                       }}
                     >
                       + Додати дату
-                    </ButtonRefresh>
+                    </ButtonAdd>
                   </Label>
 
                   <Label>

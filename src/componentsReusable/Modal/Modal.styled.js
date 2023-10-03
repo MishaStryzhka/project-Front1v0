@@ -26,7 +26,7 @@ export const ModalContainer = styled.div`
 
   padding: 14px;
   margin: 0 auto;
-  border-radius: 10px;
+  border-radius: 20px;
 
   position: relative;
   padding: 80px 100px;
@@ -62,8 +62,18 @@ export const WrapBtnClose = styled.div``;
 
 export const BtnClose = styled.button`
   position: absolute;
-  right: 15px;
-  top: 15px;
+  right: 10px;
+  top: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 40px;
+  height: 40px;
+
+  border: 1px solid ${({ theme }) => theme.color.main};
+  border-radius: 20px;
 
   cursor: pointer;
 `;

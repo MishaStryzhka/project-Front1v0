@@ -8,6 +8,7 @@ import { StyledButtonWrapper } from './PersonalData.styled';
 
 const PersonalData = () => {
   const { userType } = useAuth();
+
   return (
     <div>
       <MainContent width={'800px'}>
@@ -21,7 +22,7 @@ const PersonalData = () => {
         <SecondaryButton
           $styledType="rose"
           type="submit"
-          form="formPersonalDataPatient"
+          form="formPersonalData"
         >
           Зберегти
         </SecondaryButton>

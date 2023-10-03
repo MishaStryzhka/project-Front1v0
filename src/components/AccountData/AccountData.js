@@ -1,25 +1,29 @@
 import {
-  FieldStyled,
   FormStyled,
   Label,
   TextError,
 } from 'components/Forms/FormLogin/FormLogin.styled';
 import {
-  ButtonRefresh,
   FormStyledPatient,
   Placeholder,
   StyledButton,
 } from 'components/Forms/FormPersonalDataPatient/FormPersonalDataPatient.styled';
-import ModalRefreshEmail from 'components/ModalRefreshEmail/ModalRefreshEmail';
-import ModalRefreshPassword from 'components/ModalRefreshPassword/ModalRefreshPassword';
+import ModalRefreshEmail from 'components/Modals/ModalRefreshEmail/ModalRefreshEmail';
+import ModalRefreshPassword from 'components/Modals/ModalRefreshPassword/ModalRefreshPassword';
 import { Formik } from 'formik';
 import { useAuth } from 'hooks';
 import IconRemove from 'images/icons/IconRemove';
 import { useState } from 'react';
-import { ButtonWrapper, StyledImputWrap } from './AccountData.styled';
+import {
+  ButtonRefresh,
+  ButtonWrapper,
+  StyledImputWrap,
+} from './AccountData.styled';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import Title from 'componentsReusable/Titles/Title/Title';
-import ModalDeleteAccount from 'components/ModalDeleteAccount/ModalDeleteAccount';
+import ModalDeleteAccount from 'components/Modals/ModalDeleteAccount/ModalDeleteAccount';
+import Input from 'componentsReusable/Inputs/Input/Input';
+import IconEdit from 'images/icons/IconEdit';
 
 const AccountData = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -66,7 +70,7 @@ const AccountData = () => {
               <FormStyledPatient as={FormStyled} onSubmit={handleSubmit}>
                 <StyledImputWrap>
                   <Label>
-                    <FieldStyled
+                    <Input
                       disabled={true}
                       error={errors.email && touched.email && errors.email}
                       valid={values.email}
@@ -77,19 +81,16 @@ const AccountData = () => {
                         handleChange(e);
                       }}
                       onBlur={handleBlur}
-                      required
+                      // required
+                      placeholder={'e-mail'}
                     />
                     <ButtonRefresh type="button" onClick={handleRefreshEmail}>
-                      Змінити e-mail
+                      <IconEdit />
                     </ButtonRefresh>
-                    {!values.email && <Placeholder>email</Placeholder>}
-                    {errors.email && touched.email && (
-                      <TextError>{errors.email}</TextError>
-                    )}
                   </Label>
 
                   <Label>
-                    <FieldStyled
+                    <Input
                       disabled={true}
                       error={
                         errors.password && touched.password && errors.password
@@ -101,13 +102,14 @@ const AccountData = () => {
                         handleChange(e);
                       }}
                       onBlur={handleBlur}
-                      required
+                      // required
+                      placeholder="Пароль"
                     />
                     <ButtonRefresh
                       type="button"
                       onClick={handleRefreshPassword}
                     >
-                      Змінити пароль
+                      <IconEdit />
                     </ButtonRefresh>
                     {!values.password && <Placeholder>Пароль</Placeholder>}
                     {errors.password && touched.password && (

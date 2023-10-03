@@ -8,6 +8,7 @@ import {
   updateUserType,
   deleteAccount,
   refreshEmail,
+  refreshPassword,
 } from './operations';
 
 const initialState = {
@@ -16,9 +17,11 @@ const initialState = {
   userType: null,
   isLoggedIn: false,
   isRefreshing: false,
+  isLoading: false,
   error: null,
   currentTheme: 'light',
   isFirstLogin: false,
+  response: null,
 };
 
 const authSlice = createSlice({
@@ -27,6 +30,9 @@ const authSlice = createSlice({
   reducers: {
     saveToken: (state, { payload }) => {
       state.token = payload;
+    },
+    resetResponse: (state, { payload }) => {
+      state.response = payload;
     },
   },
   extraReducers: builder => {
@@ -98,9 +104,23 @@ const authSlice = createSlice({
       })
       .addCase(refreshEmail.rejected, (state, action) => {
         console.log('action', action);
+      })
+      .addCase(refreshPassword.pending, state => {
+        state.isLoading = true;
+      })
+      .addCase(refreshPassword.fulfilled, (state, action) => {
+        // console.log('action', action);
+        state.isLoading = false;
+        state.response = { status: action.payload.status };
+        // state.user = action.payload.user;
+      })
+      .addCase(refreshPassword.rejected, (state, action) => {
+        state.isLoading = false;
+        // console.log('action', action);
+        state.error = action.payload;
       });
   },
 });
 
 export const authReducer = authSlice.reducer;
-export const { saveToken } = authSlice.actions;
+export const { saveToken, resetResponse } = authSlice.actions;

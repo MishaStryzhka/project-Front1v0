@@ -36,23 +36,25 @@ import {
   YearsWrap,
 } from './FormPersonalDataDoctor.styled';
 import Modal from 'componentsReusable/Modal/Modal';
-import { TitleModal } from 'components/ModalRefreshEmail/ModalRefreshEmail.styled';
+import { TitleModal } from 'components/Modals/ModalRefreshEmail/ModalRefreshEmail.styled';
 import CropperWrap from 'components/CropperWrap/CropperWrap';
-import Input from 'components/Input/Input';
+import Input from 'componentsReusable/Inputs/Input/Input';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import Checkbox from 'components/Checkbox/Checkbox';
+import { FieldStyled } from '../FormLogin/FormLogin.styled';
+import { Placeholder } from '../FormPersonalDataPatient/FormPersonalDataPatient.styled';
 
 const FormPersonalDataDoctor = () => {
-  let { error } = useAuth();
+  const { user } = useAuth();
   const [avatar, setAvatar] = useState(null);
   const [sertificatePreview, setSertificatePreview] = useState(null);
+
   const [isOpenModalAddAvatar, setIsOpenModalAddAvatar] = useState(false);
   const [isOpenModalAddSertificate, setIsOpenModalAddSertificate] =
     useState(false);
+
   const [step, setStep] = useState('one');
   const steps = ['one', 'two'];
-
-  error && console.log('error', error);
 
   const isChangeAvatarUrl = e => {
     const { files } = e.currentTarget;
@@ -82,11 +84,13 @@ const FormPersonalDataDoctor = () => {
     console.log('handlePublish');
   };
 
+  console.log('user', user);
+
   return (
     <Formik
       initialValues={{
         avatarUrl: '',
-        lastName: '',
+        lastName: user.lastName || '',
         firstName: '',
         patronymic: '',
         phones: [],
@@ -119,9 +123,8 @@ const FormPersonalDataDoctor = () => {
       }) => {
         return (
           <Form
-            id="FormPersonalData"
+            id="formPersonalData"
             onSubmit={handleSubmit}
-            isRequiredFields
             handlePublish={step === 'two' ? handlePublish : null}
             next={step !== 'two' ? handleNextStep : null}
           >
@@ -187,12 +190,11 @@ const FormPersonalDataDoctor = () => {
                     value={values.lastName}
                     name="lastName"
                     onChange={e => {
-                      error = null;
                       handleChange(e);
                     }}
                     onBlur={handleBlur}
                     required
-                    placeholder="Прізвище"
+                    placeholder="Прізвище (обов’язкове поле)"
                   />
                 </Label>
 
@@ -205,12 +207,11 @@ const FormPersonalDataDoctor = () => {
                     value={values.firstName}
                     name="firstName"
                     onChange={e => {
-                      error = null;
                       handleChange(e);
                     }}
                     onBlur={handleBlur}
                     required
-                    placeholder="Ім’я"
+                    placeholder="Ім’я (обов’язкове поле)"
                   />
                 </Label>
 
@@ -225,11 +226,9 @@ const FormPersonalDataDoctor = () => {
                     value={values.patronymic}
                     name="patronymic"
                     onChange={e => {
-                      error = null;
                       handleChange(e);
                     }}
                     onBlur={handleBlur}
-                    required
                     placeholder="По-батькові"
                   />
                 </Label>
@@ -243,13 +242,16 @@ const FormPersonalDataDoctor = () => {
                       const index = values.phones.indexOf(phone);
                       return (
                         <Label key={values.phones.length === 0 ? 0 : index}>
-                          <Input
-                            width="800px"
+                          <FieldStyled
                             as={PhoneInputField}
-                            error={null}
-                            value={phone}
-                            field={{ name: 'phones', value: phone }}
+                            field={{
+                              name: 'phones',
+                              // value: phone ? `+${phone}` : '',
+                              value: phone,
+                            }}
                             setFieldValue={value => {
+                              console.log('value', value.slice(1, 13));
+
                               const newPhones = [...values.phones];
                               if (
                                 values.phones.indexOf('') &&
@@ -275,9 +277,13 @@ const FormPersonalDataDoctor = () => {
                                 index === -1 ? [value] : newPhones
                               );
                             }}
-                            required
-                            placeholder="+380 __ ___ ____"
                           />
+
+                          {phone === '' && (
+                            <Placeholder type="tel">
+                              +380 __ ___ ____ <span> (обов’язкове поле)</span>
+                            </Placeholder>
+                          )}
                         </Label>
                       );
                     })}
@@ -309,12 +315,11 @@ const FormPersonalDataDoctor = () => {
                     value={values.experienceYears}
                     name="experienceYears"
                     onChange={e => {
-                      error = null;
                       handleChange(e);
                     }}
                     onBlur={handleBlur}
                     required
-                    placeholder="Стаж роботи, років"
+                    placeholder="Стаж роботи, років (обов’язкове поле)"
                   />
                   {/* <FieldStyled
                         error={
@@ -361,7 +366,6 @@ const FormPersonalDataDoctor = () => {
                             name="education"
                             onChange={e => {
                               const { value } = e.currentTarget;
-                              error = null;
                               const newEducation = [...values.educations];
                               console.log('value', value);
 
@@ -396,7 +400,6 @@ const FormPersonalDataDoctor = () => {
                               name="education"
                               onChange={e => {
                                 const { value } = e.currentTarget;
-                                error = null;
                                 const newEducation = [...values.educations];
 
                                 newEducation.splice(index, 1, {
@@ -421,7 +424,6 @@ const FormPersonalDataDoctor = () => {
                               name="education"
                               onChange={e => {
                                 const { value } = e.currentTarget;
-                                error = null;
                                 const newEducation = [...values.educations];
 
                                 newEducation.splice(index, 1, {
@@ -515,7 +517,6 @@ const FormPersonalDataDoctor = () => {
                             name="jobs"
                             onChange={e => {
                               const { value } = e.currentTarget;
-                              error = null;
                               const newJobs = [...values.jobs];
                               if (values.jobs.length !== 1 && value === '') {
                                 newJobs.splice(index, 1);
@@ -545,7 +546,6 @@ const FormPersonalDataDoctor = () => {
                             name="jobs"
                             onChange={e => {
                               const { value } = e.currentTarget;
-                              error = null;
                               const newJobs = [...values.jobs];
                               if (values.jobs.length !== 1 && value === '') {
                                 newJobs.splice(index, 1);
@@ -575,7 +575,6 @@ const FormPersonalDataDoctor = () => {
                             name="jobs"
                             onChange={e => {
                               const { value } = e.currentTarget;
-                              error = null;
                               const newJobs = [...values.jobs];
                               if (values.jobs.length !== 1 && value === '') {
                                 newJobs.splice(index, 1);
@@ -605,7 +604,6 @@ const FormPersonalDataDoctor = () => {
                             name="jobs"
                             onChange={e => {
                               const { value } = e.currentTarget;
-                              error = null;
                               const newJobs = [...values.jobs];
                               if (values.jobs.length !== 1 && value === '') {
                                 newJobs.splice(index, 1);
@@ -632,7 +630,6 @@ const FormPersonalDataDoctor = () => {
                               name="job"
                               onChange={e => {
                                 const { value } = e.currentTarget;
-                                error = null;
                                 const newJobs = [...values.jobs];
 
                                 newJobs.splice(index, 1, {
@@ -658,7 +655,6 @@ const FormPersonalDataDoctor = () => {
                               name="jobs"
                               onChange={e => {
                                 const { value } = e.currentTarget;
-                                error = null;
                                 const newjob = [...values.jobs];
 
                                 newjob.splice(index, 1, {

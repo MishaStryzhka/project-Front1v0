@@ -3,21 +3,19 @@ import {
   ButtonWrapper,
   FormDescription,
   FormRefreshEmail,
-  TitleModal,
 } from './ModalRefreshEmail.styled';
 import { Formik } from 'formik';
 import { useAuth } from 'hooks';
 import { validationRefreshEmailSchema } from 'schemas/RefreshEmailSchema';
 import {
   Button,
-  FieldStyled,
   ImputWrap,
   Label,
-  TextError,
 } from 'components/Forms/FormLogin/FormLogin.styled';
-import { Placeholder } from 'components/Forms/FormPersonalDataPatient/FormPersonalDataPatient.styled';
 import { useDispatch } from 'react-redux';
 import { refreshEmail } from 'redux/auth/operations';
+import Title from 'componentsReusable/Titles/Title/Title';
+import Input from 'componentsReusable/Inputs/Input/Input';
 
 const ModalRefreshEmail = ({ setIsOpenModal }) => {
   let { user, error } = useAuth();
@@ -37,7 +35,7 @@ const ModalRefreshEmail = ({ setIsOpenModal }) => {
 
   return (
     <Modal onClick={() => setIsOpenModal(null)}>
-      <TitleModal>Змінити e-mail</TitleModal>
+      <Title type="modal">Змінити e-mail</Title>
 
       <Formik
         initialValues={{
@@ -60,7 +58,7 @@ const ModalRefreshEmail = ({ setIsOpenModal }) => {
             <FormRefreshEmail onSubmit={handleSubmit}>
               <ImputWrap>
                 <Label>
-                  <FieldStyled
+                  <Input
                     error={errors.email && touched.email && errors.email}
                     valid={values.email}
                     type="email"
@@ -71,15 +69,12 @@ const ModalRefreshEmail = ({ setIsOpenModal }) => {
                     }}
                     onBlur={handleBlur}
                     required
+                    placeholder={'Старий e-mail'}
                   />
-                  {!values.email && <Placeholder>Старий e-mail</Placeholder>}
-                  {(errors.email || error) && touched.email && (
-                    <TextError>{error || errors.email}</TextError>
-                  )}
                 </Label>
 
                 <Label>
-                  <FieldStyled
+                  <Input
                     error={
                       errors.newEmail && touched.newEmail && errors.newEmail
                     }
@@ -92,11 +87,8 @@ const ModalRefreshEmail = ({ setIsOpenModal }) => {
                     }}
                     onBlur={handleBlur}
                     required
+                    placeholder={'Новий e-mail'}
                   />
-                  {!values.newEmail && <Placeholder>Новий e-mail</Placeholder>}
-                  {errors.newEmail && touched.newEmail && (
-                    <TextError>{errors.newEmail}</TextError>
-                  )}
                 </Label>
               </ImputWrap>
               <FormDescription>
