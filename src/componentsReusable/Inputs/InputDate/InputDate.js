@@ -8,7 +8,7 @@ import {
   WrapScroll,
 } from './InputDate.styled';
 import IconCalendar from 'images/icons/IconCalendar';
-import Input from 'components/Input/Input';
+import Input from 'componentsReusable/Inputs/Input/Input';
 
 import dateFormat from 'dateformat';
 

@@ -1,14 +1,13 @@
 import {
-  FieldStyled,
   FormStyled,
   ImputWrap,
   Label,
-  TextError,
 } from 'components/Forms/FormLogin/FormLogin.styled';
 import PassValidateBox from 'components/PassValidateBox/PassValidateBox';
 import { Formik } from 'formik';
 import { validationRegisterSchema } from 'schemas';
 import { useAuth } from 'hooks';
+import Input from 'componentsReusable/Inputs/Input/Input';
 
 const FormRegister = ({ onSubmit }) => {
   let { error } = useAuth();
@@ -41,8 +40,16 @@ const FormRegister = ({ onSubmit }) => {
             <FormStyled id="FormRegister" onSubmit={handleSubmit}>
               <ImputWrap>
                 <Label>
-                  <FieldStyled
-                    error={errors.email && touched.email && errors.email}
+                  <Input
+                    error={
+                      (errors.email && touched.email && errors.email) ||
+                      (error &&
+                        error.status === 409 &&
+                        'Користувач з таким адресом електроної пошти вже існує') ||
+                      (error &&
+                        error.status === 400 &&
+                        'Невірний формат електроної пошти')
+                    }
                     valid={values.email}
                     type="email"
                     name="email"
@@ -55,21 +62,10 @@ const FormRegister = ({ onSubmit }) => {
                     placeholder="e-mail"
                     required
                   />
-                  {errors.email && touched.email && (
-                    <TextError>{errors.email}</TextError>
-                  )}
-                  {error && (
-                    <TextError>
-                      {error.status === 409 &&
-                        'Користувач з таким адресом електроної пошти вже існує'}
-                      {error.status === 400 &&
-                        'Невірний формат електроної пошти'}
-                    </TextError>
-                  )}
                 </Label>
 
                 <Label>
-                  <FieldStyled
+                  <Input
                     error={
                       errors.password && touched.password && errors.password
                     }
@@ -81,15 +77,11 @@ const FormRegister = ({ onSubmit }) => {
                     placeholder="Пароль"
                     required
                   />
-                  {errors.password && touched.password && (
-                    <TextError>{errors.password}</TextError>
-                  )}
-
                   <PassValidateBox value={values.password} />
                 </Label>
 
                 <Label>
-                  <FieldStyled
+                  <Input
                     error={
                       errors.confirmPassword &&
                       touched.confirmPassword &&
@@ -103,9 +95,9 @@ const FormRegister = ({ onSubmit }) => {
                     placeholder="Повторити пароль"
                     required
                   />
-                  {errors.confirmPassword && touched.confirmPassword && (
+                  {/* {errors.confirmPassword && touched.confirmPassword && (
                     <TextError>{errors.confirmPassword}</TextError>
-                  )}
+                  )} */}
                 </Label>
               </ImputWrap>
               {/* <NavWrap>

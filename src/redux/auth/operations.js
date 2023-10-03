@@ -148,10 +148,14 @@ export const updateUserInfo = createAsyncThunk(
       const response = await axios.put(`/users/current/update`, formData, {
         headers: { 'content-type': 'multipart/form-data' },
       });
-      return response.data;
+      console.log('response.data', response.data);
+
+      return response.data.user;
       // const user = { avatar, name, email, phone, city, birthday };
       // return user;
     } catch (error) {
+      console.log('error', error);
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -193,14 +197,14 @@ export const refreshPassword = createAsyncThunk(
 
       // setAuthHeader(res.data.user.token);
 
-      return res.data;
+      return { data: res.data, status: res.status };
     } catch (error) {
       console.log('error', error);
 
-      // return thunkAPI.rejectWithValue({
-      //   status: error.response.status,
-      //   message: error.response.data.message,
-      // });
+      return thunkAPI.rejectWithValue({
+        status: error.response.status,
+        message: error.response.data.message,
+      });
     }
   }
 );
@@ -213,14 +217,10 @@ export const refreshPassword = createAsyncThunk(
 export const refreshEmail = createAsyncThunk(
   'auth/refreshEmail',
   async (credentials, thunkAPI) => {
-    console.log('credentials', credentials);
-
     try {
       const res = await axios.patch('users/current/refreshEmail', credentials);
 
       console.log('res', res);
-
-      // setAuthHeader(res.data.user.token);
 
       return res.data;
     } catch (error) {

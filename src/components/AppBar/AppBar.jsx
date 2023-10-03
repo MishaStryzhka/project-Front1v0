@@ -5,7 +5,7 @@ import IconUser from 'images/icons/IconUser';
 import BurgerMenu from 'components/BurgerMenu/BurgerMenu';
 import { useAuth } from 'hooks';
 import { useState } from 'react';
-import ModalLeaveRequest from 'components/ModalLeaveRequest/ModalLeaveRequest';
+import ModalLeaveRequest from 'components/Modals/ModalLeaveRequest/ModalLeaveRequest';
 import HeaderButton from 'componentsReusable/Buttons/HeaderButton/HeaderButton';
 import UserBtn from 'components/UserBtn/UserBtn';
 

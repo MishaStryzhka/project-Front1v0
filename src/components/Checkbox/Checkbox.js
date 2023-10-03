@@ -9,15 +9,17 @@ const Checkbox = e => {
     field: { name },
   } = e;
 
-  console.log('e', e.form.values[name]);
   return (
     <StyledLabel onChange={onChange}>
       <StyledField type={e.type} name={e.field.name} value={value} />
 
       {typeof e.form.values[name] === 'object' ? (
         <>
-          {!e.form.values[name].includes(e.value) && <IconCheckbox />}
-          {e.form.values[name].includes(e.value) && <IconCheckboxChack />}
+          {e.form.values[name].includes(e.value) ? (
+            <IconCheckboxChack />
+          ) : (
+            <IconCheckbox />
+          )}
         </>
       ) : (
         <>

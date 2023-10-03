@@ -3,7 +3,8 @@ import { styled } from 'styled-components';
 export const ValidateBox = styled.ul`
   padding-top: 20px;
   display: flex;
-  flex-direction: column;
+  justify-content: space-between;
+  // flex-direction: column;
   row-gap: 12px;
 `;
 

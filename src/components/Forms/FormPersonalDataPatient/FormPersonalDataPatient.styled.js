@@ -48,7 +48,7 @@ export const Placeholder = styled.p`
   }
 `;
 
-export const ButtonRefresh = styled.button`
+export const ButtonAdd = styled.button`
   cursor: pointer;
 
   padding-top: 10px;

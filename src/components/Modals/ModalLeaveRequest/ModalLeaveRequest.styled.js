@@ -4,7 +4,7 @@ import { styled } from 'styled-components';
 export const Box = styled.div``;
 
 export const InputWrap = styled.div`
-  padding-top: 20px;
+  padding-top: 40px;
 
   display: flex;
   flex-direction: column;

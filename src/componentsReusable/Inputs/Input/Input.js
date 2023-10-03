@@ -6,7 +6,7 @@ const Input = ({
   setFieldValue,
   error = null,
   type = 'text',
-  value = '',
+  value,
   name = '',
   onChange = () => {},
   onBlur = () => {},
@@ -15,7 +15,7 @@ const Input = ({
   width = '800px',
   height = '50px',
   showPlaceholder = false,
-  placeholder = '',
+  placeholder,
   min,
   max,
   $style,
@@ -40,11 +40,7 @@ const Input = ({
         height={height}
         $style={$style}
       />
-      {!value && (
-        <Placeholder type={field} required={required}>
-          {placeholder}
-        </Placeholder>
-      )}
+      <Placeholder required={required}>{placeholder}</Placeholder>
       {error && <TextError>{error}</TextError>}
     </div>
   );

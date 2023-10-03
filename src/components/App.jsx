@@ -25,7 +25,9 @@ const LoginPage = lazy(() => import('pages/authPages/LoginPage/LoginPage'));
 const MainPage = lazy(() => import('pages/mainPages/MainPage'));
 const NotFoundPage = lazy(() => import('pages/mainPages/NotFoundPage'));
 
-const ProblemsListPage = lazy(() => import('pages/mainPages/ProblemsListPage'));
+const ProblemsListPage = lazy(() =>
+  import('pages/mainPages/ProblemsListPage/ProblemsListPage')
+);
 const DirectionsListPage = lazy(() =>
   import('pages/mainPages/DirectionsListPage/DirectionsListPage')
 );

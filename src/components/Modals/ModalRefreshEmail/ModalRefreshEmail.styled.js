@@ -13,6 +13,7 @@ export const TitleModal = styled.h2`
 `;
 
 export const FormRefreshEmail = styled.form`
+  padding-top: 40px;
   width: 800px;
 `;
 

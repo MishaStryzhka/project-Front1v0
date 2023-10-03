@@ -63,7 +63,7 @@ const RegisterPage = () => {
       </StyledMainContent>
 
       <StyledCTABigButton type="submit" form="FormRegister">
-        Зберегти та продовжити
+        Зареєструватися
       </StyledCTABigButton>
 
       <OrBoxAotorization />
