@@ -9,5 +9,5 @@ export const StyledMainContent = styled.div`
   background: ${({ theme }) => theme.color.background1};
   border-radius: 20px;
 
-  padding: 40px 90px;
+  padding: ${({ $padding }) => $padding || '40px 90px'};
 `;

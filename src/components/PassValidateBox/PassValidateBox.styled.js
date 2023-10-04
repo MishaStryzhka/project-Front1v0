@@ -1,7 +1,7 @@
 import { styled } from 'styled-components';
 
 export const ValidateBox = styled.ul`
-  padding-top: 20px;
+  padding-top: 5px;
   display: flex;
   justify-content: space-between;
   // flex-direction: column;

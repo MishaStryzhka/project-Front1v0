@@ -12,7 +12,7 @@ const DirectionsListPage = () => {
       </Helmet>
 
       <Container>
-        <StyledTitle>Оберіть напрямок спеціаліста</StyledTitle>
+        <StyledTitle type="page">Оберіть напрямок спеціаліста</StyledTitle>
 
         <NavList name="direction" list={directionListValue} />
       </Container>

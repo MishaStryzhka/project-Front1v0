@@ -9,7 +9,7 @@ export const Backdrop = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${({ theme }) => theme.color.primary}80;
+  background: ${({ theme }) => theme.color.btnLight}80;
   backdrop-filter: blur(4px);
   z-index: 1200;
 `;

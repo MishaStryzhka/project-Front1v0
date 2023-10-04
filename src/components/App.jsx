@@ -22,7 +22,7 @@ const RegisterPage = lazy(() =>
   import('pages/authPages/RegisterPage/RegisterPage')
 );
 const LoginPage = lazy(() => import('pages/authPages/LoginPage/LoginPage'));
-const MainPage = lazy(() => import('pages/mainPages/MainPage'));
+const MainPage = lazy(() => import('pages/mainPages/MainPage/MainPage'));
 const NotFoundPage = lazy(() => import('pages/mainPages/NotFoundPage'));
 
 const ProblemsListPage = lazy(() =>

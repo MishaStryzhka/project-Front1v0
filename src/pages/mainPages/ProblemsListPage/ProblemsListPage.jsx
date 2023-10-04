@@ -12,7 +12,7 @@ const ProblemsListPage = () => {
       </Helmet>
 
       <Container>
-        <StyledTitle>Скарги</StyledTitle>
+        <StyledTitle type="page">Скарги</StyledTitle>
 
         <NavList name="problem" list={problemListValue} />
       </Container>

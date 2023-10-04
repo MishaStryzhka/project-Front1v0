@@ -10,7 +10,9 @@ export const StyledTitle = styled.h1`
   ${({ type }) =>
     (type === 'page' &&
       `font-size: 40px;
-    font-weight: 600;`) ||
+    font-weight: 600;
+    text-align: center;
+    `) ||
     (type === 'modal' &&
       `font-size: 30px;
     font-weight: 400;

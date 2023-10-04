@@ -1,5 +1,4 @@
 import {
-  FormStyled,
   ImputWrap,
   Label,
   TextError,
@@ -10,7 +9,6 @@ import { useAuth } from 'hooks';
 import {
   ButtonAdd,
   ContactMethodLabel,
-  FormStyledPatient,
   Placeholder,
   RadioInputWrap,
   RadioLabel,
@@ -25,24 +23,18 @@ import { useDispatch } from 'react-redux';
 import { updateUserInfo } from 'redux/auth/operations';
 import { validationPatientPageScheme } from 'schemas';
 import Input from 'componentsReusable/Inputs/Input/Input';
-
+import IconAdd from 'images/icons/IconAdd';
+import theme from 'theme';
+import Form from '../Form/Form';
 const FormPersonalDataPatient = () => {
-  const { user } = useAuth();
+  const { user, currentTheme } = useAuth();
   console.log('user', user);
 
   const dispatch = useDispatch();
 
   const onSubmit = value => {
-    const { lastName, firstName, patronymic, phones, contactMethods } = value;
-
-    console.log(
-      'value',
-      lastName,
-      firstName,
-      patronymic,
-      phones,
-      contactMethods
-    );
+    const { lastName, firstName, patronymic, phones, contactMethods, age } =
+      value;
 
     dispatch(
       updateUserInfo({
@@ -51,6 +43,7 @@ const FormPersonalDataPatient = () => {
         patronymic,
         phones,
         contactMethods,
+        age,
       })
     );
   };
@@ -61,6 +54,7 @@ const FormPersonalDataPatient = () => {
         lastName: user.lastName || '',
         firstName: user.firstName || '',
         patronymic: user.patronymic || '',
+        age: user.age || '',
         phones: user.phones || [],
         contactMethods: user.contactMethods || ['chat'],
       }}
@@ -77,9 +71,10 @@ const FormPersonalDataPatient = () => {
         handleSubmit,
       }) => {
         return (
-          <FormStyledPatient
+          <Form
             id="formPersonalData"
-            as={FormStyled}
+            isRequiredFields
+            // as={FormStyled}
             // onSubmit={handleSubmit}
           >
             <ImputWrap>
@@ -125,6 +120,22 @@ const FormPersonalDataPatient = () => {
                   }}
                   onBlur={handleBlur}
                   placeholder="По-батькові"
+                />
+              </Label>
+
+              <Label>
+                <Input
+                  error={
+                    errors.patronymic && touched.patronymic && errors.patronymic
+                  }
+                  type={'text'}
+                  name="age"
+                  onChange={e => {
+                    handleChange(e);
+                  }}
+                  onBlur={handleBlur}
+                  placeholder="Вік, років"
+                  required
                 />
               </Label>
 
@@ -195,7 +206,15 @@ const FormPersonalDataPatient = () => {
                     setFieldValue('phones', newPhones);
                   }}
                 >
-                  + Додати номер телефону
+                  <IconAdd
+                    fill={
+                      values.phones.indexOf('') !== -1 ||
+                      values.phones.length === 0
+                        ? theme[currentTheme].color.disable
+                        : theme[currentTheme].color.text
+                    }
+                  />{' '}
+                  Додати номер телефону
                 </ButtonAdd>
               </WrapPhone>
 
@@ -230,7 +249,7 @@ const FormPersonalDataPatient = () => {
                 )}
               </ContactMethodLabel>
             </ImputWrap>
-          </FormStyledPatient>
+          </Form>
         );
       }}
     </Formik>

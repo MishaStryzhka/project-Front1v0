@@ -90,7 +90,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                   <Label>
                     <Input
                       width="800px"
-                      error={
+                      $error={
                         errors.lastName && touched.lastName && errors.lastName
                       }
                       type={'text'}
@@ -109,7 +109,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                   <Label>
                     <Input
                       width="800px"
-                      error={
+                      $error={
                         errors.firstName &&
                         touched.firstName &&
                         errors.firstName
@@ -139,7 +139,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                             <Input
                               width="800px"
                               as={PhoneInputField}
-                              error={null}
+                              $error={null}
                               value={phone}
                               field={{ name: 'phones', value: phone }}
                               setFieldValue={value => {
@@ -277,7 +277,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                   <Label>
                     <Input
                       width="800px"
-                      error={errors.age && touched.age && errors.age}
+                      $error={errors.age && touched.age && errors.age}
                       type={'text'}
                       value={values.age}
                       name="age"
@@ -311,9 +311,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                     placeholder="Проблема"
                   />
 
-                  <LabelCheckbox
-                    style={{ paddingTop: 0, marginTop: -20, marginBottom: -20 }}
-                  >
+                  <LabelCheckbox style={{ paddingTop: 0, marginTop: -20 }}>
                     <FieldCheckboxStyled
                       type={'checkbox'}
                       name="needPediatricDentist"
@@ -327,7 +325,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                   <Label>
                     <Input
                       width="800px"
-                      error={errors.budget && touched.budget && errors.budget}
+                      $error={errors.budget && touched.budget && errors.budget}
                       type={'number'}
                       value={values.budget}
                       name="budget"
@@ -341,16 +339,11 @@ const ModalLeaveRequest = ({ onClick }) => {
                     />
                   </Label>
 
-                  <Label>
+                  {/* <Label>
                     <Input
                       as={'textarea'}
                       width="800px"
                       height="150px"
-                      error={
-                        errors.descriptionProblem &&
-                        touched.descriptionProblem &&
-                        errors.descriptionProblem
-                      }
                       type={'text'}
                       value={values.descriptionProblem}
                       name="descriptionProblem"
@@ -362,7 +355,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                       placeholder="Опис проблеми"
                     />
                     <p>Максимум 300 символів</p>
-                  </Label>
+                  </Label> */}
                 </InputWrap>
               </Form>
             );

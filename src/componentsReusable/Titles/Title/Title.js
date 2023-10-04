@@ -8,6 +8,7 @@ import { StyledTitle } from './Title.styled';
 // ---page:
 // font-size: 40px;
 // font-weight: 600;
+// text-align: center;
 
 // ---modal:
 // font-size: 30px;

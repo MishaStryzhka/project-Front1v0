@@ -18,7 +18,7 @@ const BurgerMenu = () => {
     <BurgerMenuContainer>
       {isLoggedIn ? (
         <>
-          <StyledNavLink to="user">Мій профіль</StyledNavLink>
+          <StyledNavLink to="user/accountData">Мій профіль</StyledNavLink>
           <StyledBtnLogOut onClick={() => hendlelogout()}>
             Вийти
           </StyledBtnLogOut>
