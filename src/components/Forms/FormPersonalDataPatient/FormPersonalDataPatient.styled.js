@@ -1,9 +1,5 @@
-import { Field, Form } from 'formik';
+import { Field } from 'formik';
 import { styled } from 'styled-components';
-
-export const FormStyledPatient = styled(Form)`
-  padding-top: 40px;
-`;
 
 export const FormDescription = styled.p`
   width: 800px;
@@ -52,9 +48,10 @@ export const ButtonAdd = styled.button`
   cursor: pointer;
 
   padding-top: 10px;
+  padding-left: 15px;
 
   color: ${({ theme, disabled }) =>
-    disabled ? theme.color.placeholder : theme.color.secondary};
+    disabled ? theme.color.disable : theme.color.text};
 
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 16px;
@@ -66,6 +63,10 @@ export const ButtonAdd = styled.button`
 
   &:hover {
   }
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
 `;
 
 export const WrapPhone = styled.div``;

@@ -25,7 +25,7 @@ export const Spinner = styled.div`
 
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
-  border-radius: 45%;
+  border-radius: 50%;
   background: conic-gradient(
     ${({ $colorParent }) => $colorParent || '#fff'} 0%,
     transparent

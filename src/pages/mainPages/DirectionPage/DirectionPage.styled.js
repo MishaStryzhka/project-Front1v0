@@ -11,18 +11,18 @@ export const DoctorsBox = styled.ul`
   padding-top: 20px;
 
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 40px;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
 `;
 
 export const DoctorsItem = styled.li`
-  width: 180px;
-  height: 240px;
+  // width: 180px;
+  height: 330px;
   padding: 10px;
   box-sizing: border-box;
 
   border-radius: 10px;
-  border: 2px solid var(--Black, #000);
+  background-color: ${({ theme }) => theme.color.primary};
 `;
 
 export const DoctorsAvatars = styled.img`

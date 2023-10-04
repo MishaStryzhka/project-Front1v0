@@ -1,10 +1,5 @@
+import { Label, TextError } from 'components/Forms/FormLogin/FormLogin.styled';
 import {
-  FormStyled,
-  Label,
-  TextError,
-} from 'components/Forms/FormLogin/FormLogin.styled';
-import {
-  FormStyledPatient,
   Placeholder,
   StyledButton,
 } from 'components/Forms/FormPersonalDataPatient/FormPersonalDataPatient.styled';
@@ -24,6 +19,7 @@ import Title from 'componentsReusable/Titles/Title/Title';
 import ModalDeleteAccount from 'components/Modals/ModalDeleteAccount/ModalDeleteAccount';
 import Input from 'componentsReusable/Inputs/Input/Input';
 import IconEdit from 'images/icons/IconEdit';
+import Form from 'components/Forms/Form/Form';
 
 const AccountData = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -67,7 +63,7 @@ const AccountData = () => {
             handleSubmit,
           }) => {
             return (
-              <FormStyledPatient as={FormStyled} onSubmit={handleSubmit}>
+              <Form>
                 <StyledImputWrap>
                   <Label>
                     <Input
@@ -122,7 +118,7 @@ const AccountData = () => {
                     )}
                   </Label>
                 </StyledImputWrap>
-              </FormStyledPatient>
+              </Form>
             );
           }}
         </Formik>

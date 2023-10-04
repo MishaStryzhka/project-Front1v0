@@ -1,4 +1,4 @@
-import { StyledForm } from './Form.styled';
+import { FormDescription, StyledForm } from './Form.styled';
 
 const Form = ({
   onSubmit,
@@ -12,7 +12,16 @@ const Form = ({
   sendRequest,
   id,
 }) => {
-  return <StyledForm id={id}>{children}</StyledForm>;
+  return (
+    <>
+      {isRequiredFields && (
+        <FormDescription>
+          <span>*</span>обов’язкові поля
+        </FormDescription>
+      )}
+      <StyledForm id={id}>{children}</StyledForm>
+    </>
+  );
 };
 
 export default Form;

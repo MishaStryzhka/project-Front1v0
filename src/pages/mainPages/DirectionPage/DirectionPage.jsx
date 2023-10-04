@@ -182,6 +182,38 @@ const users = [
       },
     ],
   },
+  {
+    id: nanoid(),
+    lastName: 'Прізвище',
+    firstName: 'Ім’я',
+    experienceYears: 'Стаж роботи',
+    jobs: [
+      {
+        id: nanoid(),
+        name: 'Місце роботи',
+        cityArea: 'Kyiv',
+        address: '',
+        workSchedule: '',
+        receptionHours: ['', ''],
+      },
+    ],
+  },
+  {
+    id: nanoid(),
+    lastName: 'Прізвище',
+    firstName: 'Ім’я',
+    experienceYears: 'Стаж роботи',
+    jobs: [
+      {
+        id: nanoid(),
+        name: 'Місце роботи',
+        cityArea: 'Kyiv',
+        address: '',
+        workSchedule: '',
+        receptionHours: ['', ''],
+      },
+    ],
+  },
 ];
 
 const DirectionPage = () => {
@@ -232,7 +264,7 @@ const DirectionPage = () => {
           />
         </SideBarPage>
 
-        <MainContent>
+        <MainContent width="900px" $padding="40px">
           <Title page="page">{direction?.name}</Title>
 
           <p>Review</p>
