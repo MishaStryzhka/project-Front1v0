@@ -10,14 +10,6 @@ const WrapCalendar = ({ value, onChange }) => {
     console.log(`Обрана дата: ${date}`);
   };
 
-  const date = document.querySelector(
-    '.react-calendar__navigation__label__labelText'
-  );
-
-  if (date?.textContent) {
-    date.textContent = `123 ${date.textContent}`;
-  }
-
   return (
     <Wrap>
       <Calendar onChange={handleDateChange} value={value} />
