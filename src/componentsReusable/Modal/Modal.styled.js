@@ -20,16 +20,15 @@ export const CloseWrap = styled.div`
   justify-content: flex-end;
 `;
 export const ModalContainer = styled.div`
-  width: 800px;
+  // width: 800px;
   border: 2px solid ${({ theme }) => theme.color.main};
   background: ${({ theme }) => theme.color.primary};
 
-  padding: 14px;
   margin: 0 auto;
   border-radius: 20px;
 
   position: relative;
-  padding: 80px 100px;
+  padding: ${({ $padding }) => $padding || `40px`};
 
   max-height: 75vh;
   overflow-y: auto;

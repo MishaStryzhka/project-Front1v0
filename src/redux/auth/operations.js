@@ -149,14 +149,11 @@ export const updateUserInfo = createAsyncThunk(
       const response = await axios.put(`/users/current/update`, formData, {
         headers: { 'content-type': 'multipart/form-data' },
       });
-      console.log('response.data', response.data);
 
       return response.data.user;
       // const user = { avatar, name, email, phone, city, birthday };
       // return user;
     } catch (error) {
-      console.log('error', error);
-
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -166,7 +163,7 @@ export const updateUserInfo = createAsyncThunk(
  * DELETE @ users/current
  * headers: Authorization: Bearer token
  */
-export const deleteAccount = createAsyncThunk(
+export const removeAccount = createAsyncThunk(
   'auth/deleteAccount',
   async (_, thunkAPI) => {
     try {
@@ -186,22 +183,16 @@ export const deleteAccount = createAsyncThunk(
 export const refreshPassword = createAsyncThunk(
   'auth/refreshPassword',
   async (credentials, thunkAPI) => {
-    console.log('credentials', credentials);
-
     try {
       const res = await axios.patch(
         'users/current/refreshPassword',
         credentials
       );
 
-      console.log('res', res);
-
       // setAuthHeader(res.data.user.token);
 
       return { data: res.data, status: res.status };
     } catch (error) {
-      console.log('error', error);
-
       return thunkAPI.rejectWithValue({
         status: error.response.status,
         message: error.response.data.message,
@@ -220,9 +211,6 @@ export const refreshEmail = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       const res = await axios.patch('users/current/refreshEmail', credentials);
-
-      console.log('res', res);
-
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue({

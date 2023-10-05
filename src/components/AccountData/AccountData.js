@@ -16,7 +16,7 @@ import {
 } from './AccountData.styled';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import Title from 'componentsReusable/Titles/Title/Title';
-import ModalDeleteAccount from 'components/Modals/ModalDeleteAccount/ModalDeleteAccount';
+import ModalDeleteAccount from 'components/Modals/ModalRemoveAccount/ModalRemoveAccount';
 import Input from 'componentsReusable/Inputs/Input/Input';
 import IconEdit from 'images/icons/IconEdit';
 import Form from 'components/Forms/Form/Form';

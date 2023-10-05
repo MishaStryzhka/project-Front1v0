@@ -1,20 +1,20 @@
 import Modal from 'componentsReusable/Modal/Modal';
-import { TitleModal } from '../ModalRefreshEmail/ModalRefreshEmail.styled';
 import { useDispatch } from 'react-redux';
-import { deleteAccount } from 'redux/auth/operations';
+import { removeAccount } from 'redux/auth/operations';
 import SecondaryButton from 'componentsReusable/Buttons/SecondaryButton/SecondaryButton';
-import { StyledButtonWrapper } from './ModalDeleteAccount.styled';
+import { StyledButtonWrapper } from './ModalRemoveAccount.styled';
+import Title from 'componentsReusable/Titles/Title/Title';
 
-const ModalDeleteAccount = ({ setIsOpenModal }) => {
+const ModalRemoveAccount = ({ setIsOpenModal }) => {
   const dispatch = useDispatch();
 
-  const handleDeleteAccount = () => {
-    dispatch(deleteAccount());
+  const handleRemoveAccount = () => {
+    dispatch(removeAccount());
   };
 
   return (
     <Modal onClick={() => setIsOpenModal(null)}>
-      <TitleModal>Видалити акаунт?</TitleModal>
+      <Title type="modal">Видалити акаунт?</Title>
 
       <StyledButtonWrapper>
         <SecondaryButton onClick={() => setIsOpenModal(null)}>
@@ -22,7 +22,7 @@ const ModalDeleteAccount = ({ setIsOpenModal }) => {
         </SecondaryButton>
         <SecondaryButton
           $styledType="rose"
-          onClick={() => handleDeleteAccount()}
+          onClick={() => handleRemoveAccount()}
         >
           Видалити
         </SecondaryButton>
@@ -31,4 +31,4 @@ const ModalDeleteAccount = ({ setIsOpenModal }) => {
   );
 };
 
-export default ModalDeleteAccount;
+export default ModalRemoveAccount;

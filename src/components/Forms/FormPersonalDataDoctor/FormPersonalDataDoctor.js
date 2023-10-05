@@ -43,6 +43,7 @@ import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import Checkbox from 'components/Checkbox/Checkbox';
 import { FieldStyled } from '../FormLogin/FormLogin.styled';
 import { Placeholder } from '../FormPersonalDataPatient/FormPersonalDataPatient.styled';
+import ModalAddAvatar from 'components/Modals/ModalAddAvatar/ModalAddAvatar';
 
 const FormPersonalDataDoctor = () => {
   const { user } = useAuth();
@@ -121,6 +122,8 @@ const FormPersonalDataDoctor = () => {
         handleBlur,
         handleSubmit,
       }) => {
+        console.log('values', values);
+
         return (
           <Form
             id="formPersonalData"
@@ -165,19 +168,11 @@ const FormPersonalDataDoctor = () => {
                     </AvatarDescription>
                   </div>
                   {isOpenModalAddAvatar && (
-                    <Modal
-                      onClick={() => {
-                        setIsOpenModalAddAvatar(false);
-                      }}
-                    >
-                      <TitleModal>Додати зображення профілю</TitleModal>
-                      <CropperWrap
-                        image={avatar}
-                        name="avatar"
-                        setImage={e => setFieldValue('avatarUrl', e)}
-                        onClose={() => setIsOpenModalAddAvatar(false)}
-                      />
-                    </Modal>
+                    <ModalAddAvatar
+                      avatar={avatar}
+                      setFieldValue={setFieldValue}
+                      setIsOpenModalAddAvatar={setIsOpenModalAddAvatar}
+                    />
                   )}
                 </AvatarLabel>
 

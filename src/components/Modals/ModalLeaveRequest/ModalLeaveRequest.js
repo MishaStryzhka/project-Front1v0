@@ -41,7 +41,7 @@ const ModalLeaveRequest = ({ onClick }) => {
   };
 
   return createPortal(
-    <Modal onClick={() => onClick()}>
+    <Modal onClick={() => onClick()} $padding="80px 160px">
       <Box>
         <StyledTitle type="modal">
           Залиште свою заявку, і лікар з вами зв’яжеться!
@@ -149,15 +149,12 @@ const ModalLeaveRequest = ({ onClick }) => {
                                   values.phones.indexOf('') !== index &&
                                   value === ''
                                 ) {
-                                  console.log('видаляти номер?');
-
                                   newPhones.splice(index, 1);
                                 } else {
                                   if (
                                     value !== '' &&
                                     values.phones.indexOf(value) !== -1
                                   ) {
-                                    console.log('Даний номер вже вказаний.');
                                     return;
                                   }
                                   newPhones.splice(index, 1, value);
@@ -339,9 +336,12 @@ const ModalLeaveRequest = ({ onClick }) => {
                     />
                   </Label>
 
-                  {/* <Label>
+                  <Label>
                     <Input
                       as={'textarea'}
+                      error={
+                        touched.descriptionProblem && errors.descriptionProblem
+                      }
                       width="800px"
                       height="150px"
                       type={'text'}
@@ -355,7 +355,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                       placeholder="Опис проблеми"
                     />
                     <p>Максимум 300 символів</p>
-                  </Label> */}
+                  </Label>
                 </InputWrap>
               </Form>
             );
