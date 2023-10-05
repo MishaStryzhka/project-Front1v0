@@ -8,9 +8,11 @@ import { useState } from 'react';
 import ModalLeaveRequest from 'components/Modals/ModalLeaveRequest/ModalLeaveRequest';
 import HeaderButton from 'componentsReusable/Buttons/HeaderButton/HeaderButton';
 import UserBtn from 'components/UserBtn/UserBtn';
+import ModalSignOut from 'components/Modals/ModalSignOut/ModalSignOutOfAccount';
 
 export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
   const [isOpenModalLeaveRequest, setIsOpenModalLeaveRequest] = useState(false);
+  const [isOpenModalSignOut, setIsOpenModalSignOut] = useState(false);
 
   const { user } = useAuth();
 
@@ -42,11 +44,16 @@ export const AppBar = ({ isOpenMenu, setIsOpenMenu }) => {
               <IconUser />
             </UserBtn>
           </NavWrap>
-          {isOpenMenu && <BurgerMenu setIsOpenMenu={setIsOpenMenu} />}
+          {isOpenMenu && (
+            <BurgerMenu setIsOpenModalSignOut={setIsOpenModalSignOut} />
+          )}
         </StyledContainer>
       </StyledAppBar>
       {isOpenModalLeaveRequest && (
         <ModalLeaveRequest onClick={() => setIsOpenModalLeaveRequest(false)} />
+      )}
+      {isOpenModalSignOut && (
+        <ModalSignOut setIsOpenModal={() => setIsOpenModalSignOut(false)} />
       )}
     </>
   );

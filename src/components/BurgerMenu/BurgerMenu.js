@@ -4,34 +4,29 @@ import {
   StyledBtnLogOut,
   StyledNavLink,
 } from './BurgerMenu.styled';
-import { logOut } from 'redux/auth/operations';
-import { useDispatch } from 'react-redux';
 
-const BurgerMenu = () => {
+const BurgerMenu = ({ setIsOpenModalSignOut }) => {
   const { isLoggedIn } = useAuth();
-  const dispatch = useDispatch();
-
-  const hendlelogout = () => {
-    dispatch(logOut());
-  };
   return (
-    <BurgerMenuContainer>
-      {isLoggedIn ? (
-        <>
-          <StyledNavLink to="user/accountData">Мій профіль</StyledNavLink>
-          <StyledBtnLogOut onClick={() => hendlelogout()}>
-            Вийти
-          </StyledBtnLogOut>
-        </>
-      ) : (
-        <>
+    <>
+      <BurgerMenuContainer>
+        {isLoggedIn ? (
           <>
-            <StyledNavLink to="/login">Увійти</StyledNavLink>
-            <StyledNavLink to="/register">Зареєструватися</StyledNavLink>
+            <StyledNavLink to="user/accountData">Мій профіль</StyledNavLink>
+            <StyledBtnLogOut onClick={() => setIsOpenModalSignOut(true)}>
+              Вийти
+            </StyledBtnLogOut>
           </>
-        </>
-      )}
-    </BurgerMenuContainer>
+        ) : (
+          <>
+            <>
+              <StyledNavLink to="/login">Увійти</StyledNavLink>
+              <StyledNavLink to="/register">Зареєструватися</StyledNavLink>
+            </>
+          </>
+        )}
+      </BurgerMenuContainer>
+    </>
   );
 };
 

@@ -14,9 +14,6 @@ import Input from 'componentsReusable/Inputs/Input/Input';
 
 const FormLogin = ({ onSubmit }) => {
   let { error } = useAuth();
-
-  console.log('error', error);
-
   return (
     <>
       <Formik
@@ -56,7 +53,12 @@ const FormLogin = ({ onSubmit }) => {
 
                 <Label>
                   <Input
-                    error={touched.password && errors.password}
+                    error={
+                      (touched.password && errors.password) ||
+                      (error &&
+                        error.status === 401 &&
+                        'Невірна електронна пошта або пароль')
+                    }
                     type={'password'}
                     name="password"
                     onChange={e => {

@@ -2,7 +2,7 @@ import { useCallback, useEffect } from 'react';
 import { Backdrop, ModalContainer, BtnClose } from './Modal.styled';
 import IconCross from 'images/icons/IconCross';
 
-const Modal = ({ children, onClick }) => {
+const Modal = ({ children, onClick, $padding }) => {
   const handleKeyDown = useCallback(
     evt => {
       document.body.style.overflow = 'auto';
@@ -31,7 +31,7 @@ const Modal = ({ children, onClick }) => {
 
   return (
     <Backdrop onClick={handleBackdropClick}>
-      <ModalContainer>
+      <ModalContainer $padding={$padding}>
         {onClick && (
           <BtnClose
             onClick={() => {

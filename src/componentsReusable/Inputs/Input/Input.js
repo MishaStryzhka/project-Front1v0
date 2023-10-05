@@ -4,7 +4,7 @@ const Input = ({
   as,
   field,
   setFieldValue,
-  $error = null,
+  error,
   type = 'text',
   value,
   name = '',
@@ -26,7 +26,7 @@ const Input = ({
         as={as}
         field={field}
         setFieldValue={setFieldValue}
-        error={$error}
+        error={error}
         type={type}
         min={min}
         max={max}
@@ -41,7 +41,7 @@ const Input = ({
         $style={$style}
       />
       <Placeholder required={required}>{placeholder}</Placeholder>
-      {$error && <TextError>{$error}</TextError>}
+      {error && <TextError>{error}</TextError>}
     </div>
   );
 };

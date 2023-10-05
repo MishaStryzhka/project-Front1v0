@@ -80,7 +80,11 @@ const CropperWrap = ({ image, name, setImage, onClose }) => {
         >
           Скасувати
         </SecondaryButton>
-        <SecondaryButton disabled={isLoading} onClick={e => hendleSave(e)}>
+        <SecondaryButton
+          $styledType="rose"
+          disabled={isLoading}
+          onClick={e => hendleSave(e)}
+        >
           Зберегти
         </SecondaryButton>
       </PreviewButtonWraper>

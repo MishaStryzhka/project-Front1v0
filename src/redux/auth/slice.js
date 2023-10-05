@@ -6,7 +6,7 @@ import {
   refreshUser,
   updateUserInfo,
   updateUserType,
-  deleteAccount,
+  removeAccount,
   refreshEmail,
   refreshPassword,
 } from './operations';
@@ -89,7 +89,7 @@ const authSlice = createSlice({
       .addCase(updateUserInfo.rejected, (state, action) => {
         console.log(action.payload);
       })
-      .addCase(deleteAccount.fulfilled, (state, action) => {
+      .addCase(removeAccount.fulfilled, (state, action) => {
         state.user = null;
         state.token = null;
         state.userType = null;

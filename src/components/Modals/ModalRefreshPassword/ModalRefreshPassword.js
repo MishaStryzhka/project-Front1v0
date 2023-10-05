@@ -72,6 +72,8 @@ const ModalRefreshPassword = ({ setIsOpenModal }) => {
               handleBlur,
               handleSubmit,
             }) => {
+              console.log('errors', errors);
+
               return (
                 <FormRefreshEmail onSubmit={handleSubmit}>
                   <ImputWrap>
