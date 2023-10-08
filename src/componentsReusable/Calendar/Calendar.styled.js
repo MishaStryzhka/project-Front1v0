@@ -73,10 +73,10 @@ color:white;
 border-radius:12px;
 }
 
-.react-calendar__navigation__label__labelText--from{
+/* .react-calendar__navigation__label__labelText--from{
     display:flex;
     justify-content:space-between;
-}
+} */
 
 .react-calendar__year-view__months{
     display:flex;
