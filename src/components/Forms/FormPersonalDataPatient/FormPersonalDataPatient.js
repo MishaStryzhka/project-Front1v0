@@ -1,8 +1,4 @@
-import {
-  ImputWrap,
-  Label,
-  TextError,
-} from 'components/Forms/FormLogin/FormLogin.styled';
+import { ImputWrap, Label } from 'components/Forms/FormLogin/FormLogin.styled';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import { Formik } from 'formik';
 import { useAuth } from 'hooks';
@@ -125,9 +121,7 @@ const FormPersonalDataPatient = () => {
 
               <Label>
                 <Input
-                  error={
-                    errors.patronymic && touched.patronymic && errors.patronymic
-                  }
+                  error={errors.age && touched.age && errors.age}
                   type={'text'}
                   name="age"
                   onChange={e => {
@@ -244,9 +238,6 @@ const FormPersonalDataPatient = () => {
                     <RadioLabel htmlFor="telegramBot">телеграм-бот</RadioLabel>
                   </WrapInputRadio>
                 </RadioInputWrap>
-                {errors.patronymic && touched.patronymic && (
-                  <TextError>{errors.patronymic}</TextError>
-                )}
               </ContactMethodLabel>
             </ImputWrap>
           </Form>
