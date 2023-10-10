@@ -22,6 +22,8 @@ import Input from 'componentsReusable/Inputs/Input/Input';
 import IconAdd from 'images/icons/IconAdd';
 import theme from 'theme';
 import Form from '../Form/Form';
+import InputDate from 'componentsReusable/Inputs/InputDate/InputDate';
+import { TextError } from '../FormPersonalDataDoctor/FormPersonalDataDoctor.styled';
 const FormPersonalDataPatient = () => {
   const { user, currentTheme } = useAuth();
   console.log('user', user);
@@ -29,8 +31,14 @@ const FormPersonalDataPatient = () => {
   const dispatch = useDispatch();
 
   const onSubmit = value => {
-    const { lastName, firstName, patronymic, phones, contactMethods, age } =
-      value;
+    const {
+      lastName,
+      firstName,
+      patronymic,
+      phones,
+      contactMethods,
+      dateOfBirthday,
+    } = value;
 
     dispatch(
       updateUserInfo({
@@ -39,7 +47,7 @@ const FormPersonalDataPatient = () => {
         patronymic,
         phones,
         contactMethods,
-        age,
+        dateOfBirthday,
       })
     );
   };
@@ -50,7 +58,7 @@ const FormPersonalDataPatient = () => {
         lastName: user.lastName || '',
         firstName: user.firstName || '',
         patronymic: user.patronymic || '',
-        age: user.age || '',
+        dateOfBirthday: user.dateOfBirthday || '',
         phones: user.phones || [],
         contactMethods: user.contactMethods || ['chat'],
       }}
@@ -120,15 +128,20 @@ const FormPersonalDataPatient = () => {
               </Label>
 
               <Label>
-                <Input
-                  error={errors.age && touched.age && errors.age}
-                  type={'text'}
-                  name="age"
+                <InputDate
+                  error={
+                    errors.dateOfBirthday &&
+                    touched.dateOfBirthday &&
+                    errors.dateOfBirthday
+                  }
+                  type="date"
+                  name="dateOfBirthday"
+                  selectedValue={values.dateOfBirthday}
                   onChange={e => {
-                    handleChange(e);
+                    setFieldValue('dateOfBirthday', new Date(e));
                   }}
                   onBlur={handleBlur}
-                  placeholder="Вік, років"
+                  placeholder="Дата народження"
                   required
                 />
               </Label>
@@ -143,6 +156,12 @@ const FormPersonalDataPatient = () => {
                     return (
                       <Label key={values.phones.length === 0 ? 0 : index}>
                         <Input
+                          error={
+                            errors.phones &&
+                            errors.phones[index] &&
+                            touched.phones[index] &&
+                            errors.phones[index]
+                          }
                           as={PhoneInputField}
                           field={{
                             name: 'phones',
@@ -150,8 +169,6 @@ const FormPersonalDataPatient = () => {
                             value: phone,
                           }}
                           setFieldValue={value => {
-                            console.log('value', value.slice(1, 13));
-
                             const newPhones = [...values.phones];
                             if (
                               values.phones.indexOf('') &&
@@ -176,6 +193,10 @@ const FormPersonalDataPatient = () => {
                               'phones',
                               index === -1 ? [value] : newPhones
                             );
+
+                            touched.phones = [...(touched.phones || '')];
+                            touched.phones[index] = true;
+                            handleSubmit(e => console.log('EEE'));
                           }}
                           required
                           placeholder="Номер телефону"

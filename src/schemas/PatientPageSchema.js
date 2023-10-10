@@ -25,11 +25,18 @@ export const validationPatientPageScheme = Yup.object().shape({
     )
     .max(64, 'По-батькові має бути менше 64 символів'),
   phones: Yup.array().of(
-    Yup.string()
-      .required('Поле обов`язкове')
-      .max(13, 'Номер має бути менше 13 символів')
+    Yup.string().required('Поле обов`язкове').matches(
+      // eslint-disable-next-line no-useless-escape
+      '^\\+\\d{12}$',
+      'Введено недійсний номер телефону. Переконайтеся, що ви ввели його у правильному форматі.'
+    )
   ),
-  age: Yup.number().min(1, 'qwe').max(120, 'WWW'),
+  dateOfBirthday: Yup.date()
+    .min(
+      new Date('1900-01-01'),
+      'Будь ласка, введіть коректний рік народження.'
+    )
+    .max(new Date(), 'Будь ласка, введіть коректний рік народження.'),
   contactMethods: Yup.array().of(
     Yup.string().oneOf(
       ['chat', 'telegramBot'],
