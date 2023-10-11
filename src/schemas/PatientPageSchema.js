@@ -25,11 +25,24 @@ export const validationPatientPageScheme = Yup.object().shape({
     )
     .max(64, 'По-батькові має бути менше 64 символів'),
   phones: Yup.array().of(
-    Yup.string().required('Поле обов`язкове').matches(
-      // eslint-disable-next-line no-useless-escape
-      '^\\+\\d{12}$',
-      'Введено недійсний номер телефону. Переконайтеся, що ви ввели його у правильному форматі.'
-    )
+    Yup.string()
+      .required('Поле обов`язкове')
+      .test(
+        'is-unique',
+        'Усі елементи мають бути унікальними',
+        function (value) {
+          // Використовуємо Set для визначення унікальних значень у масиві
+          const uniqueValues = [...new Set(value)];
+          return value.length !== 0
+            ? true
+            : uniqueValues.length === value.length;
+        }
+      )
+      .matches(
+        // eslint-disable-next-line no-useless-escape
+        '^\\+\\d{12}$',
+        'Введено недійсний номер телефону. Переконайтеся, що ви ввели його у правильному форматі.'
+      )
   ),
   dateOfBirthday: Yup.date()
     .min(
