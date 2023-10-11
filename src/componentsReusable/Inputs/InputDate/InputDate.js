@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   InputCalendarBox,
   ScrollBox,
-  StyledPlaceholder,
   ToggleBtn,
   WrapScroll,
 } from './InputDate.styled';
@@ -11,6 +10,7 @@ import IconCalendar from 'images/icons/IconCalendar';
 import Input from 'componentsReusable/Inputs/Input/Input';
 
 import dateFormat from 'dateformat';
+import { Placeholder, TextError } from '../Input/Input.styled';
 
 const InputDate = e => {
   const {
@@ -20,6 +20,8 @@ const InputDate = e => {
     className,
     onChange,
     required,
+    placeholder,
+    error,
   } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
 
@@ -64,9 +66,8 @@ const InputDate = e => {
           onChange(e.currentTarget.value);
         }}
       />
-      {!selectedValue && (
-        <StyledPlaceholder required={required}></StyledPlaceholder>
-      )}
+      <Placeholder required={required}>{placeholder}</Placeholder>
+      {error && <TextError>{error}</TextError>}
       <ToggleBtn
         id={`ToggleBtn-${name}`}
         onClick={() => {

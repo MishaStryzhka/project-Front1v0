@@ -27,9 +27,29 @@ export const validationPatientPageScheme = Yup.object().shape({
   phones: Yup.array().of(
     Yup.string()
       .required('Поле обов`язкове')
-      .max(13, 'Номер має бути менше 13 символів')
+      .test(
+        'is-unique',
+        'Усі елементи мають бути унікальними',
+        function (value) {
+          // Використовуємо Set для визначення унікальних значень у масиві
+          const uniqueValues = [...new Set(value)];
+          return value.length !== 0
+            ? true
+            : uniqueValues.length === value.length;
+        }
+      )
+      .matches(
+        // eslint-disable-next-line no-useless-escape
+        '^\\+\\d{12}$',
+        'Введено недійсний номер телефону. Переконайтеся, що ви ввели його у правильному форматі.'
+      )
   ),
-  age: Yup.number().min(1, 'qwe').max(120, 'WWW'),
+  dateOfBirthday: Yup.date()
+    .min(
+      new Date('1900-01-01'),
+      'Будь ласка, введіть коректний рік народження.'
+    )
+    .max(new Date(), 'Будь ласка, введіть коректний рік народження.'),
   contactMethods: Yup.array().of(
     Yup.string().oneOf(
       ['chat', 'telegramBot'],

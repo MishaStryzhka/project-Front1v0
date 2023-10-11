@@ -22,15 +22,23 @@ import Input from 'componentsReusable/Inputs/Input/Input';
 import IconAdd from 'images/icons/IconAdd';
 import theme from 'theme';
 import Form from '../Form/Form';
+import InputDate from 'componentsReusable/Inputs/InputDate/InputDate';
+import { useState } from 'react';
 const FormPersonalDataPatient = () => {
   const { user, currentTheme } = useAuth();
-  console.log('user', user);
+  const [errorPhones, setErrorPhones] = useState([]);
 
   const dispatch = useDispatch();
 
   const onSubmit = value => {
-    const { lastName, firstName, patronymic, phones, contactMethods, age } =
-      value;
+    const {
+      lastName,
+      firstName,
+      patronymic,
+      phones,
+      contactMethods,
+      dateOfBirthday,
+    } = value;
 
     dispatch(
       updateUserInfo({
@@ -39,7 +47,7 @@ const FormPersonalDataPatient = () => {
         patronymic,
         phones,
         contactMethods,
-        age,
+        dateOfBirthday,
       })
     );
   };
@@ -50,12 +58,12 @@ const FormPersonalDataPatient = () => {
         lastName: user.lastName || '',
         firstName: user.firstName || '',
         patronymic: user.patronymic || '',
-        age: user.age || '',
+        dateOfBirthday: user.dateOfBirthday || '',
         phones: user.phones || [],
         contactMethods: user.contactMethods || ['chat'],
       }}
       validationSchema={validationPatientPageScheme}
-      onSubmit={onSubmit}
+      onSubmit={e => onSubmit(e)}
     >
       {({
         values,
@@ -67,12 +75,7 @@ const FormPersonalDataPatient = () => {
         handleSubmit,
       }) => {
         return (
-          <Form
-            id="formPersonalData"
-            isRequiredFields
-            // as={FormStyled}
-            // onSubmit={handleSubmit}
-          >
+          <Form id="formPersonalData" isRequiredFields>
             <ImputWrap>
               <Label>
                 <Input
@@ -120,15 +123,20 @@ const FormPersonalDataPatient = () => {
               </Label>
 
               <Label>
-                <Input
-                  error={errors.age && touched.age && errors.age}
-                  type={'text'}
-                  name="age"
+                <InputDate
+                  error={
+                    errors.dateOfBirthday &&
+                    touched.dateOfBirthday &&
+                    errors.dateOfBirthday
+                  }
+                  type="date"
+                  name="dateOfBirthday"
+                  selectedValue={values.dateOfBirthday}
                   onChange={e => {
-                    handleChange(e);
+                    setFieldValue('dateOfBirthday', new Date(e));
                   }}
                   onBlur={handleBlur}
-                  placeholder="Вік, років"
+                  placeholder="Дата народження"
                   required
                 />
               </Label>
@@ -140,25 +148,30 @@ const FormPersonalDataPatient = () => {
                     : [...(values.phones || '')]
                   ).map(phone => {
                     const index = values.phones.indexOf(phone);
+
                     return (
                       <Label key={values.phones.length === 0 ? 0 : index}>
                         <Input
+                          error={
+                            errorPhones[index] ||
+                            (errors.phones &&
+                              errors.phones[index] &&
+                              touched.phones &&
+                              touched.phones[index] &&
+                              errors.phones[index])
+                          }
                           as={PhoneInputField}
-                          field={{
-                            name: 'phones',
-                            // value: phone ? `+${phone}` : '',
-                            value: phone,
-                          }}
+                          name="phones"
+                          value={phone}
                           setFieldValue={value => {
-                            console.log('value', value.slice(1, 13));
-
                             const newPhones = [...values.phones];
+                            errorPhones[index] = '';
                             if (
                               values.phones.indexOf('') &&
                               values.phones.indexOf('') !== index &&
                               value === ''
                             ) {
-                              console.log('видаляти номер?');
+                              // видаляти номер?
 
                               newPhones.splice(index, 1);
                             } else {
@@ -166,16 +179,33 @@ const FormPersonalDataPatient = () => {
                                 value !== '' &&
                                 values.phones.indexOf(value) !== -1
                               ) {
-                                console.log('Даний номер вже вказаний.');
+                                // console.log('error?.phones', error?.phones);
+
+                                const newErrorPhones = [...errorPhones];
+                                newErrorPhones[index] =
+                                  'Даний номер вже вказаний';
+                                setErrorPhones(newErrorPhones);
+                                // error = 'Даний номер вже вказаний';
                                 return;
                               }
                               newPhones.splice(index, 1, value);
                             }
 
-                            setFieldValue(
-                              'phones',
-                              index === -1 ? [value] : newPhones
-                            );
+                            value.length <= 13 &&
+                              setFieldValue(
+                                'phones',
+                                index === -1 ? [value] : newPhones
+                              );
+
+                            const regex = /^\+\d{12}$/;
+                            touched.phones = [...(touched.phones || '')];
+                            touched.phones[index] = regex.test(value)
+                              ? false
+                              : phone.length === 0
+                              ? false
+                              : value.length >= phone.length
+                              ? false
+                              : true;
                           }}
                           required
                           placeholder="Номер телефону"

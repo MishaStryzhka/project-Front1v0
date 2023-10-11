@@ -4,12 +4,7 @@ import { StyledPhoneInput } from './PhoneInput.styled';
 import ua from 'react-phone-number-input/locale/ua';
 
 const PhoneInputField = props => {
-  const {
-    field: { name, value },
-    setFieldValue,
-    country = 'UA',
-    width,
-  } = props;
+  const { name, value, setFieldValue, country = 'UA', width } = props;
 
   const onValueChange = phoneNumber => {
     setFieldValue(phoneNumber);

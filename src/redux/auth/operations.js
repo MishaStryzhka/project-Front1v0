@@ -133,7 +133,15 @@ export const refreshUser = createAsyncThunk(
 export const updateUserInfo = createAsyncThunk(
   'auth/update',
   async (
-    { avatar, lastName, firstName, patronymic, phones, contactMethods, age },
+    {
+      avatar,
+      lastName,
+      firstName,
+      patronymic,
+      phones,
+      contactMethods,
+      dateOfBirthday,
+    },
     thunkAPI
   ) => {
     try {
@@ -142,7 +150,7 @@ export const updateUserInfo = createAsyncThunk(
       formData.append('lastName', lastName);
       formData.append('firstName', firstName);
       formData.append('patronymic', patronymic);
-      formData.append('age', age);
+      formData.append('dateOfBirthday', dateOfBirthday);
       formData.append('phones', phones || '');
       formData.append('contactMethods', contactMethods || '');
 
