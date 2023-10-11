@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   InputCalendarBox,
   ScrollBox,
-  StyledPlaceholder,
   ToggleBtn,
   WrapScroll,
 } from './InputDate.styled';
