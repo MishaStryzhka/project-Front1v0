@@ -16,7 +16,7 @@ const PersonalData = () => {
 
   setTimeout(() => {
     dispatch(resetResponse(null));
-  }, 3000);
+  }, 2000);
 
   return (
     <div>
@@ -36,11 +36,9 @@ const PersonalData = () => {
           Зберегти
         </SecondaryButton>
       </StyledButtonWrapper>
-      {response?.status === 200 && (
-        <Notify>
-          <IconDone width="22px" height="22px" /> Дані збережено
-        </Notify>
-      )}
+      <Notify show={response?.status === 200}>
+        <IconDone width="22px" height="22px" /> Дані збережено
+      </Notify>
     </div>
   );
 };
