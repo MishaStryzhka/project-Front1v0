@@ -84,7 +84,8 @@ const authSlice = createSlice({
         state.token = null;
       })
       .addCase(updateUserInfo.fulfilled, (state, action) => {
-        state.user = action.payload;
+        state.user = action.payload.user;
+        state.response = { status: action.payload.status };
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
         console.log(action.payload);
