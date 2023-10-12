@@ -4,10 +4,19 @@ import { useAuth } from 'hooks';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import Title from 'componentsReusable/Titles/Title/Title';
 import SecondaryButton from 'componentsReusable/Buttons/SecondaryButton/SecondaryButton';
-import { StyledButtonWrapper } from './PersonalData.styled';
+import { Notify, StyledButtonWrapper } from './PersonalData.styled';
+import IconDone from 'images/icons/IconDone';
+import { useDispatch } from 'react-redux';
+import { resetResponse } from 'redux/auth/slice';
 
 const PersonalData = () => {
-  const { userType } = useAuth();
+  const { userType, response } = useAuth();
+  const dispatch = useDispatch();
+  console.log('response', response);
+
+  setTimeout(() => {
+    dispatch(resetResponse(null));
+  }, 3000);
 
   return (
     <div>
@@ -27,6 +36,11 @@ const PersonalData = () => {
           Зберегти
         </SecondaryButton>
       </StyledButtonWrapper>
+      {response?.status === 200 && (
+        <Notify>
+          <IconDone width="22px" height="22px" /> Дані збережено
+        </Notify>
+      )}
     </div>
   );
 };

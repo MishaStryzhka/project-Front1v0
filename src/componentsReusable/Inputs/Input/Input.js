@@ -1,4 +1,7 @@
+import { ButtonRefresh } from 'components/AccountData/AccountData.styled';
 import { Placeholder, StyledField, TextError } from './Input.styled';
+import IconEdit from 'images/icons/IconEdit';
+import { useEffect, useState } from 'react';
 
 const Input = ({
   as,
@@ -19,7 +22,14 @@ const Input = ({
   min,
   max,
   $style,
+  submitted,
 }) => {
+  const [isRefresh, setIsRefresh] = useState(disabled || value === '');
+
+  useEffect(() => {
+    setIsRefresh(submitted);
+  }, [submitted]);
+
   return (
     <div style={{ position: 'relative' }}>
       <StyledField
@@ -35,11 +45,16 @@ const Input = ({
         onChange={onChange}
         onBlur={onBlur}
         required={required}
-        disabled={disabled}
+        disabled={disabled || !isRefresh}
         width={width}
         height={height}
         $style={$style}
       />
+      {!isRefresh && (
+        <ButtonRefresh type="button" onClick={() => setIsRefresh(true)}>
+          <IconEdit />
+        </ButtonRefresh>
+      )}
       <Placeholder required={required}>{placeholder}</Placeholder>
       {error && <TextError>{error}</TextError>}
     </div>

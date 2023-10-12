@@ -27,10 +27,12 @@ import { useState } from 'react';
 const FormPersonalDataPatient = () => {
   const { user, currentTheme } = useAuth();
   const [errorPhones, setErrorPhones] = useState([]);
+  const [submitted, setSubmitted] = useState(false);
 
   const dispatch = useDispatch();
 
   const onSubmit = value => {
+    setSubmitted(false);
     const {
       lastName,
       firstName,
@@ -83,11 +85,14 @@ const FormPersonalDataPatient = () => {
                   type={'text'}
                   name="lastName"
                   onChange={e => {
+                    setSubmitted(true);
                     handleChange(e);
                   }}
+                  value={values.lastName}
                   onBlur={handleBlur}
                   required
                   placeholder="Прізвище"
+                  submitted={submitted}
                 />
               </Label>
 
@@ -101,9 +106,11 @@ const FormPersonalDataPatient = () => {
                   onChange={e => {
                     handleChange(e);
                   }}
+                  value={values.firstName}
                   onBlur={handleBlur}
                   required
                   placeholder="Ім’я"
+                  submitted={submitted}
                 />
               </Label>
 
@@ -117,8 +124,10 @@ const FormPersonalDataPatient = () => {
                   onChange={e => {
                     handleChange(e);
                   }}
+                  value={values.patronymic}
                   onBlur={handleBlur}
                   placeholder="По-батькові"
+                  submitted={submitted}
                 />
               </Label>
 
@@ -138,6 +147,7 @@ const FormPersonalDataPatient = () => {
                   onBlur={handleBlur}
                   placeholder="Дата народження"
                   required
+                  submitted={submitted}
                 />
               </Label>
 
@@ -209,6 +219,7 @@ const FormPersonalDataPatient = () => {
                           }}
                           required
                           placeholder="Номер телефону"
+                          submitted={submitted}
                         />
 
                         {phone === '' && (

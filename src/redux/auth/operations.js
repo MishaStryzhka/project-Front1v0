@@ -158,7 +158,7 @@ export const updateUserInfo = createAsyncThunk(
         headers: { 'content-type': 'multipart/form-data' },
       });
 
-      return response.data.user;
+      return { user: response.data.user, status: response.status };
       // const user = { avatar, name, email, phone, city, birthday };
       // return user;
     } catch (error) {
