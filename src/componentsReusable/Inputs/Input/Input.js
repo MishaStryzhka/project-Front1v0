@@ -27,7 +27,7 @@ const Input = ({
   const [isRefresh, setIsRefresh] = useState(disabled || value === '');
 
   useEffect(() => {
-    setIsRefresh(submitted);
+    setIsRefresh(false);
   }, [submitted]);
 
   return (

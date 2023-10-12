@@ -24,6 +24,7 @@ import theme from 'theme';
 import Form from '../Form/Form';
 import InputDate from 'componentsReusable/Inputs/InputDate/InputDate';
 import { useState } from 'react';
+import { nanoid } from '@reduxjs/toolkit';
 const FormPersonalDataPatient = () => {
   const { user, currentTheme } = useAuth();
   const [errorPhones, setErrorPhones] = useState([]);
@@ -32,7 +33,7 @@ const FormPersonalDataPatient = () => {
   const dispatch = useDispatch();
 
   const onSubmit = value => {
-    setSubmitted(false);
+    setSubmitted(nanoid());
     const {
       lastName,
       firstName,
@@ -85,7 +86,6 @@ const FormPersonalDataPatient = () => {
                   type={'text'}
                   name="lastName"
                   onChange={e => {
-                    setSubmitted(true);
                     handleChange(e);
                   }}
                   value={values.lastName}
