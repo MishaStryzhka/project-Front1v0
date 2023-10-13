@@ -30,5 +30,5 @@ export const Notify = styled.p`
   transform: translateX(200px);
   transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
 
-  ${({ show }) => show && 'transform: translateX(0px);'}
+  ${({ $show }) => $show && 'transform: translateX(0px);'}
 `;

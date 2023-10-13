@@ -60,7 +60,7 @@ const ModalRefreshEmail = ({ setIsOpenModal }) => {
                 <Label>
                   <Input
                     error={errors.email && touched.email && errors.email}
-                    valid={values.email}
+                    value={values.email}
                     type="email"
                     name="email"
                     onChange={e => {
@@ -70,6 +70,7 @@ const ModalRefreshEmail = ({ setIsOpenModal }) => {
                     onBlur={handleBlur}
                     required
                     placeholder={'Старий e-mail'}
+                    disabled={false}
                   />
                 </Label>
 
@@ -78,7 +79,7 @@ const ModalRefreshEmail = ({ setIsOpenModal }) => {
                     error={
                       errors.newEmail && touched.newEmail && errors.newEmail
                     }
-                    valid={values.newEmail}
+                    value={values.newEmail}
                     type="email"
                     name="newEmail"
                     onChange={e => {

@@ -133,6 +133,7 @@ const FormPersonalDataPatient = () => {
 
               <Label>
                 <InputDate
+                  width="800px"
                   error={
                     errors.dateOfBirthday &&
                     touched.dateOfBirthday &&

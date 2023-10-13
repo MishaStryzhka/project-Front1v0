@@ -36,9 +36,16 @@ const PersonalData = () => {
           Зберегти
         </SecondaryButton>
       </StyledButtonWrapper>
-      <Notify show={response?.status === 200}>
-        <IconDone width="22px" height="22px" /> Дані збережено
-      </Notify>
+      {response && (
+        <Notify $show={response.status === 200}>
+          <IconDone width="22px" height="22px" /> Дані збережено
+        </Notify>
+      )}
+      {response && (
+        <Notify $show={response.status !== 200}>
+          <IconDone width="22px" height="22px" /> Дані збережено
+        </Notify>
+      )}
     </div>
   );
 };

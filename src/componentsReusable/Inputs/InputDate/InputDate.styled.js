@@ -1,10 +1,69 @@
 import { Placeholder } from 'components/Forms/FormPersonalDataPatient/FormPersonalDataPatient.styled';
+import { Field } from 'formik';
 import styled from 'styled-components';
 
 export const InputCalendarBox = styled.div`
   position: relative;
 
   width: ${({ width }) => width};
+`;
+
+export const StyledInput = styled(Field)`
+  ${({ disabled }) => disabled && 'pointer-events: none;'}
+  display: block;
+
+  position: relative;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 1.5;
+  letter-spacing: 0.64px;
+
+  padding: 15px;
+  width: ${({ width }) => {
+    console.log('width', width);
+
+    return width;
+  }};
+  height: 50px;
+  ${e => console.log('e', e)}
+  height: ${({ height }) => height};
+  box-sizing: border-box;
+  border-radius: 10px;
+
+  border: 2px solid
+    ${({ theme, error }) => (error ? theme.color.error : theme.color.main)};
+  outline: none;
+
+  color: ${({ theme }) => theme.color.text};
+  ${({ $style }) => $style && $style}
+
+  ${({ value, theme, error }) =>
+    value
+      ? `
+  //     & + p {top: -9.5px;
+  // font-size: 12px;
+  // background-color: ${theme.color.primary};
+  // padding: 1px 5px;
+  // border: 2px solid
+  //   ${error ? theme.color.error : theme.color.main};
+  // border-radius: 5px;
+  }`
+      : `
+      // &:focus + p {
+      //   top: -9.5px;
+      //   font-size: 12px;
+      //   background-color: ${theme.color.primary};
+      //   padding: 1px 5px;
+      //   border: 2px solid
+      //     ${error ? theme.color.error : theme.color.main};
+      //   border-radius: 5px;
+      }`}
+
+  ${({ required }) => {
+    return required && '';
+  }};
 `;
 
 export const StyledPlaceholder = styled(Placeholder)`
