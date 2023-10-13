@@ -88,7 +88,7 @@ const ModalRefreshPassword = ({ setIsOpenModal }) => {
                             error?.status === 409 &&
                             'Пароль невірний')
                         }
-                        valid={values.password}
+                        value={values.password}
                         type="password"
                         name="password"
                         onChange={e => {
@@ -98,6 +98,7 @@ const ModalRefreshPassword = ({ setIsOpenModal }) => {
                         onBlur={handleBlur}
                         required
                         placeholder={'Старий пароль'}
+                        disabled={false}
                       />
                     </Label>
 

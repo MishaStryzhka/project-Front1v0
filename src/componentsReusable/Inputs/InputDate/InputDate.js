@@ -3,14 +3,16 @@ import { useCallback, useEffect, useState } from 'react';
 import {
   InputCalendarBox,
   ScrollBox,
+  StyledInput,
   ToggleBtn,
   WrapScroll,
 } from './InputDate.styled';
 import IconCalendar from 'images/icons/IconCalendar';
-import Input from 'componentsReusable/Inputs/Input/Input';
 
 import dateFormat from 'dateformat';
 import { Placeholder, TextError } from '../Input/Input.styled';
+import { ButtonRefresh } from 'components/AccountData/AccountData.styled';
+import IconEdit from 'images/icons/IconEdit';
 
 const InputDate = e => {
   const {
@@ -22,8 +24,16 @@ const InputDate = e => {
     required,
     placeholder,
     error,
+    submitted,
+    disabled,
+    value,
   } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
+  const [isRefresh, setIsRefresh] = useState(disabled || value === '');
+
+  useEffect(() => {
+    setIsRefresh(false);
+  }, [submitted]);
 
   const handleKeyDown = useCallback(evt => {
     document.body.style.overflow = 'auto';
@@ -56,7 +66,7 @@ const InputDate = e => {
 
   return (
     <InputCalendarBox width={width} className={className}>
-      <Input
+      <StyledInput
         type="date"
         width={width}
         value={
@@ -65,18 +75,27 @@ const InputDate = e => {
         onChange={e => {
           onChange(e.currentTarget.value);
         }}
+        placeholder={placeholder}
+        disabled={disabled || !isRefresh}
       />
+      {!isRefresh && (
+        <ButtonRefresh type="button" onClick={() => setIsRefresh(true)}>
+          <IconEdit />
+        </ButtonRefresh>
+      )}
       <Placeholder required={required}>{placeholder}</Placeholder>
       {error && <TextError>{error}</TextError>}
-      <ToggleBtn
-        id={`ToggleBtn-${name}`}
-        onClick={() => {
-          setIsOpenMenu(!isOpenMenu);
-        }}
-        type="button"
-      >
-        <IconCalendar />
-      </ToggleBtn>
+      {isRefresh && (
+        <ToggleBtn
+          id={`ToggleBtn-${name}`}
+          onClick={() => {
+            setIsOpenMenu(!isOpenMenu);
+          }}
+          type="button"
+        >
+          <IconCalendar />
+        </ToggleBtn>
+      )}
       <WrapScroll $isOpenMenu={isOpenMenu} id={`InputCalendar-${name}`}>
         <ScrollBox>
           <Calendar

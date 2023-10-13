@@ -25,10 +25,14 @@ const Input = ({
   submitted,
 }) => {
   const [isRefresh, setIsRefresh] = useState(disabled || value === '');
+  console.log('isRefresh', isRefresh);
+  console.log('disabled', disabled);
+
+  console.log('value', name, value);
 
   useEffect(() => {
-    setIsRefresh(false);
-  }, [submitted]);
+    disabled && setIsRefresh(false);
+  }, [disabled, submitted]);
 
   return (
     <div style={{ position: 'relative' }}>

@@ -48,6 +48,7 @@ const FormLogin = ({ onSubmit }) => {
                     }}
                     onBlur={handleBlur}
                     placeholder="E-mail"
+                    disabled={false}
                   />
                 </Label>
 
@@ -59,6 +60,7 @@ const FormLogin = ({ onSubmit }) => {
                         error.status === 401 &&
                         'Невірна електронна пошта або пароль')
                     }
+                    value={values.password}
                     type={'password'}
                     name="password"
                     onChange={e => {
@@ -67,6 +69,7 @@ const FormLogin = ({ onSubmit }) => {
                     }}
                     onBlur={handleBlur}
                     placeholder="Пароль"
+                    disabled={false}
                   />
                 </Label>
               </ImputWrap>
