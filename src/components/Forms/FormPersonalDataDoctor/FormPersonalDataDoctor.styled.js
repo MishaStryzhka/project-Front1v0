@@ -22,8 +22,6 @@ export const FormDescription = styled.p`
 `;
 
 export const InputWrap = styled.div`
-  padding-top: 26px;
-
   display: flex;
   flex-direction: column;
   gap: 40px;
@@ -42,7 +40,7 @@ export const AvaterInputLabel = styled.label`
   cursor: pointer;
 
   color: ${({ theme, disabled }) =>
-    disabled ? theme.color.placeholder : theme.color.secondary};
+    disabled ? theme.color.placeholder : theme.color.text};
 
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 16px;
@@ -86,7 +84,7 @@ export const Avatar = styled.img``;
 export const AvatarDescription = styled.p`
   margin-top: 20px;
 
-  color: ${({ theme }) => theme.color.secondary};
+  color: ${({ theme }) => theme.color.text};
 
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 16px;

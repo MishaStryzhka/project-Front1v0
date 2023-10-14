@@ -26,14 +26,13 @@ const InputDate = e => {
     error,
     submitted,
     disabled,
-    value,
   } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
-  const [isRefresh, setIsRefresh] = useState(disabled || value === '');
+  const [isRefresh, setIsRefresh] = useState(disabled || selectedValue === '');
 
   useEffect(() => {
-    setIsRefresh(false);
-  }, [submitted]);
+    disabled && setIsRefresh(false);
+  }, [disabled, submitted]);
 
   const handleKeyDown = useCallback(evt => {
     document.body.style.overflow = 'auto';

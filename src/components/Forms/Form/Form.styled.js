@@ -7,7 +7,7 @@ export const StyledForm = styled(Form)`
   justify-content: space-between;
   align-items: center;
 
-  padding-top: 60px;
+  padding-top: 40px;
 `;
 
 export const FormDescription = styled.p`

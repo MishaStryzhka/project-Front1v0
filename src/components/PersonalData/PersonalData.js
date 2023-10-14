@@ -12,7 +12,6 @@ import { resetResponse } from 'redux/auth/slice';
 const PersonalData = () => {
   const { userType, response } = useAuth();
   const dispatch = useDispatch();
-  console.log('response', response);
 
   setTimeout(() => {
     dispatch(resetResponse(null));

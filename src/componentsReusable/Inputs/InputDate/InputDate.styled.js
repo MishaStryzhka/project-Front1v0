@@ -22,12 +22,9 @@ export const StyledInput = styled(Field)`
 
   padding: 15px;
   width: ${({ width }) => {
-    console.log('width', width);
-
     return width;
   }};
   height: 50px;
-  ${e => console.log('e', e)}
   height: ${({ height }) => height};
   box-sizing: border-box;
   border-radius: 10px;
