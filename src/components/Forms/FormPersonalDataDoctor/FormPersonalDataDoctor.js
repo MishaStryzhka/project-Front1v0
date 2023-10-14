@@ -41,14 +41,23 @@ import CropperWrap from 'components/CropperWrap/CropperWrap';
 import Input from 'componentsReusable/Inputs/Input/Input';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import Checkbox from 'components/Checkbox/Checkbox';
-import { FieldStyled } from '../FormLogin/FormLogin.styled';
-import { Placeholder } from '../FormPersonalDataPatient/FormPersonalDataPatient.styled';
+import {
+  ButtonAdd,
+  Placeholder,
+} from '../FormPersonalDataPatient/FormPersonalDataPatient.styled';
 import ModalAddAvatar from 'components/Modals/ModalAddAvatar/ModalAddAvatar';
+import { validationDoctorPageSchema } from 'schemas';
+import IconAdd from 'images/icons/IconAdd';
+import theme from 'theme';
+import InputDate from 'componentsReusable/Inputs/InputDate/InputDate';
 
 const FormPersonalDataDoctor = () => {
-  const { user } = useAuth();
+  const { user, currentTheme } = useAuth();
   const [avatar, setAvatar] = useState(null);
   const [sertificatePreview, setSertificatePreview] = useState(null);
+  const [errorPhones, setErrorPhones] = useState([]);
+
+  const [submitted, setSubmitted] = useState(false);
 
   const [isOpenModalAddAvatar, setIsOpenModalAddAvatar] = useState(false);
   const [isOpenModalAddSertificate, setIsOpenModalAddSertificate] =
@@ -70,22 +79,21 @@ const FormPersonalDataDoctor = () => {
   };
 
   const onSubmit = value => {
+    setSubmitted(nanoid());
     console.log('value', value);
   };
 
-  const handleNextStep = () => {
-    if (steps.indexOf(step) + 1 === steps.length) {
-      setStep(steps[0]);
-    } else {
-      setStep(steps[steps.indexOf(step) + 1]);
-    }
-  };
+  // const handleNextStep = () => {
+  //   if (steps.indexOf(step) + 1 === steps.length) {
+  //     setStep(steps[0]);
+  //   } else {
+  //     setStep(steps[steps.indexOf(step) + 1]);
+  //   }
+  // };
 
-  const handlePublish = () => {
-    console.log('handlePublish');
-  };
-
-  console.log('user', user);
+  // const handlePublish = () => {
+  //   console.log('handlePublish');
+  // };
 
   return (
     <Formik
@@ -94,6 +102,7 @@ const FormPersonalDataDoctor = () => {
         lastName: user.lastName || '',
         firstName: '',
         patronymic: '',
+        dateOfBirthday: '',
         phones: [],
         experienceYears: '',
         educations: [{ id: nanoid(), name: '', years: ['', ''] }],
@@ -110,7 +119,7 @@ const FormPersonalDataDoctor = () => {
         ],
         sertificates: [{ id: nanoid(), file: null }],
       }}
-      // validationSchema={validationDoctorPageSchema}
+      validationSchema={validationDoctorPageSchema}
       onSubmit={onSubmit}
     >
       {({
@@ -122,15 +131,10 @@ const FormPersonalDataDoctor = () => {
         handleBlur,
         handleSubmit,
       }) => {
-        console.log('values', values);
+        // console.log('values', values);
 
         return (
-          <Form
-            id="formPersonalData"
-            onSubmit={handleSubmit}
-            handlePublish={step === 'two' ? handlePublish : null}
-            next={step !== 'two' ? handleNextStep : null}
-          >
+          <Form id="formPersonalData" isRequiredFields>
             {step === 'one' && (
               <InputWrapStepOne>
                 <AvatarLabel as={Label}>
@@ -182,14 +186,15 @@ const FormPersonalDataDoctor = () => {
                       errors.lastName && touched.lastName && errors.lastName
                     }
                     type={'text'}
-                    value={values.lastName}
                     name="lastName"
                     onChange={e => {
                       handleChange(e);
                     }}
+                    value={values.lastName}
                     onBlur={handleBlur}
                     required
-                    placeholder="Прізвище (обов’язкове поле)"
+                    placeholder="Прізвище"
+                    submitted={submitted}
                   />
                 </Label>
 
@@ -199,14 +204,15 @@ const FormPersonalDataDoctor = () => {
                       errors.firstName && touched.firstName && errors.firstName
                     }
                     type={'text'}
-                    value={values.firstName}
                     name="firstName"
                     onChange={e => {
                       handleChange(e);
                     }}
+                    value={values.firstName}
                     onBlur={handleBlur}
                     required
-                    placeholder="Ім’я (обов’язкове поле)"
+                    placeholder="Ім’я"
+                    submitted={submitted}
                   />
                 </Label>
 
@@ -218,13 +224,35 @@ const FormPersonalDataDoctor = () => {
                       errors.patronymic
                     }
                     type={'text'}
-                    value={values.patronymic}
                     name="patronymic"
                     onChange={e => {
                       handleChange(e);
                     }}
+                    value={values.patronymic}
                     onBlur={handleBlur}
                     placeholder="По-батькові"
+                    submitted={submitted}
+                  />
+                </Label>
+
+                <Label>
+                  <InputDate
+                    width="800px"
+                    error={
+                      errors.dateOfBirthday &&
+                      touched.dateOfBirthday &&
+                      errors.dateOfBirthday
+                    }
+                    type="date"
+                    name="dateOfBirthday"
+                    selectedValue={values.dateOfBirthday}
+                    onChange={e => {
+                      setFieldValue('dateOfBirthday', new Date(e));
+                    }}
+                    onBlur={handleBlur}
+                    placeholder="Дата народження"
+                    required
+                    submitted={submitted}
                   />
                 </Label>
 
@@ -235,25 +263,30 @@ const FormPersonalDataDoctor = () => {
                       : [...(values.phones || '')]
                     ).map(phone => {
                       const index = values.phones.indexOf(phone);
+
                       return (
                         <Label key={values.phones.length === 0 ? 0 : index}>
-                          <FieldStyled
+                          <Input
+                            error={
+                              errorPhones[index] ||
+                              (errors.phones &&
+                                errors.phones[index] &&
+                                touched.phones &&
+                                touched.phones[index] &&
+                                errors.phones[index])
+                            }
                             as={PhoneInputField}
-                            field={{
-                              name: 'phones',
-                              // value: phone ? `+${phone}` : '',
-                              value: phone,
-                            }}
+                            name="phones"
+                            value={phone}
                             setFieldValue={value => {
-                              console.log('value', value.slice(1, 13));
-
                               const newPhones = [...values.phones];
+                              errorPhones[index] = '';
                               if (
                                 values.phones.indexOf('') &&
                                 values.phones.indexOf('') !== index &&
                                 value === ''
                               ) {
-                                console.log('видаляти номер?');
+                                // видаляти номер?
 
                                 newPhones.splice(index, 1);
                               } else {
@@ -261,29 +294,49 @@ const FormPersonalDataDoctor = () => {
                                   value !== '' &&
                                   values.phones.indexOf(value) !== -1
                                 ) {
-                                  console.log('Даний номер вже вказаний.');
+                                  // console.log('error?.phones', error?.phones);
+
+                                  const newErrorPhones = [...errorPhones];
+                                  newErrorPhones[index] =
+                                    'Даний номер вже вказаний';
+                                  setErrorPhones(newErrorPhones);
+                                  // error = 'Даний номер вже вказаний';
                                   return;
                                 }
                                 newPhones.splice(index, 1, value);
                               }
 
-                              setFieldValue(
-                                'phones',
-                                index === -1 ? [value] : newPhones
-                              );
+                              value.length <= 13 &&
+                                setFieldValue(
+                                  'phones',
+                                  index === -1 ? [value] : newPhones
+                                );
+
+                              const regex = /^\+\d{12}$/;
+                              touched.phones = [...(touched.phones || '')];
+                              touched.phones[index] = regex.test(value)
+                                ? false
+                                : phone.length === 0
+                                ? false
+                                : value.length >= phone.length
+                                ? false
+                                : true;
                             }}
+                            required
+                            placeholder="Номер телефону"
+                            submitted={submitted}
                           />
 
                           {phone === '' && (
                             <Placeholder type="tel">
-                              +380 __ ___ ____ <span> (обов’язкове поле)</span>
+                              +380 __ ___ ____
                             </Placeholder>
                           )}
                         </Label>
                       );
                     })}
                   </WrapPhoneInput>
-                  <ButtonRefresh
+                  <ButtonAdd
                     disabled={
                       values.phones.indexOf('') !== -1 ||
                       values.phones.length === 0
@@ -295,8 +348,16 @@ const FormPersonalDataDoctor = () => {
                       setFieldValue('phones', newPhones);
                     }}
                   >
-                    + Додати номер телефону
-                  </ButtonRefresh>
+                    <IconAdd
+                      fill={
+                        values.phones.indexOf('') !== -1 ||
+                        values.phones.length === 0
+                          ? theme[currentTheme].color.disable
+                          : theme[currentTheme].color.text
+                      }
+                    />{' '}
+                    Додати номер телефону
+                  </ButtonAdd>
                 </WrapPhone>
 
                 <Label>
@@ -306,7 +367,7 @@ const FormPersonalDataDoctor = () => {
                       touched.experienceYears &&
                       errors.experienceYears
                     }
-                    type={'text'}
+                    type={'number'}
                     value={values.experienceYears}
                     name="experienceYears"
                     onChange={e => {
@@ -314,7 +375,9 @@ const FormPersonalDataDoctor = () => {
                     }}
                     onBlur={handleBlur}
                     required
-                    placeholder="Стаж роботи, років (обов’язкове поле)"
+                    placeholder="Стаж роботи, років"
+                    min="0"
+                    max="100"
                   />
                   {/* <FieldStyled
                         error={

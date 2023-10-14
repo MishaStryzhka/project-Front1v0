@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const validationPatientPageScheme = Yup.object().shape({
+export const validationDoctorPageSchema = Yup.object().shape({
   firstName: Yup.string()
     .matches(
       // eslint-disable-next-line no-useless-escape
@@ -56,4 +56,9 @@ export const validationPatientPageScheme = Yup.object().shape({
       'Метод має бути "чат" або "телеграм-бот"'
     )
   ),
+  experienceYears: Yup.number()
+    .required('Поле обов`язкове')
+    .min(0, 'Мінімальний стаж роботи повинен бути не менше 0 років')
+    .max(100, 'Максимальний стаж роботи повинен бути не більше 100 років'),
+  educations: Yup.array().of(Yup.object()),
 });
