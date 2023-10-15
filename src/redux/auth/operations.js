@@ -141,6 +141,8 @@ export const updateUserInfo = createAsyncThunk(
       phones,
       contactMethods,
       dateOfBirthday,
+      experienceYears,
+      educations,
     },
     thunkAPI
   ) => {
@@ -153,6 +155,11 @@ export const updateUserInfo = createAsyncThunk(
       formData.append('dateOfBirthday', dateOfBirthday);
       formData.append('phones', phones || '');
       formData.append('contactMethods', contactMethods || '');
+      formData.append('experienceYears', experienceYears || '');
+      formData.append(
+        'educations',
+        educations ? JSON.stringify(educations) : ''
+      );
 
       const response = await axios.put(`/users/current/update`, formData, {
         headers: { 'content-type': 'multipart/form-data' },
