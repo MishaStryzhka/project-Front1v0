@@ -165,8 +165,8 @@ const FormPersonalDataDoctor = () => {
         handleBlur,
         handleSubmit,
       }) => {
-        console.log('values', values);
-        console.log('errors', errors);
+        // console.log('values', values);
+        // console.log('errors', errors);
 
         return (
           <Form id="formPersonalData" isRequiredFields>

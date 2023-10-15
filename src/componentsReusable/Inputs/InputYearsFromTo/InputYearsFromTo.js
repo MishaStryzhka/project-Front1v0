@@ -63,7 +63,7 @@ const InputYearsFromTo = e => {
 
   const currentYear = new Date().getFullYear();
 
-  console.log('error', error);
+  //   console.log('error', error);
 
   return (
     <InputCalendarBox width={width} className={className}>
@@ -81,7 +81,7 @@ const InputYearsFromTo = e => {
           step="1"
           name="begin"
           parse={0}
-          value={value.begin}
+          value={value.begin || ''}
           placeholder="PPPP"
           onChange={e => {
             if (e.currentTarget.value.length > 4) return;
@@ -101,7 +101,7 @@ const InputYearsFromTo = e => {
           max={currentYear}
           step="1"
           name="end"
-          value={value.end}
+          value={value.end || ''}
           placeholder="PPPP"
           onChange={e => {
             if (e.currentTarget.value.length > 4) return;
