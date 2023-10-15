@@ -97,6 +97,12 @@ export const Label = styled.div`
   position: relative;
 `;
 
+export const LabelYears = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+`;
+
 export const FieldStyled = styled(Field)`
   ${({ disabled }) => disabled && 'pointer-events: none;'}
   display: block;
@@ -195,13 +201,6 @@ export const CheckboxLabel = styled.label`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-`;
-
-export const YearsWrap = styled.div`
-  margin-top: 20px;
-  display: flex;
-  column-gap: 40px;
-  align-items: center;
 `;
 
 export const WrapEducation = styled.div``;

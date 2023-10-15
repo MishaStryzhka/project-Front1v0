@@ -1,5 +1,7 @@
 import * as Yup from 'yup';
 
+const currentYear = new Date().getFullYear();
+
 export const validationDoctorPageSchema = Yup.object().shape({
   firstName: Yup.string()
     .matches(
@@ -50,15 +52,43 @@ export const validationDoctorPageSchema = Yup.object().shape({
       'Будь ласка, введіть коректний рік народження.'
     )
     .max(new Date(), 'Будь ласка, введіть коректний рік народження.'),
-  contactMethods: Yup.array().of(
+  paymentMethods: Yup.array().of(
     Yup.string().oneOf(
-      ['chat', 'telegramBot'],
-      'Метод має бути "чат" або "телеграм-бот"'
+      ['cash', 'card'],
+      'Спосіб має бути "готівковий розрахунок" або "оплата карткою"'
     )
   ),
   experienceYears: Yup.number()
     .required('Поле обов`язкове')
     .min(0, 'Мінімальний стаж роботи повинен бути не менше 0 років')
     .max(100, 'Максимальний стаж роботи повинен бути не більше 100 років'),
-  educations: Yup.array().of(Yup.object()),
+  educations: Yup.array().of(
+    Yup.object().shape({
+      id: Yup.string(), // ID - рядок, не обов'язковий
+      name: Yup.string().max(
+        120,
+        'Назва освіти може містити максимум 120 символів.'
+      ), // Назва освіти - рядок, не обов'язкова
+      years: Yup.object().shape({
+        begin: Yup.number()
+          .required("Початковий рік є обов'язковим полем")
+          .min(1990, 'Початковий рік повинен бути не раніше 1990')
+          .max(
+            currentYear,
+            'Початковий рік не може бути пізніше поточного року'
+          ),
+        end: Yup.number()
+          .nullable()
+          .when('begin', (begin, schema) => {
+            if (begin) {
+              return schema.min(
+                begin,
+                'Рік закінчення не може бути меншим за початковий рік'
+              );
+            }
+            return schema;
+          }),
+      }),
+    })
+  ),
 });

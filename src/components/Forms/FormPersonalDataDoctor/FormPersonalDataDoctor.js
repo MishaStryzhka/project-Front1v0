@@ -19,6 +19,7 @@ import {
   InputWrapStepTwo,
   Label,
   LabelJob,
+  LabelYears,
   Pagination,
   PaginationItem,
   PayMethodLabel,
@@ -50,8 +51,12 @@ import { validationDoctorPageSchema } from 'schemas';
 import IconAdd from 'images/icons/IconAdd';
 import theme from 'theme';
 import InputDate from 'componentsReusable/Inputs/InputDate/InputDate';
+import { useDispatch } from 'react-redux';
+import { updateUserInfo } from 'redux/auth/operations';
+import InputYearsFromTo from 'componentsReusable/Inputs/InputYearsFromTo/InputYearsFromTo';
 
 const FormPersonalDataDoctor = () => {
+  const dispatch = useDispatch();
   const { user, currentTheme } = useAuth();
   const [avatar, setAvatar] = useState(null);
   const [sertificatePreview, setSertificatePreview] = useState(null);
@@ -81,6 +86,33 @@ const FormPersonalDataDoctor = () => {
   const onSubmit = value => {
     setSubmitted(nanoid());
     console.log('value', value);
+    const {
+      lastName,
+      firstName,
+      patronymic,
+      phones,
+      contactMethods,
+      dateOfBirthday,
+      experienceYears,
+      avatarUrl,
+      educations,
+    } = value;
+
+    console.log('educations', educations);
+
+    dispatch(
+      updateUserInfo({
+        avatar: avatarUrl,
+        lastName,
+        firstName,
+        patronymic,
+        phones,
+        contactMethods,
+        dateOfBirthday,
+        experienceYears,
+        educations,
+      })
+    );
   };
 
   // const handleNextStep = () => {
@@ -98,15 +130,18 @@ const FormPersonalDataDoctor = () => {
   return (
     <Formik
       initialValues={{
-        avatarUrl: '',
+        avatarUrl: user.avatar || '',
         lastName: user.lastName || '',
-        firstName: '',
-        patronymic: '',
-        dateOfBirthday: '',
-        phones: [],
-        experienceYears: '',
-        educations: [{ id: nanoid(), name: '', years: ['', ''] }],
-        paymentMethods: [],
+        firstName: user.firstName || '',
+        patronymic: user.patronymic || '',
+        dateOfBirthday: user.dateOfBirthday || '',
+        phones: user.phones || [],
+        experienceYears: user.experienceYears || '',
+        educations:
+          user.educations.length === 0
+            ? [{ _id: nanoid(), name: '', years: { begin: 2014, end: 2019 } }]
+            : user.educations,
+        paymentMethods: user.paymentMethods || [],
         jobs: [
           {
             id: nanoid(),
@@ -131,7 +166,8 @@ const FormPersonalDataDoctor = () => {
         handleBlur,
         handleSubmit,
       }) => {
-        // console.log('values', values);
+        console.log('values', values);
+        console.log('errors', errors);
 
         return (
           <Form id="formPersonalData" isRequiredFields>
@@ -411,7 +447,7 @@ const FormPersonalDataDoctor = () => {
                     {values.educations.map(education => {
                       const index = values.educations.indexOf(education);
                       return (
-                        <Label key={education.id}>
+                        <LabelYears key={education._id}>
                           <Input
                             error={
                               (errors.education &&
@@ -444,59 +480,23 @@ const FormPersonalDataDoctor = () => {
                             onBlur={handleBlur}
                             // required
                             placeholder="Освіта"
+                            submitted={submitted}
                           />
-                          <YearsWrap>
-                            <p>Роки</p>
-                            <Input
-                              error={
-                                errors.education &&
-                                touched.education &&
-                                errors.education
-                              }
-                              type={'text'}
-                              value={education.years[0]}
-                              name="education"
-                              onChange={e => {
-                                const { value } = e.currentTarget;
-                                const newEducation = [...values.educations];
-
-                                newEducation.splice(index, 1, {
-                                  ...education,
-                                  years: [value, education.years[1]],
-                                });
-
-                                setFieldValue('educations', newEducation);
-                              }}
-                              onBlur={handleBlur}
-                              placeholder="Від"
-                              width="100px"
-                            />
-                            <Input
-                              error={
-                                errors.education &&
-                                touched.education &&
-                                errors.education
-                              }
-                              type={'text'}
-                              value={education.years[1]}
-                              name="education"
-                              onChange={e => {
-                                const { value } = e.currentTarget;
-                                const newEducation = [...values.educations];
-
-                                newEducation.splice(index, 1, {
-                                  ...education,
-                                  years: [education.years[0], value],
-                                });
-
-                                setFieldValue('educations', newEducation);
-                              }}
-                              onBlur={handleBlur}
-                              placeholder="До"
-                              width="100px"
-                            />
-                          </YearsWrap>
-                        </Label>
+                          <InputYearsFromTo
+                            error={
+                              errors.educations &&
+                              errors?.educations[index]?.years
+                            }
+                            onChange={e => {
+                              let newEducations = [...values.educations];
+                              newEducations[index] = { ...education, years: e };
+                              setFieldValue('educations', newEducations);
+                            }}
+                            value={education.years}
+                            width="800px"
+                            placeholder="Роки"
+                          />
+                        </LabelYears>
                       );
                     })}
                   </WrapEducationInputs>
@@ -508,9 +508,9 @@ const FormPersonalDataDoctor = () => {
                     onClick={() => {
                       const newEducation = [...values.educations];
                       newEducation.push({
-                        id: nanoid(),
+                        _id: nanoid(),
                         name: '',
-                        years: ['', ''],
+                        years: { begin: '', end: '' },
                       });
                       setFieldValue('educations', newEducation);
                     }}
