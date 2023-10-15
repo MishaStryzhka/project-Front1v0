@@ -34,7 +34,6 @@ import {
   WrapPhoneInput,
   WrapSertificate,
   WrapSertificateInputs,
-  YearsWrap,
 } from './FormPersonalDataDoctor.styled';
 import Modal from 'componentsReusable/Modal/Modal';
 import { TitleModal } from 'components/Modals/ModalRefreshEmail/ModalRefreshEmail.styled';

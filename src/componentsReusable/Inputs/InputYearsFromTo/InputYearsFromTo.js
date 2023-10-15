@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useState } from 'react';
 import IconCalendar from 'images/icons/IconCalendar';
 
-import dateFormat from 'dateformat';
 import { Placeholder, TextError } from '../Input/Input.styled';
 import { ButtonRefresh } from 'components/AccountData/AccountData.styled';
 import IconEdit from 'images/icons/IconEdit';
