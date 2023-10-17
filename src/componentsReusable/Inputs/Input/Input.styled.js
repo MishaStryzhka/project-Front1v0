@@ -13,7 +13,7 @@ export const StyledField = styled(Field)`
   line-height: 1.5;
   letter-spacing: 0.64px;
 
-  padding: 15px;
+  padding: 15px ${({ disabled }) => (disabled ? '40px' : '15px')} 15px 15px;
   width: ${({ width }) => width};
   height: ${({ height }) => height};
   box-sizing: border-box;
