@@ -143,12 +143,19 @@ export const updateUserInfo = createAsyncThunk(
       dateOfBirthday,
       experienceYears,
       educations,
+      certificates,
     },
     thunkAPI
   ) => {
     try {
       const formData = new FormData();
       formData.append('avatar', avatar);
+
+      certificates.forEach(fileObject => {
+        const file = fileObject.file;
+        formData.append(`certificates`, file);
+      });
+
       formData.append('lastName', lastName);
       formData.append('firstName', firstName);
       formData.append('patronymic', patronymic);
