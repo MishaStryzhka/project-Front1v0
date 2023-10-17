@@ -22,15 +22,20 @@ const InputYearsFromTo = e => {
     required,
     placeholder,
     error,
-    submitted,
+    isSubmitting,
     disabled,
+    setFieldTouched,
   } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isRefresh, setIsRefresh] = useState(disabled || value === '');
 
   useEffect(() => {
-    disabled && setIsRefresh(false);
-  }, [disabled, submitted]);
+    if (value.begin === '') {
+      setIsRefresh(true);
+    } else if (isSubmitting) {
+      setIsRefresh(false);
+    }
+  }, [value, isSubmitting]);
 
   const handleKeyDown = useCallback(evt => {
     document.body.style.overflow = 'auto';
@@ -92,6 +97,9 @@ const InputYearsFromTo = e => {
             };
 
             onChange(years);
+          }}
+          onBlur={() => {
+            setFieldTouched('begin');
           }}
         />
         -

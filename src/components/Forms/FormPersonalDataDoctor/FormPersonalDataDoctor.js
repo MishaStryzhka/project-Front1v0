@@ -61,14 +61,12 @@ const FormPersonalDataDoctor = () => {
   const [sertificatePreview, setSertificatePreview] = useState(null);
   const [errorPhones, setErrorPhones] = useState([]);
 
-  const [submitted, setSubmitted] = useState(false);
-
   const [isOpenModalAddAvatar, setIsOpenModalAddAvatar] = useState(false);
   const [isOpenModalAddSertificate, setIsOpenModalAddSertificate] =
     useState(false);
 
   const [step, setStep] = useState('one');
-  const steps = ['one', 'two'];
+  const steps = ['one', 'two', 'three'];
 
   const isChangeAvatarUrl = e => {
     const { files } = e.currentTarget;
@@ -83,7 +81,6 @@ const FormPersonalDataDoctor = () => {
   };
 
   const onSubmit = value => {
-    setSubmitted(nanoid());
     console.log('value', value);
     const {
       lastName,
@@ -95,9 +92,8 @@ const FormPersonalDataDoctor = () => {
       experienceYears,
       avatarUrl,
       educations,
+      certificates,
     } = value;
-
-    console.log('educations', educations);
 
     dispatch(
       updateUserInfo({
@@ -110,6 +106,7 @@ const FormPersonalDataDoctor = () => {
         dateOfBirthday,
         experienceYears,
         educations,
+        certificates,
       })
     );
   };
@@ -126,6 +123,8 @@ const FormPersonalDataDoctor = () => {
   //   console.log('handlePublish');
   // };
 
+  console.log('user.certificates', user.certificates);
+
   return (
     <Formik
       initialValues={{
@@ -135,7 +134,7 @@ const FormPersonalDataDoctor = () => {
         patronymic: user.patronymic || '',
         dateOfBirthday: user.dateOfBirthday || '',
         phones: user.phones || [],
-        experienceYears: user.experienceYears || '',
+        experienceYears: user.experienceYears || '0',
         educations:
           user.educations.length === 0
             ? [{ _id: nanoid(), name: '', years: { begin: 2014, end: 2019 } }]
@@ -151,22 +150,35 @@ const FormPersonalDataDoctor = () => {
             receptionHours: ['', ''],
           },
         ],
-        sertificates: [{ id: nanoid(), file: null }],
+        certificates: user.certificates || [],
       }}
       validationSchema={validationDoctorPageSchema}
-      onSubmit={onSubmit}
+      onSubmit={values => {
+        onSubmit(values);
+      }}
     >
-      {({
-        values,
-        errors,
-        touched,
-        setFieldValue,
-        handleChange,
-        handleBlur,
-        handleSubmit,
-      }) => {
-        // console.log('values', values);
-        // console.log('errors', errors);
+      {e => {
+        const {
+          values,
+          errors,
+          touched,
+          setFieldTouched,
+          setFieldValue,
+          handleChange,
+          handleBlur,
+          // handleSubmit,
+          isSubmitting,
+          setSubmitting,
+        } = e;
+
+        const handleYearsChange = (index, newYears) => {
+          let newEducations = [...values.educations];
+          newEducations[index] = {
+            ...newEducations[index],
+            years: newYears,
+          };
+          setFieldValue('educations', newEducations);
+        };
 
         return (
           <Form id="formPersonalData" isRequiredFields>
@@ -198,7 +210,10 @@ const FormPersonalDataDoctor = () => {
                         id="avatarUrl"
                         value=""
                         name="avatarUrl"
-                        onChange={e => isChangeAvatarUrl(e)}
+                        onChange={e => {
+                          setSubmitting(false);
+                          isChangeAvatarUrl(e);
+                        }}
                       />
                     </div>
                     <AvatarDescription>
@@ -223,13 +238,14 @@ const FormPersonalDataDoctor = () => {
                     type={'text'}
                     name="lastName"
                     onChange={e => {
+                      setSubmitting(false);
                       handleChange(e);
                     }}
                     value={values.lastName}
                     onBlur={handleBlur}
                     required
                     placeholder="Прізвище"
-                    submitted={submitted}
+                    isSubmitting={isSubmitting}
                   />
                 </Label>
 
@@ -241,13 +257,14 @@ const FormPersonalDataDoctor = () => {
                     type={'text'}
                     name="firstName"
                     onChange={e => {
+                      setSubmitting(false);
                       handleChange(e);
                     }}
                     value={values.firstName}
                     onBlur={handleBlur}
                     required
                     placeholder="Ім’я"
-                    submitted={submitted}
+                    isSubmitting={isSubmitting}
                   />
                 </Label>
 
@@ -261,12 +278,13 @@ const FormPersonalDataDoctor = () => {
                     type={'text'}
                     name="patronymic"
                     onChange={e => {
+                      setSubmitting(false);
                       handleChange(e);
                     }}
                     value={values.patronymic}
                     onBlur={handleBlur}
                     placeholder="По-батькові"
-                    submitted={submitted}
+                    isSubmitting={isSubmitting}
                   />
                 </Label>
 
@@ -282,12 +300,13 @@ const FormPersonalDataDoctor = () => {
                     name="dateOfBirthday"
                     selectedValue={values.dateOfBirthday}
                     onChange={e => {
+                      setSubmitting(false);
                       setFieldValue('dateOfBirthday', new Date(e));
                     }}
                     onBlur={handleBlur}
                     placeholder="Дата народження"
                     required
-                    submitted={submitted}
+                    isSubmitting={isSubmitting}
                   />
                 </Label>
 
@@ -314,6 +333,7 @@ const FormPersonalDataDoctor = () => {
                             name="phones"
                             value={phone}
                             setFieldValue={value => {
+                              setSubmitting(false);
                               const newPhones = [...values.phones];
                               errorPhones[index] = '';
                               if (
@@ -357,9 +377,18 @@ const FormPersonalDataDoctor = () => {
                                 ? false
                                 : true;
                             }}
+                            onRemove={
+                              index !== -1
+                                ? () => {
+                                    const newPhones = [...values.phones];
+                                    newPhones.splice(index, 1);
+                                    setFieldValue('phones', newPhones);
+                                  }
+                                : null
+                            }
                             required
                             placeholder="Номер телефону"
-                            submitted={submitted}
+                            isSubmitting={isSubmitting}
                           />
 
                           {phone === '' && (
@@ -394,73 +423,33 @@ const FormPersonalDataDoctor = () => {
                     Додати номер телефону
                   </ButtonAdd>
                 </WrapPhone>
+              </InputWrapStepOne>
+            )}
 
-                <Label>
-                  <Input
-                    error={
-                      errors.experienceYears &&
-                      touched.experienceYears &&
-                      errors.experienceYears
-                    }
-                    type={'number'}
-                    value={values.experienceYears}
-                    name="experienceYears"
-                    onChange={e => {
-                      handleChange(e);
-                    }}
-                    onBlur={handleBlur}
-                    required
-                    placeholder="Стаж роботи, років"
-                    min="0"
-                    max="100"
-                  />
-                  {/* <FieldStyled
-                        error={
-                          errors.experienceYears &&
-                          touched.experienceYears &&
-                          errors.experienceYears
-                        }
-                        type={'number'}
-                        min="1"
-                        max="100"
-                        name="experienceYears"
-                        onChange={e => {
-                          error = null;
-                          handleChange(e);
-                        }}
-                        onBlur={handleBlur}
-                        required
-                      />
-                      {!values.experienceYears && (
-                        <Placeholder>
-                          Стаж роботи, років <span>*</span>
-                        </Placeholder>
-                      )}
-                      {errors.experienceYears && touched.experienceYears && (
-                        <TextError>{errors.experienceYears}</TextError>
-                      )} */}
-                </Label>
-
+            {step === 'two' && (
+              <InputWrapStepOne>
                 <WrapEducation>
                   <WrapEducationInputs>
                     {values.educations.map(education => {
-                      const index = values.educations.indexOf(education);
+                      const index = values.educations.findIndex(
+                        option => option._id === education._id
+                      );
                       return (
                         <LabelYears key={education._id}>
                           <Input
                             error={
-                              (errors.education &&
-                                touched.education &&
-                                errors.education) ||
-                              null
+                              errors.educations &&
+                              touched?.educations &&
+                              touched?.educations[index]?.value &&
+                              errors?.educations[index]?.value
                             }
                             type={'text'}
                             value={education.name}
-                            name="education"
+                            name="educations"
                             onChange={e => {
+                              setSubmitting(false);
                               const { value } = e.currentTarget;
                               const newEducation = [...values.educations];
-                              console.log('value', value);
 
                               if (
                                 values.educations.length !== 1 &&
@@ -476,24 +465,46 @@ const FormPersonalDataDoctor = () => {
 
                               setFieldValue('educations', newEducation);
                             }}
-                            onBlur={handleBlur}
-                            // required
+                            onBlur={() => {
+                              const newTouched = touched.educations
+                                ? [...touched.educations]
+                                : [];
+                              newTouched[index] = touched.educations
+                                ? { ...touched.educations[index], value: true }
+                                : { value: true };
+                              setFieldTouched('educations', newTouched);
+                            }}
                             placeholder="Освіта"
-                            submitted={submitted}
+                            isSubmitting={isSubmitting}
                           />
                           <InputYearsFromTo
                             error={
                               errors.educations &&
+                              touched?.educations &&
+                              touched?.educations[index]?.years &&
                               errors?.educations[index]?.years
                             }
-                            onChange={e => {
-                              let newEducations = [...values.educations];
-                              newEducations[index] = { ...education, years: e };
-                              setFieldValue('educations', newEducations);
+                            onChange={newYears => {
+                              setSubmitting(false);
+                              handleYearsChange(index, newYears);
+                            }}
+                            setFieldTouched={() => {
+                              const newTouched = touched.educations
+                                ? [...touched.educations]
+                                : [];
+                              newTouched[index] = touched.educations
+                                ? {
+                                    ...touched.educations[index],
+                                    years: true,
+                                  }
+                                : { years: true };
+                              setFieldTouched('educations', newTouched);
                             }}
                             value={education.years}
                             width="800px"
                             placeholder="Роки"
+                            disabled={education.name === ''}
+                            isSubmitting={isSubmitting}
                           />
                         </LabelYears>
                       );
@@ -518,42 +529,114 @@ const FormPersonalDataDoctor = () => {
                   </ButtonRefresh>
                 </WrapEducation>
 
-                <PayMethodLabel>
-                  <StyledLegend>Спосіб оплати</StyledLegend>
-                  <CheckboxWrap>
-                    <CheckboxInputWrap>
-                      <CheckboxField
-                        type="checkbox"
-                        id="cash"
-                        name="paymentMethods"
-                        value="cash"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="cash">
-                        Готівковий розрахунок
-                      </CheckboxLabel>
-                    </CheckboxInputWrap>
-                    <CheckboxInputWrap>
-                      <CheckboxField
-                        type="checkbox"
-                        id="card"
-                        name="paymentMethods"
-                        value="card"
-                        component={Checkbox}
-                        onChange={handleChange}
-                      />
-                      <CheckboxLabel htmlFor="card">
-                        Оплата карткою
-                      </CheckboxLabel>
-                    </CheckboxInputWrap>
-                  </CheckboxWrap>
-                </PayMethodLabel>
+                <WrapSertificate>
+                  <WrapSertificateInputs>
+                    {values.certificates.map(sertificate => {
+                      const index = values.certificates.findIndex(
+                        option => option._id === sertificate._id
+                      );
+
+                      return (
+                        <AvatarLabel key={sertificate._id} as={Label}>
+                          <AvatarWrap>
+                            {sertificate.file ? (
+                              <Avatar
+                                src={URL.createObjectURL(sertificate.file)}
+                                alt="Sertificate"
+                              />
+                            ) : sertificate.path ? (
+                              <Avatar
+                                src={sertificate.path}
+                                alt="Sertificate"
+                              />
+                            ) : (
+                              <PhotoDescription>Sertificate</PhotoDescription>
+                            )}
+                          </AvatarWrap>
+                          <div>
+                            <div>
+                              <AvaterInputLabel htmlFor="certificates">
+                                {sertificate.file
+                                  ? 'Оновити сертифікат'
+                                  : 'Завантажити сертифікат'}
+                              </AvaterInputLabel>
+                              <Field
+                                style={{ display: 'none' }}
+                                type="file"
+                                id="certificates"
+                                value=""
+                                name={`certificates-${sertificate.id}`}
+                                onChange={e => {
+                                  setSubmitting(false);
+                                  document.body.style.overflow = 'auto';
+                                  isChangeSertificate(e);
+                                }}
+                              />
+                            </div>
+                            <AvatarDescription>
+                              Файл повинен бути у форматі jpeg або png.
+                              Максимальний розмір - 5 Мб
+                            </AvatarDescription>
+                          </div>
+                          {isOpenModalAddSertificate && (
+                            <Modal
+                              onClick={() => {
+                                setIsOpenModalAddSertificate(false);
+                              }}
+                            >
+                              <TitleModal>Додати сертифікат</TitleModal>
+                              <CropperWrap
+                                image={sertificatePreview}
+                                name={`sertificate - ${nanoid()}`}
+                                setImage={value => {
+                                  setSubmitting(false);
+                                  console.log('value', value);
+
+                                  const newCertificates = [
+                                    ...values.certificates,
+                                  ];
+
+                                  newCertificates.splice(index, 1, {
+                                    ...sertificate,
+                                    file: value,
+                                  });
+
+                                  setFieldValue(
+                                    'certificates',
+                                    newCertificates
+                                  );
+                                }}
+                                onClose={() => {
+                                  document.body.style.overflow = 'auto';
+                                  setIsOpenModalAddSertificate(false);
+                                }}
+                              />
+                            </Modal>
+                          )}
+                        </AvatarLabel>
+                      );
+                    })}
+                  </WrapSertificateInputs>
+                  <ButtonRefresh
+                    disabled={values.certificates.find(
+                      sertificate => sertificate.file === null
+                    )}
+                    type="button"
+                    onClick={() => {
+                      const newSertificate = [...values.certificates];
+
+                      newSertificate.push({ _id: nanoid(), file: null });
+
+                      setFieldValue('certificates', newSertificate);
+                    }}
+                  >
+                    + Додати сертифікат
+                  </ButtonRefresh>
+                </WrapSertificate>
               </InputWrapStepOne>
             )}
 
-            {step === 'two' && (
+            {step === 'three' && (
               <InputWrapStepTwo>
                 <WrapJobs>
                   <WrapJobsInputs>
@@ -573,6 +656,7 @@ const FormPersonalDataDoctor = () => {
                             value={job.name}
                             name="jobs"
                             onChange={e => {
+                              setSubmitting(false);
                               const { value } = e.currentTarget;
                               const newJobs = [...values.jobs];
                               if (values.jobs.length !== 1 && value === '') {
@@ -602,6 +686,7 @@ const FormPersonalDataDoctor = () => {
                             value={job.cityArea}
                             name="jobs"
                             onChange={e => {
+                              setSubmitting(false);
                               const { value } = e.currentTarget;
                               const newJobs = [...values.jobs];
                               if (values.jobs.length !== 1 && value === '') {
@@ -631,6 +716,7 @@ const FormPersonalDataDoctor = () => {
                             value={job.address}
                             name="jobs"
                             onChange={e => {
+                              setSubmitting(false);
                               const { value } = e.currentTarget;
                               const newJobs = [...values.jobs];
                               if (values.jobs.length !== 1 && value === '') {
@@ -660,6 +746,7 @@ const FormPersonalDataDoctor = () => {
                             value={job.workSchedule}
                             name="jobs"
                             onChange={e => {
+                              setSubmitting(false);
                               const { value } = e.currentTarget;
                               const newJobs = [...values.jobs];
                               if (values.jobs.length !== 1 && value === '') {
@@ -686,6 +773,7 @@ const FormPersonalDataDoctor = () => {
                               value={job.receptionHours[0]}
                               name="job"
                               onChange={e => {
+                                setSubmitting(false);
                                 const { value } = e.currentTarget;
                                 const newJobs = [...values.jobs];
 
@@ -711,6 +799,7 @@ const FormPersonalDataDoctor = () => {
                               value={job.receptionHours[1]}
                               name="jobs"
                               onChange={e => {
+                                setSubmitting(false);
                                 const { value } = e.currentTarget;
                                 const newjob = [...values.jobs];
 
@@ -754,103 +843,92 @@ const FormPersonalDataDoctor = () => {
                     + Додати місце роботи
                   </ButtonRefresh>
                 </WrapJobs>
-                <WrapSertificate>
-                  <WrapSertificateInputs>
-                    {values.sertificates.map(sertificate => {
-                      const index = values.sertificates.findIndex(
-                        option => option.id === sertificate.id
-                      );
 
-                      return (
-                        <AvatarLabel key={sertificate.id} as={Label}>
-                          <AvatarWrap>
-                            {sertificate.file ? (
-                              <Avatar
-                                src={URL.createObjectURL(sertificate.file)}
-                                alt="Sertificate"
-                              />
-                            ) : (
-                              <PhotoDescription>Sertificate</PhotoDescription>
-                            )}
-                          </AvatarWrap>
-                          <div>
-                            <div>
-                              <AvaterInputLabel htmlFor="sertificates">
-                                {sertificate.file
-                                  ? 'Оновити сертифікат'
-                                  : 'Завантажити сертифікат'}
-                              </AvaterInputLabel>
-                              <Field
-                                style={{ display: 'none' }}
-                                type="file"
-                                id="sertificates"
-                                value=""
-                                name={`sertificates-${sertificate.id}`}
-                                onChange={e => {
-                                  document.body.style.overflow = 'auto';
-                                  isChangeSertificate(e);
-                                }}
-                              />
-                            </div>
-                            <AvatarDescription>
-                              Файл повинен бути у форматі jpeg або png.
-                              Максимальний розмір - 5 Мб
-                            </AvatarDescription>
-                          </div>
-                          {isOpenModalAddSertificate && (
-                            <Modal
-                              onClick={() => {
-                                setIsOpenModalAddSertificate(false);
-                              }}
-                            >
-                              <TitleModal>Додати сертифікат</TitleModal>
-                              <CropperWrap
-                                image={sertificatePreview}
-                                name={`sertificate - ${nanoid()}`}
-                                setImage={value => {
-                                  console.log('value', value);
-
-                                  const newSertificates = [
-                                    ...values.sertificates,
-                                  ];
-
-                                  newSertificates.splice(index, 1, {
-                                    ...sertificate,
-                                    file: value,
-                                  });
-
-                                  setFieldValue(
-                                    'sertificates',
-                                    newSertificates
-                                  );
-                                }}
-                                onClose={() => {
-                                  document.body.style.overflow = 'auto';
-                                  setIsOpenModalAddSertificate(false);
-                                }}
-                              />
-                            </Modal>
-                          )}
-                        </AvatarLabel>
-                      );
-                    })}
-                  </WrapSertificateInputs>
-                  <ButtonRefresh
-                    disabled={values.sertificates.find(
-                      sertificate => sertificate.file === null
-                    )}
-                    type="button"
-                    onClick={() => {
-                      const newSertificate = [...values.sertificates];
-
-                      newSertificate.push({ id: nanoid(), file: null });
-
-                      setFieldValue('sertificates', newSertificate);
+                <Label>
+                  <Input
+                    error={
+                      errors.experienceYears &&
+                      touched.experienceYears &&
+                      errors.experienceYears
+                    }
+                    type={'number'}
+                    value={values.experienceYears}
+                    name="experienceYears"
+                    onChange={e => {
+                      handleChange(e);
                     }}
-                  >
-                    + Додати сертифікат
-                  </ButtonRefresh>
-                </WrapSertificate>
+                    onBlur={handleBlur}
+                    required
+                    placeholder="Загальний стаж роботи, років"
+                    min="0"
+                    max="100"
+                    isSubmitting={isSubmitting}
+                  />
+                  {/* <FieldStyled
+                        error={
+                          errors.experienceYears &&
+                          touched.experienceYears &&
+                          errors.experienceYears
+                        }
+                        type={'number'}
+                        min="1"
+                        max="100"
+                        name="experienceYears"
+                        onChange={e => {
+                          error = null;
+                          handleChange(e);
+                        }}
+                        onBlur={handleBlur}
+                        required
+                      />
+                      {!values.experienceYears && (
+                        <Placeholder>
+                          Стаж роботи, років <span>*</span>
+                        </Placeholder>
+                      )}
+                      {errors.experienceYears && touched.experienceYears && (
+                        <TextError>{errors.experienceYears}</TextError>
+                      )} */}
+                </Label>
+
+                <PayMethodLabel>
+                  <StyledLegend>Спосіб оплати</StyledLegend>
+                  <CheckboxWrap>
+                    <CheckboxInputWrap>
+                      <CheckboxField
+                        type="checkbox"
+                        id="cash"
+                        name="paymentMethods"
+                        value="cash"
+                        component={Checkbox}
+                        onChange={value => {
+                          setSubmitting(false);
+                          handleChange(value);
+                        }}
+                        checked
+                      />
+                      <CheckboxLabel htmlFor="cash">
+                        Готівковий розрахунок
+                      </CheckboxLabel>
+                    </CheckboxInputWrap>
+                    <CheckboxInputWrap>
+                      <CheckboxField
+                        type="checkbox"
+                        id="card"
+                        name="paymentMethods"
+                        value="card"
+                        component={Checkbox}
+                        onChange={value => {
+                          setSubmitting(false);
+                          handleChange(value);
+                        }}
+                      />
+                      <CheckboxLabel htmlFor="card">
+                        Оплата карткою
+                      </CheckboxLabel>
+                    </CheckboxInputWrap>
+                  </CheckboxWrap>
+                </PayMethodLabel>
               </InputWrapStepTwo>
             )}
 

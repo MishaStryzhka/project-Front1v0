@@ -2,6 +2,7 @@ import { ButtonRefresh } from 'components/AccountData/AccountData.styled';
 import { Placeholder, StyledField, TextError } from './Input.styled';
 import IconEdit from 'images/icons/IconEdit';
 import { useEffect, useState } from 'react';
+import IconRemove from 'images/icons/IconRemove';
 
 const Input = ({
   as,
@@ -22,13 +23,18 @@ const Input = ({
   min,
   max,
   $style,
-  submitted,
+  isSubmitting,
+  onRemove,
 }) => {
   const [isRefresh, setIsRefresh] = useState(disabled || value === '');
 
   useEffect(() => {
-    disabled && setIsRefresh(false);
-  }, [disabled, submitted]);
+    if (value === '') {
+      setIsRefresh(true);
+    } else if (isSubmitting) {
+      setIsRefresh(false);
+    }
+  }, [value, isSubmitting]);
 
   return (
     <div style={{ position: 'relative' }}>
@@ -53,6 +59,11 @@ const Input = ({
       {!isRefresh && (
         <ButtonRefresh type="button" onClick={() => setIsRefresh(true)}>
           <IconEdit />
+        </ButtonRefresh>
+      )}
+      {isRefresh && onRemove && (
+        <ButtonRefresh type="button" onClick={() => onRemove()}>
+          <IconRemove />
         </ButtonRefresh>
       )}
       <Placeholder required={required}>{placeholder}</Placeholder>
