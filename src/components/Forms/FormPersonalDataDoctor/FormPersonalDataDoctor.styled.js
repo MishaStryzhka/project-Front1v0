@@ -96,6 +96,12 @@ export const AvatarDescription = styled.p`
 export const Label = styled.div`
   position: relative;
 `;
+export const LabelLink = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 60px;
+`;
 
 export const LabelYears = styled.div`
   display: flex;

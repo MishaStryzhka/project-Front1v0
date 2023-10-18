@@ -52,6 +52,15 @@ export const validationDoctorPageSchema = Yup.object().shape({
       'Будь ласка, введіть коректний рік народження.'
     )
     .max(new Date(), 'Будь ласка, введіть коректний рік народження.'),
+  instagram: Yup.string().matches(
+    /^(https?:\/\/)?(www\.)?instagram\.com\/[a-zA-Z0-9_.]+\/?$/,
+    'Введіть дійсний URL-адресу Instagram-профілю'
+  ),
+  tiktok: Yup.string().matches(
+    /^(https?:\/\/)?(www\.)?tiktok\.com\/@[a-zA-Z0-9_.]+\/?$/,
+    'Введіть дійсний URL-адресу TikTok-профілю'
+  ),
+  otherLink: Yup.string().url('Введіть дійсну URL-адресу'),
   paymentMethods: Yup.array().of(
     Yup.string().oneOf(
       ['cash', 'card'],
