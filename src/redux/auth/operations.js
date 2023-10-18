@@ -144,6 +144,7 @@ export const updateUserInfo = createAsyncThunk(
       experienceYears,
       educations,
       certificates,
+      links,
     },
     thunkAPI
   ) => {
