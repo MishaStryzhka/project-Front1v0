@@ -37,7 +37,7 @@ const Input = ({
   }, [value, isSubmitting]);
 
   return (
-    <div style={{ position: 'relative' }}>
+    <div style={{ position: 'relative', width: width }}>
       <StyledField
         as={as}
         field={field}
@@ -55,6 +55,7 @@ const Input = ({
         width={width}
         height={height}
         $style={$style}
+        placeholder={type === 'url' ? placeholder : null}
       />
       {!isRefresh && (
         <ButtonRefresh type="button" onClick={() => setIsRefresh(true)}>
@@ -66,7 +67,9 @@ const Input = ({
           <IconRemove />
         </ButtonRefresh>
       )}
-      <Placeholder required={required}>{placeholder}</Placeholder>
+      {type !== 'url' && (
+        <Placeholder required={required}>{placeholder}</Placeholder>
+      )}
       {error && <TextError>{error}</TextError>}
     </div>
   );

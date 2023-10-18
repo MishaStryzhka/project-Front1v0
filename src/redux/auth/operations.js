@@ -144,6 +144,7 @@ export const updateUserInfo = createAsyncThunk(
       experienceYears,
       educations,
       certificates,
+      links,
     },
     thunkAPI
   ) => {
@@ -153,7 +154,7 @@ export const updateUserInfo = createAsyncThunk(
 
       certificates.forEach(fileObject => {
         const file = fileObject.file;
-        formData.append(`certificates`, file);
+        file && formData.append(`certificates`, file);
       });
 
       formData.append('lastName', lastName);
@@ -167,6 +168,7 @@ export const updateUserInfo = createAsyncThunk(
         'educations',
         educations ? JSON.stringify(educations) : ''
       );
+      formData.append('links', links ? JSON.stringify(links) : '');
 
       const response = await axios.put(`/users/current/update`, formData, {
         headers: { 'content-type': 'multipart/form-data' },

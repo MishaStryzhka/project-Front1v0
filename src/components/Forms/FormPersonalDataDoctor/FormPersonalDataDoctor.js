@@ -19,6 +19,7 @@ import {
   InputWrapStepTwo,
   Label,
   LabelJob,
+  LabelLink,
   LabelYears,
   Pagination,
   PaginationItem,
@@ -53,6 +54,8 @@ import InputDate from 'componentsReusable/Inputs/InputDate/InputDate';
 import { useDispatch } from 'react-redux';
 import { updateUserInfo } from 'redux/auth/operations';
 import InputYearsFromTo from 'componentsReusable/Inputs/InputYearsFromTo/InputYearsFromTo';
+import IconInstagram from 'images/icons/IconInstagram';
+import IconTikTok from 'images/icons/IconTikTok';
 
 const FormPersonalDataDoctor = () => {
   const dispatch = useDispatch();
@@ -93,7 +96,16 @@ const FormPersonalDataDoctor = () => {
       avatarUrl,
       educations,
       certificates,
+      instagram,
+      tiktok,
+      otherLink,
     } = value;
+
+    let links = {};
+
+    if (instagram) links.instagram = instagram;
+    if (tiktok) links.tiktok = tiktok;
+    if (otherLink) links.otherLink = otherLink;
 
     dispatch(
       updateUserInfo({
@@ -107,6 +119,7 @@ const FormPersonalDataDoctor = () => {
         experienceYears,
         educations,
         certificates,
+        links,
       })
     );
   };
@@ -122,8 +135,6 @@ const FormPersonalDataDoctor = () => {
   // const handlePublish = () => {
   //   console.log('handlePublish');
   // };
-
-  console.log('user.certificates', user.certificates);
 
   return (
     <Formik
@@ -151,6 +162,9 @@ const FormPersonalDataDoctor = () => {
           },
         ],
         certificates: user.certificates || [],
+        instagram: user.links.instagram || '',
+        tiktok: user.links.tiktok || '',
+        otherLink: user.links.otherLink || '',
       }}
       validationSchema={validationDoctorPageSchema}
       onSubmit={values => {
@@ -170,6 +184,8 @@ const FormPersonalDataDoctor = () => {
           isSubmitting,
           setSubmitting,
         } = e;
+
+        console.log('errors', errors);
 
         const handleYearsChange = (index, newYears) => {
           let newEducations = [...values.educations];
@@ -423,6 +439,55 @@ const FormPersonalDataDoctor = () => {
                     Додати номер телефону
                   </ButtonAdd>
                 </WrapPhone>
+
+                <LabelLink>
+                  <IconInstagram />
+                  <Input
+                    width="700px"
+                    error={
+                      errors.instagram && touched.instagram && errors.instagram
+                    }
+                    type="url"
+                    name="instagram"
+                    value={values.instagram}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="http://"
+                    isSubmitting={isSubmitting}
+                  />
+                </LabelLink>
+
+                <LabelLink>
+                  <IconTikTok />
+                  <Input
+                    width="700px"
+                    error={errors.tiktok && touched.tiktok && errors.tiktok}
+                    type="url"
+                    name="tiktok"
+                    value={values.tiktok}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="http://"
+                    isSubmitting={isSubmitting}
+                  />
+                </LabelLink>
+
+                <LabelLink>
+                  <IconInstagram />
+                  <Input
+                    width="700px"
+                    error={
+                      errors.otherLink && touched.otherLink && errors.otherLink
+                    }
+                    type="url"
+                    name="otherLink"
+                    value={values.otherLink}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    placeholder="http://"
+                    isSubmitting={isSubmitting}
+                  />
+                </LabelLink>
               </InputWrapStepOne>
             )}
 
