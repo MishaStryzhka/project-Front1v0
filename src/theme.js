@@ -22,6 +22,7 @@ const lightTheme = {
 
   text: '#00185C',
   background1: '#f1f5ff',
+  Background2: '#E5E8EF',
   secondaryColor: '#DEFFD9',
   secondaryColorHover: '#D0FFC9',
   secondaryColorPressed: '#C4FFBA',
