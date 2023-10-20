@@ -138,35 +138,6 @@ const FormPersonalDataDoctor = () => {
   //   console.log('handlePublish');
   // };
 
-  const fetchFriends = () => {
-    return fetch(
-      `https://maps.googleapis.com/maps/api/geocode/json?address=Kytlická 862, 190 00 Praha 9-Prosek&key=AIzaSyBRqVKDoFWjCcbCbd7wH8x5oAaJObkr8CA&language=uk`
-    )
-      .then(response => response.json())
-      .then(data => {
-        console.log('data', data);
-
-        const results = data.results;
-        if (results.length > 0) {
-          const addressComponents = results[0].address_components;
-
-          // Знайдіть компонент, який відповідає за район
-          const regionComponent = addressComponents.find(component => {
-            return component.types.includes('sublocality_level_1');
-          });
-
-          if (regionComponent) {
-            const regionName = regionComponent.long_name;
-            console.log(`Район: ${regionName}`);
-          }
-        }
-      })
-      .catch(error => {
-        console.error('Помилка запиту до Google Geocoding API', error);
-      });
-  };
-
-  fetchFriends();
   return (
     <Formik
       initialValues={{
