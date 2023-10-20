@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import Input from '../Input/Input';
-import PlacesAutocomplete from //   getLatLng, //   geocodeByAddress,
-'react-places-autocomplete';
+import PlacesAutocomplete from 'react-places-autocomplete'; //   getLatLng, //   geocodeByAddress,
 import { AddressList, AddressListItem } from './InputAddress.styled';
 
 const InputAddress = ({
@@ -65,6 +64,7 @@ const InputAddress = ({
                     : 'suggestion-item';
                   return (
                     <AddressListItem
+                      key={suggestion.placeId}
                       {...getSuggestionItemProps(suggestion, {
                         className,
                       })}

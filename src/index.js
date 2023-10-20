@@ -11,7 +11,7 @@ import App from 'components/App';
 ReactDOM.createRoot(document.getElementById('root')).render(
   // <React.StrictMode>
   <LoadScript
-    googleMapsApiKey={process.env.GOOGLE_MAPS_API_KEY}
+    googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
     libraries={['places']}
     language="uk"
   >
