@@ -56,6 +56,8 @@ import { updateUserInfo } from 'redux/auth/operations';
 import InputYearsFromTo from 'componentsReusable/Inputs/InputYearsFromTo/InputYearsFromTo';
 import IconInstagram from 'images/icons/IconInstagram';
 import IconTikTok from 'images/icons/IconTikTok';
+import AddressAutocomplete from 'components/AddressAutocomplete';
+import InputAddress from 'componentsReusable/Inputs/InputAddress/InputAddress';
 
 const FormPersonalDataDoctor = () => {
   const dispatch = useDispatch();
@@ -136,6 +138,35 @@ const FormPersonalDataDoctor = () => {
   //   console.log('handlePublish');
   // };
 
+  const fetchFriends = () => {
+    return fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=Kytlická 862, 190 00 Praha 9-Prosek&key=AIzaSyBRqVKDoFWjCcbCbd7wH8x5oAaJObkr8CA&language=uk`
+    )
+      .then(response => response.json())
+      .then(data => {
+        console.log('data', data);
+
+        const results = data.results;
+        if (results.length > 0) {
+          const addressComponents = results[0].address_components;
+
+          // Знайдіть компонент, який відповідає за район
+          const regionComponent = addressComponents.find(component => {
+            return component.types.includes('sublocality_level_1');
+          });
+
+          if (regionComponent) {
+            const regionName = regionComponent.long_name;
+            console.log(`Район: ${regionName}`);
+          }
+        }
+      })
+      .catch(error => {
+        console.error('Помилка запиту до Google Geocoding API', error);
+      });
+  };
+
+  fetchFriends();
   return (
     <Formik
       initialValues={{
@@ -184,8 +215,6 @@ const FormPersonalDataDoctor = () => {
           isSubmitting,
           setSubmitting,
         } = e;
-
-        console.log('errors', errors);
 
         const handleYearsChange = (index, newYears) => {
           let newEducations = [...values.educations];
@@ -566,7 +595,7 @@ const FormPersonalDataDoctor = () => {
                               setFieldTouched('educations', newTouched);
                             }}
                             value={education.years}
-                            width="800px"
+                            width="250px"
                             placeholder="Роки"
                             disabled={education.name === ''}
                             isSubmitting={isSubmitting}
@@ -740,43 +769,14 @@ const FormPersonalDataDoctor = () => {
                             placeholder="Місце роботи"
                           />
 
-                          <Input
-                            error={
-                              (errors.cityArea &&
-                                touched.cityArea &&
-                                errors.cityArea) ||
-                              null
-                            }
-                            type={'text'}
-                            value={job.cityArea}
-                            name="jobs"
-                            onChange={e => {
-                              setSubmitting(false);
-                              const { value } = e.currentTarget;
-                              const newJobs = [...values.jobs];
-                              if (values.jobs.length !== 1 && value === '') {
-                                newJobs.splice(index, 1);
-                              } else {
-                                newJobs.splice(index, 1, {
-                                  ...job,
-                                  cityArea: value,
-                                });
-                              }
-
-                              setFieldValue('jobs', newJobs);
-                            }}
-                            onBlur={handleBlur}
-                            required
-                            placeholder="Район міста"
-                          />
-
-                          <Input
+                          <InputAddress
                             error={
                               (errors?.jobs?.address &&
                                 touched?.jobs?.address &&
                                 errors?.jobs?.address) ||
                               null
                             }
+                            as={AddressAutocomplete}
                             type={'text'}
                             value={job.address}
                             name="jobs"
@@ -798,6 +798,7 @@ const FormPersonalDataDoctor = () => {
                             onBlur={handleBlur}
                             required
                             placeholder="Адреса"
+                            width="800px"
                           />
 
                           <Input
