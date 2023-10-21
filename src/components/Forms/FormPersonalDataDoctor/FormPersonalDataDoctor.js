@@ -25,7 +25,6 @@ import {
   PaginationItem,
   PayMethodLabel,
   PhotoDescription,
-  ReceptionHoursWrap,
   StyledLegend,
   WrapEducation,
   WrapEducationInputs,
@@ -53,11 +52,12 @@ import theme from 'theme';
 import InputDate from 'componentsReusable/Inputs/InputDate/InputDate';
 import { useDispatch } from 'react-redux';
 import { updateUserInfo } from 'redux/auth/operations';
-import InputYearsFromTo from 'componentsReusable/Inputs/InputYearsFromTo/InputYearsFromTo';
+import InputFromTo from 'componentsReusable/Inputs/InputFromTo/InputFromTo';
 import IconInstagram from 'images/icons/IconInstagram';
 import IconTikTok from 'images/icons/IconTikTok';
-import AddressAutocomplete from 'components/AddressAutocomplete';
 import InputAddress from 'componentsReusable/Inputs/InputAddress/InputAddress';
+import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
+import { hoursOfWorkListValue } from 'helpers/hoursOfWorkList';
 
 const FormPersonalDataDoctor = () => {
   const dispatch = useDispatch();
@@ -86,7 +86,6 @@ const FormPersonalDataDoctor = () => {
   };
 
   const onSubmit = value => {
-    console.log('value', value);
     const {
       lastName,
       firstName,
@@ -101,6 +100,8 @@ const FormPersonalDataDoctor = () => {
       instagram,
       tiktok,
       otherLink,
+      jobs,
+      paymentMethods,
     } = value;
 
     let links = {};
@@ -122,6 +123,8 @@ const FormPersonalDataDoctor = () => {
         educations,
         certificates,
         links,
+        jobs,
+        paymentMethods,
       })
     );
   };
@@ -153,14 +156,14 @@ const FormPersonalDataDoctor = () => {
             ? [{ _id: nanoid(), name: '', years: { begin: 2014, end: 2019 } }]
             : user.educations,
         paymentMethods: user.paymentMethods || [],
-        jobs: [
+        jobs: user.jobs || [
           {
-            id: nanoid(),
+            _id: nanoid(),
             name: '',
             cityArea: '',
             address: '',
             workSchedule: '',
-            receptionHours: ['', ''],
+            receptionHours: [{ begin: '', end: '' }],
           },
         ],
         certificates: user.certificates || [],
@@ -542,7 +545,7 @@ const FormPersonalDataDoctor = () => {
                             placeholder="Освіта"
                             isSubmitting={isSubmitting}
                           />
-                          <InputYearsFromTo
+                          <InputFromTo
                             error={
                               errors.educations &&
                               touched?.educations &&
@@ -568,6 +571,7 @@ const FormPersonalDataDoctor = () => {
                             value={education.years}
                             width="250px"
                             placeholder="Роки"
+                            type="date"
                             disabled={education.name === ''}
                             isSubmitting={isSubmitting}
                           />
@@ -655,7 +659,7 @@ const FormPersonalDataDoctor = () => {
                                 name={`sertificate - ${nanoid()}`}
                                 setImage={value => {
                                   setSubmitting(false);
-                                  console.log('value', value);
+                                  // console.log('value', value);
 
                                   const newCertificates = [
                                     ...values.certificates,
@@ -707,11 +711,13 @@ const FormPersonalDataDoctor = () => {
                   <WrapJobsInputs>
                     {values.jobs.map(job => {
                       const index = values.jobs.findIndex(
-                        option => option.id === job.id
+                        option => option._id === job._id
                       );
 
+                      // console.log('job', job);
+
                       return (
-                        <LabelJob key={job.id}>
+                        <LabelJob key={job._id}>
                           <Input
                             error={
                               (errors.jobs && touched.jobs && errors.jobs) ||
@@ -747,13 +753,12 @@ const FormPersonalDataDoctor = () => {
                                 errors?.jobs?.address) ||
                               null
                             }
-                            as={AddressAutocomplete}
                             type={'text'}
                             value={job.address}
                             name="jobs"
-                            onChange={e => {
+                            onChange={value => {
                               setSubmitting(false);
-                              const { value } = e.currentTarget;
+                              // const { value } = e.currentTarget;
                               const newJobs = [...values.jobs];
                               if (values.jobs.length !== 1 && value === '') {
                                 newJobs.splice(index, 1);
@@ -772,7 +777,7 @@ const FormPersonalDataDoctor = () => {
                             width="800px"
                           />
 
-                          <Input
+                          <InputRadio
                             error={
                               (errors?.jobs?.workSchedule &&
                                 touched?.jobs?.workSchedule &&
@@ -780,11 +785,12 @@ const FormPersonalDataDoctor = () => {
                               null
                             }
                             type={'text'}
-                            value={job.workSchedule}
+                            selectedValue={job.workSchedule}
+                            values={hoursOfWorkListValue}
                             name="jobs"
-                            onChange={e => {
+                            onChange={value => {
                               setSubmitting(false);
-                              const { value } = e.currentTarget;
+                              // const { value } = e.currentTarget;
                               const newJobs = [...values.jobs];
                               if (values.jobs.length !== 1 && value === '') {
                                 newJobs.splice(index, 1);
@@ -802,7 +808,48 @@ const FormPersonalDataDoctor = () => {
                             placeholder="Графік роботи"
                           />
 
-                          <ReceptionHoursWrap>
+                          <InputFromTo
+                            error={
+                              errors.jobs &&
+                              touched?.jobs &&
+                              touched?.jobs[index]?.years &&
+                              errors?.jobs[index]?.years
+                            }
+                            onChange={newValue => {
+                              // console.log('newValue', newValue);
+
+                              setSubmitting(false);
+                              let newWorkHours = [...values.jobs];
+                              newWorkHours[index] = {
+                                ...newWorkHours[index],
+                                receptionHours: [newValue],
+                              };
+
+                              // console.log('newWorkHours', newWorkHours);
+
+                              setFieldValue('jobs', newWorkHours);
+                            }}
+                            setFieldTouched={() => {
+                              const newTouched = touched.job
+                                ? [...touched.job]
+                                : [];
+                              newTouched[index] = touched.job
+                                ? {
+                                    ...touched.job[index],
+                                    years: true,
+                                  }
+                                : { years: true };
+                              setFieldTouched('jobs', newTouched);
+                            }}
+                            type={'time'}
+                            value={job.receptionHours[0]}
+                            width="250px"
+                            placeholder="Години прийому"
+                            disabled={job.name === ''}
+                            isSubmitting={isSubmitting}
+                          />
+
+                          {/* <ReceptionHoursWrap>
                             <p>Години прийому</p>
                             <Input
                               error={errors.job && touched.job && errors.job}
@@ -856,7 +903,7 @@ const FormPersonalDataDoctor = () => {
                               width="145px"
                               $style={`padding-left: 45px;`}
                             />
-                          </ReceptionHoursWrap>
+                          </ReceptionHoursWrap> */}
                         </LabelJob>
                       );
                     })}
@@ -867,12 +914,12 @@ const FormPersonalDataDoctor = () => {
                     onClick={() => {
                       const newJobs = [...values.jobs];
                       newJobs.push({
-                        id: nanoid(),
+                        _id: nanoid(),
                         name: '',
                         cityArea: '',
                         address: '',
                         workSchedule: '',
-                        receptionHours: ['', ''],
+                        receptionHours: [{ begin: '', end: '' }],
                       });
                       setFieldValue('jobs', newJobs);
                     }}

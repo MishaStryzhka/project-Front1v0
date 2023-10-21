@@ -10,9 +10,11 @@ import {
   ToggleBtn,
   WrapScroll,
 } from '../InputDate/InputDate.styled';
-import { StyledField, StyledInput } from './InputYearsFromTo.styled';
+import { StyledField, StyledInput } from './InputFromTo.styled';
+import YearsPicker from './YearsPicker/YearsPicker';
+import TimePicker from './TimePicker/TimePicker';
 
-const InputYearsFromTo = e => {
+const InputFromTo = e => {
   const {
     width, // "800px", ...
     value,
@@ -25,6 +27,7 @@ const InputYearsFromTo = e => {
     isSubmitting,
     disabled,
     setFieldTouched,
+    type,
   } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
   const [isRefresh, setIsRefresh] = useState(disabled || value === '');
@@ -48,7 +51,7 @@ const InputYearsFromTo = e => {
     e => {
       if (
         e.target.id !== `ToggleBtn-${name}` &&
-        e.target.id !== `InputYearsFromTo-${name}`
+        e.target.id !== `InputFromTo-${name}`
       ) {
         setIsOpenMenu(false);
       }
@@ -68,35 +71,33 @@ const InputYearsFromTo = e => {
 
   const currentYear = new Date().getFullYear();
 
-  //   console.log('error', error);
-
   return (
     <InputCalendarBox width={width} className={className}>
       <StyledInput
-        type="date"
+        // type="date"
         width={width}
         value={value}
         placeholder={placeholder}
         disabled={disabled || !isRefresh}
       >
         <StyledField
-          type="number"
-          min="1900"
-          max={currentYear}
-          step="1"
+          type={(type === 'date' && 'number') || type}
+          min={type === 'date' ? '1900' : null}
+          max={type === 'date' ? currentYear : null}
+          step={type === 'date' ? '1' : null}
           name="begin"
           parse={0}
           value={value.begin || ''}
           placeholder="PPPP"
           onChange={e => {
-            if (e.currentTarget.value.length > 4) return;
+            if (type === 'date' && e.currentTarget.value.length > 4) return;
 
-            let years = {
+            let newValues = {
               ...value,
               begin: e.currentTarget.value,
             };
 
-            onChange(years);
+            onChange(newValues);
           }}
           onBlur={() => {
             setFieldTouched('begin');
@@ -104,22 +105,22 @@ const InputYearsFromTo = e => {
         />
         -
         <StyledField
-          type="number"
-          min="1900"
-          max={currentYear}
-          step="1"
+          type={(type === 'date' && 'number') || type}
+          min={type === 'date' ? '1900' : null}
+          max={type === 'date' ? currentYear : null}
+          step={type === 'date' ? '1' : null}
           name="end"
           value={value.end || ''}
           placeholder="PPPP"
           onChange={e => {
-            if (e.currentTarget.value.length > 4) return;
+            if (type === 'date' && e.currentTarget.value.length > 4) return;
 
-            let years = {
+            let newValues = {
               ...value,
               end: e.currentTarget.value,
             };
 
-            onChange(years);
+            onChange(newValues);
           }}
         />
       </StyledInput>
@@ -144,11 +145,11 @@ const InputYearsFromTo = e => {
       )}
       <WrapScroll $isOpenMenu={isOpenMenu} id={`InputCalendar-${name}`}>
         <ScrollBox>
-          <p>YearsPicker</p>
+          {(type === 'date' && <YearsPicker />) || <TimePicker />}
         </ScrollBox>
       </WrapScroll>
     </InputCalendarBox>
   );
 };
 
-export default InputYearsFromTo;
+export default InputFromTo;
