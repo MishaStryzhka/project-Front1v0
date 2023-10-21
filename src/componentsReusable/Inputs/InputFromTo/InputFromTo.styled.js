@@ -48,7 +48,7 @@ export const StyledField = styled(Field)`
 
   //   text-align: center;
 
-  width: 45px;
+  width: 50px;
 
   border: none;
   padding: 0;
@@ -60,5 +60,8 @@ export const StyledField = styled(Field)`
   &::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+  }
+  &::-webkit-calendar-picker-indicator {
+    display: none;
   }
 `;

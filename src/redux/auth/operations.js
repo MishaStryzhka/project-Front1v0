@@ -145,6 +145,8 @@ export const updateUserInfo = createAsyncThunk(
       educations,
       certificates,
       links,
+      jobs,
+      paymentMethods,
     },
     thunkAPI
   ) => {
@@ -164,20 +166,24 @@ export const updateUserInfo = createAsyncThunk(
       formData.append('phones', phones || '');
       formData.append('contactMethods', contactMethods || '');
       formData.append('experienceYears', experienceYears || '');
+      formData.append('paymentMethods', paymentMethods || '');
       formData.append(
         'educations',
         educations ? JSON.stringify(educations) : ''
       );
+      formData.append('jobs', jobs ? JSON.stringify(jobs) : '');
       formData.append('links', links ? JSON.stringify(links) : '');
 
       const response = await axios.put(`/users/current/update`, formData, {
         headers: { 'content-type': 'multipart/form-data' },
       });
 
+      console.log('response', response);
+
       return { user: response.data.user, status: response.status };
-      // const user = { avatar, name, email, phone, city, birthday };
-      // return user;
     } catch (error) {
+      console.log('error', error);
+
       return thunkAPI.rejectWithValue(error.message);
     }
   }

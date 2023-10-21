@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Input from '../Input/Input';
 import PlacesAutocomplete from 'react-places-autocomplete'; //   getLatLng, //   geocodeByAddress,
 import { AddressList, AddressListItem } from './InputAddress.styled';
+import { Placeholder } from '../Input/Input.styled';
 
 const InputAddress = ({
   error,
@@ -15,14 +16,16 @@ const InputAddress = ({
   width,
 }) => {
   const [address, setAddress] = useState('');
+  // console.log('address', address);
 
   const handleChange = address => {
     setAddress(address);
+    onChange(address);
   };
 
   const handleSelect = address => {
     setAddress(address);
-    console.log('address', address);
+    onChange(address);
 
     // geocodeByAddress(address)
     //   .then(results => getLatLng(results[0]))
@@ -34,12 +37,14 @@ const InputAddress = ({
   };
   return (
     <PlacesAutocomplete
-      value={address}
+      value={address || value}
       onChange={handleChange}
       onSelect={handleSelect}
     >
       {({ getInputProps, suggestions, getSuggestionItemProps }) => {
         // console.log('suggestions', suggestions);
+        // console.log('value', value);
+
         return (
           <div style={{ position: 'relative' }}>
             <Input
@@ -56,6 +61,7 @@ const InputAddress = ({
                 className: 'form-control',
               })}
             />
+            <Placeholder required={required}>{placeholder}</Placeholder>
             {suggestions.length !== 0 && (
               <AddressList width={width}>
                 {suggestions.map(suggestion => {

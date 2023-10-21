@@ -26,8 +26,8 @@ import {
   TextCheckbox,
 } from 'components/Forms/FormLogin/FormLogin.styled';
 import InputDate from 'componentsReusable/Inputs/InputDate/InputDate';
-import InputHours from 'componentsReusable/Inputs/InputHours/InputHours';
 import { nanoid } from '@reduxjs/toolkit';
+import InputFromTo from 'componentsReusable/Inputs/InputFromTo/InputFromTo';
 
 const { default: Modal } = require('componentsReusable/Modal/Modal');
 const { createPortal } = require('react-dom');
@@ -78,6 +78,7 @@ const ModalLeaveRequest = ({ onClick }) => {
             handleChange,
             handleBlur,
             handleSubmit,
+            setFieldTouched,
           }) => {
             return (
               <Form
@@ -221,7 +222,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                               placeholder=""
                             />
 
-                            <InputHours
+                            {/* <InputHours
                               disabled={!dateValue.day}
                               width="300px"
                               selectedValue={dateValue}
@@ -241,6 +242,42 @@ const ModalLeaveRequest = ({ onClick }) => {
                               required
                               type="date"
                               placeholder=""
+                            /> */}
+
+                            <InputFromTo
+                              error={
+                                errors.job &&
+                                touched?.job &&
+                                touched?.job[index]?.years &&
+                                errors?.job[index]?.years
+                              }
+                              onChange={newValue => {
+                                // setSubmitting(false);
+                                let newWorkHours = [...values.dateOfReception];
+                                newWorkHours[index] = {
+                                  ...newWorkHours[index],
+                                  receptionHours: newValue,
+                                };
+                                setFieldValue('dateOfReception', newWorkHours);
+                              }}
+                              setFieldTouched={() => {
+                                const newTouched = touched.job
+                                  ? [...touched.job]
+                                  : [];
+                                newTouched[index] = touched.job
+                                  ? {
+                                      ...touched.job[index],
+                                      years: true,
+                                    }
+                                  : { years: true };
+                                setFieldTouched('dateOfReception', newTouched);
+                              }}
+                              type={'time'}
+                              value={values.dateOfReception}
+                              width="250px"
+                              placeholder="Години прийому"
+                              disabled={!dateValue.day}
+                              // isSubmitting={isSubmitting}
                             />
                           </WrapDate>
                         );
