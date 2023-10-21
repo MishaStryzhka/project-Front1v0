@@ -24,7 +24,6 @@ const InputRadio = e => {
     onChange,
     required,
     type, // "calendar"
-    showPlaceholder = false,
     placeholder,
   } = e;
   const [isOpenMenu, setIsOpenMenu] = useState(false);
