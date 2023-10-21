@@ -141,6 +141,36 @@ const FormPersonalDataDoctor = () => {
   //   console.log('handlePublish');
   // };
 
+  const getRegion = e => {
+    const { address, setFieldValue } = e;
+
+    return fetch(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}&language=uk`
+    )
+      .then(response => response.json())
+      .then(data => {
+        const results = data.results;
+        if (results.length > 0) {
+          const addressComponents = results[0].address_components;
+
+          // Знайдіть компонент, який відповідає за район
+          const regionComponent = addressComponents.find(component => {
+            return component.types.includes('sublocality_level_1');
+          });
+
+          if (regionComponent) {
+            const regionName = regionComponent.long_name;
+            setFieldValue(regionName);
+          }
+        } else {
+          setFieldValue('');
+        }
+      })
+      .catch(error => {
+        console.error('Помилка запиту до Google Geocoding API', error);
+      });
+  };
+
   return (
     <Formik
       initialValues={{
@@ -189,6 +219,8 @@ const FormPersonalDataDoctor = () => {
           isSubmitting,
           setSubmitting,
         } = e;
+
+        console.log('values', values);
 
         const handleYearsChange = (index, newYears) => {
           let newEducations = [...values.educations];
@@ -758,8 +790,8 @@ const FormPersonalDataDoctor = () => {
                             name="jobs"
                             onChange={value => {
                               setSubmitting(false);
-                              // const { value } = e.currentTarget;
                               const newJobs = [...values.jobs];
+
                               if (values.jobs.length !== 1 && value === '') {
                                 newJobs.splice(index, 1);
                               } else {
@@ -770,6 +802,25 @@ const FormPersonalDataDoctor = () => {
                               }
 
                               setFieldValue('jobs', newJobs);
+
+                              getRegion({
+                                address: value,
+                                setFieldValue: region => {
+                                  if (
+                                    values.jobs.length !== 1 &&
+                                    value === ''
+                                  ) {
+                                    newJobs.splice(index, 1);
+                                  } else {
+                                    newJobs.splice(index, 1, {
+                                      ...job,
+                                      cityArea: region,
+                                    });
+                                  }
+
+                                  setFieldValue('jobs', newJobs);
+                                },
+                              });
                             }}
                             onBlur={handleBlur}
                             required
