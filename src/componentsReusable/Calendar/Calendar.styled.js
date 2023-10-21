@@ -7,15 +7,16 @@ justify-content:center;
 align-items:center;
 .react-calendar__navigation {
     display: flex;
+    justify-content: center;
     padding: 10px 4px;
-    /* margin-bottom:14px; */
     }
-    .react-calendar__navigation__label {
+.react-calendar__navigation__label {
         font-family: "Rubik";
         font-size: 16px;
-        text-align: center;
         font-weight: 400;
         text-transform: capitalize;
+        display: flex;
+        justify-content:center;
     }
 
     .react-calendar__navigation__arrow {
@@ -67,9 +68,9 @@ align-items:center;
         color:rgba(0, 24, 92, 1);
     }
     
-.react-calendar__tile--active{
-background-color: rgba(57, 109, 255, 1);
-color:white;
+.react-calendar__tile--now{
+background-color: rgba(57, 109, 255, 1) !important;
+color:white !important;
 border-radius:12px;
 }
 
@@ -95,4 +96,44 @@ border-radius:12px;
     color:rgba(0, 24, 92, 1);
     font-family: "Rubik";
     font-size: 16px;
-  }`
+  }
+
+.react-calendar__tile--active{
+background-color:  #DEFFD9;
+border-radius:12px;
+color:rgba(0, 24, 92, 1);
+}
+
+.react-calendar__year-view__months__month{
+  display:block;
+  width:300px;
+}
+.react-calendar__decade-view__years__year{
+  display:block;
+  width:300px;
+}
+.react-calendar__decade-view__years__year:hover{
+    background-color:  #DEFFD9;
+    color:rgba(0, 24, 92, 1);
+    /* transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+  color 250ms cubic-bezier(0.4, 0, 0.2, 1), */
+  }
+
+.react-calendar__year-view__months__month:hover{
+  background-color:  #DEFFD9;
+  color:rgba(0, 24, 92, 1);
+  /* transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+  color 250ms cubic-bezier(0.4, 0, 0.2, 1), */
+}
+
+.react-calendar__month-view__days__day:hover{
+  background-color:  #DEFFD9;
+  color:rgba(0, 24, 92, 1);
+  border-radius:12px;
+  /* transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+  color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+  border-radius 250ms cubic-bezier(0.4, 0, 0.2, 1); */
+}
+
+`
+
