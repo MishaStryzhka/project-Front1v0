@@ -45,8 +45,6 @@ const DirectionWork = () => {
   }, 2000);
 
   const onSubmit = value => {
-    console.log('value', value);
-
     dispatch(updateUserInfo(value));
   };
 
@@ -77,10 +75,6 @@ const DirectionWork = () => {
             handleBlur,
             handleSubmit,
           }) => {
-            console.log('errors', errors);
-            console.log('touched', touched);
-            console.log('values', values);
-
             return (
               <Form
                 id="formDirectionWork"

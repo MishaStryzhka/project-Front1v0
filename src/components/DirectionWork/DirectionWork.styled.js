@@ -14,7 +14,7 @@ export const ListProblemsCategories = styled.ul`
 `;
 
 export const ListProblems = styled.ul`
-  margin-top: 40px;
+  margin-top: 20px;
   display: flex;
   flex-direction: column;
   gap: 20px;
