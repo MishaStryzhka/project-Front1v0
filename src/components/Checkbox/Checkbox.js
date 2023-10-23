@@ -21,13 +21,18 @@ const Checkbox = e => {
             <IconCheckbox />
           )}
         </>
-      ) : (
+      ) : typeof e.form.values[name] === 'object' ? (
         <>
           {Object.keys(e.form.values[name]).includes(e.value) ? (
             <IconCheckboxChack />
           ) : (
             <IconCheckbox />
           )}
+        </>
+      ) : (
+        <>
+          {!e.form.values[name] && <IconCheckbox />}
+          {e.form.values[name] && <IconCheckboxChack />}
         </>
       )}
     </StyledLabel>
