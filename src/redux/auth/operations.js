@@ -147,32 +147,38 @@ export const updateUserInfo = createAsyncThunk(
       links,
       jobs,
       paymentMethods,
+      directionsOfWork,
+      problemsItSolves,
     },
     thunkAPI
   ) => {
+    console.log('directionsOfWork', directionsOfWork);
     try {
       const formData = new FormData();
-      formData.append('avatar', avatar);
+      avatar && formData.append('avatar', avatar);
 
-      certificates.forEach(fileObject => {
-        const file = fileObject.file;
-        file && formData.append(`certificates`, file);
-      });
+      certificates &&
+        certificates.forEach(fileObject => {
+          const file = fileObject.file;
+          file && formData.append(`certificates`, file);
+        });
 
-      formData.append('lastName', lastName);
-      formData.append('firstName', firstName);
-      formData.append('patronymic', patronymic);
-      formData.append('dateOfBirthday', dateOfBirthday);
-      formData.append('phones', phones || '');
-      formData.append('contactMethods', contactMethods || '');
-      formData.append('experienceYears', experienceYears || '');
-      formData.append('paymentMethods', paymentMethods || '');
-      formData.append(
-        'educations',
-        educations ? JSON.stringify(educations) : ''
-      );
-      formData.append('jobs', jobs ? JSON.stringify(jobs) : '');
-      formData.append('links', links ? JSON.stringify(links) : '');
+      lastName && formData.append('lastName', lastName);
+      firstName && formData.append('firstName', firstName);
+      patronymic && formData.append('patronymic', patronymic);
+      dateOfBirthday && formData.append('dateOfBirthday', dateOfBirthday);
+      phones && formData.append('phones', phones || '');
+      contactMethods && formData.append('contactMethods', contactMethods || '');
+      experienceYears &&
+        formData.append('experienceYears', experienceYears || '');
+      paymentMethods && formData.append('paymentMethods', paymentMethods || '');
+      educations && formData.append('educations', JSON.stringify(educations));
+      jobs && formData.append('jobs', JSON.stringify(jobs));
+      links && formData.append('links', JSON.stringify(links));
+      directionsOfWork &&
+        formData.append('directionsOfWork', JSON.stringify(directionsOfWork));
+      problemsItSolves &&
+        formData.append('problemsItSolves', JSON.stringify(problemsItSolves));
 
       const response = await axios.put(`/users/current/update`, formData, {
         headers: { 'content-type': 'multipart/form-data' },
@@ -184,7 +190,10 @@ export const updateUserInfo = createAsyncThunk(
     } catch (error) {
       console.log('error', error);
 
-      return thunkAPI.rejectWithValue(error.message);
+      return thunkAPI.rejectWithValue({
+        message: error.message,
+        status: error.response.status,
+      });
     }
   }
 );

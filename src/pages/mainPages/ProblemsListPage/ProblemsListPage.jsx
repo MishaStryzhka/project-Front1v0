@@ -1,7 +1,7 @@
 import { Helmet } from 'react-helmet';
 import { StyledTitle } from '../DirectionsListPage/DirectionsListPage.styled';
 import NavList from 'componentsReusable/NavLIst/NavList';
-import { problemListValue } from 'helpers/problemsList';
+import { problemsListValue } from 'helpers/problemsList';
 import Container from 'componentsReusable/Container/Container';
 
 const ProblemsListPage = () => {
@@ -14,7 +14,7 @@ const ProblemsListPage = () => {
       <Container>
         <StyledTitle type="page">Скарги</StyledTitle>
 
-        <NavList name="problem" list={problemListValue} />
+        <NavList name="problem" list={problemsListValue} />
       </Container>
     </>
   );

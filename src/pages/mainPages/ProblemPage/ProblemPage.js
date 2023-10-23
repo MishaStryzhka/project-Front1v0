@@ -3,7 +3,7 @@ import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import PageContainer from 'componentsReusable/PageContainer/PageContainer';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
-import { problemListValue } from 'helpers/problemsList';
+import { problemsListValue } from 'helpers/problemsList';
 import { sortListValue } from 'helpers/sortList';
 import { Helmet } from 'react-helmet';
 import { useSearchParams } from 'react-router-dom';
@@ -219,7 +219,7 @@ const users = [
 const ProblemPage = () => {
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const problem = problemListValue.find(
+  const problem = problemsListValue.find(
     option => option.id === searchParams.get('problem')
   );
   const sort = sortListValue.find(
@@ -262,7 +262,7 @@ const ProblemPage = () => {
           <InputRadio
             width="220"
             selectedValue={problem?.id}
-            values={problemListValue}
+            values={problemsListValue}
             name="problem"
             onChange={value => newSetSearchParams('problem', value)}
           />

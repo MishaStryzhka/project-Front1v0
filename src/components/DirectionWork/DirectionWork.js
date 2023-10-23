@@ -1,11 +1,15 @@
 import { Formik } from 'formik';
 import {
+  CategoryTitle,
   CheckboxField,
   CheckboxInputItem,
   CheckboxLabel,
+  CheckboxProblemItem,
   DirectionOfWorkLabel,
+  InputPrice,
   ListDirection,
   ListProblems,
+  ListProblemsCategories,
   ProblemsItSolvesLabel,
   StyledLegend,
 } from './DirectionWork.styled';
@@ -20,11 +24,30 @@ import {
 } from 'components/PersonalData/PersonalData.styled';
 import SecondaryButton from 'componentsReusable/Buttons/SecondaryButton/SecondaryButton';
 import IconDone from 'images/icons/IconDone';
+import { directionListValue } from 'helpers/directionsList';
+import { useDispatch } from 'react-redux';
+import { updateUserInfo } from 'redux/auth/operations';
+import { resetError, resetResponse } from 'redux/auth/slice';
+import { problemsListValue } from 'helpers/problemsList';
+import { validationDoctorDirectionWork } from 'schemas';
+import { TextError } from 'components/Forms/FormLogin/FormLogin.styled';
 
 const DirectionWork = () => {
-  const { response, userType } = useAuth();
+  const dispatch = useDispatch();
+  let { user, response, userType, error } = useAuth();
+
+  setTimeout(() => {
+    response && dispatch(resetResponse(null));
+  }, 2000);
+
+  setTimeout(() => {
+    error && dispatch(resetError(null));
+  }, 2000);
+
   const onSubmit = value => {
     console.log('value', value);
+
+    dispatch(updateUserInfo(value));
   };
 
   const handlePublish = () => {
@@ -39,10 +62,10 @@ const DirectionWork = () => {
         </Title>
         <Formik
           initialValues={{
-            directionOfWork: [],
-            problemsItSolves: [],
+            directionsOfWork: user.directionsOfWork || [],
+            problemsItSolves: user.problemsItSolves || {},
           }}
-          // validationSchema={validationDoctorPageSchema}
+          validationSchema={validationDoctorDirectionWork}
           onSubmit={onSubmit}
         >
           {({
@@ -54,8 +77,13 @@ const DirectionWork = () => {
             handleBlur,
             handleSubmit,
           }) => {
+            console.log('errors', errors);
+            console.log('touched', touched);
+            console.log('values', values);
+
             return (
               <Form
+                id="formDirectionWork"
                 onSubmit={handleSubmit}
                 isRequiredFields
                 handlePublish={handlePublish}
@@ -64,351 +92,112 @@ const DirectionWork = () => {
                   <StyledLegend>
                     Напрямки роботи <span>*</span>
                   </StyledLegend>
+
                   <ListDirection>
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="therapeuticDentistry"
-                        name="directionsOfWork"
-                        value="therapeuticDentistry"
-                        component={Checkbox}
-                        onChange={handleChange}
-                      />
-                      <CheckboxLabel htmlFor="therapeuticDentistry">
-                        Терапевтична стоматологія
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="orthodontics"
-                        name="directionsOfWork"
-                        value="orthodontics"
-                        component={Checkbox}
-                        onChange={handleChange}
-                      />
-                      <CheckboxLabel htmlFor="orthodontics">
-                        Ортодонтія
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="surgicalDentistry"
-                        name="directionsOfWork"
-                        value="surgicalDentistry"
-                        component={Checkbox}
-                        onChange={handleChange}
-                      />
-                      <CheckboxLabel htmlFor="surgicalDentistry">
-                        Хірургічна стоматологія
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="prosthesis"
-                        name="directionsOfWork"
-                        value="prosthesis"
-                        component={Checkbox}
-                        onChange={handleChange}
-                      />
-                      <CheckboxLabel htmlFor="prosthesis">
-                        Протезування
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="endodontics"
-                        name="directionsOfWork"
-                        value="endodontics"
-                        component={Checkbox}
-                        onChange={handleChange}
-                      />
-                      <CheckboxLabel htmlFor="endodontics">
-                        Ендодонтія
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="parandotology"
-                        name="directionsOfWork"
-                        value="parandotology"
-                        component={Checkbox}
-                        onChange={handleChange}
-                      />
-                      <CheckboxLabel htmlFor="parandotology">
-                        Парандотологія
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="childrensDentistry"
-                        name="directionsOfWork"
-                        value="childrensDentistry"
-                        component={Checkbox}
-                        onChange={handleChange}
-                      />
-                      <CheckboxLabel htmlFor="childrensDentistry">
-                        Дитяча стоматологія
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="aestheticDentistry"
-                        name="directionsOfWork"
-                        value="aestheticDentistry"
-                        component={Checkbox}
-                        onChange={handleChange}
-                      />
-                      <CheckboxLabel htmlFor="aestheticDentistry">
-                        Естетична стоматологія
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="radiology"
-                        name="directionsOfWork"
-                        value="radiology"
-                        component={Checkbox}
-                        onChange={handleChange}
-                      />
-                      <CheckboxLabel htmlFor="radiology">
-                        Рентгенологія
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
+                    {directionListValue.map(direction => {
+                      return (
+                        <CheckboxInputItem key={direction.id}>
+                          <CheckboxField
+                            type="checkbox"
+                            id={direction.id}
+                            name="directionsOfWork"
+                            value={direction.id}
+                            component={Checkbox}
+                            onChange={handleChange}
+                          />
+                          <CheckboxLabel htmlFor={direction.id}>
+                            {direction.name}
+                          </CheckboxLabel>
+                        </CheckboxInputItem>
+                      );
+                    })}
                   </ListDirection>
+                  {errors.directionsOfWork && (
+                    <TextError>{errors.directionsOfWork}</TextError>
+                  )}
                 </DirectionOfWorkLabel>
 
                 <ProblemsItSolvesLabel>
                   <StyledLegend>
                     Проблеми, які вирішує <span>*</span>
                   </StyledLegend>
+                  <ListProblemsCategories>
+                    {problemsListValue.map(category => {
+                      return (
+                        <li key={category.id}>
+                          <CategoryTitle>{category.category}</CategoryTitle>
+                          <ListProblems>
+                            {category.problems.map(problem => {
+                              return (
+                                <CheckboxProblemItem key={problem.id}>
+                                  <div
+                                    style={{
+                                      display: 'flex',
+                                      alignItems: 'center',
+                                      gap: '20px',
+                                    }}
+                                  >
+                                    <CheckboxField
+                                      type="checkbox"
+                                      id={problem.id}
+                                      name="problemsItSolves"
+                                      value={problem.id}
+                                      component={Checkbox}
+                                      onChange={e => {
+                                        const newProblemsItSolves = {
+                                          ...values.problemsItSolves,
+                                        };
 
-                  <ListProblems>
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="acutePain"
-                        name="problemsItSolves"
-                        value="acutePain"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="acutePain">
-                        Гострий біль
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
+                                        if (problem.id in newProblemsItSolves) {
+                                          delete newProblemsItSolves[
+                                            problem.id
+                                          ];
+                                        } else {
+                                          newProblemsItSolves[problem.id] = '';
+                                        }
 
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="cariesTreatment"
-                        name="problemsItSolves"
-                        value="cariesTreatment"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="cariesTreatment">
-                        Лікування карієсу
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="treatmentOfGumDisease"
-                        name="problemsItSolves"
-                        value="treatmentOfGumDisease"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="treatmentOfGumDisease">
-                        Лікування захворювання ясен
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="treatmentOfRootCanals"
-                        name="problemsItSolves"
-                        value="treatmentOfRootCanals"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="treatmentOfRootCanals">
-                        Лікування кореневих каналів
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="installationOfEntalImplants/Prostheses"
-                        name="problemsItSolves"
-                        value="installationOfEntalImplants/Prostheses"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="installationOfEntalImplants/Prostheses">
-                        Встановлення зубних імплантів/протезів
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="treatmentOfMalocclusion"
-                        name="problemsItSolves"
-                        value="treatmentOfMalocclusion"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="treatmentOfMalocclusion">
-                        Лікування неправильного прикусу
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="restorationOfDamagedTeeth"
-                        name="problemsItSolves"
-                        value="restorationOfDamagedTeeth"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="restorationOfDamagedTeeth">
-                        Відновлення пошкоджених зубів
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="teethWhitening"
-                        name="problemsItSolves"
-                        value="teethWhitening"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="teethWhitening">
-                        Відбілювання зубів
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="preventiveCleaning"
-                        name="problemsItSolves"
-                        value="preventiveCleaning"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="preventiveCleaning">
-                        Профілактична чистка
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="removalOfDentalDeposits"
-                        name="problemsItSolves"
-                        value="removalOfDentalDeposits"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="removalOfDentalDeposits">
-                        Зняття зубних відкладень
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="treatmentOfDiseasesOfTheMucousMembrane"
-                        name="problemsItSolves"
-                        value="treatmentOfDiseasesOfTheMucousMembrane"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="treatmentOfDiseasesOfTheMucousMembrane">
-                        Лікування захворювань слизової оболонки
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="treatmentOfChewingDisorders"
-                        name="problemsItSolves"
-                        value="treatmentOfChewingDisorders"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="treatmentOfChewingDisorders">
-                        Лікування вади жування
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="restorationProcedures"
-                        name="problemsItSolves"
-                        value="restorationProcedures"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="restorationProcedures">
-                        Реставраційні процедури
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-
-                    <CheckboxInputItem>
-                      <CheckboxField
-                        type="checkbox"
-                        id="treatmentOfInjuriesOfTheOralCavity"
-                        name="problemsItSolves"
-                        value="treatmentOfInjuriesOfTheOralCavity"
-                        component={Checkbox}
-                        onChange={handleChange}
-                        checked
-                      />
-                      <CheckboxLabel htmlFor="treatmentOfInjuriesOfTheOralCavity">
-                        Лікування травм ротової порожнини
-                      </CheckboxLabel>
-                    </CheckboxInputItem>
-                  </ListProblems>
+                                        setFieldValue(
+                                          'problemsItSolves',
+                                          newProblemsItSolves
+                                        );
+                                      }}
+                                    />
+                                    <CheckboxLabel htmlFor={problem.id}>
+                                      {problem.name_ua}
+                                    </CheckboxLabel>
+                                  </div>
+                                  <InputPrice
+                                    width="150px"
+                                    type="number"
+                                    placeholder="Ціна від, грн"
+                                    name="problemsItSolves"
+                                    disabled={
+                                      !(problem.id in values.problemsItSolves)
+                                    }
+                                    value={
+                                      values.problemsItSolves[problem.id] || ''
+                                    }
+                                    onChange={e => {
+                                      setFieldValue('problemsItSolves', {
+                                        ...values.problemsItSolves,
+                                        [problem.id]: Number(
+                                          e.currentTarget.value
+                                        ),
+                                      });
+                                    }}
+                                    onBlur={handleBlur}
+                                  />
+                                </CheckboxProblemItem>
+                              );
+                            })}
+                          </ListProblems>
+                        </li>
+                      );
+                    })}
+                  </ListProblemsCategories>
+                  {errors.problemsItSolves && (
+                    <TextError>{errors.problemsItSolves}</TextError>
+                  )}
                 </ProblemsItSolvesLabel>
               </Form>
             );
@@ -419,7 +208,7 @@ const DirectionWork = () => {
         <SecondaryButton
           $styledType="rose"
           type="submit"
-          form="formPersonalData"
+          form="formDirectionWork"
         >
           Зберегти
         </SecondaryButton>
@@ -429,11 +218,7 @@ const DirectionWork = () => {
           <IconDone width="22px" height="22px" /> Дані збережено
         </Notify>
       )}
-      {response && (
-        <Notify $show={response.status !== 200}>
-          <IconDone width="22px" height="22px" /> Дані збережено
-        </Notify>
-      )}
+      {error && <Notify $show>!!! Щось пішло не так !!!</Notify>}
     </div>
   );
 };
