@@ -34,6 +34,9 @@ const authSlice = createSlice({
     resetResponse: (state, { payload }) => {
       state.response = payload;
     },
+    resetError: (state, { payload }) => {
+      state.error = payload;
+    },
   },
   extraReducers: builder => {
     builder
@@ -88,7 +91,7 @@ const authSlice = createSlice({
         state.response = { status: action.payload.status };
       })
       .addCase(updateUserInfo.rejected, (state, action) => {
-        console.log(action.payload);
+        state.error = action.payload;
       })
       .addCase(removeAccount.fulfilled, (state, action) => {
         state.user = null;
@@ -124,4 +127,4 @@ const authSlice = createSlice({
 });
 
 export const authReducer = authSlice.reducer;
-export const { saveToken, resetResponse } = authSlice.actions;
+export const { saveToken, resetResponse, resetError } = authSlice.actions;

@@ -7,14 +7,18 @@ import SecondaryButton from 'componentsReusable/Buttons/SecondaryButton/Secondar
 import { Notify, StyledButtonWrapper } from './PersonalData.styled';
 import IconDone from 'images/icons/IconDone';
 import { useDispatch } from 'react-redux';
-import { resetResponse } from 'redux/auth/slice';
+import { resetError, resetResponse } from 'redux/auth/slice';
 
 const PersonalData = () => {
-  const { userType, response } = useAuth();
+  const { userType, response, error } = useAuth();
   const dispatch = useDispatch();
 
   setTimeout(() => {
-    dispatch(resetResponse(null));
+    response && dispatch(resetResponse(null));
+  }, 2000);
+
+  setTimeout(() => {
+    error && dispatch(resetError(null));
   }, 2000);
 
   return (
@@ -40,11 +44,7 @@ const PersonalData = () => {
           <IconDone width="22px" height="22px" /> Дані збережено
         </Notify>
       )}
-      {response && (
-        <Notify $show={response.status !== 200}>
-          <IconDone width="22px" height="22px" /> Дані збережено
-        </Notify>
-      )}
+      {error && <Notify $show>!!! Щось пішло не так !!!</Notify>}
     </div>
   );
 };

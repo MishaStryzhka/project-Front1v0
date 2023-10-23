@@ -1,3 +1,6 @@
+const {
+  validationDoctorDirectionWork,
+} = require('./DoctorDirectionWorkSchema');
 const { validationDoctorPageSchema } = require('./DoctorPageSchema');
 const { validationPatientPageScheme } = require('./PatientPageSchema');
 const { validationRegisterSchema } = require('./RegisterSchema');
@@ -8,4 +11,5 @@ module.exports = {
   validationRegisterSchema,
   validationPatientPageScheme,
   validationDoctorPageSchema,
+  validationDoctorDirectionWork,
 };

@@ -13,7 +13,7 @@ const Checkbox = e => {
     <StyledLabel onChange={onChange}>
       <StyledField type={e.type} name={e.field.name} value={value} />
 
-      {typeof e.form.values[name] === 'object' ? (
+      {Array.isArray(e.form.values[name]) ? (
         <>
           {e.form.values[name].includes(e.value) ? (
             <IconCheckboxChack />
@@ -23,8 +23,11 @@ const Checkbox = e => {
         </>
       ) : (
         <>
-          {!e.form.values[name] && <IconCheckbox />}
-          {e.form.values[name] && <IconCheckboxChack />}
+          {Object.keys(e.form.values[name]).includes(e.value) ? (
+            <IconCheckboxChack />
+          ) : (
+            <IconCheckbox />
+          )}
         </>
       )}
     </StyledLabel>

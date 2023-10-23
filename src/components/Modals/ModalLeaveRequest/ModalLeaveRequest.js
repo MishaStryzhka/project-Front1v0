@@ -18,7 +18,7 @@ import {
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
 import { locationListValue } from 'helpers/locationsList';
-import { problemListValue } from 'helpers/problemsList';
+import { problemsListValue } from 'helpers/problemsList';
 import Checkbox from 'components/Checkbox/Checkbox';
 import {
   FieldCheckboxStyled,
@@ -338,7 +338,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                   <InputRadio
                     width="800px"
                     selectedValue={values.problem}
-                    values={problemListValue}
+                    values={problemsListValue}
                     name="problem"
                     onChange={value => setFieldValue('problem', value)}
                     required

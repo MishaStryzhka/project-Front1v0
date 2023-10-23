@@ -899,62 +899,6 @@ const FormPersonalDataDoctor = () => {
                             disabled={job.name === ''}
                             isSubmitting={isSubmitting}
                           />
-
-                          {/* <ReceptionHoursWrap>
-                            <p>Години прийому</p>
-                            <Input
-                              error={errors.job && touched.job && errors.job}
-                              type={'time'}
-                              value={job.receptionHours[0]}
-                              name="job"
-                              onChange={e => {
-                                setSubmitting(false);
-                                const { value } = e.currentTarget;
-                                const newJobs = [...values.jobs];
-
-                                newJobs.splice(index, 1, {
-                                  ...job,
-                                  receptionHours: [
-                                    value,
-                                    job.receptionHours[1],
-                                  ],
-                                });
-
-                                setFieldValue('jobs', newJobs);
-                              }}
-                              onBlur={handleBlur}
-                              showPlaceholder="true"
-                              placeholder="Від"
-                              width="145px"
-                              $style={`padding-left: 45px;`}
-                            />
-                            <Input
-                              error={errors.job && touched.job && errors.job}
-                              type={'time'}
-                              value={job.receptionHours[1]}
-                              name="jobs"
-                              onChange={e => {
-                                setSubmitting(false);
-                                const { value } = e.currentTarget;
-                                const newjob = [...values.jobs];
-
-                                newjob.splice(index, 1, {
-                                  ...job,
-                                  receptionHours: [
-                                    job.receptionHours[0],
-                                    value,
-                                  ],
-                                });
-
-                                setFieldValue('jobs', newjob);
-                              }}
-                              onBlur={handleBlur}
-                              showPlaceholder="true"
-                              placeholder="До"
-                              width="145px"
-                              $style={`padding-left: 45px;`}
-                            />
-                          </ReceptionHoursWrap> */}
                         </LabelJob>
                       );
                     })}
