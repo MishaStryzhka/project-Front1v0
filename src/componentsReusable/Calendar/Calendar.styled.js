@@ -62,6 +62,7 @@ align-items:center;
     
     .react-calendar__month-view__days__day--neighboringMonth{
         color:#BABABA !important;
+        pointer-events: none;
     }
     
     .react-calendar__month-view__days__day{
@@ -115,24 +116,27 @@ color:rgba(0, 24, 92, 1);
 .react-calendar__decade-view__years__year:hover{
     background-color:  #DEFFD9;
     color:rgba(0, 24, 92, 1);
-    /* transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
-  color 250ms cubic-bezier(0.4, 0, 0.2, 1), */
+    cursor:pointer;
+    transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+  color 250ms cubic-bezier(0.4, 0, 0.2, 1),
   }
 
 .react-calendar__year-view__months__month:hover{
   background-color:  #DEFFD9;
   color:rgba(0, 24, 92, 1);
-  /* transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
-  color 250ms cubic-bezier(0.4, 0, 0.2, 1), */
+  cursor:pointer;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+  color 250ms cubic-bezier(0.4, 0, 0.2, 1),
 }
 
 .react-calendar__month-view__days__day:hover{
   background-color:  #DEFFD9;
   color:rgba(0, 24, 92, 1);
   border-radius:12px;
-  /* transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
   color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-  border-radius 250ms cubic-bezier(0.4, 0, 0.2, 1); */
+  border-radius 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  cursor:pointer;
 }
 
 `
