@@ -22,9 +22,9 @@ import SecondaryButton from 'componentsReusable/Buttons/SecondaryButton/Secondar
 import IconDone from 'images/icons/IconDone';
 import { useDispatch } from 'react-redux';
 import { resetError, resetResponse } from 'redux/auth/slice';
-import { updateUserInfo } from 'redux/auth/operations';
 import { validationCommunication } from 'schemas';
 import { TextError } from 'componentsReusable/Inputs/Input/Input.styled';
+import { updateUserInfo } from 'redux/auth/operations';
 
 const Communication = () => {
   const dispatch = useDispatch();
@@ -68,8 +68,7 @@ const Communication = () => {
             handleBlur,
             handleSubmit,
           }) => {
-            console.log('errors', errors);
-            console.log('touched', touched);
+            console.log('values', values);
 
             return (
               <Form
