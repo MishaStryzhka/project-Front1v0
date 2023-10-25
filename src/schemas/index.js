@@ -1,3 +1,4 @@
+const { validationCommunication } = require('./CommunicationSchemas');
 const {
   validationDoctorDirectionWork,
 } = require('./DoctorDirectionWorkSchema');
@@ -12,4 +13,5 @@ module.exports = {
   validationPatientPageScheme,
   validationDoctorPageSchema,
   validationDoctorDirectionWork,
+  validationCommunication,
 };

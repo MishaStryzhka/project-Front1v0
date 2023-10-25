@@ -23,6 +23,8 @@ import IconDone from 'images/icons/IconDone';
 import { useDispatch } from 'react-redux';
 import { resetError, resetResponse } from 'redux/auth/slice';
 import { updateUserInfo } from 'redux/auth/operations';
+import { validationCommunication } from 'schemas';
+import { TextError } from 'componentsReusable/Inputs/Input/Input.styled';
 
 const Communication = () => {
   const dispatch = useDispatch();
@@ -39,7 +41,7 @@ const Communication = () => {
   const onSubmit = value => {
     console.log('value', value);
 
-    dispatch(updateUserInfo(value));
+    // dispatch(updateUserInfo(value));
   };
 
   return (
@@ -53,7 +55,7 @@ const Communication = () => {
             communicationWithDoctor: user.communicationWithDoctor || [],
             howApplicationsAreReceived: user.howApplicationsAreReceived || [],
           }}
-          // validationSchema={validationDoctorPageSchema}
+          validationSchema={validationCommunication}
           onSubmit={onSubmit}
         >
           {({
@@ -61,15 +63,20 @@ const Communication = () => {
             errors,
             touched,
             setFieldValue,
+            setFieldTouched,
             handleChange,
             handleBlur,
             handleSubmit,
           }) => {
+            console.log('errors', errors);
+            console.log('touched', touched);
+
             return (
               <Form
                 onSubmit={handleSubmit}
                 isRequiredFields
                 save={() => onSubmit(values)}
+                id={'formCommunication'}
               >
                 <CommunicationWrap>
                   <CommunicationWithDoctorLabel>
@@ -84,7 +91,10 @@ const Communication = () => {
                           name="communicationWithDoctor"
                           value="telegramBot"
                           component={Checkbox}
-                          onChange={handleChange}
+                          onChange={e => {
+                            setFieldTouched('communicationWithDoctor');
+                            handleChange(e);
+                          }}
                           checked
                         />
                         <CheckboxLabel htmlFor="telegramBot">
@@ -99,13 +109,20 @@ const Communication = () => {
                           name="communicationWithDoctor"
                           value="chatBotOnTheSite"
                           component={Checkbox}
-                          onChange={handleChange}
+                          onChange={e => {
+                            setFieldTouched('communicationWithDoctor');
+                            handleChange(e);
+                          }}
                         />
                         <CheckboxLabel htmlFor="chatBotOnTheSite">
                           Чат-бот на сайті
                         </CheckboxLabel>
                       </CheckboxInputItem>
                     </ListCommunication>
+                    {errors.communicationWithDoctor &&
+                      touched.communicationWithDoctor && (
+                        <TextError>{errors.communicationWithDoctor}</TextError>
+                      )}
                   </CommunicationWithDoctorLabel>
                   <HowApplicationsAreReceivedLabel>
                     <StyledLegend>
@@ -119,7 +136,10 @@ const Communication = () => {
                           name="howApplicationsAreReceived"
                           value="telegramBot"
                           component={Checkbox}
-                          onChange={handleChange}
+                          onChange={e => {
+                            setFieldTouched('howApplicationsAreReceived');
+                            handleChange(e);
+                          }}
                           checked
                         />
                         <CheckboxLabel htmlFor="telegramBot">
@@ -134,7 +154,10 @@ const Communication = () => {
                           name="howApplicationsAreReceived"
                           value="chatBotOnTheSite"
                           component={Checkbox}
-                          onChange={handleChange}
+                          onChange={e => {
+                            setFieldTouched('howApplicationsAreReceived');
+                            handleChange(e);
+                          }}
                         />
                         <CheckboxLabel htmlFor="chatBotOnTheSite">
                           Чат-бот на сайті
@@ -148,13 +171,22 @@ const Communication = () => {
                           name="howApplicationsAreReceived"
                           value="email"
                           component={Checkbox}
-                          onChange={handleChange}
+                          onChange={e => {
+                            setFieldTouched('howApplicationsAreReceived');
+                            handleChange(e);
+                          }}
                         />
                         <CheckboxLabel htmlFor="email">
                           Електрона пошта
                         </CheckboxLabel>
                       </CheckboxInputItem>
                     </ListCommunication>
+                    {errors.howApplicationsAreReceived &&
+                      touched.howApplicationsAreReceived && (
+                        <TextError>
+                          {errors.howApplicationsAreReceived}
+                        </TextError>
+                      )}
                   </HowApplicationsAreReceivedLabel>
                 </CommunicationWrap>
               </Form>
@@ -166,7 +198,7 @@ const Communication = () => {
         <SecondaryButton
           $styledType="rose"
           type="submit"
-          form="formDirectionWork"
+          form="formCommunication"
         >
           Зберегти
         </SecondaryButton>
