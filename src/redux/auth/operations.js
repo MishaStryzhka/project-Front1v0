@@ -154,7 +154,6 @@ export const updateUserInfo = createAsyncThunk(
     },
     thunkAPI
   ) => {
-    console.log('directionsOfWork', directionsOfWork);
     try {
       const formData = new FormData();
       avatar && formData.append('avatar', avatar);
@@ -181,10 +180,6 @@ export const updateUserInfo = createAsyncThunk(
         formData.append('directionsOfWork', JSON.stringify(directionsOfWork));
       problemsItSolves &&
         formData.append('problemsItSolves', JSON.stringify(problemsItSolves));
-
-      const response = await axios.put(`/users/current/update`, formData, {
-        headers: { 'content-type': 'multipart/form-data' },
-      });
       communicationWithDoctor &&
         formData.append('communicationWithDoctor', communicationWithDoctor);
       howApplicationsAreReceived &&
@@ -192,6 +187,10 @@ export const updateUserInfo = createAsyncThunk(
           'howApplicationsAreReceived',
           howApplicationsAreReceived
         );
+
+      const response = await axios.put(`/users/current/update`, formData, {
+        headers: { 'content-type': 'multipart/form-data' },
+      });
 
       console.log('response', response);
 
