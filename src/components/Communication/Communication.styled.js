@@ -2,25 +2,27 @@ import { Field } from 'formik';
 import { styled } from 'styled-components';
 
 export const CommunicationWrap = styled.div`
-  width: max-content;
-  margin-top: 40px;
+  width: 100%;
 `;
 
 export const StyledLegend = styled.legend`
-  color: ${({ theme }) => theme.color.secondary};
+  color: ${({ theme }) => theme.color.text};
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 20px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
 
+  text-align: end;
+
   > span {
-    color: red;
+    color: ${({ theme }) => theme.color.text};
   }
 `;
 
 export const CommunicationWithDoctorLabel = styled.label`
-  display: flex;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
   gap: 50px;
 `;
 
@@ -40,7 +42,7 @@ export const CheckboxField = styled(Field)`
 `;
 
 export const CheckboxLabel = styled.label`
-  color: ${({ theme }) => theme.color.secondary};
+  color: ${({ theme }) => theme.color.text};
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 16px;
   font-style: normal;
@@ -50,7 +52,7 @@ export const CheckboxLabel = styled.label`
 
 export const HowApplicationsAreReceivedLabel = styled.label`
   margin-top: 40px;
-  display: flex;
+  display: grid;
   gap: 50px;
-  justify-content: flex-end;
+  grid-template-columns: 1fr 1fr;
 `;
