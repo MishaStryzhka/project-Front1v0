@@ -41,7 +41,7 @@ const Communication = () => {
   const onSubmit = value => {
     console.log('value', value);
 
-    // dispatch(updateUserInfo(value));
+    dispatch(updateUserInfo(value));
   };
 
   return (
