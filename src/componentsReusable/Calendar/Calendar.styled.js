@@ -127,14 +127,18 @@ color:rgba(0, 24, 92, 1);
   color 250ms cubic-bezier(0.4, 0, 0.2, 1),
 }
 
-.react-calendar__month-view__days__day:hover{
+/* .react-calendar__month-view__days__day:hover{
   background-color:  #DEFFD9;
   color:rgba(0, 24, 92, 1);
   border-radius:12px;
   transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1), 
   color 250ms cubic-bezier(0.4, 0, 0.2, 1),
-  border-radius 250ms cubic-bezier(0.4, 0, 0.2, 1);
-}
+  border-radius 250ms cubic-bezier(0.4, 0, 0.2, 1); */
 
+  .component:hover{
+  background-color:  #DEFFD9;
+  color:rgba(0, 24, 92, 1);
+  border-radius:12px;
+  }
 `
 
