@@ -4,12 +4,16 @@ import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { Header, MainContainer, StyledPageContainer } from './UserPage.styled';
 import Title from 'componentsReusable/Titles/Title/Title';
+import { useAuth } from 'hooks';
 
 export const UserPage = () => {
+  const auth = useAuth();
+
   const location = useLocation();
   const navigate = useNavigate();
 
-  const { user } = location.state;
+  const user = location.state.user || auth.user;
+
   return (
     <Container>
       <StyledPageContainer>
