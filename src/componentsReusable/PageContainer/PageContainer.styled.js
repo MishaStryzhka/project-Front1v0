@@ -7,5 +7,5 @@ export const StyledPageContainer = styled.div`
   gap: 40px;
   height: 100%;
   box-sizing: border-box;
-  padding: 40px 0;
+  padding: 40px 20px;
 `;

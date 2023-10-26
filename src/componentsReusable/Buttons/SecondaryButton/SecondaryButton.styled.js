@@ -1,6 +1,9 @@
+import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-export const Button = styled.button`
+export const Button = styled(({ type, ...props }) =>
+  type === 'navLink' ? <NavLink {...props} /> : <button {...props} />
+)`
   cursor: ${({ disabled }) => !disabled && 'pointer'};
 
   display: flex;
@@ -29,16 +32,20 @@ export const Button = styled.button`
   font-weight: 400;
   line-height: normal;
 
-  &:hover {
-    background: ${({ theme, $styledType }) =>
+  ${({ disabled, theme, $styledType }) =>
+    !disabled &&
+    `&:hover {
+    background: ${
       $styledType === 'green'
         ? theme.color.secondaryColorHover
-        : theme.color.CTAHover};
+        : theme.color.CTAHover
+    };
   }
   &:focus {
-    background: ${({ theme, $styledType }) =>
+    background: ${
       $styledType === 'green'
         ? theme.color.secondaryColorPressed
-        : theme.color.CTAPressed};
-  }
+        : theme.color.CTAPressed
+    };
+  }`}
 `;
