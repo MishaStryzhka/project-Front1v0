@@ -6,6 +6,7 @@ export const StyledSideBarPage = styled.div`
   row-gap: 40px;
 
   height: max-content;
+  width: 380px;
   box-sizing: border-box;
   padding: 40px 50px;
   border-radius: 20px;

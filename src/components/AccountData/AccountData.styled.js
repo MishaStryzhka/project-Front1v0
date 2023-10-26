@@ -9,10 +9,10 @@ export const ButtonWrapper = styled.div`
   padding-top: 40px;
   margin: 0 auto;
 
-  width: 800px;
+  // width: 900px;
 
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
 `;
 
 export const BtnBox = styled.div`

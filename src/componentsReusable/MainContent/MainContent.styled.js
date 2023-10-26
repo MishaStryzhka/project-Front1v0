@@ -5,6 +5,7 @@ export const StyledMainContent = styled.div`
   flex-direction: column;
 
   width: ${({ width }) => width};
+  // box-sizing: border-box;
 
   background: ${({ theme }) => theme.color.background1};
   border-radius: 20px;

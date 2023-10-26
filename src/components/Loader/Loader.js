@@ -12,7 +12,7 @@ import { LoaderWraper, Spinner } from './Loader.styled';
 // ============================
 
 const Loader = ({ width, height, $urlImage, colorParent, className }) => {
-  console.log('urlImage', $urlImage);
+  // console.log('urlImage', $urlImage);
 
   return (
     <LoaderWraper

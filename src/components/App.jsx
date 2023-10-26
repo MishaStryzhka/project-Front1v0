@@ -16,6 +16,7 @@ import DirectionWork from './DirectionWork/DirectionWork';
 import Communication from './Communication/Communication';
 import DirectionPage from 'pages/mainPages/DirectionPage/DirectionPage';
 import ProblemPage from 'pages/mainPages/ProblemPage/ProblemPage';
+import MyPage from 'pages/secondaryPages/UserPage/MyPage/MyPage';
 import UserPage from 'pages/secondaryPages/UserPage/UserPage/UserPage';
 
 const RegisterPage = lazy(() =>
@@ -85,12 +86,12 @@ export const App = () => {
               />
             }
           />
-          {/* <Route
-            path="/user/:id"
+          <Route
+            path="/in/:id"
             element={
               <PrivateRoute redirectTo="/login" component={<UserPage />} />
             }
-          /> */}
+          />
           {/* <Route
             path="/user/patient"
             element={
@@ -100,7 +101,7 @@ export const App = () => {
           <Route
             path="/user"
             element={
-              <PrivateRoute redirectTo="/login" component={<UserPage />} />
+              <PrivateRoute redirectTo="/login" component={<MyPage />} />
             }
           >
             <Route index element={<AccountData />} />

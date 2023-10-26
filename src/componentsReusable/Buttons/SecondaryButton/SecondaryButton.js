@@ -10,6 +10,8 @@ const SecondaryButton = ({
   type = 'button',
   onClick,
   form,
+  to,
+  state,
 }) => {
   return (
     <Button
@@ -18,6 +20,8 @@ const SecondaryButton = ({
       $styledType={$styledType}
       onClick={onClick}
       disabled={disabled}
+      to={to}
+      state={state}
     >
       {children}
     </Button>

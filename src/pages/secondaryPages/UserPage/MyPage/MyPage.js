@@ -1,11 +1,11 @@
 import Container from 'componentsReusable/Container/Container';
 import PageContainer from 'componentsReusable/PageContainer/PageContainer';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
-import { StyledNavLink } from './UserPage.styled';
+import { StyledNavLink } from './MyPage.styled';
 import { useAuth } from 'hooks';
 import { Outlet } from 'react-router-dom';
 
-const UserPage = () => {
+const MyPage = () => {
   const { userType } = useAuth();
 
   return (
@@ -27,7 +27,7 @@ const UserPage = () => {
   );
 };
 
-export default UserPage;
+export default MyPage;
 
 //==================================
 // const { id } = useParams();
@@ -75,4 +75,4 @@ export default UserPage;
 
 //   console.log('user', user);
 
-//   return <p>UserPage</p>;
+//   return <p>MyPage</p>;
