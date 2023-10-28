@@ -17,12 +17,13 @@ import {
 import { ButtonWrapper } from 'components/AccountData/AccountData.styled';
 
 const PersonalData = () => {
-  const { user, userType, response, error } = useAuth();
+  const [typeSubmit, setTypeSubmit] = useState('save'); // 'save', 'preview', 'publish'
+
+  const { userType, response, error } = useAuth();
   const dispatch = useDispatch();
   const [step, setStep] = useState('one');
-  const [changeInfoValue, setChangeInfoValue] = useState(false);
   const steps = ['one', 'two', 'three'];
-  console.log('changeInfoValue', changeInfoValue);
+  // console.log('changeInfoValue', changeInfoValue);
 
   setTimeout(() => {
     response && dispatch(resetResponse(null));
@@ -32,9 +33,9 @@ const PersonalData = () => {
     error && dispatch(resetError(null));
   }, 2000);
 
-  const viewAsUser = () => {
-    console.log('Переглянути картку як користувач');
-  };
+  // const viewAsUser = () => {
+  //   console.log('Переглянути картку як користувач');
+  // };
 
   return (
     <div>
@@ -46,7 +47,7 @@ const PersonalData = () => {
           <FormPersonalDataDoctor
             step={step}
             setStep={setStep}
-            onChangeInfoUser={value => setChangeInfoValue(value)}
+            typeSubmit={typeSubmit}
           />
         )}
         {userType === 'patient' && <FormPersonalDataPatient />}
@@ -71,11 +72,11 @@ const PersonalData = () => {
       <ButtonWrapper>
         <SecondaryButton
           $styledType="green"
-          type="navLink"
-          onClick={viewAsUser}
-          // disabled={!isDoctorFormValid}
-          to={`/in/${user?.userID}`}
-          state={{ from: 'qwe', user: changeInfoValue || user }}
+          type="submit"
+          onClick={() => {
+            setTypeSubmit('preview');
+          }}
+          form="formPersonalData"
         >
           Переглянути картку як користувач
         </SecondaryButton>
@@ -89,6 +90,9 @@ const PersonalData = () => {
         <SecondaryButton
           $styledType="rose"
           type="submit"
+          onClick={() => {
+            setTypeSubmit('publish');
+          }}
           form="formPersonalData"
         >
           Опублікувати

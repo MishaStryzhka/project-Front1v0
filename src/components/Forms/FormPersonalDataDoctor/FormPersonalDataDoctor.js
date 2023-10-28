@@ -56,7 +56,7 @@ import InputAddress from 'componentsReusable/Inputs/InputAddress/InputAddress';
 import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
 import { hoursOfWorkListValue } from 'helpers/hoursOfWorkList';
 
-const FormPersonalDataDoctor = ({ step, setStep, onChangeInfoUser }) => {
+const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
   const dispatch = useDispatch();
   const { user, currentTheme } = useAuth();
   const [avatar, setAvatar] = useState(null);
@@ -66,9 +66,6 @@ const FormPersonalDataDoctor = ({ step, setStep, onChangeInfoUser }) => {
   const [isOpenModalAddAvatar, setIsOpenModalAddAvatar] = useState(false);
   const [isOpenModalAddSertificate, setIsOpenModalAddSertificate] =
     useState(false);
-
-  // const [step, setStep] = useState('one');
-  // const steps = ['one', 'two', 'three'];
 
   const isChangeAvatarUrl = e => {
     const { files } = e.currentTarget;
@@ -83,6 +80,10 @@ const FormPersonalDataDoctor = ({ step, setStep, onChangeInfoUser }) => {
   };
 
   const onSubmit = value => {
+    console.log('typeSubmit', typeSubmit);
+
+    console.log('WWW');
+
     const {
       lastName,
       firstName,
@@ -194,9 +195,9 @@ const FormPersonalDataDoctor = ({ step, setStep, onChangeInfoUser }) => {
           },
         ],
         certificates: user.certificates || [],
-        instagram: user.links.instagram || '',
-        tiktok: user.links.tiktok || '',
-        otherLink: user.links.otherLink || '',
+        instagram: user?.links?.instagram || '',
+        tiktok: user?.links?.tiktok || '',
+        otherLink: user?.links?.otherLink || '',
       }}
       validationSchema={validationDoctorPageSchema}
       onSubmit={values => {
@@ -205,6 +206,7 @@ const FormPersonalDataDoctor = ({ step, setStep, onChangeInfoUser }) => {
     >
       {e => {
         const {
+          // initialValues,
           values,
           errors,
           touched,
@@ -217,9 +219,15 @@ const FormPersonalDataDoctor = ({ step, setStep, onChangeInfoUser }) => {
           setSubmitting,
         } = e;
 
-        console.log('touched', touched);
+        // console.log('QQQ', e);
 
-        Object.keys(touched).length !== 0 && onChangeInfoUser(values);
+        // Object.keys(touched).length !== 0 && onChangeInfoUser(values);
+
+        // if (JSON.stringify(initialValues) !== JSON.stringify(values)) {
+        //   console.log('WWW');
+
+        //   onChangeInfoUser(values);
+        // }
 
         const handleYearsChange = (index, newYears) => {
           let newEducations = [...values.educations];
@@ -232,7 +240,11 @@ const FormPersonalDataDoctor = ({ step, setStep, onChangeInfoUser }) => {
 
         return (
           <>
-            <Form id="formPersonalData" isRequiredFields>
+            <Form
+              id="formPersonalData"
+              isRequiredFields
+              // onChange={console.log('first')}
+            >
               {step === 'one' && (
                 <InputWrapStepOne>
                   <AvatarLabel as={Label}>
