@@ -31,9 +31,14 @@ import { resetError, resetResponse } from 'redux/auth/slice';
 import { problemsListValue } from 'helpers/problemsList';
 import { validationDoctorDirectionWork } from 'schemas';
 import { TextError } from 'components/Forms/FormLogin/FormLogin.styled';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const DirectionWork = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const [typeSubmit, setTypeSubmit] = useState('save'); // 'save', 'preview', 'publish'
   let { user, response, userType, error } = useAuth();
 
   setTimeout(() => {
@@ -44,12 +49,35 @@ const DirectionWork = () => {
     error && dispatch(resetError(null));
   }, 2000);
 
-  const onSubmit = value => {
-    dispatch(updateUserInfo(value));
-  };
-
-  const handlePublish = () => {
-    console.log('handlePublish', handlePublish);
+  const onSubmit = ({ directionsOfWork, problemsItSolves }) => {
+    if (typeSubmit === 'preview') {
+      navigate(`/in/${user?.userID}`, {
+        // replace: true,
+        state: {
+          user: {
+            ...user,
+            directionsOfWork,
+            problemsItSolves,
+          },
+          back: location.pathname,
+        },
+      });
+    } else if (typeSubmit === 'publish') {
+      dispatch(
+        updateUserInfo({
+          directionsOfWork,
+          problemsItSolves,
+          isPublish: user.isPublish ? !user.isPublish : true,
+        })
+      );
+    } else {
+      dispatch(
+        updateUserInfo({
+          directionsOfWork,
+          problemsItSolves,
+        })
+      );
+    }
   };
 
   return (
@@ -60,8 +88,14 @@ const DirectionWork = () => {
         </Title>
         <Formik
           initialValues={{
-            directionsOfWork: user.directionsOfWork || [],
-            problemsItSolves: user.problemsItSolves || {},
+            directionsOfWork:
+              location?.state?.user?.directionsOfWork ||
+              user.directionsOfWork ||
+              [],
+            problemsItSolves:
+              location?.state?.user?.problemsItSolves ||
+              user.problemsItSolves ||
+              {},
           }}
           validationSchema={validationDoctorDirectionWork}
           onSubmit={onSubmit}
@@ -80,9 +114,8 @@ const DirectionWork = () => {
                 id="formDirectionWork"
                 onSubmit={handleSubmit}
                 isRequiredFields
-                handlePublish={handlePublish}
               >
-                <DirectionOfWorkLabel>
+                <DirectionOfWorkLabel htmlFor="directionsOfWork">
                   <StyledLegend>
                     Напрямки роботи <span>*</span>
                   </StyledLegend>
@@ -200,11 +233,31 @@ const DirectionWork = () => {
       </MainContent>
       <StyledButtonWrapper>
         <SecondaryButton
-          $styledType="rose"
+          $styledType="green"
+          type="submit"
+          onClick={() => {
+            setTypeSubmit('preview');
+          }}
+          form="formDirectionWork"
+        >
+          Переглянути картку як користувач
+        </SecondaryButton>
+        <SecondaryButton
+          $styledType="green"
           type="submit"
           form="formDirectionWork"
         >
           Зберегти
+        </SecondaryButton>
+        <SecondaryButton
+          $styledType="rose"
+          type="submit"
+          onClick={() => {
+            setTypeSubmit('publish');
+          }}
+          form="formDirectionWork"
+        >
+          {user.isPublish ? 'Зняти публікацію' : 'Опублікувати'}
         </SecondaryButton>
       </StyledButtonWrapper>
       {response && (

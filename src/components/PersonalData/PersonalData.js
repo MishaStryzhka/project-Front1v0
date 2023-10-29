@@ -4,7 +4,7 @@ import { useAuth } from 'hooks';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import Title from 'componentsReusable/Titles/Title/Title';
 import SecondaryButton from 'componentsReusable/Buttons/SecondaryButton/SecondaryButton';
-import { Notify } from './PersonalData.styled';
+import { Notify, StyledButtonWrapper } from './PersonalData.styled';
 import IconDone from 'images/icons/IconDone';
 import { useDispatch } from 'react-redux';
 import { resetError, resetResponse } from 'redux/auth/slice';
@@ -14,15 +14,15 @@ import {
   Pagination,
   PaginationItem,
 } from 'components/Forms/FormPersonalDataDoctor/FormPersonalDataDoctor.styled';
-import { ButtonWrapper } from 'components/AccountData/AccountData.styled';
 
 const PersonalData = () => {
+  const [typeSubmit, setTypeSubmit] = useState('save'); // 'save', 'preview', 'publish'
+
   const { user, userType, response, error } = useAuth();
   const dispatch = useDispatch();
   const [step, setStep] = useState('one');
-  const [changeInfoValue, setChangeInfoValue] = useState(false);
   const steps = ['one', 'two', 'three'];
-  console.log('changeInfoValue', changeInfoValue);
+  // console.log('changeInfoValue', changeInfoValue);
 
   setTimeout(() => {
     response && dispatch(resetResponse(null));
@@ -31,10 +31,6 @@ const PersonalData = () => {
   setTimeout(() => {
     error && dispatch(resetError(null));
   }, 2000);
-
-  const viewAsUser = () => {
-    console.log('Переглянути картку як користувач');
-  };
 
   return (
     <div>
@@ -46,7 +42,7 @@ const PersonalData = () => {
           <FormPersonalDataDoctor
             step={step}
             setStep={setStep}
-            onChangeInfoUser={value => setChangeInfoValue(value)}
+            typeSubmit={typeSubmit}
           />
         )}
         {userType === 'patient' && <FormPersonalDataPatient />}
@@ -68,14 +64,14 @@ const PersonalData = () => {
           );
         })}
       </Pagination>
-      <ButtonWrapper>
+      <StyledButtonWrapper>
         <SecondaryButton
           $styledType="green"
-          type="navLink"
-          onClick={viewAsUser}
-          // disabled={!isDoctorFormValid}
-          to={`/in/${user?.userID}`}
-          state={{ from: 'qwe', user: changeInfoValue || user }}
+          type="submit"
+          onClick={() => {
+            setTypeSubmit('preview');
+          }}
+          form="formPersonalData"
         >
           Переглянути картку як користувач
         </SecondaryButton>
@@ -89,11 +85,14 @@ const PersonalData = () => {
         <SecondaryButton
           $styledType="rose"
           type="submit"
+          onClick={() => {
+            setTypeSubmit('publish');
+          }}
           form="formPersonalData"
         >
-          Опублікувати
+          {user.isPublish ? 'Зняти публікацію' : 'Опублікувати'}
         </SecondaryButton>
-      </ButtonWrapper>
+      </StyledButtonWrapper>
       {response && (
         <Notify $show={response.status === 200}>
           <IconDone width="22px" height="22px" /> Дані збережено

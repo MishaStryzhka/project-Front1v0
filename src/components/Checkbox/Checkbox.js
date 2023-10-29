@@ -4,14 +4,17 @@ import IconCheckboxChack from 'images/icons/IconCheckboxChack';
 
 const Checkbox = e => {
   const {
+    id,
     onChange,
     value,
     field: { name },
   } = e;
 
+  console.log('e', e);
+
   return (
     <StyledLabel onChange={onChange}>
-      <StyledField type={e.type} name={e.field.name} value={value} />
+      <StyledField type={e.type} name={e.field.name} value={value} id={id} />
 
       {Array.isArray(e.form.values[name]) ? (
         <>

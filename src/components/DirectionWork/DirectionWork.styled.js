@@ -70,9 +70,13 @@ export const CheckboxLabel = styled.label`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
-export const ProblemsItSolvesLabel = styled(Label)`
+export const ProblemsItSolvesLabel = styled.div`
   width: 100%;
 `;
 

@@ -25,10 +25,15 @@ import { resetError, resetResponse } from 'redux/auth/slice';
 import { validationCommunication } from 'schemas';
 import { TextError } from 'componentsReusable/Inputs/Input/Input.styled';
 import { updateUserInfo } from 'redux/auth/operations';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Communication = () => {
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
   let { user, response, userType, error } = useAuth();
+  const [typeSubmit, setTypeSubmit] = useState('save'); // 'save', 'preview', 'publish'
 
   setTimeout(() => {
     response && dispatch(resetResponse(null));
@@ -38,10 +43,38 @@ const Communication = () => {
     error && dispatch(resetError(null));
   }, 2000);
 
-  const onSubmit = value => {
-    console.log('value', value);
-
-    dispatch(updateUserInfo(value));
+  const onSubmit = ({
+    communicationWithDoctor,
+    howApplicationsAreReceived,
+  }) => {
+    if (typeSubmit === 'preview') {
+      navigate(`/in/${user?.userID}`, {
+        // replace: true,
+        state: {
+          user: {
+            ...user,
+            communicationWithDoctor,
+            howApplicationsAreReceived,
+          },
+          back: location.pathname,
+        },
+      });
+    } else if (typeSubmit === 'publish') {
+      dispatch(
+        updateUserInfo({
+          communicationWithDoctor,
+          howApplicationsAreReceived,
+          isPublish: user.isPublish ? !user.isPublish : true,
+        })
+      );
+    } else {
+      dispatch(
+        updateUserInfo({
+          communicationWithDoctor,
+          howApplicationsAreReceived,
+        })
+      );
+    }
   };
 
   return (
@@ -52,8 +85,14 @@ const Communication = () => {
         </Title>
         <Formik
           initialValues={{
-            communicationWithDoctor: user.communicationWithDoctor || [],
-            howApplicationsAreReceived: user.howApplicationsAreReceived || [],
+            communicationWithDoctor:
+              location?.state?.user?.communicationWithDoctor ||
+              user.communicationWithDoctor ||
+              [],
+            howApplicationsAreReceived:
+              location?.state?.user?.howApplicationsAreReceived ||
+              user.howApplicationsAreReceived ||
+              [],
           }}
           validationSchema={validationCommunication}
           onSubmit={onSubmit}
@@ -68,7 +107,7 @@ const Communication = () => {
             handleBlur,
             handleSubmit,
           }) => {
-            // console.log('values', values);
+            console.log('values', values);
 
             return (
               <Form
@@ -195,11 +234,31 @@ const Communication = () => {
       </MainContent>
       <StyledButtonWrapper>
         <SecondaryButton
-          $styledType="rose"
+          $styledType="green"
+          type="submit"
+          onClick={() => {
+            setTypeSubmit('preview');
+          }}
+          form="formCommunication"
+        >
+          Переглянути картку як користувач
+        </SecondaryButton>
+        <SecondaryButton
+          $styledType="green"
           type="submit"
           form="formCommunication"
         >
           Зберегти
+        </SecondaryButton>
+        <SecondaryButton
+          $styledType="rose"
+          type="submit"
+          onClick={() => {
+            setTypeSubmit('publish');
+          }}
+          form="formCommunication"
+        >
+          {user.isPublish ? 'Зняти публікацію' : 'Опублікувати'}
         </SecondaryButton>
       </StyledButtonWrapper>
       {response && (

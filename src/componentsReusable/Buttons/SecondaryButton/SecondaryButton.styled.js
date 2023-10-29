@@ -2,7 +2,11 @@ import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
 
 export const Button = styled(({ type, ...props }) =>
-  type === 'navLink' ? <NavLink {...props} /> : <button {...props} />
+  type === 'navLink' ? (
+    <NavLink {...props} />
+  ) : (
+    <button type={type} {...props} />
+  )
 )`
   cursor: ${({ disabled }) => !disabled && 'pointer'};
 

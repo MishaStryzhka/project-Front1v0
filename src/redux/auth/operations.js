@@ -151,6 +151,7 @@ export const updateUserInfo = createAsyncThunk(
       problemsItSolves,
       communicationWithDoctor,
       howApplicationsAreReceived,
+      isPublish,
     },
     thunkAPI
   ) => {
@@ -187,16 +188,17 @@ export const updateUserInfo = createAsyncThunk(
           'howApplicationsAreReceived',
           howApplicationsAreReceived
         );
+      formData.append('isPublish', isPublish || false);
 
       const response = await axios.put(`/users/current/update`, formData, {
         headers: { 'content-type': 'multipart/form-data' },
       });
 
-      console.log('response', response);
+      // console.log('response', response);
 
       return { user: response.data.user, status: response.status };
     } catch (error) {
-      console.log('error', error);
+      // console.log('error', error);
 
       return thunkAPI.rejectWithValue({
         message: error.message,
