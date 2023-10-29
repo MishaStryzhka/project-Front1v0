@@ -10,8 +10,6 @@ const Checkbox = e => {
     field: { name },
   } = e;
 
-  console.log('e', e);
-
   return (
     <StyledLabel onChange={onChange}>
       <StyledField type={e.type} name={e.field.name} value={value} id={id} />

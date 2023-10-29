@@ -2,7 +2,6 @@ import FormPersonalDataPatient from 'components/Forms/FormPersonalDataPatient/Fo
 import FormPersonalDataDoctor from 'components/Forms/FormPersonalDataDoctor/FormPersonalDataDoctor';
 import { useAuth } from 'hooks';
 import MainContent from 'componentsReusable/MainContent/MainContent';
-import Title from 'componentsReusable/Titles/Title/Title';
 import SecondaryButton from 'componentsReusable/Buttons/SecondaryButton/SecondaryButton';
 import { Notify, StyledButtonWrapper } from './PersonalData.styled';
 import IconDone from 'images/icons/IconDone';
@@ -35,9 +34,9 @@ const PersonalData = () => {
   return (
     <div>
       <MainContent width={'800px'}>
-        <Title>
+        {/* <Title>
           Особистий кабінет {userType === 'doctor' ? 'лікаря' : 'пацієнта'}
-        </Title>
+        </Title> */}
         {userType === 'doctor' && (
           <FormPersonalDataDoctor
             step={step}

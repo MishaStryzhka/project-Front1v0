@@ -12,7 +12,6 @@ import {
 } from './Communication.styled';
 import Checkbox from 'components/Checkbox/Checkbox';
 import MainContent from 'componentsReusable/MainContent/MainContent';
-import Title from 'componentsReusable/Titles/Title/Title';
 import { useAuth } from 'hooks';
 import {
   Notify,
@@ -32,7 +31,7 @@ const Communication = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  let { user, response, userType, error } = useAuth();
+  let { user, response, error } = useAuth();
   const [typeSubmit, setTypeSubmit] = useState('save'); // 'save', 'preview', 'publish'
 
   setTimeout(() => {
@@ -80,9 +79,9 @@ const Communication = () => {
   return (
     <div>
       <MainContent width={'800px'}>
-        <Title>
+        {/* <Title>
           Особистий кабінет {userType === 'doctor' ? 'лікаря' : 'пацієнта'}
-        </Title>
+        </Title> */}
         <Formik
           initialValues={{
             communicationWithDoctor:

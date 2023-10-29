@@ -6,13 +6,10 @@ export const StyledForm = styled(Form)`
   gap: 40px;
   flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-
-  padding-top: 40px;
 `;
 
 export const FormDescription = styled.p`
-  padding-top: 40px;
+  // padding-top: 40px;
 
   color: ${({ theme }) => theme.color.text};
 

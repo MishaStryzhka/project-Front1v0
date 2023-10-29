@@ -64,7 +64,7 @@ export const CheckboxField = styled(Field)`
 `;
 
 export const CheckboxLabel = styled.label`
-  color: ${({ theme }) => theme.color.secondary};
+  color: ${({ theme }) => theme.color.text};
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 16px;
   font-style: normal;
@@ -85,7 +85,7 @@ export const CategoryTitle = styled.h3`
 
   font-family: Rubik;
   font-size: 20px;
-  font-style: normal;
+  font-style: bold;
   font-weight: 400;
   line-height: normal;
 `;

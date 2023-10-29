@@ -18,6 +18,7 @@ import DirectionPage from 'pages/mainPages/DirectionPage/DirectionPage';
 import ProblemPage from 'pages/mainPages/ProblemPage/ProblemPage';
 import MyPage from 'pages/secondaryPages/UserPage/MyPage/MyPage';
 import UserPage from 'pages/secondaryPages/UserPage/UserPage/UserPage';
+import Chat from './Chat/Chat';
 
 const RegisterPage = lazy(() =>
   import('pages/authPages/RegisterPage/RegisterPage')
@@ -109,6 +110,7 @@ export const App = () => {
             <Route path="personalData/" element={<PersonalData />} />
             <Route path="directionWork/" element={<DirectionWork />} />
             <Route path="communication/" element={<Communication />} />
+            <Route path="chat/" element={<Chat />} />
           </Route>
         </Route>
       </Routes>

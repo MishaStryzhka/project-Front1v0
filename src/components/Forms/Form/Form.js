@@ -11,15 +11,18 @@ const Form = ({
   viewCard,
   sendRequest,
   id,
+  className,
 }) => {
   return (
     <>
-      {isRequiredFields && (
-        <FormDescription>
-          <span>*</span>обов’язкові поля
-        </FormDescription>
-      )}
-      <StyledForm id={id}>{children}</StyledForm>
+      <StyledForm id={id} className={className}>
+        {isRequiredFields && (
+          <FormDescription>
+            <span>*</span>обов’язкові поля
+          </FormDescription>
+        )}
+        {children}
+      </StyledForm>
     </>
   );
 };
