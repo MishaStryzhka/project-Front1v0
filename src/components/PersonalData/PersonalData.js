@@ -4,7 +4,7 @@ import { useAuth } from 'hooks';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import Title from 'componentsReusable/Titles/Title/Title';
 import SecondaryButton from 'componentsReusable/Buttons/SecondaryButton/SecondaryButton';
-import { Notify } from './PersonalData.styled';
+import { Notify, StyledButtonWrapper } from './PersonalData.styled';
 import IconDone from 'images/icons/IconDone';
 import { useDispatch } from 'react-redux';
 import { resetError, resetResponse } from 'redux/auth/slice';
@@ -14,12 +14,11 @@ import {
   Pagination,
   PaginationItem,
 } from 'components/Forms/FormPersonalDataDoctor/FormPersonalDataDoctor.styled';
-import { ButtonWrapper } from 'components/AccountData/AccountData.styled';
 
 const PersonalData = () => {
   const [typeSubmit, setTypeSubmit] = useState('save'); // 'save', 'preview', 'publish'
 
-  const { userType, response, error } = useAuth();
+  const { user, userType, response, error } = useAuth();
   const dispatch = useDispatch();
   const [step, setStep] = useState('one');
   const steps = ['one', 'two', 'three'];
@@ -32,10 +31,6 @@ const PersonalData = () => {
   setTimeout(() => {
     error && dispatch(resetError(null));
   }, 2000);
-
-  // const viewAsUser = () => {
-  //   console.log('Переглянути картку як користувач');
-  // };
 
   return (
     <div>
@@ -69,7 +64,7 @@ const PersonalData = () => {
           );
         })}
       </Pagination>
-      <ButtonWrapper>
+      <StyledButtonWrapper>
         <SecondaryButton
           $styledType="green"
           type="submit"
@@ -95,9 +90,9 @@ const PersonalData = () => {
           }}
           form="formPersonalData"
         >
-          Опублікувати
+          {user.isPublish ? 'Зняти публікацію' : 'Опублікувати'}
         </SecondaryButton>
-      </ButtonWrapper>
+      </StyledButtonWrapper>
       {response && (
         <Notify $show={response.status === 200}>
           <IconDone width="22px" height="22px" /> Дані збережено

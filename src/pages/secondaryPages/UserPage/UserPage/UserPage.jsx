@@ -7,18 +7,32 @@ import Title from 'componentsReusable/Titles/Title/Title';
 import { useAuth } from 'hooks';
 
 export const UserPage = () => {
-  const auth = useAuth();
+  let { user } = useAuth();
 
   const location = useLocation();
   const navigate = useNavigate();
 
-  const user = location.state.user || auth.user;
+  console.log('location', location);
+
+  if (location?.state?.user) {
+    user = location?.state?.user;
+  }
 
   return (
     <Container>
       <StyledPageContainer>
         <Header>
-          <button type="button" onClick={() => navigate(-1)}>
+          <button
+            type="button"
+            onClick={() =>
+              navigate(location.state.back, {
+                // replace: true,
+                state: {
+                  user: location?.state?.user,
+                },
+              })
+            }
+          >
             Назад
           </button>
           <Title>{`${user.lastName} ${user.firstName} ${user.patronymic}`}</Title>

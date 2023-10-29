@@ -55,9 +55,13 @@ import IconTikTok from 'images/icons/IconTikTok';
 import InputAddress from 'componentsReusable/Inputs/InputAddress/InputAddress';
 import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
 import { hoursOfWorkListValue } from 'helpers/hoursOfWorkList';
+import { useLocation, useNavigate } from 'react-router-dom';
+import IconSocialMedia from 'images/icons/IconSocialMedia';
 
 const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { user, currentTheme } = useAuth();
   const [avatar, setAvatar] = useState(null);
   const [sertificatePreview, setSertificatePreview] = useState(null);
@@ -81,8 +85,6 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
 
   const onSubmit = value => {
     console.log('typeSubmit', typeSubmit);
-
-    console.log('WWW');
 
     const {
       lastName,
@@ -108,23 +110,68 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
     if (tiktok) links.tiktok = tiktok;
     if (otherLink) links.otherLink = otherLink;
 
-    dispatch(
-      updateUserInfo({
-        avatar: avatarUrl,
-        lastName,
-        firstName,
-        patronymic,
-        phones,
-        contactMethods,
-        dateOfBirthday,
-        experienceYears,
-        educations,
-        certificates,
-        links,
-        jobs,
-        paymentMethods,
-      })
-    );
+    if (typeSubmit === 'preview') {
+      navigate(`/in/${user?.userID}`, {
+        // replace: true,
+        state: {
+          user: {
+            lastName,
+            firstName,
+            patronymic,
+            phones,
+            contactMethods,
+            dateOfBirthday,
+            experienceYears,
+            avatarUrl,
+            educations,
+            certificates,
+            instagram,
+            tiktok,
+            otherLink,
+            jobs,
+            paymentMethods,
+          },
+          back: location.pathname,
+        },
+      });
+    } else if (typeSubmit === 'publish') {
+      dispatch(
+        updateUserInfo({
+          avatar: avatarUrl,
+          lastName,
+          firstName,
+          patronymic,
+          phones,
+          contactMethods,
+          dateOfBirthday,
+          experienceYears,
+          educations,
+          certificates,
+          links,
+          jobs,
+          paymentMethods,
+          isPublish: user.isPublish ? !user.isPublish : true,
+        })
+      );
+    } else {
+      dispatch(
+        updateUserInfo({
+          avatar: avatarUrl,
+          lastName,
+          firstName,
+          patronymic,
+          phones,
+          contactMethods,
+          dateOfBirthday,
+          experienceYears,
+          educations,
+          certificates,
+          links,
+          jobs,
+          paymentMethods,
+        })
+      );
+    }
   };
 
   // const handleNextStep = () => {
@@ -172,32 +219,44 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
   return (
     <Formik
       initialValues={{
-        avatarUrl: user.avatar || '',
-        lastName: user.lastName || '',
-        firstName: user.firstName || '',
-        patronymic: user.patronymic || '',
-        dateOfBirthday: user.dateOfBirthday || '',
-        phones: user.phones || [],
-        experienceYears: user.experienceYears || '0',
+        avatarUrl: location?.state?.user?.avatar || user.avatar || '',
+        lastName: location?.state?.user?.lastName || user.lastName || '',
+        firstName: location?.state?.user?.firstName || user.firstName || '',
+        patronymic: location?.state?.user?.patronymic || user.patronymic || '',
+        dateOfBirthday:
+          location?.state?.user.dateOfBirthday || user.dateOfBirthday || '',
+        phones: location?.state?.user?.phones || user.phones || [],
+        experienceYears:
+          location?.state?.user?.experienceYears || user.experienceYears || '0',
         educations:
-          user.educations.length === 0
+          location?.state?.user?.educations || user.educations.length === 0
             ? [{ _id: nanoid(), name: '', years: { begin: 2014, end: 2019 } }]
             : user.educations,
-        paymentMethods: user.paymentMethods || [],
-        jobs: user.jobs || [
-          {
-            _id: nanoid(),
-            name: '',
-            cityArea: '',
-            address: '',
-            workSchedule: '',
-            receptionHours: [{ begin: '', end: '' }],
-          },
-        ],
-        certificates: user.certificates || [],
-        instagram: user?.links?.instagram || '',
-        tiktok: user?.links?.tiktok || '',
-        otherLink: user?.links?.otherLink || '',
+        paymentMethods:
+          location?.state?.user?.paymentMethods || user.paymentMethods || [],
+        jobs: location?.state?.user?.jobs ||
+          user.jobs || [
+            {
+              _id: nanoid(),
+              name: '',
+              cityArea: '',
+              address: '',
+              workSchedule: '',
+              receptionHours: [{ begin: '', end: '' }],
+            },
+          ],
+        certificates:
+          location?.state?.user?.certificates || user.certificates || [],
+        instagram:
+          location?.state?.user?.links?.instagram ||
+          user?.links?.instagram ||
+          '',
+        tiktok:
+          location?.state?.user?.links?.tiktok || user?.links?.tiktok || '',
+        otherLink:
+          location?.state?.user?.links?.otherLink ||
+          user?.links?.otherLink ||
+          '',
       }}
       validationSchema={validationDoctorPageSchema}
       onSubmit={values => {
@@ -218,16 +277,6 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
           isSubmitting,
           setSubmitting,
         } = e;
-
-        // console.log('QQQ', e);
-
-        // Object.keys(touched).length !== 0 && onChangeInfoUser(values);
-
-        // if (JSON.stringify(initialValues) !== JSON.stringify(values)) {
-        //   console.log('WWW');
-
-        //   onChangeInfoUser(values);
-        // }
 
         const handleYearsChange = (index, newYears) => {
           let newEducations = [...values.educations];
@@ -524,7 +573,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
                   </LabelLink>
 
                   <LabelLink>
-                    <IconInstagram />
+                    <IconSocialMedia />
                     <Input
                       width="700px"
                       error={
