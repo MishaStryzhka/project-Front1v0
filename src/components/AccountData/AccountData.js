@@ -12,19 +12,18 @@ import { useState } from 'react';
 import {
   ButtonRefresh,
   ButtonWrapper,
+  StyledForm,
   StyledImputWrap,
 } from './AccountData.styled';
 import MainContent from 'componentsReusable/MainContent/MainContent';
-import Title from 'componentsReusable/Titles/Title/Title';
 import ModalDeleteAccount from 'components/Modals/ModalRemoveAccount/ModalRemoveAccount';
 import Input from 'componentsReusable/Inputs/Input/Input';
 import IconEdit from 'images/icons/IconEdit';
-import Form from 'components/Forms/Form/Form';
 
 const AccountData = () => {
   const [isOpenModal, setIsOpenModal] = useState(false);
 
-  let { user, userType, error } = useAuth();
+  let { user, error } = useAuth();
   const [onChange, setOnChange] = useState(null);
 
   const onSubmit = value => {
@@ -42,9 +41,9 @@ const AccountData = () => {
   return (
     <div>
       <MainContent width={'800px'}>
-        <Title>
+        {/* <Title>
           Особистий кабінет {userType === 'doctor' ? 'лікаря' : 'пацієнта'}
-        </Title>
+        </Title> */}
         <Formik
           initialValues={{
             email: user.email,
@@ -63,7 +62,7 @@ const AccountData = () => {
             handleSubmit,
           }) => {
             return (
-              <Form>
+              <StyledForm>
                 <StyledImputWrap>
                   <Label>
                     <Input
@@ -118,7 +117,7 @@ const AccountData = () => {
                     )}
                   </Label>
                 </StyledImputWrap>
-              </Form>
+              </StyledForm>
             );
           }}
         </Formik>

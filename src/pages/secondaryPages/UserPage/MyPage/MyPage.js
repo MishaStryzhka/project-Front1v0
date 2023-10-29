@@ -1,35 +1,45 @@
 import Container from 'componentsReusable/Container/Container';
-import PageContainer from 'componentsReusable/PageContainer/PageContainer';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
 import { StyledNavLink } from './MyPage.styled';
 import { useAuth } from 'hooks';
 import { Outlet } from 'react-router-dom';
+import {
+  MainContainer,
+  StyledPageContainer,
+} from '../UserPage/UserPage.styled';
+import HeaderPage from 'componentsReusable/HeaderPage/HeaderPage';
 
 const MyPage = () => {
   const { userType } = useAuth();
 
   return (
     <Container>
-      <PageContainer>
-        <SideBarPage>
-          <StyledNavLink to="accountData">Дані акаунту</StyledNavLink>
-          <StyledNavLink to="personalData">Особисті дані</StyledNavLink>
-          {userType === 'doctor' && (
-            <StyledNavLink to="directionWork">Напрямок роботи</StyledNavLink>
-          )}
-          {userType === 'doctor' && (
-            <StyledNavLink to="communication">Комунікація</StyledNavLink>
-          )}
-        </SideBarPage>
-        <Outlet />
-      </PageContainer>
+      <StyledPageContainer>
+        <HeaderPage
+          title={`Особистий кабінет ${
+            userType === 'doctor' ? 'лікаря' : 'пацієнта'
+          }`}
+        />
+        <MainContainer style={{ display: 'flex' }}>
+          <SideBarPage>
+            <StyledNavLink to="accountData">Дані акаунту</StyledNavLink>
+            <StyledNavLink to="personalData">Особисті дані</StyledNavLink>
+            {userType === 'doctor' && (
+              <StyledNavLink to="directionWork">Напрямок роботи</StyledNavLink>
+            )}
+            {userType === 'doctor' && (
+              <StyledNavLink to="communication">Комунікація</StyledNavLink>
+            )}
+            <StyledNavLink to="chat">Чат</StyledNavLink>
+          </SideBarPage>
+          <Outlet />
+        </MainContainer>
+      </StyledPageContainer>
     </Container>
   );
 };
 
 export default MyPage;
-
-//==================================
 // const { id } = useParams();
 //   console.log('id', id);
 

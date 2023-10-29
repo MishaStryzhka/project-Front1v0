@@ -1,18 +1,15 @@
 import Container from 'componentsReusable/Container/Container';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Header, MainContainer, StyledPageContainer } from './UserPage.styled';
-import Title from 'componentsReusable/Titles/Title/Title';
+import { useLocation } from 'react-router-dom';
+import { MainContainer, StyledPageContainer } from './UserPage.styled';
 import { useAuth } from 'hooks';
+import HeaderPage from 'componentsReusable/HeaderPage/HeaderPage';
 
 export const UserPage = () => {
   let { user } = useAuth();
 
   const location = useLocation();
-  const navigate = useNavigate();
-
-  console.log('location', location);
 
   if (location?.state?.user) {
     user = location?.state?.user;
@@ -21,22 +18,9 @@ export const UserPage = () => {
   return (
     <Container>
       <StyledPageContainer>
-        <Header>
-          <button
-            type="button"
-            onClick={() =>
-              navigate(location.state.back, {
-                // replace: true,
-                state: {
-                  user: location?.state?.user,
-                },
-              })
-            }
-          >
-            Назад
-          </button>
-          <Title>{`${user.lastName} ${user.firstName} ${user.patronymic}`}</Title>
-        </Header>
+        <HeaderPage
+          title={`${user.lastName} ${user.firstName} ${user.patronymic}`}
+        />
         <MainContainer style={{ display: 'flex' }}>
           <SideBarPage>
             <p>Side Bar</p>

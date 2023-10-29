@@ -1,6 +1,10 @@
+import Form from 'components/Forms/Form/Form';
 import { ImputWrap } from 'components/Forms/FormLogin/FormLogin.styled';
 import { styled } from 'styled-components';
 
+export const StyledForm = styled(Form)`
+  padding-top: 10px;
+`;
 export const StyledImputWrap = styled(ImputWrap)`
   padding-top: 0;
 `;

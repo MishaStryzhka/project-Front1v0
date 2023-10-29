@@ -137,4 +137,6 @@ export const TextCheckbox = styled.span`
   font-style: italic;
   font-weight: 400;
   line-height: normal;
+
+  cursor: pointer;
 `;

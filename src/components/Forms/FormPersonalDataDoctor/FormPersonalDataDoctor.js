@@ -224,7 +224,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
         firstName: location?.state?.user?.firstName || user.firstName || '',
         patronymic: location?.state?.user?.patronymic || user.patronymic || '',
         dateOfBirthday:
-          location?.state?.user.dateOfBirthday || user.dateOfBirthday || '',
+          location?.state?.user?.dateOfBirthday || user.dateOfBirthday || '',
         phones: location?.state?.user?.phones || user.phones || [],
         experienceYears:
           location?.state?.user?.experienceYears || user.experienceYears || '0',

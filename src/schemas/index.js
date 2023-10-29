@@ -1,3 +1,4 @@
+const { validationChat } = require('./ChatSchemas');
 const { validationCommunication } = require('./CommunicationSchemas');
 const {
   validationDoctorDirectionWork,
@@ -14,4 +15,5 @@ module.exports = {
   validationDoctorPageSchema,
   validationDoctorDirectionWork,
   validationCommunication,
+  validationChat,
 };

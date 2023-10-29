@@ -16,7 +16,6 @@ import {
 import Checkbox from 'components/Checkbox/Checkbox';
 import Form from 'components/Forms/Form/Form';
 import MainContent from 'componentsReusable/MainContent/MainContent';
-import Title from 'componentsReusable/Titles/Title/Title';
 import { useAuth } from 'hooks';
 import {
   Notify,
@@ -39,7 +38,7 @@ const DirectionWork = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [typeSubmit, setTypeSubmit] = useState('save'); // 'save', 'preview', 'publish'
-  let { user, response, userType, error } = useAuth();
+  let { user, response, error } = useAuth();
 
   setTimeout(() => {
     response && dispatch(resetResponse(null));
@@ -83,9 +82,9 @@ const DirectionWork = () => {
   return (
     <div>
       <MainContent width={'800px'}>
-        <Title>
+        {/* <Title>
           Особистий кабінет {userType === 'doctor' ? 'лікаря' : 'пацієнта'}
-        </Title>
+        </Title> */}
         <Formik
           initialValues={{
             directionsOfWork:
