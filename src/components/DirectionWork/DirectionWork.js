@@ -38,7 +38,7 @@ const DirectionWork = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const [typeSubmit, setTypeSubmit] = useState('save'); // 'save', 'preview', 'publish'
-  let { user, response, error } = useAuth();
+  let { user, userType, response, error } = useAuth();
 
   setTimeout(() => {
     response && dispatch(resetResponse(null));
@@ -230,7 +230,7 @@ const DirectionWork = () => {
           }}
         </Formik>
       </MainContent>
-      <StyledButtonWrapper>
+      <StyledButtonWrapper $userType={userType}>
         <SecondaryButton
           $styledType="green"
           type="submit"

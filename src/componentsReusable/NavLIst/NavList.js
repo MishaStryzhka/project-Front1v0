@@ -1,16 +1,32 @@
-import { StyledNavItem, StyledNavLink, StyledNavList } from './NavList.styled';
+import Title from 'componentsReusable/Titles/Title/Title';
+import {
+  ItemProblemCategories,
+  ListProblemCategories,
+  StyledNavItem,
+  StyledNavLink,
+  StyledNavList,
+} from './NavList.styled';
 
 const NavList = ({ name, list = {} }) => {
+  console.log('list', list);
+
   return (
-    <StyledNavList>
+    <ListProblemCategories>
       {list.map(el => (
-        <StyledNavItem key={el.id}>
-          <StyledNavLink to={`/${name}/?${name}=${el.id}`}>
-            {el.name}
-          </StyledNavLink>
-        </StyledNavItem>
+        <ItemProblemCategories>
+          <Title>{el.category}</Title>
+          <StyledNavList>
+            {el.problems.map(problem => (
+              <StyledNavItem key={problem.id}>
+                <StyledNavLink to={`/${name}/?${name}=${problem.id}`}>
+                  {problem.name_ua}
+                </StyledNavLink>
+              </StyledNavItem>
+            ))}
+          </StyledNavList>
+        </ItemProblemCategories>
       ))}
-    </StyledNavList>
+    </ListProblemCategories>
   );
 };
 

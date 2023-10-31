@@ -31,7 +31,7 @@ const Communication = () => {
   const dispatch = useDispatch();
   const location = useLocation();
   const navigate = useNavigate();
-  let { user, response, error } = useAuth();
+  let { user, userType, response, error } = useAuth();
   const [typeSubmit, setTypeSubmit] = useState('save'); // 'save', 'preview', 'publish'
 
   setTimeout(() => {
@@ -231,7 +231,7 @@ const Communication = () => {
           }}
         </Formik>
       </MainContent>
-      <StyledButtonWrapper>
+      <StyledButtonWrapper $userType={userType}>
         <SecondaryButton
           $styledType="green"
           type="submit"
