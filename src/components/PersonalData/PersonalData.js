@@ -46,34 +46,38 @@ const PersonalData = () => {
         )}
         {userType === 'patient' && <FormPersonalDataPatient />}
       </MainContent>
-      <Pagination>
-        {steps.map(itemStep => {
-          const index = steps.indexOf(itemStep);
-          const isLast = index + 1 === steps.length;
-          return (
-            <PaginationItem key={index}>
-              <ButtonStep
-                $active={itemStep === step}
-                type="button"
-                onClick={() => setStep(`${itemStep}`)}
-                alt={`step ${itemStep}`}
-                $islast={isLast}
-              />
-            </PaginationItem>
-          );
-        })}
-      </Pagination>
-      <StyledButtonWrapper>
-        <SecondaryButton
-          $styledType="green"
-          type="submit"
-          onClick={() => {
-            setTypeSubmit('preview');
-          }}
-          form="formPersonalData"
-        >
-          Переглянути картку як користувач
-        </SecondaryButton>
+      {userType === 'doctor' && (
+        <Pagination>
+          {steps.map(itemStep => {
+            const index = steps.indexOf(itemStep);
+            const isLast = index + 1 === steps.length;
+            return (
+              <PaginationItem key={index}>
+                <ButtonStep
+                  $active={itemStep === step}
+                  type="button"
+                  onClick={() => setStep(`${itemStep}`)}
+                  alt={`step ${itemStep}`}
+                  $islast={isLast}
+                />
+              </PaginationItem>
+            );
+          })}
+        </Pagination>
+      )}
+      <StyledButtonWrapper $userType={userType}>
+        {userType === 'doctor' && (
+          <SecondaryButton
+            $styledType="green"
+            type="submit"
+            onClick={() => {
+              setTypeSubmit('preview');
+            }}
+            form="formPersonalData"
+          >
+            Переглянути картку як користувач
+          </SecondaryButton>
+        )}
         <SecondaryButton
           $styledType="green"
           type="submit"
@@ -81,17 +85,20 @@ const PersonalData = () => {
         >
           Зберегти
         </SecondaryButton>
-        <SecondaryButton
-          $styledType="rose"
-          type="submit"
-          onClick={() => {
-            setTypeSubmit('publish');
-          }}
-          form="formPersonalData"
-        >
-          {user.isPublish ? 'Зняти публікацію' : 'Опублікувати'}
-        </SecondaryButton>
+        {userType === 'doctor' && (
+          <SecondaryButton
+            $styledType="rose"
+            type="submit"
+            onClick={() => {
+              setTypeSubmit('publish');
+            }}
+            form="formPersonalData"
+          >
+            {user.isPublish ? 'Зняти публікацію' : 'Опублікувати'}
+          </SecondaryButton>
+        )}
       </StyledButtonWrapper>
+
       {response && (
         <Notify $show={response.status === 200}>
           <IconDone width="22px" height="22px" /> Дані збережено

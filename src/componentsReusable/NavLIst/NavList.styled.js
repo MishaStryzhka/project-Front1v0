@@ -1,9 +1,14 @@
 import { NavLink } from 'react-router-dom';
 import { styled } from 'styled-components';
 
-export const StyledNavList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+export const ListProblemCategories = styled.ul`
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+`;
+export const ItemProblemCategories = styled.li`
+  display: flex;
+  flex-direction: column;
   gap: 40px;
 
   width: 1280px;
@@ -12,6 +17,12 @@ export const StyledNavList = styled.ul`
   border-radius: 20px;
 
   background: ${({ theme }) => theme.color.background1};
+`;
+
+export const StyledNavList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 40px;
 `;
 
 export const StyledNavItem = styled.li`
@@ -31,7 +42,7 @@ export const StyledNavItem = styled.li`
 `;
 
 export const StyledNavLink = styled(NavLink)`
-  color: ${({ theme }) => theme.color.secondary};
+  color: ${({ theme }) => theme.color.text};
   text-align: center;
 
   font-family: ${({ theme }) => theme.fontFamily};
@@ -42,7 +53,7 @@ export const StyledNavLink = styled(NavLink)`
 
   width: 100%;
   height: 100%;
-  padding: 0 20px;
+  // padding: 0 20px;
 
   display: flex;
   align-items: center;

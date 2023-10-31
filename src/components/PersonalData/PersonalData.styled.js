@@ -2,8 +2,10 @@ import { ButtonWrapper } from 'components/AccountData/AccountData.styled';
 import { styled } from 'styled-components';
 
 export const StyledButtonWrapper = styled(ButtonWrapper)`
-  justify-content: space-around;
-  width: 980px;
+  ${({ $userType }) =>
+    $userType === 'doctor'
+      ? 'justify-content: space-around; width: 980px;'
+      : 'justify-content: flex-end; width: 800px;'}
 `;
 
 export const Notify = styled.p`

@@ -219,9 +219,27 @@ const users = [
 const ProblemPage = () => {
   let [searchParams, setSearchParams] = useSearchParams();
 
-  const problem = problemsListValue.find(
-    option => option.id === searchParams.get('problem')
-  );
+  let targetId = searchParams.get('problem');
+  let problem = null;
+
+  for (let i = 0; i < problemsListValue.length; i++) {
+    let category = problemsListValue[i];
+    let problems = category.problems;
+
+    for (let j = 0; j < problems.length; j++) {
+      if (problems[j].id === targetId) {
+        problem = problems[j];
+        break;
+      }
+    }
+
+    if (problem) {
+      break;
+    }
+  }
+
+  console.log('problem', problem);
+
   const sort = sortListValue.find(
     option => option.id === searchParams.get('sort')
   );
@@ -295,7 +313,7 @@ const ProblemPage = () => {
         <MainContent width="900px" $padding="40px">
           <Title type="page">{problem?.name}</Title>
 
-          <p>Review</p>
+          <p>{problem.description}</p>
 
           <StyledInputRadio
             width="150"
