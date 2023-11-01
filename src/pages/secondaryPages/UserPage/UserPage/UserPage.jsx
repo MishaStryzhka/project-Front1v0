@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import { MainContainer, StyledPageContainer } from './UserPage.styled';
 import { useAuth } from 'hooks';
 import HeaderPage from 'componentsReusable/HeaderPage/HeaderPage';
+import DoctorCard from 'components/DoctorCard/DoctorCard';
 
 export const UserPage = () => {
   let { user } = useAuth();
@@ -26,7 +27,7 @@ export const UserPage = () => {
             <p>Side Bar</p>
           </SideBarPage>
           <MainContent width="900px" $padding="40px">
-            <p>Main content</p>
+           <DoctorCard/>
           </MainContent>
         </MainContainer>
       </StyledPageContainer>

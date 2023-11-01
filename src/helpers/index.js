@@ -6,6 +6,7 @@ import { problemsListValue } from './problemsList';
 import { quantityListValue } from './quantityList';
 import { sortListValue } from './sortList';
 import { workExperienceListValue } from './workExperienceList';
+import { paymentListValue } from './paymentList'
 
 module.exports = {
   cropImage,
@@ -16,4 +17,5 @@ module.exports = {
   locationListValue,
   hoursOfWorkListValue,
   workExperienceListValue,
+  paymentListValue
 };
