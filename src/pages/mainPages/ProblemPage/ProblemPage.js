@@ -20,6 +20,12 @@ import { locationListValue } from 'helpers/locationsList';
 import { hoursOfWorkListValue } from 'helpers/hoursOfWorkList';
 import { workExperienceListValue } from 'helpers/workExperienceList';
 import Title from 'componentsReusable/Titles/Title/Title';
+import Image from 'images/main/Rectangle.jpg';
+import {
+  DescriptionProblem,
+  ImageProblem,
+  WrapperAboutProblem,
+} from './ProblemPage.styled';
 
 const users = [
   {
@@ -273,19 +279,19 @@ const ProblemPage = () => {
   return (
     <Container>
       <Helmet>
-        <title>{problem?.name}</title>
+        <title>{problem?.name_ua}</title>
       </Helmet>
       <PageContainer>
         <SideBarPage>
-          <InputRadio
+          {/* <InputRadio
             width="220"
             selectedValue={problem?.id}
             values={problemsListValue}
             name="problem"
             onChange={value => newSetSearchParams('problem', value)}
-          />
+          /> */}
           <InputRadio
-            width="220"
+            width="280"
             selectedValue={location?.id}
             defaultValue={'Місцерозташування'}
             values={locationListValue}
@@ -293,7 +299,7 @@ const ProblemPage = () => {
             onChange={value => newSetSearchParams('location', value)}
           />
           <InputRadio
-            width="220"
+            width="280"
             selectedValue={hoursOfWork?.id}
             defaultValue={'Години роботи'}
             values={hoursOfWorkListValue}
@@ -301,7 +307,7 @@ const ProblemPage = () => {
             onChange={value => newSetSearchParams('hoursOfWork', value)}
           />
           <InputRadio
-            width="220"
+            width="280"
             selectedValue={workExperience?.id}
             defaultValue={'Стаж роботи лікаря'}
             values={workExperienceListValue}
@@ -310,42 +316,49 @@ const ProblemPage = () => {
           />
         </SideBarPage>
 
-        <MainContent width="900px" $padding="40px">
-          <Title type="page">{problem?.name}</Title>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '40px' }}>
+          <MainContent width="900px" $padding="40px" style={{ gap: '40px' }}>
+            <Title>{problem?.name_ua}</Title>
+            <WrapperAboutProblem>
+              <ImageProblem src={Image} alt="Опис зображення" />
+              <DescriptionProblem>{problem.description}</DescriptionProblem>
+            </WrapperAboutProblem>
+            <DescriptionProblem>{problem.prevention}</DescriptionProblem>
+          </MainContent>
 
-          <p>{problem.description}</p>
+          <MainContent width="900px" $padding="40px" style={{ gap: '20px' }}>
+            <StyledInputRadio
+              width="150"
+              selectedValue={sort?.id || 'fromAToZ'}
+              values={sortListValue}
+              name="sort"
+              onChange={value => newSetSearchParams('sort', value)}
+              styledType="min"
+            />
 
-          <StyledInputRadio
-            width="150"
-            selectedValue={sort?.id || 'fromAToZ'}
-            values={sortListValue}
-            name="sort"
-            onChange={value => newSetSearchParams('sort', value)}
-            styledType="min"
-          />
+            <DoctorsBox>
+              {users.map(user => (
+                <DoctorsItem key={user.id}>
+                  <DoctorsAvatars alt="" />
+                  <p>{user.lastName}</p>
+                  <p>{user.firstName}</p>
+                  <p>{user.jobs[0].name}</p>
+                  <p>{user.experienceYears}</p>
+                </DoctorsItem>
+              ))}
+            </DoctorsBox>
+            <StyledInputRadio
+              width="150"
+              selectedValue={quantity?.id || '10'}
+              values={quantityListValue}
+              name="quantity"
+              onChange={value => newSetSearchParams('quantity', value)}
+              styledType="min"
+            />
 
-          <DoctorsBox>
-            {users.map(user => (
-              <DoctorsItem key={user.id}>
-                <DoctorsAvatars alt="" />
-                <p>{user.lastName}</p>
-                <p>{user.firstName}</p>
-                <p>{user.jobs[0].name}</p>
-                <p>{user.experienceYears}</p>
-              </DoctorsItem>
-            ))}
-          </DoctorsBox>
-          <StyledInputRadio
-            width="150"
-            selectedValue={quantity?.id || '10'}
-            values={quantityListValue}
-            name="quantity"
-            onChange={value => newSetSearchParams('quantity', value)}
-            styledType="min"
-          />
-
-          <StyledPagination />
-        </MainContent>
+            <StyledPagination />
+          </MainContent>
+        </div>
       </PageContainer>
     </Container>
   );
