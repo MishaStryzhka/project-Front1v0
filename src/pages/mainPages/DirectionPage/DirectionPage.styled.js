@@ -3,12 +3,12 @@ import Pagination from 'componentsReusable/Pagination/Pagination';
 import { styled } from 'styled-components';
 
 export const StyledInputRadio = styled(InputRadio)`
-  margin-top: 60px;
+  // margin-top: 60px;
   margin-left: auto;
 `;
 
 export const DoctorsBox = styled.ul`
-  padding-top: 20px;
+  // padding-top: 20px;
 
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -33,5 +33,5 @@ export const DoctorsAvatars = styled.img`
 `;
 
 export const StyledPagination = styled(Pagination)`
-  margin: 34px 0 0 auto;
+  margin-left: auto;
 `;

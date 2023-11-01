@@ -13,7 +13,7 @@ const NavList = ({ name, list = {} }) => {
   return (
     <ListProblemCategories>
       {list.map(el => (
-        <ItemProblemCategories>
+        <ItemProblemCategories key={el.id}>
           <Title>{el.category}</Title>
           <StyledNavList>
             {el.problems.map(problem => (

@@ -1,8 +1,13 @@
 import { StyledMainContent } from './MainContent.styled';
 
-const MainContent = ({ children, width, $padding, className }) => {
+const MainContent = ({ children, width, $padding, className, style }) => {
   return (
-    <StyledMainContent className={className} width={width} $padding={$padding}>
+    <StyledMainContent
+      className={className}
+      style={style}
+      width={width}
+      $padding={$padding}
+    >
       {children}
     </StyledMainContent>
   );
