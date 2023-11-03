@@ -10,6 +10,7 @@ export const Item = styled.li`
 border-radius: 20px;
 padding: 20px;
 display: flex;
+align-items:center;
 position: relative;
 gap:80px;
 background-color:rgba(255, 255, 255, 1);

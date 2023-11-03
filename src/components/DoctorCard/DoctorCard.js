@@ -3,20 +3,26 @@ import { Description, Item, List, TitleDescription, Wrap } from "./DoctorCards.s
 import { directionListValue } from "helpers/directionsList";
 import { hoursOfWorkListValue } from "helpers/hoursOfWorkList";
 import { paymentListValue } from "helpers/paymentList";
+import { workExperienceListValue } from "helpers/workExperienceList";
 
 const DoctorCard =()=>{
    let {user} = useAuth();
 console.log(user);
-const currentDirection = directionListValue.find(direction=>direction.id === user.directionsOfWork[0])
+console.log(workExperienceListValue);
+const currentDirections = directionListValue.filter(direction => user.directionsOfWork.includes(direction.id)) 
 const workDays = hoursOfWorkListValue.find(day=>day.id === user.jobs[0].workSchedule)
-const typeOfPayment = paymentListValue.find(value=>value.id === user.paymentMethods[1 && 2] || user.paymentMethods[1 || 2])
-
+const typesOfPayment = paymentListValue.filter(value =>user.paymentMethods.includes(value.id))
+// workExperienceListValue
 return(
     <>
     <List>
         <Item>
             <TitleDescription>Спеціалізація:</TitleDescription>
-            <Description>{currentDirection.name}</Description>
+            <div>
+      {currentDirections.map(({id, name})=>{
+       return <Description key={id}>{name}</Description>
+      })} 
+           </div>    
         </Item>
         <Item>
             <TitleDescription>Стаж роботи:</TitleDescription>
@@ -44,7 +50,12 @@ return(
         </Item>
          <Item>
             <TitleDescription>Спосіб оплати:</TitleDescription>
-            <Description>{typeOfPayment.name}</Description>
+            <div>
+                {typesOfPayment.map(({id, name})=>{
+                    return <Description key={id}>{name}</Description>
+                })}
+            </div>
+            
         </Item>
         <Item>
             <TitleDescription>Соціальні мережі:</TitleDescription>
