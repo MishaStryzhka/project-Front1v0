@@ -8,7 +8,7 @@ import {
 } from './NavList.styled';
 
 const NavList = ({ name, list = {} }) => {
-  console.log('list', list);
+  // console.log('list', list);
 
   return (
     <ListProblemCategories>
