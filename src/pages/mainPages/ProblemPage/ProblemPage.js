@@ -14,7 +14,6 @@ import {
   StyledInputRadio,
   StyledPagination,
 } from '../DirectionPage/DirectionPage.styled';
-import { nanoid } from '@reduxjs/toolkit';
 import { quantityListValue } from 'helpers/quantityList';
 import { locationListValue } from 'helpers/locationsList';
 import { hoursOfWorkListValue } from 'helpers/hoursOfWorkList';
@@ -26,204 +25,14 @@ import {
   ImageProblem,
   WrapperAboutProblem,
 } from './ProblemPage.styled';
-
-const users = [
-  {
-    id: nanoid(),
-    lastName: 'Прізвище',
-    firstName: 'Ім’я',
-    experienceYears: 'Стаж роботи',
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Місце роботи',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    id: nanoid(),
-    lastName: 'Прізвище',
-    firstName: 'Ім’я',
-    experienceYears: 'Стаж роботи',
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Місце роботи',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    id: nanoid(),
-    lastName: 'Прізвище',
-    firstName: 'Ім’я',
-    experienceYears: 'Стаж роботи',
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Місце роботи',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    id: nanoid(),
-    lastName: 'Прізвище',
-    firstName: 'Ім’я',
-    experienceYears: 'Стаж роботи',
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Місце роботи',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    id: nanoid(),
-    lastName: 'Прізвище',
-    firstName: 'Ім’я',
-    experienceYears: 'Стаж роботи',
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Місце роботи',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    id: nanoid(),
-    lastName: 'Прізвище',
-    firstName: 'Ім’я',
-    experienceYears: 'Стаж роботи',
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Місце роботи',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    id: nanoid(),
-    lastName: 'Прізвище',
-    firstName: 'Ім’я',
-    experienceYears: 'Стаж роботи',
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Місце роботи',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    id: nanoid(),
-    lastName: 'Прізвище',
-    firstName: 'Ім’я',
-    experienceYears: 'Стаж роботи',
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Місце роботи',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    id: nanoid(),
-    lastName: 'Прізвище',
-    firstName: 'Ім’я',
-    experienceYears: 'Стаж роботи',
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Місце роботи',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    id: nanoid(),
-    lastName: 'Прізвище',
-    firstName: 'Ім’я',
-    experienceYears: 'Стаж роботи',
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Місце роботи',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    id: nanoid(),
-    lastName: 'Прізвище',
-    firstName: 'Ім’я',
-    experienceYears: 'Стаж роботи',
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Місце роботи',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-  {
-    id: nanoid(),
-    lastName: 'Прізвище',
-    firstName: 'Ім’я',
-    experienceYears: 'Стаж роботи',
-    jobs: [
-      {
-        id: nanoid(),
-        name: 'Місце роботи',
-        cityArea: 'Kyiv',
-        address: '',
-        workSchedule: '',
-        receptionHours: ['', ''],
-      },
-    ],
-  },
-];
+import { useEffect, useState } from 'react';
+import { getDoctorsByProblem } from 'sirvices/doctors';
 
 const ProblemPage = () => {
-  let [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [users, setUsers] = useState([]);
+
+  const page = searchParams.get('page') || 1;
 
   let targetId = searchParams.get('problem');
   let problem = null;
@@ -244,7 +53,7 @@ const ProblemPage = () => {
     }
   }
 
-  console.log('problem', problem);
+  // console.log('problem', problem);
 
   const sort = sortListValue.find(
     option => option.id === searchParams.get('sort')
@@ -275,6 +84,25 @@ const ProblemPage = () => {
       };
     });
   };
+
+  useEffect(() => {
+    getDoctorsByProblem({
+      problem: problem?.id,
+      cityArea: location?.name,
+      hoursOfWork: hoursOfWork?.id,
+      experienceYears: workExperience?.id,
+      limit: quantity,
+      sort,
+      page,
+    })
+      .then(result => {
+        // console.log('result', result);
+        setUsers(result.data);
+      })
+      .catch(err => {
+        console.log('err', err);
+      });
+  }, [hoursOfWork, location, page, problem, quantity, sort, workExperience]);
 
   return (
     <Container>
@@ -338,7 +166,7 @@ const ProblemPage = () => {
 
             <DoctorsBox>
               {users.map(user => (
-                <DoctorsItem key={user.id}>
+                <DoctorsItem key={user._id}>
                   <DoctorsAvatars alt="" />
                   <p>{user.lastName}</p>
                   <p>{user.firstName}</p>
