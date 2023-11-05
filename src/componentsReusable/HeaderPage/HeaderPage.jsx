@@ -23,7 +23,7 @@ const HeaderPage = ({ title }) => {
             })
           }
         >
-          {'<'} <spam>Назад</spam>
+          {'<'} <span>Назад</span>
         </BackButton>
       )}
       <Title>{title}</Title>

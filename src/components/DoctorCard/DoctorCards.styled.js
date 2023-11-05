@@ -39,3 +39,19 @@ export const Wrap = styled.div`
 display:flex;
 flex-direction:column;
 `
+export const ItemProblems = styled.ul`
+display:flex;
+align-items: center;
+justify-content:space-between;
+`
+export const ListProblems = styled.ul`
+display:flex;
+flex-direction:column;
+gap:20px;
+`
+
+export const WrapSocialLink = styled.div`
+margin-left:320px;
+display: flex;
+gap:40px;
+`
