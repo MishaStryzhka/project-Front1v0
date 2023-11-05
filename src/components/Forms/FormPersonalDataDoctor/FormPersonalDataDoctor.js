@@ -219,17 +219,19 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
   return (
     <Formik
       initialValues={{
-        avatarUrl: location?.state?.user?.avatar || user.avatar || '',
-        lastName: location?.state?.user?.lastName || user.lastName || '',
-        firstName: location?.state?.user?.firstName || user.firstName || '',
-        patronymic: location?.state?.user?.patronymic || user.patronymic || '',
+        avatarUrl: location?.state?.user?.avatar || user?.avatar || '',
+        lastName: location?.state?.user?.lastName || user?.lastName || '',
+        firstName: location?.state?.user?.firstName || user?.firstName || '',
+        patronymic: location?.state?.user?.patronymic || user?.patronymic || '',
         dateOfBirthday:
-          location?.state?.user?.dateOfBirthday || user.dateOfBirthday || '',
-        phones: location?.state?.user?.phones || user.phones || [],
+          location?.state?.user?.dateOfBirthday || user?.dateOfBirthday || '',
+        phones: location?.state?.user?.phones || user?.phones || [],
         experienceYears:
-          location?.state?.user?.experienceYears || user.experienceYears || '0',
+          location?.state?.user?.experienceYears ||
+          user?.experienceYears ||
+          '0',
         educations:
-          location?.state?.user?.educations || user.educations.length === 0
+          location?.state?.user?.educations || user?.educations?.length === 0
             ? [{ _id: nanoid(), name: '', years: { begin: 2014, end: 2019 } }]
             : user.educations,
         paymentMethods:
@@ -246,7 +248,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
             },
           ],
         certificates:
-          location?.state?.user?.certificates || user.certificates || [],
+          location?.state?.user?.certificates || user?.certificates || [],
         instagram:
           location?.state?.user?.links?.instagram ||
           user?.links?.instagram ||
