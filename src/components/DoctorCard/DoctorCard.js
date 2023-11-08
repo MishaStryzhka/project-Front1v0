@@ -23,6 +23,7 @@ import IconMessages from 'images/icons/IconMessages';
 const DoctorCard = () => {
   let { user } = useAuth();
   console.log(user);
+  console.log(user.experienceYears);
   const currentDirections = directionListValue.filter(
     direction =>
       user.directionsOfWork && user.directionsOfWork.includes(direction.id)
@@ -61,19 +62,31 @@ const DoctorCard = () => {
         <Item>
           <TitleDescription>Освіта:</TitleDescription>
           <Wrap>
-            <Description>{user.educations[0].name}</Description>
-            <Description>
-              <span>{user.educations[0].years.begin}</span> -{' '}
-              <span>{user.educations[0].years.end}</span>
-            </Description>
+            {user.educations.map(education => {
+              return (
+                <div>
+                  <Description>{education.name}</Description>
+                  <Description>
+                    <span>{education.years.begin}</span> -{' '}
+                    <span>{education.years.end}</span>
+                  </Description>
+                </div>
+              );
+            })}
           </Wrap>
         </Item>
         <Item>
           <TitleDescription>Місце роботи:</TitleDescription>
           <Wrap>
-            <Description>{user.jobs[0].name}</Description>
-            <Description>{user.jobs[0].address}</Description>
-            <Description>{workDays?.name}</Description>
+            {user.jobs.map(job => {
+              return (
+                <div>
+                  <Description>{job.name}</Description>
+                  <Description>{job.address}</Description>
+                  <Description>{workDays?.name}</Description>
+                </div>
+              );
+            })}
           </Wrap>
         </Item>
         <Item>

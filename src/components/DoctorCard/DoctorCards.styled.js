@@ -37,6 +37,7 @@ export const Description = styled.p`
 export const Wrap = styled.div`
   display: flex;
   flex-direction: column;
+  gap: 14px;
 `;
 export const ItemProblems = styled.ul`
   display: flex;
@@ -54,8 +55,3 @@ export const WrapSocialLink = styled.div`
   display: flex;
   gap: 40px;
 `;
-
-// export const ProblemList = styled.ul`
-//   display: flex;
-//   justify-content: space-between;
-// `;
