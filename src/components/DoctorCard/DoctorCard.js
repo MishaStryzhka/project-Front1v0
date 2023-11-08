@@ -23,8 +23,9 @@ import IconMessages from 'images/icons/IconMessages';
 const DoctorCard = () => {
   let { user } = useAuth();
   console.log(user);
-  const currentDirections = directionListValue.filter(direction =>
-    user.directionsOfWork.includes(direction.id)
+  const currentDirections = directionListValue.filter(
+    direction =>
+      user.directionsOfWork && user.directionsOfWork.includes(direction.id)
   );
   const workDays = hoursOfWorkListValue.find(
     day => day.id === user.jobs[0].workSchedule
@@ -72,8 +73,7 @@ const DoctorCard = () => {
           <Wrap>
             <Description>{user.jobs[0].name}</Description>
             <Description>{user.jobs[0].address}</Description>
-            <Description>{workDays.name}</Description>
-            <p></p>
+            <Description>{workDays?.name}</Description>
           </Wrap>
         </Item>
         <Item>

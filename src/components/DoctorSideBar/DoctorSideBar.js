@@ -20,15 +20,16 @@ const DoctorSideBar = () => {
       </WrapAvatar>
 
       <BoxSertificate>
-        {user.certificates.map(({ path, id }) => {
-          return (
-            <WrapSertificate key={id}>
-              <img src={path} alt="Сертифікат" width={140} height={140} />
-            </WrapSertificate>
-          );
-        })}
-        <Button type="button">Переглянути сертифікати</Button>
+        {user.certificates &&
+          user.certificates.map(({ path, id }) => {
+            return (
+              <WrapSertificate key={id}>
+                <img src={path} alt="Сертифікат" width={140} height={140} />
+              </WrapSertificate>
+            );
+          })}
       </BoxSertificate>
+      <Button type="button">Переглянути сертифікати</Button>
     </>
   );
 };
