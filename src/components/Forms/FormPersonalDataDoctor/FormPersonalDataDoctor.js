@@ -61,10 +61,9 @@ import IconSocialMedia from 'images/icons/IconSocialMedia';
 const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const location = useLocation(); 
-  console.log('location', location)
+  const location = useLocation();
+  console.log('location', location);
   const { user, currentTheme } = useAuth();
-  console.log('user', user)
   const [avatar, setAvatar] = useState(null);
   const [sertificatePreview, setSertificatePreview] = useState(null);
   const [errorPhones, setErrorPhones] = useState([]);
@@ -232,7 +231,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
           location?.state?.user?.experienceYears || user.experienceYears || '0',
         educations:
           location?.state?.user?.educations || user?.educations?.length === 0
-            ? [{ _id: nanoid(), name: '', years: { begin: "", end: "" } }]
+            ? [{ _id: nanoid(), name: '', years: { begin: 2014, end: 2019 } }]
             : user.educations,
         paymentMethods:
           location?.state?.user?.paymentMethods || user.paymentMethods || [],
