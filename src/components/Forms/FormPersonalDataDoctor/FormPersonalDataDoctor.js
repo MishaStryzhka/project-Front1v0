@@ -62,7 +62,6 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const location = useLocation();
-  console.log('location', location);
   const { user, currentTheme } = useAuth();
   const [avatar, setAvatar] = useState(null);
   const [sertificatePreview, setSertificatePreview] = useState(null);
@@ -230,7 +229,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
         experienceYears:
           location?.state?.user?.experienceYears || user.experienceYears || '0',
         educations:
-          location?.state?.user?.educations || user?.educations?.length === 0
+          location?.state?.user?.educations || user.educations.length === 0
             ? [{ _id: nanoid(), name: '', years: { begin: 2014, end: 2019 } }]
             : user.educations,
         paymentMethods:
