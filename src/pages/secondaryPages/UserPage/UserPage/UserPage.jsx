@@ -27,7 +27,7 @@ export const UserPage = () => {
             <p>Side Bar</p>
           </SideBarPage>
           <MainContent width="900px" $padding="40px">
-           <DoctorCard/>
+            <DoctorCard />
           </MainContent>
         </MainContainer>
       </StyledPageContainer>
