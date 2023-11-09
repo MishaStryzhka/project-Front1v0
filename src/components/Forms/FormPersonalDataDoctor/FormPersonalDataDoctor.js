@@ -232,7 +232,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
           '0',
         educations:
           location?.state?.user?.educations || user?.educations?.length === 0
-            ? [{ _id: nanoid(), name: '', years: { begin: 2014, end: 2019 } }]
+            ? [{ _id: nanoid(), name: '', years: { begin: '', end: '' } }]
             : user.educations,
         paymentMethods:
           location?.state?.user?.paymentMethods || user.paymentMethods || [],
