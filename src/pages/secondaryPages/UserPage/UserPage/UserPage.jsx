@@ -6,6 +6,7 @@ import { MainContainer, StyledPageContainer } from './UserPage.styled';
 import { useAuth } from 'hooks';
 import HeaderPage from 'componentsReusable/HeaderPage/HeaderPage';
 import DoctorCard from 'components/DoctorCard/DoctorCard';
+import DoctorSideBar from 'components/DoctorSideBar/DoctorSideBar';
 
 export const UserPage = () => {
   let { user } = useAuth();
@@ -24,10 +25,10 @@ export const UserPage = () => {
         />
         <MainContainer style={{ display: 'flex' }}>
           <SideBarPage>
-            <p>Side Bar</p>
+            <DoctorSideBar />
           </SideBarPage>
           <MainContent width="900px" $padding="40px">
-           <DoctorCard/>
+            <DoctorCard />
           </MainContent>
         </MainContainer>
       </StyledPageContainer>
