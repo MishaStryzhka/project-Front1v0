@@ -6,8 +6,6 @@ const HeaderPage = ({ title }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  console.log('location', location);
-
   return (
     <Header>
       {location?.state?.back && (
