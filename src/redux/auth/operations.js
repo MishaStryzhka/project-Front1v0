@@ -144,6 +144,7 @@ export const updateUserInfo = createAsyncThunk(
       experienceYears,
       educations,
       certificates,
+      workExamples,
       links,
       jobs,
       paymentMethods,
@@ -163,6 +164,11 @@ export const updateUserInfo = createAsyncThunk(
         certificates.forEach(fileObject => {
           const file = fileObject.file;
           file && formData.append(`certificates`, file);
+        });
+      workExamples &&
+        workExamples.forEach(fileObject => {
+          const file = fileObject.file;
+          file && formData.append(`workExamples`, file);
         });
 
       lastName && formData.append('lastName', lastName);

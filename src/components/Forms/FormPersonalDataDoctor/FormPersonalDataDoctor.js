@@ -65,10 +65,13 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
   const { user, currentTheme } = useAuth();
   const [avatar, setAvatar] = useState(null);
   const [sertificatePreview, setSertificatePreview] = useState(null);
+  const [workExamplePreview, setWorkExamplePreview] = useState(null);
   const [errorPhones, setErrorPhones] = useState([]);
 
   const [isOpenModalAddAvatar, setIsOpenModalAddAvatar] = useState(false);
   const [isOpenModalAddSertificate, setIsOpenModalAddSertificate] =
+    useState(false);
+  const [isOpenModalAddWorkExample, setIsOpenModalAddWorkExample] =
     useState(false);
 
   const isChangeAvatarUrl = e => {
@@ -83,8 +86,14 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
     setIsOpenModalAddSertificate(true);
   };
 
+  const isChangeWorkExample = e => {
+    const { files } = e.currentTarget;
+    setWorkExamplePreview(files[0]);
+    setIsOpenModalAddWorkExample(true);
+  };
+
   const onSubmit = value => {
-    console.log('typeSubmit', typeSubmit);
+    // console.log('typeSubmit', typeSubmit);
 
     const {
       lastName,
@@ -97,6 +106,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
       avatarUrl,
       educations,
       certificates,
+      workExamples,
       instagram,
       tiktok,
       otherLink,
@@ -125,6 +135,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
             avatarUrl,
             educations,
             certificates,
+            workExamples,
             instagram,
             tiktok,
             otherLink,
@@ -147,6 +158,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
           experienceYears,
           educations,
           certificates,
+          workExamples,
           links,
           jobs,
           paymentMethods,
@@ -166,6 +178,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
           experienceYears,
           educations,
           certificates,
+          workExamples,
           links,
           jobs,
           paymentMethods,
@@ -249,6 +262,8 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
           ],
         certificates:
           location?.state?.user?.certificates || user?.certificates || [],
+        workExamples:
+          location?.state?.user?.workExamples || user?.workExamples || [],
         instagram:
           location?.state?.user?.links?.instagram ||
           user?.links?.instagram ||
@@ -267,7 +282,6 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
     >
       {e => {
         const {
-          // initialValues,
           values,
           errors,
           touched,
@@ -275,7 +289,6 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
           setFieldValue,
           handleChange,
           handleBlur,
-          // handleSubmit,
           isSubmitting,
           setSubmitting,
         } = e;
@@ -291,11 +304,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
 
         return (
           <>
-            <Form
-              id="formPersonalData"
-              isRequiredFields
-              // onChange={console.log('first')}
-            >
+            <Form id="formPersonalData" isRequiredFields>
               {step === 'one' && (
                 <InputWrapStepOne>
                   <AvatarLabel as={Label}>
@@ -729,7 +738,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
                             <div>
                               <div>
                                 <AvaterInputLabel htmlFor="certificates">
-                                  {sertificate.file
+                                  {sertificate.file || sertificate.path
                                     ? 'Оновити сертифікат'
                                     : 'Завантажити сертифікат'}
                                 </AvaterInputLabel>
@@ -864,17 +873,6 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
                                 setSubmitting(false);
                                 const newJobs = [...values.jobs];
 
-                                if (values.jobs.length !== 1 && value === '') {
-                                  newJobs.splice(index, 1);
-                                } else {
-                                  newJobs.splice(index, 1, {
-                                    ...job,
-                                    address: value,
-                                  });
-                                }
-
-                                setFieldValue('jobs', newJobs);
-
                                 getRegion({
                                   address: value,
                                   setFieldValue: region => {
@@ -886,6 +884,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
                                     } else {
                                       newJobs.splice(index, 1, {
                                         ...job,
+                                        address: value,
                                         cityArea: region,
                                       });
                                     }
@@ -939,16 +938,12 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
                                 errors?.jobs[index]?.years
                               }
                               onChange={newValue => {
-                                // console.log('newValue', newValue);
-
                                 setSubmitting(false);
                                 let newWorkHours = [...values.jobs];
                                 newWorkHours[index] = {
                                   ...newWorkHours[index],
                                   receptionHours: [newValue],
                                 };
-
-                                // console.log('newWorkHours', newWorkHours);
 
                                 setFieldValue('jobs', newWorkHours);
                               }}
@@ -1080,6 +1075,112 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
                       </CheckboxInputWrap>
                     </CheckboxWrap>
                   </PayMethodLabel>
+
+                  <WrapSertificate>
+                    <WrapSertificateInputs>
+                      {values.workExamples.map(workExample => {
+                        const index = values.workExamples.findIndex(
+                          option => option._id === workExample._id
+                        );
+
+                        return (
+                          <AvatarLabel key={workExample._id} as={Label}>
+                            <AvatarWrap>
+                              {workExample.file ? (
+                                <Avatar
+                                  src={URL.createObjectURL(workExample.file)}
+                                  alt="WorkExample"
+                                />
+                              ) : workExample.path ? (
+                                <Avatar
+                                  src={workExample.path}
+                                  alt="WorkExample"
+                                />
+                              ) : (
+                                <PhotoDescription>
+                                  Photo of work
+                                </PhotoDescription>
+                              )}
+                            </AvatarWrap>
+                            <div>
+                              <div>
+                                <AvaterInputLabel htmlFor="workExamples">
+                                  {workExample.file || workExample.path
+                                    ? 'Оновити приклад роботи'
+                                    : 'Завантажити приклад роботи'}
+                                </AvaterInputLabel>
+                                <Field
+                                  style={{ display: 'none' }}
+                                  type="file"
+                                  id="workExamples"
+                                  value=""
+                                  name={`workExamples-${workExample.id}`}
+                                  onChange={e => {
+                                    setSubmitting(false);
+                                    document.body.style.overflow = 'auto';
+                                    isChangeWorkExample(e);
+                                  }}
+                                />
+                              </div>
+                              <AvatarDescription>
+                                Файл повинен бути у форматі jpeg або png.
+                                Максимальний розмір - 5 Мб
+                              </AvatarDescription>
+                            </div>
+                            {isOpenModalAddWorkExample && (
+                              <Modal
+                                onClick={() => {
+                                  setIsOpenModalAddWorkExample(false);
+                                }}
+                              >
+                                <TitleModal> Додати приклад роботи</TitleModal>
+                                <CropperWrap
+                                  image={workExamplePreview}
+                                  name={`workExample - ${nanoid()}`}
+                                  setImage={value => {
+                                    setSubmitting(false);
+
+                                    const newWorkExamples = [
+                                      ...values.workExamples,
+                                    ];
+
+                                    newWorkExamples.splice(index, 1, {
+                                      ...workExample,
+                                      file: value,
+                                    });
+
+                                    setFieldValue(
+                                      'workExamples',
+                                      newWorkExamples
+                                    );
+                                  }}
+                                  onClose={() => {
+                                    document.body.style.overflow = 'auto';
+                                    setIsOpenModalAddWorkExample(false);
+                                  }}
+                                />
+                              </Modal>
+                            )}
+                          </AvatarLabel>
+                        );
+                      })}
+                    </WrapSertificateInputs>
+                    <ButtonRefresh
+                      disabled={values.workExamples.find(
+                        workExample => workExample.file === null
+                      )}
+                      type="button"
+                      onClick={() => {
+                        const newWorkExample = [...values.workExamples];
+
+                        newWorkExample.push({ _id: nanoid(), file: null });
+
+                        setFieldValue('workExamples', newWorkExample);
+                      }}
+                    >
+                      + Додати приклад роботи
+                    </ButtonRefresh>
+                  </WrapSertificate>
                 </InputWrapStepTwo>
               )}
             </Form>
