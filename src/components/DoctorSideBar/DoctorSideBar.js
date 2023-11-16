@@ -1,7 +1,8 @@
 import { useAuth } from 'hooks';
 import {
-  BoxSertificate,
+  Box,
   Button,
+  Text,
   WrapAvatar,
   WrapSertificate,
 } from './DoctorSideBar.styled';
@@ -10,26 +11,48 @@ const DoctorSideBar = () => {
   const { user } = useAuth();
   return (
     <>
-      <WrapAvatar>
-        <img
-          src={user.avatar}
-          alt="Фотографія лікаря"
-          width={300}
-          height={400}
-        />
+      <WrapAvatar avatar={user.avatar}>
+        {user.avatar === '' ? (
+          <Text>Photo</Text>
+        ) : (
+          <img
+            src={user.avatar}
+            alt="Фотографія лікаря"
+            width={300}
+            height={400}
+          />
+        )}
       </WrapAvatar>
-
-      <BoxSertificate>
-        {user.certificates &&
+      <Box>
+        {user.certificates ? (
           user.certificates.map(({ path, id }) => {
             return (
-              <WrapSertificate key={id}>
-                <img src={path} alt="Сертифікат" width={140} height={140} />
+              <WrapSertificate certificate={user.certificates}>
+                <img
+                  key={id}
+                  src={path}
+                  alt="Сертифікат"
+                  width={140}
+                  height={140}
+                />
               </WrapSertificate>
             );
-          })}
-      </BoxSertificate>
+          })
+        ) : (
+          <WrapSertificate>
+            <Text>Photo</Text>
+          </WrapSertificate>
+        )}
+      </Box>
       <Button type="button">Переглянути сертифікати</Button>
+      <Box>
+        <WrapSertificate>
+          {<Text>Photo</Text> || (
+            <img src="" alt="Робота" width={140} height={140} />
+          )}
+        </WrapSertificate>
+      </Box>
+      <Button type="button">Переглянути роботи</Button>
     </>
   );
 };

@@ -7,6 +7,7 @@ const lightTheme = {
   btn: '#9D9D9D', // Dark gray
   btnDark: '#C3E2E7', // Light blue
   btnLight: '#E5E8EF', // Light grayish blue
+  backgroundBtn: 'rgba(222, 255, 217, 1)',
 
   error: '#AF0101', //
 
@@ -14,11 +15,13 @@ const lightTheme = {
   card: '#DDD', //
   placeholder: '#adadad',
 
+  backgroundPhoto: 'rgba(229, 232, 239, 1)', // gray
+
   indicator: '#C3E2E7CC', //
   gradient: 'linear-gradient(to left, #419ef1 0%, #9bd0ff 100%)', //gradient
 
   // ++++++++
-  main: '#396DFF', // dark green
+  main: '#396DFF', // dark blue
 
   text: '#00185C',
   background1: '#f1f5ff',

@@ -29,21 +29,22 @@ const DoctorCard = () => {
       user.directionsOfWork && user.directionsOfWork.includes(direction.id)
   );
   const workDays = hoursOfWorkListValue.find(
-    day => day.id === user.jobs[0].workSchedule
+    day => user.jobs && day.id === user.jobs[0].workSchedule
   );
-  const typesOfPayment = paymentListValue.filter(value =>
-    user.paymentMethods.includes(value.id)
+  const typesOfPayment = paymentListValue.filter(
+    value => user.paymentMethods && user.paymentMethods.includes(value.id)
   );
 
   const allProblems = [];
   problemsListValue.forEach(category => {
     allProblems.push(...category.problems);
   });
-  const allProblemsBack = Object.keys(user.problemsItSolves);
-  const currentProblems = allProblems.filter(problem =>
-    allProblemsBack.includes(problem.id)
+  const allProblemsBack =
+    user.problemsItSolves && Object.keys(user.problemsItSolves);
+  const currentProblems = allProblems.filter(
+    problem => allProblemsBack && allProblemsBack.includes(problem.id)
   );
-  const numberPhone = user.phones[0];
+  const numberPhone = user.phones && user.phones[0];
   return (
     <>
       <List>
@@ -62,31 +63,33 @@ const DoctorCard = () => {
         <Item>
           <TitleDescription>Освіта:</TitleDescription>
           <Wrap>
-            {user.educations.map(education => {
-              return (
-                <div>
-                  <Description>{education.name}</Description>
-                  <Description>
-                    <span>{education.years.begin}</span> -{' '}
-                    <span>{education.years.end}</span>
-                  </Description>
-                </div>
-              );
-            })}
+            {user.educations &&
+              user.educations.map(education => {
+                return (
+                  <div>
+                    <Description>{education.name}</Description>
+                    <Description>
+                      <span>{education.years.begin}</span> -{' '}
+                      <span>{education.years.end}</span>
+                    </Description>
+                  </div>
+                );
+              })}
           </Wrap>
         </Item>
         <Item>
           <TitleDescription>Місце роботи:</TitleDescription>
           <Wrap>
-            {user.jobs.map(job => {
-              return (
-                <div>
-                  <Description>{job.name}</Description>
-                  <Description>{job.address}</Description>
-                  <Description>{workDays?.name}</Description>
-                </div>
-              );
-            })}
+            {user.jobs &&
+              user.jobs.map(job => {
+                return (
+                  <div>
+                    <Description>{job.name}</Description>
+                    <Description>{job.address}</Description>
+                    <Description>{workDays?.name}</Description>
+                  </div>
+                );
+              })}
           </Wrap>
         </Item>
         <Item>
@@ -115,17 +118,17 @@ const DoctorCard = () => {
         <Item>
           <TitleDescription>Соціальні мережі:</TitleDescription>
           <WrapSocialLink>
-            {user.links.instagram && (
+            {user.links && (
               <a href={user.links.instagram} target="_ablank">
                 <IconInstagram />
               </a>
             )}
-            {user.links.tiktok && (
+            {user.links && (
               <a href={user.links.tiktok} target="_ablank">
                 <IconTikTok />
               </a>
             )}
-            {user.links.otherLink && (
+            {user.links && (
               <a href={user.links.otherLink} target="_ablank">
                 <IconSocialMedia />
               </a>
