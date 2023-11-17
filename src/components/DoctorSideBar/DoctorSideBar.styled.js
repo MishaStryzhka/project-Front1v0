@@ -18,7 +18,7 @@ export const Box = styled.div`
   margin-bottom: 20px;
 `;
 
-export const WrapSertificate = styled.picture`
+export const Wrap = styled.picture`
   position: relative;
   display: block;
   width: calc((100% - 20px) / 2);
@@ -26,8 +26,8 @@ export const WrapSertificate = styled.picture`
   border-radius: 20px;
   background-color: ${({ theme }) => theme.color.backgroundPhoto};
   overflow: hidden;
-  border: ${({ certificate }) =>
-    certificate ? 'none' : '1px dashed rgba(0, 24, 92, 1)'};
+  border: ${({ certificate, workTasks }) =>
+    workTasks || certificate ? 'none' : '1px dashed rgba(0, 24, 92, 1)'};
 `;
 
 export const Button = styled.button`

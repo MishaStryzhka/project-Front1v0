@@ -58,7 +58,7 @@ const DoctorCard = () => {
         </Item>
         <Item>
           <TitleDescription>Стаж роботи:</TitleDescription>
-          <Description>{user.experienceYears}</Description>
+          <Description>{user.experienceYears} років</Description>
         </Item>
         <Item>
           <TitleDescription>Освіта:</TitleDescription>
@@ -69,7 +69,7 @@ const DoctorCard = () => {
                   <div>
                     <Description>{education.name}</Description>
                     <Description>
-                      <span>{education.years.begin}</span> -{' '}
+                      <span>{education.years.begin}</span>-
                       <span>{education.years.end}</span>
                     </Description>
                   </div>
@@ -81,12 +81,19 @@ const DoctorCard = () => {
           <TitleDescription>Місце роботи:</TitleDescription>
           <Wrap>
             {user.jobs &&
-              user.jobs.map(job => {
+              user.jobs.map(({ name, address, receptionHours }) => {
                 return (
                   <div>
-                    <Description>{job.name}</Description>
-                    <Description>{job.address}</Description>
+                    <Description>{name}</Description>
+                    <Description>{address}</Description>
                     <Description>{workDays?.name}</Description>
+                    {receptionHours.map(({ begin, end }) => {
+                      return (
+                        <Description>
+                          <span>{begin}</span>-<span>{end}</span>
+                        </Description>
+                      );
+                    })}
                   </div>
                 );
               })}
