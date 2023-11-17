@@ -18,7 +18,7 @@ export const DoctorsBox = styled.ul`
 export const DoctorsItem = styled.li`
   // width: 180px;
   height: 330px;
-  padding: 10px;
+  padding: 20px 10px;
   box-sizing: border-box;
 
   border-radius: 10px;
@@ -26,8 +26,12 @@ export const DoctorsItem = styled.li`
 `;
 
 export const DoctorsAvatars = styled.img`
-  width: 60px;
-  height: 80px;
+  width: 90px;
+  height: 120px;
+
+  border-radius: 5px;
+
+  margin: auto;
 
   background: #d9d9d9;
 `;

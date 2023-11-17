@@ -21,6 +21,7 @@ import { workExperienceListValue } from 'helpers/workExperienceList';
 import Title from 'componentsReusable/Titles/Title/Title';
 import Image from 'images/main/Rectangle.jpg';
 import {
+  DescriptionDoctor,
   DescriptionProblem,
   ImageProblem,
   WrapperAboutProblem,
@@ -165,15 +166,36 @@ const ProblemPage = () => {
             />
 
             <DoctorsBox>
-              {users.map(user => (
-                <DoctorsItem key={user._id}>
-                  <DoctorsAvatars alt="" />
-                  <p>{user.lastName}</p>
-                  <p>{user.firstName}</p>
-                  <p>{user.jobs[0].name}</p>
-                  <p>{user.experienceYears}</p>
-                </DoctorsItem>
-              ))}
+              {users.map(user => {
+                return (
+                  <DoctorsItem key={user._id}>
+                    <DoctorsAvatars alt="" src={user.avatar} />
+                    <DescriptionDoctor>
+                      <div>
+                        <p>{user.lastName}</p>
+                        <p>{user.firstName}</p>
+                      </div>
+                      {user.jobs.map(job => {
+                        console.log('job', job.receptionHours);
+                        return (
+                          <div
+                            key={user.jobs.findIndex(
+                              option => option.name === job.name
+                            )}
+                          >
+                            <p>{job.name}</p>
+                            <p>
+                              {job.receptionHours[0].begin} -{' '}
+                              {job.receptionHours[0].end}
+                            </p>
+                          </div>
+                        );
+                      })}
+                      <p>Стаж: {user.experienceYears}</p>
+                    </DescriptionDoctor>
+                  </DoctorsItem>
+                );
+              })}
             </DoctorsBox>
             <StyledInputRadio
               width="150"
