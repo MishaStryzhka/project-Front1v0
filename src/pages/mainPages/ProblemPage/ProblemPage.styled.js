@@ -22,3 +22,12 @@ export const DescriptionProblem = styled.p`
 
   //   text-indent: 40px;
 `;
+
+export const DescriptionDoctor = styled.div`
+  margin-top: 10px;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+`;
