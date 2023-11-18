@@ -1,5 +1,11 @@
 import { styled } from 'styled-components';
 
+export const Section = styled.section`
+  background-color: white;
+  padding: 20px;
+  border-radius: 20px;
+`;
+
 export const WrapAvatar = styled.picture`
   display: block;
   width: 300px;
@@ -26,8 +32,8 @@ export const Wrap = styled.picture`
   border-radius: 20px;
   background-color: ${({ theme }) => theme.color.backgroundPhoto};
   overflow: hidden;
-  border: ${({ certificate, workTasks }) =>
-    workTasks || certificate ? 'none' : '1px dashed rgba(0, 24, 92, 1)'};
+  border: ${({ certificate, task }) =>
+    task || certificate ? 'none' : '1px dashed rgba(0, 24, 92, 1)'};
 `;
 
 export const Button = styled.button`
@@ -39,7 +45,7 @@ export const Button = styled.button`
   width: 214px;
   height: 92px;
   padding: 18px 32px;
-  margin: 0 auto;
+  margin-left: 40px;
   background-color: ${({ theme }) => theme.color.backgroundBtn};
   border-radius: 20px;
   cursor: pointer;
