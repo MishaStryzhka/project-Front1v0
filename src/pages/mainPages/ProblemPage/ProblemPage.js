@@ -6,7 +6,7 @@ import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
 import { problemsListValue } from 'helpers/problemsList';
 import { sortListValue } from 'helpers/sortList';
 import { Helmet } from 'react-helmet';
-import { useSearchParams } from 'react-router-dom';
+import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
 import {
   DoctorsAvatars,
   DoctorsBox,
@@ -15,7 +15,6 @@ import {
   StyledPagination,
 } from '../DirectionPage/DirectionPage.styled';
 import { quantityListValue } from 'helpers/quantityList';
-import { locationListValue } from 'helpers/locationsList';
 import { hoursOfWorkListValue } from 'helpers/hoursOfWorkList';
 import { workExperienceListValue } from 'helpers/workExperienceList';
 import Title from 'componentsReusable/Titles/Title/Title';
@@ -27,11 +26,14 @@ import {
   WrapperAboutProblem,
 } from './ProblemPage.styled';
 import { useEffect, useState } from 'react';
-import { getDoctorsByProblem } from 'sirvices/doctors';
+import { getDoctorsByProblem } from 'sirvices/users';
+import { districtsListValue } from 'helpers/districtsList';
 
 const ProblemPage = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const [users, setUsers] = useState([]);
+
+  const location = useLocation();
 
   const page = searchParams.get('page') || 1;
 
@@ -62,8 +64,8 @@ const ProblemPage = () => {
   const quantity = quantityListValue.find(
     option => option.id === searchParams.get('quantity')
   );
-  const location = locationListValue.find(
-    option => option.id === searchParams.get('location')
+  const district = districtsListValue.find(
+    option => option.id === searchParams.get('district')
   );
   const hoursOfWork = hoursOfWorkListValue.find(
     option => option.id === searchParams.get('hoursOfWork')
@@ -89,7 +91,7 @@ const ProblemPage = () => {
   useEffect(() => {
     getDoctorsByProblem({
       problem: problem?.id,
-      cityArea: location?.name,
+      cityArea: district?.name,
       hoursOfWork: hoursOfWork?.id,
       experienceYears: workExperience?.id,
       limit: quantity,
@@ -103,7 +105,7 @@ const ProblemPage = () => {
       .catch(err => {
         console.log('err', err);
       });
-  }, [hoursOfWork, location, page, problem, quantity, sort, workExperience]);
+  }, [hoursOfWork, district, page, problem, quantity, sort, workExperience]);
 
   return (
     <Container>
@@ -121,11 +123,11 @@ const ProblemPage = () => {
           /> */}
           <InputRadio
             width="280"
-            selectedValue={location?.id}
+            selectedValue={district?.id}
             defaultValue={'Місцерозташування'}
-            values={locationListValue}
-            name="location"
-            onChange={value => newSetSearchParams('location', value)}
+            values={districtsListValue}
+            name="district"
+            onChange={value => newSetSearchParams('district', value)}
           />
           <InputRadio
             width="280"
@@ -167,32 +169,38 @@ const ProblemPage = () => {
 
             <DoctorsBox>
               {users.map(user => {
+                console.log('location', location);
+
                 return (
                   <DoctorsItem key={user._id}>
-                    <DoctorsAvatars alt="" src={user.avatar} />
-                    <DescriptionDoctor>
-                      <div>
-                        <p>{user.lastName}</p>
-                        <p>{user.firstName}</p>
-                      </div>
-                      {user.jobs.map(job => {
-                        console.log('job', job.receptionHours);
-                        return (
-                          <div
-                            key={user.jobs.findIndex(
-                              option => option.name === job.name
-                            )}
-                          >
-                            <p>{job.name}</p>
-                            <p>
-                              {job.receptionHours[0].begin} -{' '}
-                              {job.receptionHours[0].end}
-                            </p>
-                          </div>
-                        );
-                      })}
-                      <p>Стаж: {user.experienceYears}</p>
-                    </DescriptionDoctor>
+                    <NavLink
+                      to={`/in/${user?._id}`}
+                      state={{ back: `${location.pathname}${location.search}` }}
+                    >
+                      <DoctorsAvatars alt="" src={user.avatar} />
+                      <DescriptionDoctor>
+                        <div>
+                          <p>{user.lastName}</p>
+                          <p>{user.firstName}</p>
+                        </div>
+                        {user.jobs.map(job => {
+                          return (
+                            <div
+                              key={user.jobs.findIndex(
+                                option => option.name === job.name
+                              )}
+                            >
+                              <p>{job.name}</p>
+                              <p>
+                                {job.receptionHours[0].begin} -{' '}
+                                {job.receptionHours[0].end}
+                              </p>
+                            </div>
+                          );
+                        })}
+                        <p>Стаж: {user.experienceYears}</p>
+                      </DescriptionDoctor>
+                    </NavLink>
                   </DoctorsItem>
                 );
               })}

@@ -291,7 +291,9 @@ export const ReceptionHoursWrap = styled.div`
   align-items: center;
 `;
 
-export const WrapSertificate = styled.div``;
+export const WrapSertificate = styled.div`
+  position: relative;
+`;
 
 export const WrapSertificateInputs = styled.div`
   display: flex;

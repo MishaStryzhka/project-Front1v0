@@ -1,4 +1,3 @@
-import { useAuth } from 'hooks';
 import {
   Box,
   Button,
@@ -7,8 +6,7 @@ import {
   WrapSertificate,
 } from './DoctorSideBar.styled';
 
-const DoctorSideBar = () => {
-  const { user } = useAuth();
+const DoctorSideBar = ({ user }) => {
   return (
     <>
       <WrapAvatar avatar={user.avatar}>

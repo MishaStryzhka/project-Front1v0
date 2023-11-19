@@ -1,20 +1,32 @@
 import Container from 'componentsReusable/Container/Container';
 import MainContent from 'componentsReusable/MainContent/MainContent';
 import SideBarPage from 'componentsReusable/SideBarPage/SideBarPage';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 import { MainContainer, StyledPageContainer } from './UserPage.styled';
 import { useAuth } from 'hooks';
 import HeaderPage from 'componentsReusable/HeaderPage/HeaderPage';
 import DoctorCard from 'components/DoctorCard/DoctorCard';
 import DoctorSideBar from 'components/DoctorSideBar/DoctorSideBar';
+import { getUsersById } from 'sirvices/users';
+import { useState } from 'react';
 
 export const UserPage = () => {
-  let { user } = useAuth();
-
+  const [user, setUser] = useState(useAuth().user);
+  const { id } = useParams();
   const location = useLocation();
+  console.log('location', location);
+
+  if (id !== user.userID) {
+    getUsersById(id)
+      .then(data => {
+        console.log('data', data.user);
+        setUser(data.user);
+      })
+      .catch(error => console.log('error', error));
+  }
 
   if (location?.state?.user) {
-    user = location?.state?.user;
+    setUser(location?.state?.user);
   }
 
   return (
@@ -25,10 +37,10 @@ export const UserPage = () => {
         />
         <MainContainer style={{ display: 'flex' }}>
           <SideBarPage>
-            <DoctorSideBar />
+            <DoctorSideBar user={user} />
           </SideBarPage>
           <MainContent width="900px" $padding="40px">
-            <DoctorCard />
+            <DoctorCard user={user} />
           </MainContent>
         </MainContainer>
       </StyledPageContainer>

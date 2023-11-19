@@ -17,7 +17,6 @@ import {
 } from 'components/Forms/FormPersonalDataPatient/FormPersonalDataPatient.styled';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
-import { locationListValue } from 'helpers/locationsList';
 import { problemsListValue } from 'helpers/problemsList';
 import Checkbox from 'components/Checkbox/Checkbox';
 import {
@@ -28,6 +27,7 @@ import {
 import InputDate from 'componentsReusable/Inputs/InputDate/InputDate';
 import { nanoid } from '@reduxjs/toolkit';
 import InputFromTo from 'componentsReusable/Inputs/InputFromTo/InputFromTo';
+import { districtsListValue } from 'helpers/districtsList';
 
 const { default: Modal } = require('componentsReusable/Modal/Modal');
 const { createPortal } = require('react-dom');
@@ -328,7 +328,7 @@ const ModalLeaveRequest = ({ onClick }) => {
                   <InputRadio
                     width="800px"
                     selectedValue={values.location}
-                    values={locationListValue}
+                    values={districtsListValue}
                     name="location"
                     onChange={value => setFieldValue('location', value)}
                     required

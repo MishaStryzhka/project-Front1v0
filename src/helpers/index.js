@@ -1,12 +1,12 @@
 import { cropImage } from './cropImage';
 import { directionListValue } from './directionsList';
 import { hoursOfWorkListValue } from './hoursOfWorkList';
-import { locationListValue } from './locationsList';
+import { districtsListValue } from './districtsList';
 import { problemsListValue } from './problemsList';
 import { quantityListValue } from './quantityList';
 import { sortListValue } from './sortList';
 import { workExperienceListValue } from './workExperienceList';
-import { paymentListValue } from './paymentList'
+import { paymentListValue } from './paymentList';
 
 module.exports = {
   cropImage,
@@ -14,8 +14,8 @@ module.exports = {
   sortListValue,
   quantityListValue,
   problemsListValue,
-  locationListValue,
+  districtsListValue,
   hoursOfWorkListValue,
   workExperienceListValue,
-  paymentListValue
+  paymentListValue,
 };
