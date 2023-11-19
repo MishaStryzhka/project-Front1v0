@@ -1,4 +1,4 @@
-export const locationListValue = [
+export const districtsListValue = [
   { id: 'location_1', name: 'Деснянський' },
   { id: 'location_2', name: 'Святошинський' },
   { id: 'location_3', name: 'Дніпровський' },

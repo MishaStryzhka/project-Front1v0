@@ -38,10 +38,7 @@ import CropperWrap from 'components/CropperWrap/CropperWrap';
 import Input from 'componentsReusable/Inputs/Input/Input';
 import PhoneInputField from 'components/PhoneImput/PhoneInput';
 import Checkbox from 'components/Checkbox/Checkbox';
-import {
-  ButtonAdd,
-  Placeholder,
-} from '../FormPersonalDataPatient/FormPersonalDataPatient.styled';
+import { ButtonAdd } from '../FormPersonalDataPatient/FormPersonalDataPatient.styled';
 import ModalAddAvatar from 'components/Modals/ModalAddAvatar/ModalAddAvatar';
 import { validationDoctorPageSchema } from 'schemas';
 import IconAdd from 'images/icons/IconAdd';
@@ -57,6 +54,7 @@ import InputRadio from 'componentsReusable/Inputs/InputRadio/InputRadio';
 import { hoursOfWorkListValue } from 'helpers/hoursOfWorkList';
 import { useLocation, useNavigate } from 'react-router-dom';
 import IconSocialMedia from 'images/icons/IconSocialMedia';
+import { Placeholder } from 'componentsReusable/Inputs/Input/Input.styled';
 
 const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
   const dispatch = useDispatch();
@@ -712,6 +710,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
                   </WrapEducation>
 
                   <WrapSertificate>
+                    <Placeholder>Сертифікати</Placeholder>
                     <WrapSertificateInputs>
                       {values.certificates.map(sertificate => {
                         const index = values.certificates.findIndex(
@@ -1077,6 +1076,7 @@ const FormPersonalDataDoctor = ({ step, setStep, typeSubmit }) => {
                   </PayMethodLabel>
 
                   <WrapSertificate>
+                    <Placeholder>Приклади роботи</Placeholder>
                     <WrapSertificateInputs>
                       {values.workExamples.map(workExample => {
                         const index = values.workExamples.findIndex(

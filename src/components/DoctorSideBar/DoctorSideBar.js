@@ -1,4 +1,3 @@
-import { useAuth } from 'hooks';
 import {
   Box,
   Button,
@@ -8,8 +7,7 @@ import {
   WrapAvatar,
 } from './DoctorSideBar.styled';
 
-const DoctorSideBar = () => {
-  const { user } = useAuth();
+const DoctorSideBar = ({ user }) => {
   return (
     <>
       <Section>

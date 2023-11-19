@@ -1,4 +1,3 @@
-import { useAuth } from 'hooks';
 import {
   Description,
   Item,
@@ -22,8 +21,7 @@ import IconSocialMedia from 'images/icons/IconSocialMedia';
 import IconTelegram from 'images/icons/IconTelegram';
 import IconMessages from 'images/icons/IconMessages';
 
-const DoctorCard = () => {
-  let { user } = useAuth();
+const DoctorCard = ({ user }) => {
   console.log(user);
   const currentDirections = directionListValue.filter(
     direction =>
