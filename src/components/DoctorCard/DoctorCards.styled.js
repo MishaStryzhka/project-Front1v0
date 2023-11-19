@@ -16,6 +16,11 @@ export const Item = styled.li`
 
   background-color: ${({ theme }) => theme.color.primary};
 `;
+
+export const WrapDescription = styled.div`
+  margin-left: 320px;
+`;
+
 export const TitleDescription = styled.h3`
   font-family: ${({ theme }) => theme.fontFamily};
   font-weight: 500;
@@ -31,8 +36,9 @@ export const Description = styled.p`
   font-family: ${({ theme }) => theme.fontFamily};
   font-size: 20px;
   font-weight: 400;
-  line-height: normal;
-  margin-left: 320px;
+  max-width: 280px;
+
+  /* margin-right: 160px; */
 
   color: ${({ theme }) => theme.color.text};
 `;
@@ -41,11 +47,14 @@ export const Wrap = styled.div`
   display: flex;
   flex-direction: column;
   gap: 14px;
+  margin-left: 320px;
 `;
 export const ItemProblems = styled.ul`
   display: flex;
   align-items: center;
+  /* gap: 160px; */
   justify-content: space-between;
+  margin-left: 320px;
 `;
 export const ListProblems = styled.ul`
   display: flex;
@@ -57,4 +66,12 @@ export const WrapSocialLink = styled.div`
   margin-left: 320px;
   display: flex;
   gap: 40px;
+`;
+export const Title = styled.h3`
+  font-family: ${({ theme }) => theme.fontFamily};
+  font-size: 20px;
+  font-weight: 400;
+  margin-left: 760px;
+
+  color: ${({ theme }) => theme.color.main};
 `;
