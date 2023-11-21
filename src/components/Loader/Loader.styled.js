@@ -10,6 +10,8 @@ export const LoaderWraper = styled.div`
 
   width: ${({ width }) => width}px;
   height: ${({ height }) => height}px;
+
+  margin: auto;
 `;
 
 const rotate = keyframes`

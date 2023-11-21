@@ -24,7 +24,7 @@ const HeaderPage = ({ title }) => {
           {'<'} <span>Назад</span>
         </BackButton>
       )}
-      <Title>{title}</Title>
+      {title ? <Title>{title}</Title> : ''}
     </Header>
   );
 };
