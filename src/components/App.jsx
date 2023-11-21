@@ -61,6 +61,7 @@ export const App = () => {
           <Route path="/direction" element={<DirectionPage />} />
           <Route path="/problemsList" element={<ProblemsListPage />} />
           <Route path="/problem" element={<ProblemPage />} />
+          <Route path="/in/:id" element={<UserPage />} />
 
           <Route path="*" element={<NotFoundPage />} />
           <Route
@@ -87,12 +88,12 @@ export const App = () => {
               />
             }
           />
-          <Route
+          {/* <Route
             path="/in/:id"
             element={
               <PrivateRoute redirectTo="/login" component={<UserPage />} />
             }
-          />
+          /> */}
           {/* <Route
             path="/user/patient"
             element={

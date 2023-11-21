@@ -9,17 +9,17 @@ import DoctorCard from 'components/DoctorCard/DoctorCard';
 import DoctorSideBar from 'components/DoctorSideBar/DoctorSideBar';
 import { getUsersById } from 'sirvices/users';
 import { useState } from 'react';
+import Image from 'images/Group.png';
+import Loader from 'components/Loader/Loader';
 
 export const UserPage = () => {
   const [user, setUser] = useState(useAuth().user);
   const { id } = useParams();
   const location = useLocation();
-  console.log('location', location);
 
-  if (id !== user.userID) {
+  if (id !== user?.userID) {
     getUsersById(id)
       .then(data => {
-        console.log('data', data.user);
         setUser(data.user);
       })
       .catch(error => console.log('error', error));
@@ -32,17 +32,23 @@ export const UserPage = () => {
   return (
     <Container>
       <StyledPageContainer>
-        <HeaderPage
-          title={`${user.lastName} ${user.firstName} ${user.patronymic}`}
-        />
-        <MainContainer style={{ display: 'flex' }}>
-          <SideBarPage>
-            <DoctorSideBar user={user} />
-          </SideBarPage>
-          <MainContent width="900px" $padding="40px">
-            <DoctorCard user={user} />
-          </MainContent>
-        </MainContainer>
+        {user ? (
+          <>
+            <HeaderPage
+              title={`${user.lastName} ${user.firstName} ${user.patronymic}`}
+            />
+            <MainContainer style={{ display: 'flex' }}>
+              <SideBarPage>
+                <DoctorSideBar user={user} />
+              </SideBarPage>
+              <MainContent width="900px" $padding="40px">
+                <DoctorCard user={user} />
+              </MainContent>
+            </MainContainer>
+          </>
+        ) : (
+          <Loader height={150} width={150} $urlImage={Image} />
+        )}
       </StyledPageContainer>
     </Container>
   );

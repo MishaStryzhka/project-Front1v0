@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const getUsersById = async credentials => {
-  console.log('credentials', credentials);
+  // console.log('credentials', credentials);
 
   try {
     const res = await axios.get(`users/user/${credentials}`);

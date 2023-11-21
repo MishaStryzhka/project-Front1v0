@@ -8,15 +8,29 @@ import {
 } from './NavList.styled';
 
 const NavList = ({ name, list = {} }) => {
-  // console.log('list', list);
+  console.log('list', list);
 
   return (
     <ListProblemCategories>
-      {list.map(el => (
-        <ItemProblemCategories key={el.id}>
-          <Title>{el.category}</Title>
+      {list[0].category ? (
+        list.map(el => (
+          <ItemProblemCategories key={el.id}>
+            {el?.category && <Title>{el.category}</Title>}
+            <StyledNavList>
+              {el.problems.map(problem => (
+                <StyledNavItem key={problem.id}>
+                  <StyledNavLink to={`/${name}/?${name}=${problem.id}`}>
+                    {problem.name_ua}
+                  </StyledNavLink>
+                </StyledNavItem>
+              ))}
+            </StyledNavList>
+          </ItemProblemCategories>
+        ))
+      ) : (
+        <ItemProblemCategories>
           <StyledNavList>
-            {el.problems.map(problem => (
+            {list.map(problem => (
               <StyledNavItem key={problem.id}>
                 <StyledNavLink to={`/${name}/?${name}=${problem.id}`}>
                   {problem.name_ua}
@@ -25,7 +39,7 @@ const NavList = ({ name, list = {} }) => {
             ))}
           </StyledNavList>
         </ItemProblemCategories>
-      ))}
+      )}
     </ListProblemCategories>
   );
 };
